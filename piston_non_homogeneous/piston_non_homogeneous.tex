@@ -1,0 +1,300 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Piston Driven Shock Waves in Non-Homogeneous Media}
+\author{Tal Ramot}
+\date{Exams week 3, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+\begin{enumerate}
+  \item The problem settings that the article deals with - self-similar solutions of the power-law pressure driven shock waves in non-homogeneous media.
+  \item The main results are:
+  \begin{enumerate}
+    \item Showing that the solutions take various forms depending on the value of pressure \& density exponents.
+    \item Analysis of the \textbf{shock propagation} - shock propagating at different accelarations (decelerating, constant velocity, accelerating).
+    \item Analysis of the \textbf{density near the piston} - either finite, vanishing or diverging..
+    \item Comparison of the results to \textbf{Lagrangian hydro simulations} - showing good agreement.
+  \end{enumerate}
+\end{enumerate}
+\section{subsection}{Introduction}
+\begin{enumerate}
+  \item Talking about the key role that analytic solutions of shock waves play in understanding phenomena in astrophysical \& laboratory HEDP systems.
+  \item Mentions Shussman \& Heizler (2015) and says that it provided a separate traetment of the ablation \& shock region and thus enabled the use of \textbf{binary EOS}.
+  \item Gives a cool example of an experiment (ref. 11) where a the drive temperature in the hohlraum was measured according to the shock speed.
+  \item Mentions Shussman \& Heizler again and says that they provided a solution for an homogeneous medium, and that \textcolor{blue}{the current work extends it to non-homogeneous media - solutions to ablation driven shock waves can be generalized after this paper.} which is \textbf{useful for astrophysical models of the interior and atmosphere of stars \& galaxies}.
+  \item Solutions are presented in both Lagrangian \& Eulerian coordinates, and the transformation between them is given by a useful formula that \textbf{demonstrates the behavior of the shocked fluid in the x-t plane}.
+  \item The energy is also studied - via (1) its temporal dependence, and (2) its division into kinetic \& internal energy.
+  \item The goal of the comparison to hydro simulations is to validate the simulations (surprising - \textcolor{red}{I should ask Shay about it}).
+\end{enumerate}
+\section{Statement of the problem}
+Problem settings:
+\begin{enumerate}
+  \item The lagrangian coordinate is defined as:
+  \begin{equation}
+      m = \int_0^x \rho(x', t) dx'
+  \end{equation}
+  \item The equations of motion are Euler equations (in Lag. coordinates) + the EOS (in Rosen's notation):
+  \begin{align}
+      \frac{\partial V}{\partial t} - \frac{\partial u}{\partial m} &= 0 \\
+      \frac{\partial u}{\partial t} + \frac{\partial p}{\partial m} &= 0 \\
+      \frac{\partial e}{\partial t} + p \frac{\partial V}{\partial t} &= 0
+  \end{align}
+  \begin{equation}
+      pv = re \Leftrightarrow p = r \rho e \quad (r = \gamma - 1)
+  \end{equation}
+  \item The boundary condition is a power-law pressure drive at the piston:
+  \begin{equation}
+    p(m=0, t) = p_0 t^\tau
+  \end{equation}
+  \item The initial conditions are medium at rest with a power-law density profile:
+  \begin{align}
+    u(m, t=0) = p(m, t=0) = 0 \\
+    \rho(m, t=0) = \rho_0 x^{-\omega} \Leftrightarrow v(x,t=0) = v_0 x^\omega
+  \end{align}
+  where the initial specific volume is $v_0 = \frac{1}{\rho_0}$.
+  \item One can integrate the density profile to get a relation of Lagrangian $\Leftrightarrow$ Eulerian coordinates:
+  \begin{equation}
+    m(x,t=0) = \int_0^x \rho_0 (x')^{-\omega} dx' = \frac{\rho_0}{1-\omega} x^{1-\omega} \Leftrightarrow \boxed{x(m, t=0) = \left[ v_0 (1-\omega)m \right]^{\frac{1}{1-\omega}}}
+  \end{equation}
+  which can be interpreted also as the initial specific volume in Lagrangian coordinates:
+  \begin{equation}
+    \boxed{v(m, t=0)} = v_0 x^\omega = \boxed{v_0 ^{\frac{1}{1-\omega}}\left[(1-\omega)m \right]^{\frac{\omega}{1-\omega}}}
+  \end{equation}
+\end{enumerate}
+\section{Self-similar Representation}
+\subsection{Using Pi theorem}
+The problem has 7 dimensional parameters:
+\begin{enumerate}
+  \item Independent variables: $t, m$.
+  \item Dependent variables (hydrodynamic profiles): $p, v, u$.
+  \item Initial \& boundary conditions: $p_0, v_0$
+\end{enumerate}
+Therefore, there are $N=7$ dimensional parameters, and $M=3$ fundamental dimensions (M, L, T) - so we expect $N-M=4$ dimensionless parameters, which will be chosen to be $\xi, V(\xi), U(\xi), P(\xi)$, where $\xi$ is the self-similar space variable and $V, U, P$ are the self-similar hydrodynamic profiles. The dimensional variables used to contruct the dimensionless parameters are $v_0, p_0, t$. If one solves the linear non-homogeneous equations for the construction of $\xi, v, u, p$ as power-laws of $v_0, p_0, t$, one gets:
+\begin{align}
+   \xi &= m v_0^{\frac{1}{2-\omega}} p_0^{\frac{\omega-1}{2-\omega}} t^{\frac{(2+\tau)(\omega - 1)}{2-\omega}} \\
+    v(m,t) &=  V(\xi) v_0^{\frac{1}{2-\omega}} p_0^{\frac{\omega}{2-\omega}} t^{\frac{(2+\tau)\omega}{2-\omega}} \\
+    u(m,t) &= U(\xi) v_0^{\frac{1}{2-\omega}} p_0^{\frac{1}{2-\omega}} t^{\frac{\omega + \tau}{2-\omega}} \\
+    p(m,t) &= P(\xi) p_0 t^\tau
+\end{align}
+The Pi-table is given in the article (table 1).
+\subsection{Boundary conditions and self-similar ODEs}
+The boundary condition at the piston ($m=0$) in terms of the dimensionless profiles is:
+\begin{equation}
+    P(\xi=0) = 1
+\end{equation}
+By using the relations:
+\begin{equation}
+    \begin{aligned}
+        \frac{\partial \xi}{\partial m} &= \frac{\xi}{m} \\
+        \frac{\partial \xi}{\partial t} &= \frac{(2+\tau)(\omega - 1)}{2-\omega} \frac{\xi}{t} \\
+    \end{aligned}
+\end{equation}
+one achieved a set of 3 coupled ODEs for the self-similar profiles:
+\begin{align}
+    \left(\frac{2+\tau}{2-\omega}\right)\left((\omega-1)\xi V' +\omega V\right)-U' &= 0 \\
+    \frac{(2+\tau)(\omega - 1)}{2-\omega}\xi U' + U\left(\frac{\omega + \tau}{2-\omega}\right)+P' &= 0 \\
+    \frac{(2+\tau)\omega}{2-\omega}\xi V' + V\left(\frac{(2+\tau)\omega}{2-\omega}\right) + P\left(\frac{(2+\tau)(\omega - 1)}{2-\omega}\right) + r\left(\frac{(2+\tau)(\omega - 1)}{2-\omega}\right) U &= 0
+\end{align}
+\textcolor{red}{The last equation here should be cross checked.}
+which the handy copilot arranged to solve for the derivatives vector:
+\begin{align}
+    \frac{dV}{d\xi} &= \frac{V}{\xi} \frac{(2+\tau)(\omega - 1) V + (2-\omega) U}{(1-\omega) V - U} \\
+    \frac{dU}{d\xi} &= \frac{U}{\xi} \frac{(2+\tau)(\omega - 1) V + (2-\omega) U + (1-\omega) P}{(1-\omega) V - U} \\
+    \frac{dP}{d\xi} &= \frac{P}{\xi} \frac{(2+\tau)(\omega - 1) V + (2-\omega) U + r(1-\omega) U}{(1-\omega) V - U}
+\end{align}
+\textcolor{blue}{It is mentioned that in case of $\omega=0$ (homogeneous medium) the equations reduce to those of Shussman \& Heizler (2015).}
+\section{Jump conditions at the shock front}
+\subsection{Reminder of the problem settings}
+\begin{enumerate}
+  \item In order to solve the ODEs, one should be reminded of the problem settings. In the unshocked region - the hydrodynamic profiles are given simply by the initial conditions (power-law density, zero velocity \& pressure). In the shocked region - the hydrodynamic profiles are given by the self-similar solution to the ODEs.
+  \item The transition between the shocked \& unshocked regions is the shock front, and the jump conditions at the shock front are given by the Hugoniot conditions.
+\end{enumerate}
+\subsection{Derivation of the Rankine-Hugoniot conditions}
+\begin{enumerate}
+  \item Claim: The general form of the Rankine-Hugoniot conditions for a set of conserved quantities $\bm{u}(y,t)$ which obey a set of (nonlinear) hyperbolic conservation laws in the form $\frac{\partial \bm{u}}{\partial t} + \frac{\partial \bm{f}(\bm{u})}{\partial y} = 0$ is given by:
+  \begin{equation}
+    \dot{y}_s \Delta \bm{u} = \Delta \bm{f} 
+  \end{equation}
+  where $\Delta \bm{u} = \bm{u}_2 - \bm{u}_1$ is the jump in the conserved quantities across the shock, and $\Delta \bm{f} = \bm{f}(\bm{u}_2) - \bm{f}(\bm{u}_1)$ is the jump in the fluxes across the shock. $\dot{y}_s$ is the local discontinuity velocity (e.g.\ shock velocity). \textcolor{red}{The proof is not given in the article, but copilot gave it to me and it appears on the appendix of this document.}
+  \item The article says that it needs to convert the energy conservation equation (eq. 4 in the article) to a conservation law form:
+  \begin{equation}
+    \frac{\partial}{\partial t} \left(\frac{pv}{r} + \frac{1}{2} u^2\right) + \frac{\partial pu}{\partial m} = 0 
+  \end{equation}
+  the derivation of this equation is also given in the appendix.
+  \item Using the latter equations along with the mass \& momentum conservation equations, one can apply the generalized Rankine-Hugoniot conditions to get the jump conditions at the shock front:
+  \begin{align}
+    \dot{m}_s (v_s - v_{ref}) &= u_{ref} - u_s \\
+    \dot{m}_s (u_s - u_{ref}) &= p_{s} - p_{ref} \\
+    \dot{m}_s \left(\frac{p_s v_s}{r} + \frac{1}{2} u_s^2\right) = u_s p_s - u_{ref} p_{ref}
+  \end{align}
+  where 'ref' stands for the (referenced) unshocked region and 's' stands for the shocked region. $\dot{m}_s$ is the shock velocity in Lagrangian coordinates.
+\end{enumerate}
+\subsection{Simplification of the jump conditions}
+\begin{enumerate}
+  \item \underline{Using Initial Conditions:} Since the unshocked region satisfies the initial conditions $u_{ref} = p_{ref} = 0$, the jump conditions can be simplified to (what is actually \textbf{the strong shock limit}):
+  \begin{align}
+    \dot{m}_s v_s &= -u_s \\
+    \dot{m}_s u_s &= p_s \\
+    \dot{m}_s \left(\frac{p_s v_s}{r} + \frac{1}{2} u_s^2\right) &= u_s p_s 
+  \end{align}
+  \item \underline{Using the profile of $m(t)$ to find $\dot{m}_s(t)$:} Through the inversion of the relation between $\xi$ and $m$, one can find the profile of $m(t)$:
+  \begin{equation}
+    m(t) = v_0^{-\frac{1}{2-\omega}} p_0^{\frac{1-\omega}{2-\omega}} t^{\frac{(2+\tau)(1-\omega)}{2-\omega}} \xi
+  \end{equation}
+  so the shock velocity in Lagrangian coordinates is given by:
+  \begin{equation}
+    \dot{m}_s(t) = \frac{(2+\tau)(1-\omega)}{2-\omega} v_0^{-\frac{1}{2-\omega}} p_0^{\frac{1-\omega}{2-\omega}} t^{\frac{(2+\tau)(1-\omega)}{2-\omega} - 1} \xi_s
+  \end{equation}
+  where $\xi_s$ is the self-similar coordinate of the shock front \textbf{which is NOT KNOWN A-PROIRI and should be found by using a shooting method to solve the ODEs} - described in the next section.
+  NOTE: Plotting $\frac{(2+\tau)(1-\omega)}{2-\omega}$ as a function of $\omega, \tau$ (Fig. 2 in the article) shows that the requirement for the shock to propagate is $\tau > -2$ (remember that $\omega < 1$ for the mass to be finite, and \textbf{the sign of $\frac{(2+\tau)(1-\omega)}{2-\omega}$ determines the direction of the shock propagation}).
+  \item \underline{substituting Self-similar profiles:} Notice that $v_{ref}$ is also known in terms of the self-similar profiles (we calculated the initial specific volume in Lagrangian coordinates in the previous section):
+  \begin{equation}
+    \begin{aligned}
+    v_{ref} &= v(m, t=0) = v_0 ^{\frac{1}{1-\omega}}\left[(1-\omega)m \right]^{\frac{\omega}{1-\omega}} \\
+    v_{ref} &= (1-\omega)^{\frac{\omega}{1-\omega}} v_0^{\frac{1}{2-\omega}} p_0^{\frac{\omega}{2-\omega}} t^{\frac{(2+\tau)\omega}{2-\omega}} \xi^{\frac{\omega}{1-\omega}}
+    \end{aligned}
+  \end{equation}
+  writing the hydrodynamic profiles in terms of the self-similar profiles evaluated at the shock front, we get:
+  \begin{equation}
+    \begin{aligned} 
+    v_s = V_s v_0^{\frac{1}{2-\omega}} p_0^{\frac{\omega}{2-\omega}} t^{\frac{(2+\tau)\omega}{2-\omega}} \\
+    u_s = U_s v_0^{\frac{1}{2-\omega}} p_0^{\frac{1}{2-\omega}} t^{\frac{\omega + \tau}{2-\omega}} \\
+    p_s = P_s p_0 t^\tau
+    \end{aligned}
+  \end{equation}
+  where $V_s, U_s, P_s$ are the self-similar profiles evaluated at the shock front $\xi_s$. Substituting these into the jump conditions and taking advantage of the \textbf{vanishing of dimensional parameters} we get the dimensionless jump conditions:
+  \begin{equation}
+    \begin{aligned}
+    V_s &= \left((1-\omega)\xi_s\right)^{\frac{\omega}{1-\omega}} - \frac{U_s}{(2+\tau)\left(\frac{1-\omega}{2-\omega}\right)\xi_s} \\
+    P_s &= (2+\tau)\left(\frac{1-\omega}{2-\omega}\right)\xi_s U_s \\
+    (2+\tau)\left(\frac{1-\omega}{2-\omega}\right) \left(\frac{P_s V_s}{r} + \frac{1}{2} U_s^2\right) &= U_s P_s
+    \end{aligned}
+  \end{equation}
+  which can be simplified to:
+  \begin{equation}
+    \begin{aligned}
+    V_s = \frac{r}{r+2} \left((1-\omega)\xi_s\right)^{\frac{\omega}{1-\omega}} \\
+    U_s = \frac{2}{r} (2+\tau)\left(\frac{1-\omega}{2-\omega}\right)\xi_s U_s \\
+    P_s = \frac{U_s^2}{2} \frac{r}{V_s}
+    \end{aligned}
+  \end{equation}
+  As before, substituting $\omega = 0$ (homogeneous medium) reduces the jump conditions to those of Shussman \& Heizler (2015).
+
+\end{enumerate}
+
+
+
+
+
+\section{Appendix}
+\subsection{Proof of generalized Rankine-Hugoniot Jump Conditions}
+\begin{enumerate}
+\item Proof: Consider the integral form of the conservation law:
+  \begin{equation}
+    \frac{d}{dt} \int_{y_1}^{y_2} \bm{u}(y,t) dy + \bm{f}(\bm{u}(y_2, t)) - \bm{f}(\bm{u}(y_1, t)) = 0
+  \end{equation}
+  where $y_1 < y_s(t) < y_2$ are two fixed points on the left \& right of the shock front. The integral can be split into two parts:
+  \begin{equation}
+    \int_{y_1}^{y_2} \bm{u}(y,t) dy = \int_{y_1}^{y_s(t)} \bm{u}(y,t) dy + \int_{y_s(t)}^{y_2} \bm{u}(y,t) dy
+  \end{equation}
+  Taking the time derivative of the integral, we get:
+  \begin{equation}
+    \frac{d}{dt} \int_{y_1}^{y_2} \bm{u}(y,t) dy = \int_{y_1}^{y_s(t)} \frac{\partial \bm{u}}{\partial t} dy + \int_{y_s(t)}^{y_2} \frac{\partial \bm{u}}{\partial t} dy + \dot{y}_s (\bm{u}_2 - \bm{u}_1)
+  \end{equation}
+  where we used the Leibniz rule for differentiation under the integral sign. Substituting the conservation law into the integrals, we get:
+  \begin{equation}
+    \frac{d}{dt} \int_{y_1}^{y_2} \bm{u}(y,t) dy = -\int_{y_1}^{y_s(t)} \frac{\partial \bm{f}}{\partial y} dy - \int_{y_s(t)}^{y_2} \frac{\partial \bm{f}}{\partial y} dy + \dot{y}_s (\bm{u}_2 - \bm{u}_1)
+  \end{equation}
+  Evaluating the integrals, we get:
+  \begin{equation}
+    \frac{d}{dt} \int_{y_1}^{y_2} \bm{u}(y,t) dy = -\bm{f}(\bm{u}_2) + \bm{f}(\bm{u}_1) + \dot{y}_s (\bm{u}_2 - \bm{u}_1)
+  \end{equation}
+  Substituting this back into the integral form of the conservation law, we get:
+  \begin{equation}
+    -\bm{f}(\bm{u}_2) + \bm{f}(\bm{u}_1) + \dot{y}_s (\bm{u}_2 - \bm{u}_1) + \bm{f}(\bm{u}_2) - \bm{f}(\bm{u}_1) = 0
+  \end{equation}
+  which simplifies to the Rankine-Hugoniot condition:
+  \begin{equation}
+    \dot{y}_s (\bm{u}_2 - \bm{u}_1) = \bm{f}(\bm{u}_2) - \bm{f}(\bm{u}_1)
+  \end{equation}
+  \item Proof of the conversion of the energy conservation equation to a conservation law form: Starting from the energy conservation equation in Lagrangian coordinates:
+  \begin{equation}
+    \frac{\partial e}{\partial t} + p \frac{\partial V}{\partial t} = 0
+  \end{equation}
+  we can use the EOS to express $e$ in terms of $p$ and $v$:
+  \begin{equation}
+    e = \frac{p v}{r}
+  \end{equation}
+  Substituting this into the energy conservation equation, we get:
+  \begin{equation}
+    \frac{\partial}{\partial t} \left(\frac{p v}{r}\right) + p \frac{\partial V}{\partial t} = 0
+  \end{equation}
+  which under the assumption of an ideal gas can be rewritten as:
+  \begin{equation}
+    \frac{\partial}{\partial t} \left(\frac{p v}{r} + \frac{1}{2} u^2\right) + \frac{\partial pu}{\partial m} = 0
+  \end{equation}
+  where the kinetic energy term $\frac{1}{2} u^2$ is added to the internal energy term $\frac{p v}{r}$ to form the total energy, and the flux term $\frac{\partial pu}{\partial m}$ represents the work done by pressure forces. This equation is now in the form of a conservation law, which allows us to apply the Rankine-Hugoniot conditions at the shock front. \textcolor{red}{I actually need to make sure that it makes sense to add the kinetic energy and transform the work term as the copilot did. Need to make sure it makes sense with Zeldovich.}
+\end{enumerate}
+\section{Balak presentation}
+\begin{align}
+\frac{1}{\nu} \frac{\partial \psi}{\partial t} + \mu \frac{\partial \psi}{\partial x} + \sigma_t \psi = \frac{c}{2} \sigma_t \int_{-1}^{1} \psi(\mu') d\mu' + Q
+\end{align}
+after integegration over $\mu$ and over $\mu d\mu$ one gets:
+\begin{align}
+\frac{1}{\nu} \frac{\partial \phi}{\partial t}+\frac{\partial J}{}
+\end{align}
+\section{Exam week 3 - 8.2.26}
+\subsection{Main Points}
+\begin{enumerate}
+  \item The problem in the hydro simulation - I got a diverging density near the piston (only in Shussman's solver, because of singularity of the ODE system near the piston). However, when I took a negative $\tau$ and compared to Fig. (7) in Shussman-Heizler, I got a good agreement with the self-similar solution - although it was for a different units of $P_0$ (it said MBars on the article and I took 271 Bars).
+  \item I started reading Menachem's paper and I understood it (written wonderfully). Planning to reproduce its results until tomorrow - including creating a solver for the ODEs with the general $\omega \neq 0$, and then add the simulation a variable $\rho$ profile of the cells ($dm_i$).
+  \item Reproduction of Shussman-Heizler - I want to be sure that I know what I have to do here. 
+  Maybe the first part includes only reproduction of the Ablation part in Shussman Heizler?
+  \item It means only updating the energy-conservation equation in my simulation scheme to include also the heat conduction \& use Shussman's ablation-region solver, and it seems like a very easy task in my simulation - so what's new.
+  \textbf{I want to make sure that I'm going to create a simulation from which the separation to ablation \& shock region will naturally rise}.
+  \item A material for additional reading - I have to read chapter X of the Zeldovich book but I've seen that chapter II may also be useful (radiation in matter). Should I read it as well?
+\end{enumerate}
+\subsection{Shay's Points}
+\begin{enumerate}
+  \item The \texttt{P_0} and \texttt{m_0} in Shussman's solver include the term of \texttt{10^12} to account for the conversion from $[P] = dyne / cm^2$ to $[P] = MBar$ and this is why my python solver produced different results than the article. Furthermore, it can be seen from the paper itself (Fig. 7) that the figure was taken at $t=1ns$ because the pressure value at the piston at that time is exactly $P_0 = 2.71 MBar$ (the units of the pressure axis are also $MBar$).
+  \item Understanding the rad-hydro simulation - Shay said that I will do it using an operator-split method, with the assumption of gray physics (e.g. an equation for the material energy as well as the radiation energy). \textbf{I have to make sure that I undertstand the equations and the numerical scheme that I will use for the simulation.} - and I know how to test the simulation:
+  \begin{enumerate}
+    \item See that the separation to the ablation \& shock regions naturally arises in the simulation.
+    \item Convert Shussman's ablation-region to python and compare the results to the self-similar solution in the ablation region, thus \textbf{fully reproducing \& generalizing the results of Shussman-Heizler}.
+    \item Take Menachem's paper and read it. \textbf{Shay says that Menachem produced an analytical solution that exists for any $\tau$ or $\omega$, given that one of them is set to be constant}. I think that this condition arises from the physical requirement of the Pi theorem, I have to understand it. Shay says that that will be the project - taking what he's done, finish it  and comparing to the hydro simulation.
+  \end{enumerate}
+\end{enumerate}
+\subsection{Tasks}
+\begin{enumerate}
+  \item Finish reading Menachem's paper and reproduce its results \textbf{only for $\omega=0$} (Shay insists that it is no important to take $\omega \neq 0$ for now).
+\end{enumerate}
+\end{document}

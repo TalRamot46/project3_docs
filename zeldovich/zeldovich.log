@@ -1,0 +1,808 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  26 JAN 2026 22:16
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**c:/Users/TLP-001/Documents/GitHub/Numerical_Problems/project_3/zeldovich/zeldovich.tex
+(c:/Users/TLP-001/Documents/GitHub/Numerical_Problems/project_3/zeldovich/zeldovich.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/06/16 v2.17y AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks18
+\ex@=\dimen151
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen152
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count283
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count284
+\leftroot@=\count285
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count286
+\DOTSCASE@=\count287
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen153
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count288
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count289
+\dotsspace@=\muskip17
+\c@parentequation=\count290
+\dspbrk@lvl=\count291
+\tag@help=\toks19
+\row@=\count292
+\column@=\count293
+\maxfields@=\count294
+\andhelp@=\toks20
+\eqnshift@=\dimen154
+\alignsep@=\dimen155
+\tmathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2949.
+LaTeX Info: Redefining \] on input line 2950.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count295
+\float@exts=\toks23
+\float@box=\box55
+\@float@everytoks=\toks24
+\@floatcapt=\box56
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count296
+\lst@gtempboxa=\box57
+\lst@token=\toks25
+\lst@length=\count297
+\lst@currlwidth=\dimen160
+\lst@column=\count298
+\lst@pos=\count299
+\lst@lostspace=\dimen161
+\lst@width=\dimen162
+\lst@newlines=\count300
+\lst@lineno=\count301
+\lst@maxwidth=\dimen163
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count302
+\lst@skipnumbers=\count303
+\lst@framebox=\box58
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count304
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count305
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen164
+\Hy@linkcounter=\count306
+\Hy@pagecounter=\count307
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count308
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4195.
+Package hyperref Info: Link nesting OFF on input line 4200.
+Package hyperref Info: Hyper index ON on input line 4203.
+Package hyperref Info: Plain pages OFF on input line 4210.
+Package hyperref Info: Backreferencing OFF on input line 4215.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4462.
+\c@Hy@tempcnt=\count309
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4801.
+\XeTeXLinkMargin=\dimen165
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count310
+\Field@Width=\dimen166
+\Fld@charsize=\dimen167
+Package hyperref Info: Hyper figures OFF on input line 6078.
+Package hyperref Info: Link nesting OFF on input line 6083.
+Package hyperref Info: Hyper index ON on input line 6086.
+Package hyperref Info: backreferencing OFF on input line 6093.
+Package hyperref Info: Link coloring OFF on input line 6098.
+Package hyperref Info: Link coloring with OCG OFF on input line 6103.
+Package hyperref Info: PDF/A mode OFF on input line 6108.
+\Hy@abspage=\count311
+\c@Item=\count312
+\c@Hfootnote=\count313
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
+\Fld@listcount=\count314
+\c@bookmark@seq@number=\count315
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+)
+\Hy@SectionHShift=\skip54
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen168
+\captionmargin=\dimen169
+\caption@leftmargin=\dimen170
+\caption@rightmargin=\dimen171
+\caption@width=\dimen172
+\caption@indent=\dimen173
+\caption@parindent=\dimen174
+\caption@hangindent=\dimen175
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count316
+\c@continuedfloat=\count317
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/cancel\cancel.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count318
+) (zeldovich.aux)
+\openout1 = `zeldovich.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count319
+\scratchdimen=\dimen176
+\scratchbox=\box59
+\nofMPsegments=\count320
+\nofMParguments=\count321
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count322
+\MPscratchDim=\dimen177
+\MPnumerator=\count323
+\makeMPintoPDFobject=\count324
+\everyMPtoPDFconversion=\toks27
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+\c@lstlisting=\count325
+Package hyperref Info: Link coloring OFF on input line 35.
+ (zeldovich.out) (zeldovich.out)
+\@outlinefile=\write3
+\openout3 = `zeldovich.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+[1
+
+{C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+
+[2]
+Overfull \hbox (105.28935pt too wide) in paragraph at lines 104--106
+[]\OT1/cmr/m/n/10.95 The en-ergy flux can nts/map/pdftex/pdftex.map}]
+
+[2]
+Overfull \hbox (105.28935pt too wide) in paragraph at lines 104--106
+[]\OT1/cmr/m/n/10.95 The en-ergy flux can be de-rived sim-i-larly. $[]$ 
+ []
+
+
+
+[3]
+
+[4]
+
+[5]
+<figures/derivation_acoustic_wave_equation.png, id=312, 816.04875pt x 572.1375pt>
+File: figures/derivation_acoustic_wave_equation.png Graphic file (type png)
+<use figures/derivation_acoustic_wave_equation.png>
+Package pdftex.def Info: figures/derivation_acoustic_wave_equation.png  used on input line 211.
+(pdftex.def)             Requested size: 216.0022pt x 151.4411pt.
+
+
+[6]
+
+[7 <./figures/derivation_acoustic_wave_equation.png>]
+
+[8]
+Overfull \hbox (0.5292pt too wide) in paragraph at lines 292--293
+[]\OT1/cmr/m/n/10.95 The lin-earized equa-tions of mass and mo-men-tum con-ser-va-tion in spher-
+ []
+
+
+
+[9]
+
+[10]
+Overfull \hbox (2.93199pt too wide) in paragraph at lines 338--340
+$[]$\OT1/cmr/m/n/10.95 : In an isen-tropic flow,
+ []
+
+
+
+[11]
+<figures/fig_1_7.png, id=400, 480.5955pt x 147.55125pt>
+File: figures/fig_1_7.png Graphic file (type png)
+<use figures/fig_1_7.png>
+Package pdftex.def Info: figures/fig_1_7.png  used on input line 361.
+(pdftex.def)             Requested size: 360.0pt x 110.5258pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 361--362
+[][] 
+ []
+
+<figures/fig_1_8.png, id=401, 783.92876pt x 252.945pt>
+File: figures/fig_1_8.png Graphic file (type png)
+<use figures/fig_1_8.png>
+Package pdftex.def Info: figures/fig_1_8.png  used on input line 363.
+(pdftex.def)             Requested size: 360.0pt x 116.15927pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 363--364
+[][] 
+ []
+
+
+
+[12 <./figures/fig_1_7.png>]
+<figures/riemann_invariants_wikipedia.png, id=414, 1195.46625pt x 754.82pt>
+File: figures/riemann_invariants_wikipedia.png Graphic file (type png)
+<use figures/riemann_invariants_wikipedia.png>
+Package pdftex.def Info: figures/riemann_invariants_wikipedia.png  used on input line 387.
+(pdftex.def)             Requested size: 360.0pt x 227.30005pt.
+
+
+[13 <./figures/fig_1_8.png>]
+
+[14 <./figures/riemann_invariants_wikipedia.png (PNG copy)>]
+
+[15]
+<figures/fig_1_9.png, id=454, 541.42274pt x 201.75375pt>
+File: figures/fig_1_9.png Graphic file (type png)
+<use figures/fig_1_9.png>
+Package pdftex.def Info: figures/fig_1_9.png  used on input line 442.
+(pdftex.def)             Requested size: 360.0pt x 134.15224pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 442--443
+[][] 
+ []
+
+<figures/fig_1_10.png, id=455, 536.0025pt x 186.6975pt>
+File: figures/fig_1_10.png Graphic file (type png)
+<use figures/fig_1_10.png>
+Package pdftex.def Info: figures/fig_1_10.png  used on input line 452.
+(pdftex.def)             Requested size: 360.0pt x 125.39148pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 452--453
+[][] 
+ []
+
+
+
+[16 <./figures/fig_1_9.png>]
+<figures/fig_1_12.png, id=465, 539.01375pt x 239.09325pt>
+File: figures/fig_1_12.png Graphic file (type png)
+<use figures/fig_1_12.png>
+Package pdftex.def Info: figures/fig_1_12.png  used on input line 465.
+(pdftex.def)             Requested size: 360.0pt x 159.68817pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 465--466
+[][] 
+ []
+
+
+
+[17 <./figures/fig_1_10.png>]
+
+[18 <./figures/fig_1_12.png>]
+
+[19]
+<figures/fig_1_13.png, id=500, 268.6035pt x 285.4665pt>
+File: figures/fig_1_13.png Graphic file (type png)
+<use figures/fig_1_13.png>
+Package pdftex.def Info: figures/fig_1_13.png  used on input line 511.
+(pdftex.def)             Requested size: 360.0pt x 382.61023pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 511--512
+[][] 
+ []
+
+
+
+[20 <./figures/fig_1_13.png>]
+<figures/fig_1_14.png, id=508, 639.5895pt x 426.393pt>
+File: figures/fig_1_14.png Graphic file (type png)
+<use figures/fig_1_14.png>
+Package pdftex.def Info: figures/fig_1_14.png  used on input line 516.
+(pdftex.def)             Requested size: 360.0pt x 240.00812pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 516--517
+[][] 
+ []
+
+<figures/fig_1_15.png, id=509, 1119.18124pt x 218.8175pt>
+File: figures/fig_1_15.png Graphic file (type png)
+<use figures/fig_1_15.png>
+Package pdftex.def Info: figures/fig_1_15.png  used on input line 521.
+(pdftex.def)             Requested size: 360.0pt x 70.38696pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 521--522
+[][] 
+ []
+
+
+
+[21 <./figures/fig_1_14.png> <./figures/fig_1_15.png>]
+<figures/fig_1_16.png, id=517, 677.53125pt x 313.17pt>
+File: figures/fig_1_16.png Graphic file (type png)
+<use figures/fig_1_16.png>
+Package pdftex.def Info: figures/fig_1_16.png  used on input line 529.
+(pdftex.def)             Requested size: 360.0pt x 166.40459pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 529--530
+[][] 
+ []
+
+
+
+[22 <./figures/fig_1_16.png>]
+<figures/fig_1_17.png, id=526, 678.1335pt x 316.18124pt>
+File: figures/fig_1_17.png Graphic file (type png)
+<use figures/fig_1_17.png>
+Package pdftex.def Info: figures/fig_1_17.png  used on input line 549.
+(pdftex.def)             Requested size: 360.0pt x 167.85025pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 549--550
+[][] 
+ []
+
+<figures/fig_1_18.png, id=527, 675.7245pt x 281.25075pt>
+File: figures/fig_1_18.png Graphic file (type png)
+<use figures/fig_1_18.png>
+Package pdftex.def Info: figures/fig_1_18.png  used on input line 551.
+(pdftex.def)             Requested size: 360.0pt x 149.83894pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 551--552
+[][] 
+ []
+
+
+
+[23 <./figures/fig_1_17.png>]
+
+[24 <./figures/fig_1_18.png>]
+Overfull \hbox (2.98726pt too wide) in paragraph at lines 587--589
+[]$[]$\OT1/cmr/m/n/10.95 : For ev-ery func-tion $\OML/cmm/m/it/10.95 f\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x; t\OT1/cmr/m/n/10.95 )$
+ []
+
+
+
+[25]
+
+[26]
+<figures/fig_1_21.png, id=576, 538.4115pt x 172.84575pt>
+File: figures/fig_1_21.png Graphic file (type png)
+<use figures/fig_1_21.png>
+Package pdftex.def Info: figures/fig_1_21.png  used on input line 629.
+(pdftex.def)             Requested size: 360.0pt x 115.56866pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 629--630
+[][] 
+ []
+
+<figures/fig_1_22.png, id=577, 539.616pt x 144.54pt>
+File: figures/fig_1_22.png Graphic file (type png)
+<use figures/fig_1_22.png>
+Package pdftex.def Info: figures/fig_1_22.png  used on input line 633.
+(pdftex.def)             Requested size: 360.0pt x 96.43106pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 633--635
+[][]
+ []
+
+
+
+[27 <./figures/fig_1_21.png> <./figures/fig_1_22.png>]
+<figures/fig_1_25.png, id=586, 528.7755pt x 228.855pt>
+File: figures/fig_1_25.png Graphic file (type png)
+<use figures/fig_1_25.png>
+Package pdftex.def Info: figures/fig_1_25.png  used on input line 657.
+(pdftex.def)             Requested size: 360.0pt x 155.81488pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 657--658
+[][] 
+ []
+
+
+
+[28]
+
+[29 <./figures/fig_1_25.png>]
+
+[30]
+
+[31]
+<figures/fig_1_27.png, id=638, 669.702pt x 260.77425pt>
+File: figures/fig_1_27.png Graphic file (type png)
+<use figures/fig_1_27.png>
+Package pdftex.def Info: figures/fig_1_27.png  used on input line 744.
+(pdftex.def)             Requested size: 360.0pt x 140.17934pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 743--745
+[] 
+ []
+
+
+
+[32 <./figures/fig_1_27.png>]
+
+[33]
+Overfull \hbox (2.60138pt too wide) in paragraph at lines 798--798
+[]\OT1/cmr/bx/n/12 The re-la-tion be-tween the Hugo-niot and Isen-trope curves 
+ []
+
+<figures/fig_1_28.png, id=667, 670.9065pt x 288.47775pt>
+File: figures/fig_1_28.png Graphic file (type png)
+<use figures/fig_1_28.png>
+Package pdftex.def Info: figures/fig_1_28.png  used on input line 802.
+(pdftex.def)             Requested size: 360.0pt x 154.79845pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 802--803
+ [] 
+ []
+
+
+
+[34]
+
+[35 <./figures/fig_1_28.png>]
+<figures/fig_1_29.png, id=692, 672.71326pt x 216.81pt>
+File: figures/fig_1_29.png Graphic file (type png)
+<use figures/fig_1_29.png>
+Package pdftex.def Info: figures/fig_1_29.png  used on input line 836.
+(pdftex.def)             Requested size: 360.0pt x 116.02693pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 836--837
+ [] 
+ []
+
+
+
+[36 <./figures/fig_1_29.png>]
+<figures/fig_1_30.png, id=703, 673.3155pt x 276.43275pt>
+File: figures/fig_1_30.png Graphic file (type png)
+<use figures/fig_1_30.png>
+Package pdftex.def Info: figures/fig_1_30.png  used on input line 852.
+(pdftex.def)             Requested size: 360.0pt x 147.79936pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 852--853
+ [] 
+ []
+
+
+
+[37 <./figures/fig_1_30.png>]
+<figures/fig_1_31.png, id=716, 666.0885pt x 255.95625pt>
+File: figures/fig_1_31.png Graphic file (type png)
+<use figures/fig_1_31.png>
+Package pdftex.def Info: figures/fig_1_31.png  used on input line 864.
+(pdftex.def)             Requested size: 360.0pt x 138.33928pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 864--865
+ [] 
+ []
+
+
+Overfull \hbox (1.94455pt too wide) in paragraph at lines 868--868
+[]\OT1/cmr/bx/n/14.4 On the im-pos-si-bil-ity of a rar-efac-tion shock wave
+ []
+
+
+
+[38 <./figures/fig_1_31.png>]
+<figures/fig_1_32.png, id=727, 667.89525pt x 213.79875pt>
+File: figures/fig_1_32.png Graphic file (type png)
+<use figures/fig_1_32.png>
+Package pdftex.def Info: figures/fig_1_32.png  used on input line 874.
+(pdftex.def)             Requested size: 360.0pt x 115.24081pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 874--875
+ [] 
+ []
+
+<figures/fig_1_33.png, id=728, 666.0885pt x 254.1495pt>
+File: figures/fig_1_33.png Graphic file (type png)
+<use figures/fig_1_33.png>
+Package pdftex.def Info: figures/fig_1_33.png  used on input line 878.
+(pdftex.def)             Requested size: 360.0pt x 137.36278pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 878--879
+ [] 
+ []
+
+
+
+[39 <./figures/fig_1_32.png> <./figures/fig_1_33.png>]
+Overfull \hbox (40.10088pt too wide) detected at line 894
+[][][][]  \OMS/cmsy/m/n/10.95 ([])  []  ([])  []
+ []
+
+<figures/table_1_1.png, id=736, 799.18575pt x 391.4625pt>
+File: figures/table_1_1.png Graphic file (type png)
+<use figures/table_1_1.png>
+Package pdftex.def Info: figures/table_1_1.png  used on input line 897.
+(pdftex.def)             Requested size: 360.0pt x 176.34166pt.
+
+
+[40]
+Overfull \hbox (116.25154pt too wide) detected at line 910
+[][][]\OML/cmm/m/it/10.95 "[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 "[] \OT1/cmr/m/n/10.95 = [][] (\OML/cmm/m/it/10.95 S[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 ) + [][] (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 ) + [] [][] (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] + [] [][] (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] + \OML/cmm/m/it/10.95 :::
+ []
+
+
+Overfull \hbox (49.75247pt too wide) detected at line 914
+[][][]\OML/cmm/m/it/10.95 "[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 "[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 T[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 S[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ [] [][] \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ [] [][] \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] + \OML/cmm/m/it/10.95 :::
+ []
+
+
+Overfull \hbox (175.87044pt too wide) detected at line 918
+[][][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 p[] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 )(\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 ) = [][] (\OML/cmm/m/it/10.95 S[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 )(\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 p[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ [] [][] \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ [] [][] \OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 V[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 V[]\OT1/cmr/m/n/10.95 )[] + \OML/cmm/m/it/10.95 :::
+ []
+
+
+
+[41 <./figures/table_1_1.png>]
+Overfull \hbox (93.75484pt too wide) detected at line 931
+[]
+ []
+
+
+
+[42]
+<figures/fig_1_34.png, id=768, 670.30424pt x 265.59225pt>
+File: figures/fig_1_34.png Graphic file (type png)
+<use figures/fig_1_34.png>
+Package pdftex.def Info: figures/fig_1_34.png  used on input line 940.
+(pdftex.def)             Requested size: 360.0pt x 142.64362pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 940--941
+ [] 
+ []
+
+
+
+[43 <./figures/fig_1_34.png>]
+Overfull \hbox (927.02164pt too wide) in paragraph at lines 969--970
+\OT1/cmr/m/n/10.95 chan-i-cal sta-bil-ity of the dis-con-ti-nu-ity $\OML/cmm/m/it/10.95 u[] > c[]$\OT1/cmr/m/n/10.95 . $[]$" 
+ []
+
+
+
+[44]
+<figures/fig_1_37.png, id=788, 660.066pt x 351.11176pt>
+File: figures/fig_1_37.png Graphic file (type png)
+<use figures/fig_1_37.png>
+Package pdftex.def Info: figures/fig_1_37.png  used on input line 986.
+(pdftex.def)             Requested size: 360.0pt x 191.49408pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 986--987
+ [] 
+ []
+
+
+
+[45 <./figures/fig_1_37.png>]
+<figures/fig_1_38.png, id=797, 670.9065pt x 169.8345pt>
+File: figures/fig_1_38.png Graphic file (type png)
+<use figures/fig_1_38.png>
+Package pdftex.def Info: figures/fig_1_38.png  used on input line 999.
+(pdftex.def)             Requested size: 360.0pt x 91.13394pt.
+
+Overfull \hbox (27.37506pt too wide) in paragraph at lines 999--1000
+ [] 
+ []
+
+
+
+[46 <./figures/fig_1_38.png>]
+Overfull \hbox (73.73053pt too wide) detected at line 1008
+[][][][] \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ^^@\OML/cmm/m/it/10.95 n^^W \OMS/cmsy/m/n/10.95 ^^A \OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 u \OT1/cmr/m/n/10.95 + ^^A\OML/cmm/m/it/10.95 u\OT1/cmr/m/n/10.95 ) = \OMS/cmsy/m/n/10.95 ^^@\OML/cmm/m/it/10.95 n^^W \OMS/cmsy/m/n/10.95 ^^A \OML/cmm/m/it/10.95 mu \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 n^^W \OMS/cmsy/m/n/10.95 ^^A \OML/cmm/m/it/10.95 ml[]
+ []
+
+
+
+[47]
+
+[48]
+
+[49] (zeldovich.aux)
+ ***********
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+ ***********
+Package rerunfilecheck Info: File `zeldovich.out' has not changed.
+(rerunfilecheck)             Checksum: 144ED312E332F1E199A54D62AFBDB0A0;15319.
+ ) 
+Here is how much of TeX's memory you used:
+ 13557 strings out of 468081
+ 211740 string characters out of 5424820
+ 624162 words of memory out of 5000000
+ 41657 multiletter control sequences out of 15000+600000
+ 636424 words of font info for 73 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,13n,79p,734b,632s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on zeldovich.pdf (49 pages, 2231525 bytes).
+PDF statistics:
+ 1004 PDF objects out of 1200 (max. 8388607)
+ 433 named destinations out of 1000 (max. 500000)
+ 592 words of extra memory for PDF output out of 10000 (max. 10000000)
+
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on c:/Users\TLP-001\Documents\GitHub\Numerical_Problems\project_3\zeldovich\zeldovich.pdf (49 pages, 2203667 bytes).
+PDF statistics:
+ 821 PDF objects out of 1000 (max. 8388607)
+ 433 named destinations out of 1000 (max. 500000)
+ 136 words of extra memory for PDF output out of 10000 (max. 10000000)
+

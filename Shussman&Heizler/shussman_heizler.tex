@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Shussman \& Heizler (2015) - Summary \& Questions}
+\author{Tal Ramot}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\subsection{Statement of the problem}
+
+\section{II Supersonic Waves}
+Eq. (9) in this article is the equation over the (only) dimensionless profile of $T(\xi)$ received by substituting the relations for $\frac{d\tilde{T}}{dt}$ and $\frac{d\tilde{T}}{dm}$ using the definition of the similarity dimensionless variable:
+\begin{equation}
+  \xi = mA^{\frac{1}{2}} T_0^{\frac{\beta - \alpha - 4}{2}} t^{\frac{\tau(\beta - \alpha - 4)-1}{2}}
+\end{equation} 
+The equation is:
+\begin{equation}
+  \tilde{T}^{\beta - \alpha - 4} \left[\tau \tilde{T} + w_3 \xi \frac{d\tilde{T}}{d\xi}\right] = \left(\alpha+3\right)\tilde{T}^{-1} \left(\frac{d\tilde{T}}{d\xi}\right)^2 + \frac{\partial^2\tilde{T}}{\partial \xi^2}
+\end{equation}
+solving this eq. (9) for the second derivative of $\tilde{T}$ gives:
+\begin{equation}
+  \frac{\partial^2\tilde{T}}{\partial \xi^2} = \tilde{T}^{\beta - \alpha - 4} \left[\tau \tilde{T} + w_3 \xi \frac{d\tilde{T}}{d\xi}\right] - \left(\alpha+3\right)\tilde{T}^{-1} \left(\frac{d\tilde{T}}{d\xi}\right)^2
+\end{equation}
+One can convert the 2nd order ODE to a system of two 1st order ODEs by defining $y_1 = \tilde{T}$ and $y_2 = \frac{d\tilde{T}}{d\xi}$, which gives the system of coupled 1st order ODEs:
+\begin{equation}
+  \frac{dy_1}{d\xi} = y_2
+\end{equation}
+\begin{equation}
+  \frac{dy_2}{d\xi} = y_1^{\beta - \alpha - 4} \left[\tau y_1 + w_3 \xi y_2\right] - \left(\alpha+3\right)y_1^{-1} y_2^2
+\end{equation}
+which is exactly what Shussman solver does:
+\begin{lstlisting}[language=Matlab]
+  function xp=F(t,x,alpha,beta,tau)
+  W3=-0.5+0.5*(beta-alpha-4)*tau;
+  xp=zeros(2,1);
+  xp(1)=x(2);
+  xp(2)=(x(1)^(beta-alpha-4))*[W3*t*x(2)+tau*x(1)]-(alpha+3)*(1/x(1))*(x(2)^2);
+  end
+\end{lstlisting}
+To sum up, the equation that is being solved here is:
+\begin{equation}
+  \frac{d}{d\xi}
+  \begin{bmatrix}
+    y_1 \\
+    y_2
+    \end{bmatrix} =
+    \begin{bmatrix}
+    y_2 \\
+    y_1^{\beta - \alpha - 4} \left[\tau y_1 + w_3 \xi y_2\right] - \left(\alpha+3\right)y_1^{-1} y_2^2
+    \end{bmatrix}
+\end{equation}
+which can be solved numerically using the Runge-Kutta method which is implemented by the \texttt{ode45} function in Matlab.
+\subsection{The initial and boundary conditions \& Shooting method}
+In order to solve this system of coupled ODEs, one should specify a well-defined initial condition. However, the one wishes to find the dimensionless temperature profile $y_1 = \tilde{T}$ that satisfies the following \textbf{Boundary Conditions}:
+\begin{equation}
+  \begin{gathered}
+    \tilde{T}(\xi \to \xi_f) = 0 \\
+  \frac{d\tilde{T}}{d\xi}(\xi \to \xi_f) = -\infty
+  \end{gathered}
+\end{equation}
+with the normalization condition:
+\begin{equation}
+  \tilde{T}(\xi = 0) = 1
+\end{equation}
+Therefore, the solution is solved numerically using the \textbf{Shooting method}, which is a numerical method for solving boundary value problems by converting them into initial value problems (IVP). Therefore, one can solve this system of coupled ODEs by guessing the initial value of:
+\begin{equation}
+  \begin{aligned}
+    \begin{bmatrix}
+      y_1(\xi_f) \\
+      y_2(\xi_f)
+    \end{bmatrix} = 
+    \begin{bmatrix}
+      0 \\
+      -1000
+    \end{bmatrix}
+  \end{aligned}
+\end{equation}
+for an arbitrary value of $\xi_f$ (the front dimensionless position), and then integrate the equation from $xi_f$ to $0$.
+\section{The patching method}
+In case of a general problem of a power-law temperature drive at the boundary, a solution of the hydrodynamic \& radiation profiles at the entire domain can be solved through dividing the domain into two parts: 
+
+
+\section{Questions}
+\textbf{Questions to answer - Week 13 (15.1.26)}
+\begin{enumerate}
+    \item Understand the introduction - what exactly is the innovation shown in this paper? 
+    \item Understand the equation in subsection II.A.
+    \item Understand the self-similarity of the first kind - subsection II.B.
+    \item Why the units of the temperature can be defined by
+    forcing $f\rho_0^{-\mu}$ to be dimensionless. The problem can also be solved using four units and f as an additional dimensional
+    constant.
+    \item Understand the physical differrence between the supersonic and subsonic cases - what is the affect of the sonic point?
+    \\ \dots
+    \item Understand why is there an additional dimensional constant which is $\chi_f$ (for constant and steep heat profile at the front) and/or $\bar{\chi}$ for a known observed quantity. 
+    \item How one derived Eq. 18?
+    \item Show myself that I can get Eq. 20.
+    \item \textcolor{red}{Understand the physical process of the conformation of the Marshak wave!}
+    \item \textcolor{red}{Understand the intuition about self-similarity, what is the time-scale in these questions? I}
+    \item In general, I try to understand the big picture - it feels like the unified Krief article summarizes the theory that Krief presents... What is better - study his articles or the NLD lecture notes? I think I should do both - but it will take time, I want to choose the best option.
+\end{enumerate}
+
+\end{document}
+
+

@@ -1,0 +1,426 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Radiation-Hydrodynamics Simulation}
+\author{Tal Ramot}
+\date{Exams week 3, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Hydrodynamics scheme}
+The scheme uses the principle of operator splitting, where the hydrodynamics and radiation are solved separately. The hydrodynamics is solved using a finite volume Lagrangian method (e.g. Richtmyer-Morton) and the radiation is solved using a finite difference method. The coupling between the two is done through the source terms in the hydrodynamics equations, which are updated after each radiation step.
+\subsection{Hydrodynamics step}
+The following uses the Euler equations:
+\begin{gather}
+  \frac{\partial u}{\partial t} = - \frac{\partial P}{\partial m} \\
+  \frac{\partial V}{\partial t} = \frac{\partial u}{\partial m} \\
+  \frac{\partial e}{\partial t} = -P \frac{\partial u}{\partial m} \\
+  p = r \rho e \\
+  P = p + q
+\end{gather}
+where $E_{\text{rad}}$ is the energy exchange with the radiation field, which is updated after the radiation step (kept aside for now). 
+In the lagrangian scheme, we begin with a certain pressure that applies a force on the mass elements, which causes them to accelerate. The scheme goes as follows:
+\begin{enumerate}
+  
+  \item Compute acceleration from the pressure gradient: 
+  \begin{equation}
+    a_i^{n} = -2 \cdot \frac{\left(p_{i+\frac{1}{2}}^n + q_{i+\frac{1}{2}}^n\right) - \left(p_{i-\frac{1}{2}}^n + q_{i-\frac{1}{2}}^n\right)}{m_{i+\frac{1}{2}} + m_{i-\frac{1}{2}}}
+  \end{equation}
+  \item Update velocity using the acceleration:
+  \begin{equation}
+    u_i^{n+\frac{1}{2}} = u_i^{n} + a_i^{n} \Delta t
+  \end{equation}
+  \item Update node positions using the updated velocities (which is exactly a helper step for updating the volume):
+  \begin{equation}
+    x_i^{n + 1} = x_i^{n} + u_i^{n+\frac{1}{2}} \Delta t
+  \end{equation}
+  \item Update the volume and density of each cell using the new node positions:
+  \begin{align}
+    V_{i+\frac{1}{2}}^{n+1} &= \frac{x_{i+1}^{n+1} - x_i^{n+1}}{m_{i+\frac{1}{2}}} \\
+    \rho_{i+\frac{1}{2}}^{n+1} &= \frac{1}{V_{i+\frac{1}{2}}^{n+1}}
+  \end{align}
+  \item Calculate artificial viscosity $q$ to handle shocks, using the von Neumann-Richtmyer prescription:
+  \begin{equation}
+    q_{i+\frac{1}{2}}^{n+1} = \begin{cases}
+      \sigma \rho_{i+\frac{1}{2}}^{n+1} \left(u_{i+1}^{n+1} - u_i^{n+1}\right)^2 & \text{if } u_i^{n+1} > u_{i+1}^{n+1} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation}
+  \item Calculate the new spcific internal energy using the updated pressure and velocity:
+  \begin{equation}
+    e_{i+\frac{1}{2}}^{n+1} = \frac{e_{i+\frac{1}{2}}^{n} -\frac{1}{2} \left(p_{i+\frac{1}{2}}^{n} + q_{i+\frac{1}{2}}^{n} + q_{i+\frac{1}{2}}^{n+1}\right) \left(\frac{V_{i+\frac{1}{2}}^{n+1} - V_{i+\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}\right)}{1 + \frac{\gamma - 1}{2} \rho_{i+\frac{1}{2}}^{n+1} \frac{V_{i+\frac{1}{2}}^{n+1} - V_{i+\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}}
+  \end{equation}
+  \item Calculate the new pressure using the equation of state:
+  \begin{equation}
+    p_{i+\frac{1}{2}}^{n+1} = (\gamma - 1) \rho_{i+\frac{1}{2}}^{n+1} e_{i+\frac{1}{2}}^{n+1}
+  \end{equation}
+  \item Compute acceleration from the \textbf{new} pressure gradient: 
+  \begin{equation}
+    a_i^{n+1} = -2 \cdot \frac{\left(p_{i+\frac{1}{2}}^{n+1} + q_{i+\frac{1}{2}}^{n+1}\right) - \left(p_{i-\frac{1}{2}}^{n+1} + q_{i-\frac{1}{2}}^{n+1}\right)}{m_{i+\frac{1}{2}} + m_{i-\frac{1}{2}}}
+  \end{equation}
+  \item Update velocity using the new acceleration:
+  \begin{equation}
+    u_i^{n+1} = u_i^{n+\frac{1}{2}} + a_i^{n+1} \frac{\Delta t}{2}
+  \end{equation}
+  and go back to step 2 for the next iteration. \textcolor{red}{Make sure to understand the reason for the half time step in the velocity update - it makes the scheme second-order and less noisy}.
+\end{enumerate}
+\subsection{Coupling with radiation}
+This is all good for the hydrodynamics step, but we need to couple it with radiation! After step 9, we define:
+\begin{equation}
+  e^{*} = e^{n+1} 
+\end{equation}
+which means that the energy isn't updated yet! we then assume that $U_m^{n} = \rho e^{*}$ is the energy density of the matter.
+
+\section{Radiation Scheme}
+\subsection{Physical PDEs}
+\begin{enumerate}
+  \item Writing the diffusion equation for the radiation energy $E$:
+  \begin{equation}
+      \frac{\partial{E}}{\partial t}+\rho \frac{\partial F}{\partial m} = \chi c\sigma(U_R-E) 
+  \end{equation}
+  \begin{equation}
+      \frac{\partial U_m}{\partial t}=-\chi c\sigma (U_R-E)\Rightarrow
+      \frac{1}{\beta} \frac{\partial U_R}{\partial t}=-\chi c\sigma (U_R-E)
+  \end{equation}
+  \begin{equation}
+      F=-D\rho\frac{\partial E}{\partial m}\;\;\;\;\left(D=\frac{c}{3\sigma(T,\rho)}\right)
+  \end{equation}
+  In the equation here, one assumes that during the radiation substep we keep $\rho^*$ (to be defined later) fixed, and then linearize $U_R(U_m)$ locally around $U_m^*$ to get the relation $\frac{1}{\beta} \frac{\partial U_R}{\partial t}=-\chi c\sigma (U_R-E)$, where $\beta = \frac{dU_R}{dU_m}|_{U_m^*}$ is the coupling coefficient between the radiation and matter that satifies $dU_R \approx \beta dU_m$ around $U_m^*$.
+  \item The self similar relations for the opacity (and thus the diffusion constant):
+  \begin{equation}
+    \frac{1}{\kappa_R} = g T^\alpha \rho^{-\lambda}
+  \end{equation}
+  \begin{equation}
+    \frac{1}{\sigma(T,\rho)} = \frac{1}{\rho\kappa_R(T)} = g T^\alpha \rho^{-\lambda - 1} \Rightarrow D = \frac{c}{3} g T^\alpha \rho^{-\lambda - 1}
+  \end{equation}
+  and the self similar relation for the internal energy:
+  \begin{equation}
+      e = f T^\gamma \rho^{-\mu}
+  \end{equation}
+  % alarm bells icon at the beginning of the line
+  where $e$ is the specific internal energy, which means the material energy density is:
+  \begin{equation}
+      U_m(T) = \rho e = f T^\gamma \rho^{-\mu + 1}
+  \end{equation}
+  \item Notice that we've converted the space derivatives to mass derivatives, using the relation:
+  \begin{equation}
+    \frac{\partial}{\partial x} = \frac{\partial m}{\partial x} \frac{\partial}{\partial m} = \rho \frac{\partial}{\partial m}
+  \end{equation}
+  as done in the Appendix.
+\end{enumerate}
+\subsection{Finite Difference Scheme}
+\begin{enumerate}
+  \item One should notice that the flux is defined at the nodes, while the energy is defined at the cell centers. The definition for the flux is given by:
+  \begin{equation}
+    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^{n} D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}
+  \end{equation}
+  \textcolor{red}{I have to ask Shay about the use of $m_{i+\frac{1}{2}}$ here, because maybe I should use $m_{i+\frac{1}{2}} \pm m_{i-\frac{1}{2}}$ instead like done in the hydrodynamics scheme for the acceleration.}
+  and the diffusion constant (which is also defined at the nodes) is an harmonic mean of the diffusion constants at the surrounding cell centers:
+  \begin{equation}
+    D_i^n = \frac{2 D_{i+\frac{1}{2}}^n D_{i-\frac{1}{2}}^n}{D_{i+\frac{1}{2}}^n + D_{i-\frac{1}{2}}^n}
+  \end{equation}
+  \textcolor{blue}{I need to ask Yuval where he implemented simple average instead.}
+  \item We've seen that one can \textbf{eliminate the effective radiation density $U_R$} from the finite-difference equation for the matter energy. The discretized equation for the material energy density is:
+  \begin{equation}
+      \frac{1}{ \beta_{i+\frac{1}{2}}^{n}}\frac{[U_R]_{i+\frac{1}{2}}^{n+1} - [U_R]_{i+\frac{1}{2}}^n}{\Delta t} = \chi c \sigma_{i+\frac{1}{2}}^{n} (E_{i+\frac{1}{2}}^{n+1} - [U_R]_{i+\frac{1}{2}}^{n+1})
+  \end{equation}
+  \begin{equation}
+      (1 +  \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}) [U_R]_{i+\frac{1}{2}}^{n+1} =  \beta_{i+\frac{1}{2}}^{n}\Delta t \chi c \sigma_{i+\frac{1}{2}}^{n} E_{i+\frac{1}{2}}^{n+1} + [U_R]_{i+\frac{1}{2}}^n
+  \end{equation}
+  We want to solve for $[U_R]_{i+\frac{1}{2}}^{n+1}$. First, we can denote $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ as the coupling coefficient between the radiation and matter, which gives us:
+  \begin{equation}
+      (1 + A_{i+\frac{1}{2}}^n) [U_R]_{i+\frac{1}{2}}^{n+1} =  A_{i+\frac{1}{2}}^n E_{i+\frac{1}{2}}^{n+1} + [U_R]_{i+\frac{1}{2}}^n
+  \end{equation}
+  \begin{equation}
+      \boxed{[U_R]_{i+\frac{1}{2}}^{n+1} = \frac{A_{i+\frac{1}{2}}^n}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} + \frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n}
+  \end{equation}
+  \item Furthermore, after subtituting the expressions for $[U_R]_{i+\frac{1}{2}}^{n+1}$ \& $F_i^{n}$ into the discretized equation for the radiation energy $E$, we get a tridiagonal implicit scheme for $E_i^{n+1}$:
+  \begin{equation}
+    \boxed{a_{i}^n E_{i-\frac{1}{2}}^{n+1}+b_{i}^n E_{i+\frac{1}{2}}^{n} +c_{i}^n E_{i+\frac{3}{2}}^{n+1}=d_{i}^n}
+  \end{equation}
+  where the coefficients $a_i^n,b_i^n,c_i^n,d_i^n$ are calculated in the appendix.
+  \item We notice that the coefficients $a_{i}^n,b_{i}^n,c_{i}^n,d_{i}^n$ depend on the hydrodynamics variables (e.g. density, temperature) through the diffusion constant $D$ and the opacity $\sigma$. The dependency is given through Rosen's formulae for the opacity and the internal energy. First, one should find the temperature at the previous time step:
+  \begin{equation}
+      T^n_{i+\frac{1}{2}}=\sqrt[4]{\frac{[U_R]^n_{i+\frac{1}{2}}}{a}}
+  \end{equation}
+  and then substitute it into the relations for $D(T),\beta(T)$:
+  \begin{gather}
+      D_{i+\frac{1}{2}}^n = \frac{c}{3} g \left[T_{i+\frac{1}{2}}^n\right]^\alpha \left[\rho_{i+\frac{1}{2}}^n\right]^{-\lambda - 1} \\
+      \beta_{i+\frac{1}{2}}^n = \frac{dU_R}{dU_m} = \frac{4a}{f\gamma} \left[T_{i+\frac{1}{2}}^n\right]^{4 - \gamma} \left[\rho_{i+\frac{1}{2}}^n\right]^{\mu - 1} \\
+      \frac{1}{\sigma_{i+\frac{1}{2}}^n} = \frac{1}{\rho \kappa_R (T)} = g \left[T_{i+\frac{1}{2}}^n\right]^\alpha \left[\rho_{i+\frac{1}{2}}^n\right]^{-\lambda - 1}
+  \end{gather}
+  NOTE: In the coupled scheme, we will use the temperature $T_{i+\frac{1}{2}}^*$ computed from the hydrodynamics step \textbf{directly} to calculate $D,\beta,\sigma$ and substitute in the tridiagonal system, no need to go through $U_R$ in the coupled scheme.
+  \item To sum up, the complete algorithm for the radiation scheme is as follows:
+  \begin{enumerate}
+    \item Compute the temperature at the previous time step using the effective radiation density $U_R$.
+    \item Compute the diffusion constant $D$, the coupling coefficient $\beta$ and the opacity $\sigma$ using the temperature and density at the previous time step.
+    \item Compute the coefficients $a_i^n,b_i^n,c_i^n,d_i^n$ for the tridiagonal system.
+    \item Solve the tridiagonal system for $E_i^{n+1}$ using the Thomas algorithm.
+    \item Update the effective radiation density $U_R^{n+1}$ using the expression derived above.
+  \end{enumerate}
+
+
+
+
+\end{enumerate}
+\section{Coupling the two schemes}
+\begin{enumerate}
+  \item We first perform the hydrodynamics step, which gives us the updated density $\rho^{n+1}$ and specific internal energy $e^{n+1}$. We call it $e^*$ because we haven't updated the energy with the radiation source term yet.
+  \item In the radiation scheme, the self-similar profiles for the opacity and internal energy depend on the material temperature. Since we know that $U_m = \rho e^*$, we can compute the temperature at the previous time step using the relation:
+  \begin{equation}
+    e_{i+\frac{1}{2}}^* = f \left[T_{i+\frac{1}{2}}^*\right]^{\gamma} \left[\rho_{i+\frac{1}{2}}^{*}\right]^{-\mu} \Rightarrow T_{i+\frac{1}{2}}^* = \left(\frac{e_{i+\frac{1}{2}}^*}{f} \left[\rho_{i+\frac{1}{2}}^{*}\right]^{\mu}\right)^{\frac{1}{\gamma}}
+  \end{equation}
+  \item Apply the radiation scheme using the temperature and density at the previous time step to compute $\beta$, $D$ and $\sigma$ which give us the coefficients for the tridiagonal system, which we solve to get $E_{i+\frac{1}{2}}^{n+1}$ and $\left[U_R\right]_{i+\frac{1}{2}}^{n+1}$. \\
+  NOTE: The chat proposes to perform a Picard loop, where we update the temperature using the radiation energy until convergence.
+  \item We then update the specific internal energy after the second source term of radiation is applied:
+  \begin{equation}
+    e_{i+\frac{1}{2}}^{n+1} = \frac{[U_m]_{i+\frac{1}{2}}^{n+1}}{\rho_{i+\frac{1}{2}}^{n+1}}
+  \end{equation}
+  \item Finally, we update the hydrodynamic pressure using the equation of state:
+  \begin{equation}
+    p_{i+\frac{1}{2}}^{n+1} = r \rho_{i+\frac{1}{2}}^{n+1} e_{i+\frac{1}{2}}^{n+1}
+  \end{equation}
+  and go back to the hydrodynamics step for the next iteration!
+\end{enumerate}
+
+\section{Appendix: Derivation of the tridiagonal form coefficients in Lagrangian coordinates}
+\begin{enumerate}
+  \item The discretized equation for the radiation energy in Lagrangian coordinates is:
+  \begin{equation}
+  \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} + \rho_{i+\frac{1}{2}}^{*} \frac{F_{i+1}^{n+1} - F_{i}^{n+1}}{m_{i+\frac{1}{2}}} =  \chi c \sigma_{i+\frac{1}{2}}^{n} ([U_R]_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1})
+  \end{equation}
+  \item Recalling that the flux and $U_R$ are given as expressions of $E$, we can substitute them into the equation above to get a tridiagonal system for $E_{i+\frac{1}{2}}^{n+1}$. \\ \\ 
+  \underline{LHS:}
+  The flux is given by:
+  \begin{equation}
+    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^n D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}} = -\rho_{i+\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i - \frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}
+  \end{equation}
+  Substituting the fluxes into the balance equation gives:
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}} = \\ \\
+  \end{gathered}
+  \end{equation}
+  Rearranging the terms gives us the tridiagonal form:
+  \begin{equation}
+    \begin{gathered}
+      % insert the appropriate coefficients in front of each term:
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right) E_{i+\frac{3}{2}}^{n+1} \\
+  - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i-\frac{1}{2}}^{n+1} \\
+  + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i+\frac{1}{2}}^{n+1} 
+  \end{gathered}
+  \end{equation}
+  and finally:
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right) E_{i+\frac{3}{2}}^{n+1} \\
+  - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i-\frac{1}{2}}^{n+1} \\
+  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) + \frac{1}{\Delta t} \right] E_{i+\frac{1}{2}}^{n+1} - \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n
+  \end{gathered}
+  \end{equation}
+  \underline{RHS:}
+  Substituting the expression for $[U_R]_{i+\frac{1}{2}}^{n+1}$ gives:
+  \begin{equation}
+    \begin{gathered}
+  RHS = \chi c \sigma_{i+\frac{1}{2}}^{n} \left(\frac{A_{i+\frac{1}{2}}^n}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} + \frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \chi c \sigma_{i+\frac{1}{2}}^{n}
+  \left(\frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n -\frac{1}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} 
+  \end{gathered}
+  \end{equation}
+  \item Finally, rearranging the equation $LHS = RHS$ gives us the tridiagonal form:
+  \begin{equation}
+    \begin{gathered}
+     a_{i}^n E_{i-\frac{1}{2}}^{n+1} + b_{i}^n E_{i+\frac{1}{2}}^{n+1} + c_{i}^n E_{i+\frac{3}{2}}^{n+1} = d_{i}^n
+    \end{gathered}
+  \end{equation}
+  and the coefficients are given by:
+  \begin{gather}
+    % add boxes around the coefficients:
+    \boxed{a_{i}^n = - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right)} \\
+    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
+    \boxed{c_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right)} \\
+    \boxed{d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
+  \end{gather}
+  where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}).
+  \end{enumerate}
+  \subsection{Deeper understanding of the tridiagonal form}
+  \begin{enumerate}
+    \item First, let's make order in the celebration of indexes. Our staggered grid is as follows:
+    \begin{center}
+      \begin{tabular}{c|c|c|c|c|c}
+        % make cells more spaced out to make it more readable:
+        $i-1$ & $i-\frac{1}{2}$ & $i$ & $i+\frac{1}{2}$ & $i+1$ & $i+\frac{3}{2}$ \\
+        $j - \frac{3}{2}$ & $\boxed{j - 1}$ & $j - \frac{1}{2}$ & $\boxed{j}$ & $j + \frac{1}{2}$ & $\boxed{j + 1}$ \\
+        \hline
+        node & cell center & node & cell center & node & cell center \\
+         & $E_{i-\frac{1}{2}}$ &  & $E_{i+\frac{1}{2}}$ &  & $E_{i+\frac{3}{2}}$ \\
+         & $[U_R]_{i-\frac{1}{2}}$ &  & $[U_R]_{i+\frac{1}{2}}$ &  & $[U_R]_{i+\frac{3}{2}}$ \\
+         & $\rho_{i-\frac{1}{2}}$ &  & $\rho_{i+\frac{1}{2}}$ &  & $\rho_{i+\frac{3}{2}}$ \\
+         & $D_{i-\frac{1}{2}}$ &  & $D_{i+\frac{1}{2}}$ &  & $D_{i+\frac{3}{2}}$ \\
+         & $\beta_{i-\frac{1}{2}}$ &  & $\beta_{i+\frac{1}{2}}$ &  & $\beta_{i+\frac{3}{2}}$ \\
+         & $\sigma_{i-\frac{1}{2}}$ &  & $\sigma_{i+\frac{1}{2}}$ &  & $\sigma_{i+\frac{3}{2}}$ \\
+      \end{tabular}
+    \end{center}
+    where we defined $j=i + \frac{1}{2}$ as the index for the cell centers. Now, the indexes values are:
+    \begin{equation}
+      \begin{gathered}
+        i = 0,1,2,...,N \quad (\text{nodes}) \\
+        j = 1,2,...,N \quad (\text{cell centers})
+      \end{gathered}
+    \end{equation}
+    \item We wish to write the tridiagonal equation as:
+    \begin{equation}
+      a_{j}^n E_{j-1}^{n+1} + b_{j}^n E_{j}^{n+1} + c_{j}^n E_{j+1}^{n+1} = d_{j}^n
+    \end{equation}
+    Before we think of the definitions for the coefficients, let's understand how this equation can be written in matrix form. Supposing that $E_0$ is given as a BC (discussed later) our unknowns are $E_1,E_2,...,E_N$ (remember the $E$ is indexed by $j$, the cell centers). The boundary conditions for a power-law self-similar solution with zero radiation energy at the end of the grid are: 
+    \begin{equation}
+        E_0^{n+1}=a_{\text{Hev}} T_0 t^\tau
+    \end{equation}
+    \begin{equation}
+        E_{N-1}^{n+1}=0
+    \end{equation}
+    \textcolor{blue}{Two notes: (1) This derivation holds for any BCs, even without a BC at the end of the grid that will give us an equation for $E_{N-1}$ and make $a_{N-1}, b_{N-1}, c_{N-1}, d_{N-1}$ non-zero. (2) I need to ask Shay about the correct BC here and its physical meaning.}
+    % Copilot - answer: what is the physical meaning of the zero radiation energy at the end of the grid?
+    % The physical meaning of the zero radiation energy at the end of the grid is that there is no incoming radiation from outside the system. This is a common boundary condition used in radiative transfer problems, where the system is assumed to be isolated and there is no external source of radiation. It implies that all the radiation energy within the system is generated internally, and there is no contribution from outside sources. This can be particularly relevant in astrophysical contexts, such as modeling the radiation from a star or a supernova, where the outer boundary of the computational domain is set to have zero radiation energy to simulate an open space environment.
+
+    % So is it a Vaccum BC?
+    % Yes, the zero radiation energy at the end of the grid can be considered a vacuum boundary condition.
+
+    % Thanks.
+    % You're welcome! If you have any more questions, feel free to ask.
+    Therefore, the entire matrix equation for the vector of unknowns is:
+    \begin{equation}
+    \begin{bmatrix}
+    1 & 0 & 0 & \cdots & 0 & 0\\
+    a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & \cdots & a_{N-2} & b_{N-2} & c_{N-2}  \\
+    0 & 0 & 0 & 0 & \cdots & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    E_1^{n+1} \\
+    E_2^{n+1} \\
+    E_3^{n+1} \\
+    \vdots \\
+    E_{N-1}^{n+1} \\
+    E_{N}^{n+1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{\text{Hev}} T_0 t^\tau \\
+    d_2 \\
+    d_3 \\
+    \vdots \\
+    d_{N-2} \\
+    0
+    \end{bmatrix}
+    \end{equation}
+    From now, we can reduce the $a_1$ and the $c_{N-2}$ from the $0^{th}$ and $(N-2)^{th}$ row and get the matrix equation:
+    \begin{equation}
+    \begin{bmatrix}
+    1 & 0 & 0 & \cdots & 0 & 0\\
+    0 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & \cdots & a_{N-2} & b_{N-2} & 0  \\
+    0 & 0 & 0 & 0 & \cdots & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+    E_1^{n+1} \\
+    E_2^{n+1} \\
+    E_3^{n+1} \\
+    \vdots \\
+    E_{N-1}^{n+1} \\
+    E_{N}^{n+1}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{\text{Hev}} T_0 t^\tau \\
+    d_2 - a_{\text{Hev}} T_0 t^\tau\\
+    d_3 \\
+    \vdots \\
+    d_{N-2} \\
+    0
+    \end{bmatrix}
+    \end{equation}
+    Notice that we thereby received an invariant matrix equation of $N-2$ equations in $N-2$ unknowns, which is:
+    \begin{equation}
+    \begin{bmatrix}
+    b_2 & c_2 & \cdots & 0 & 0 \\  
+    a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \cdots & a_{N-2} & b_{N-2}   \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    E_2^{n+1} \\
+    E_3^{n+1} \\
+    \vdots \\
+    E_{N-1}^{n+1} 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    d_2 - a_{\text{Hev}} T_0 t^\tau\\
+    d_3 \\
+    \vdots \\
+    d_{N-2}
+    \end{bmatrix}
+    \end{equation}
+    This is a \textit{tridiagonal system of equations} which can be solved by the \textit{Thomas algorithm} which is explained in previous files.
+  \item Now, we can define the coefficients $a_j^n, b_j^n, c_j^n, d_j^n$ for $j=2,...,N-2$ (the index $N-1$ is irrelevant for the end BC that we have, but it will be relevant if we have a different BC at the end of the grid). The transition is simply $j = i + \frac{1}{2}$, so we can rewrite the coefficients in terms of $j$ instead of $i$:
+  \begin{equation}
+    \begin{gathered}
+    a_{j}^n = - \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j-1}^n \frac{2D_{j-1}^{n} D_{j}^{n}}{D_{j-1}^{n} + D_{j}^{n}}\right) \\
+    b_{j}^n = \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j+1}^n \frac{2D_{j}^{n} D_{j+1}^{n}}{D_{j}^{n} + D_{j+1}^{n}} - \rho_{j-1}^n \frac{2D_{j-1}^{n} D_{j}^{n}}{D_{j-1}^{n} + D_{j}^{n}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{j}^{n}}{1 + A_{j}^n} \\
+    c_{j}^n = \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j+1}^n \frac{2D_{j}^{n} D_{j+1}^{n}}{D_{j}^{n} + D_{j+1}^{n}}\right) \\
+    d_{j}^n = \frac{\chi c \sigma_{j}^{n}}{1 + A_{j}^n}[U_R]_{j}^n + \frac{1}{\Delta t}E_{j}^n
+    \end{gathered}
+  \end{equation}
+  \item IMPORTANT NOTE: $\rho, m, D, \sigma$ are all given as arrays for the cell centers (i.e. $\rho_j$ = \texttt{rho[j - 1]}) for $j = 1,...,N$. However, even for the non-zero BC at $j = N$, the coefficients $a_j^n, b_j^n, c_j^n, d_j^n$ are defined for $j = 2,...,N-1$ so we will define them so that $a_j$ = \texttt{a[j - 2]} (so that \texttt{a.size()=N-2} and \texttt{a=[a[0],a[1],...,a[N-3]]}). Therefore, each time a variable $\rho_j$ appears in the formula for $a_j$ (for example), we will replace $a_j$ by \texttt{a[j-2]} and $\rho_j$ by \texttt{rho[j-1]}. \textbf{To sum up}, the arrays look like this:
+  \begin{equation}
+    \begin{gathered}
+    \text{\texttt{a=[a[0],a[1],...,a[N-3]]}} \\
+    \text{\texttt{rho=[rho[0],rho[1],...,rho[N-1]]}} \\
+    \end{gathered}
+  \end{equation}
+  and the rules for translating the formulas for the coefficients into array assignment with the correct indexing, are:
+  \begin{equation}
+    \begin{gathered}
+      a_{j}^n \to \text{\texttt{a[:] or just a}} \\
+      \rho_{j}^n \to \text{\texttt{rho[1:-1]}} \\
+      \rho_{j-1}^n \to \text{\texttt{rho[:-2]}} \\
+      \rho_{j+1}^n \to \text{\texttt{rho[2:]}} \\
+      \end{gathered}
+  \end{equation}
+  and, of course, the same for the other coefficients \& variables.
+  \end{enumerate}
+
+\end{document}

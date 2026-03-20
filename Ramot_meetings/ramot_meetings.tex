@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Meetings with Shay}
+\author{Tal Ramot}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+\section{Week 14 Tue - 20.1.26}
+\subsection{Main Points}
+\begin{enumerate}
+    \item I've read subsections 1-6 in the first chapter of Zeldovich, have seen various unrelated and advanced topics in hydrodynamics (e.g. characteristics, Riemman invariants, etc.) and I'm wondering if it's relevant.
+    \item Also read about the use of the Huguniot curves in Shussman's paper and wonder what is relevant in the more complicated hydrodynamics.
+\end{enumerate}
+\subsection{Shay's Points}
+\begin{enumerate}
+    \item I was wrong about the chapter - Shay meant the entire first chapter (I mistakenly thought he meant only the first section).
+    \item Shay recommends reading the 10th chapter of Zeldovich which contains the more advanced topics of heat waves.
+    In addition to that, Shay is talking about the Henyey solution which (as well as Zeldovich's) one of the two only known analytical solutions to the hydrodynamic equations with heat conduction.
+    Zeldovich - assumes BC of $T=T_0 t^0.1408$ (constant flux) and finds the profile to be $T(x,t)=(1-\frac{x}{x_F})^{\frac{1}{T_H}}$ where $\tau_H = \frac{1}{4+\alpha-\beta}$. Shay says that although it works analytically for constant flux only, it is a wonderful approximation for other BCs as long as $x_F$ is calculated correctly (separately from the Temperature profile) and substituted in the Henyey solution.
+    Shay says that the Zeldovich solution assumes a BC of a delta function.
+    Shay recommends reading the appendix of Hammer \& Rosen (2003) which derives the Henyey solution.
+    \item Shay says to try and plot the assymptotic solution for the hydrodynamic system of ODEs in Pakula \& Sigel's paper and compare to the subsonic solver of Shussman.
+    \item Going over the use of Shusman paper of the Huguniot relations from the Zeldovich book, Shay is trying to recall the algebra (read it lastly 25 years ago).
+    \item Speaking about the \textbf{Artificial Viscosity Simulation}, Shay gives me a summary written by someone called Itamar that includes both the theoretical background and the numerical implementation (literally finite differencing of the PDEs) and says to read it and implement with it.
+    \item Shay says that the Artificial Viscosity method will outcome the Huguniot relations as a result, and I want to make sure that it does that and I understand it properly.
+\end{enumerate}
+    \subsection{Tasks}
+\begin{enumerate}
+    \item Read the appendix of Hammer \& Rosen (2003) which derives the Henyey solution.
+    \item Derive the Huguniot relations appearing in Eq. (39) in Shussman from the Zeldovich book.
+    \item Implemet the \textbf{Artificial Viscosity} method using Itamar's summary.
+    \item Make sure that the Artificial Viscosity method outcomes the Huguniot relations as a result and understand it properly.
+    \item Continue reading the first full chapter Zeldovich book (Shay gave me a copy of the book).
+\end{enumerate}
+\section{Exam Week 1 Tue - 27.1.26}
+\subsection{Main Points}
+\begin{enumerate}
+    \item Finished reading the 84/105 pages of the first chapter of Zeldovich book (section 4 is missing).
+    \item Have finished converting Shussman's subsonic solver from Matlab to Python, and tested it (python vs. Matlab side by side).
+    \item Have written the Artificial Viscosity code in Python, and it works for the tests of the Riemman problem described in Itamar's summary, epsecially the Sod shock tube test (which I need to read more about). Compare to KriefHydro paper!!!
+    \item I found explanation about the Riemann problem and lagrangian Simulation methods in general in the book "Finite volume methods for hyperbolic problems" by Randall J. LeVeque.
+    \item I want to understand what is next - what happens after I compare Shussman's subsonic solver to the Artificial Viscosity code for the problem of a power-law pressure drive?
+    \item I want to get a broad overview of the project and what are the next steps.
+\end{enumerate}
+\subsection{Shay's Points}
+\begin{enumerate}
+    \item Improvements that Shay suggests for the Artificial Viscosity code:
+    \begin{enumerate}
+        \item Implement variable $dm$ instead of constant $dm$ between cells (a function $dm(i)$).
+        \item Implement calculation of the energy \& Temperature at each time step, according to the formulas (Rosen's notation is used, which is also in Shussman's subsonic and shock sections, respectively):
+        \begin{align}
+            P &= r \rho e \equiv (\gamma - 1) \rho e \\
+            e &= f T^\beta \rho^{-\mu}
+        \end{align}
+        so from $P,\rho$ at each time step we can calculate $e$ and then $T$.
+        \item Add a flag to choose between different boundary conditions at the first cell ($x=0$):
+        % make the enumeration be with 1), 2), 3), ...
+        \begin{enumerate}
+            \item constant pressure drive (simplest). 
+            \item power-law pressure drive (as in Shussman).
+            \textcolor{red}{I think that the last two should be implemented just like setting a ghost cell with a constant pressure, because otherwise setting a consant (or time variating, whatever) pressure at the first cell means that the first node doesn't move and the second one moves according to the pressure at the first cell - which is exactly as if we set the first cell to be the ghost cell in the simnulation}.
+            \item constant velocity drive (piston).
+            \item a "hard wall" BC at $x=0$ (zero velocity at the first cell), which is essentially a reflecting BC (equal pressure and density at the first cell and the second cell). \textcolor{red}{Isn't it the same as a ghost cell with constant pressure?}
+            \item free movement under coupling to a constant pressre bath at $x < 0$ (and therefore the pressure gradient at $x=0$ between the pressure at the first cell and the bath pressure will determine the equations of motion of the first cell). This BC should also define the pressure at the first cell (assume zero).
+        \end{enumerate} 
+        \item Verification of the Artificial Viscosity code:
+        \begin{enumerate}
+            \item Compare the results of the Artificial Viscosity code to Shussman's subsonic solver for the power-law pressure drive problem - especially for the shock position. \textbf{Shay says that profile comparison is enough, no need for analysis of the shock position}. Shay reminds that the limit of a strong shock in Hugoniot relations should rise from the simulation.
+            \item Compare the results of the Artificial Viscosity code to the analytical Sedov solution for the case of a constant energy deposition at $t=0$ (delta function energy deposition). \textbf{Look for the Sedov solution in Zeldovich book, it might appear at section X}.
+            \item At this point, it might be good to learn about the sod shock tube test and the other tests in Itamar's summary, and try to implement them in the Artificial Viscosity code to make sure it works properly. Furthemore, I should \textbf{study well the theory behind the Artificial Viscosity method from LeVeque's book}.
+            \item \textbf{Shay says that this part should be well-summarized and put in a presentation, Menahem would like to see it.}
+        \end{enumerate}
+        \item The next step in the project:
+        \begin{enumerate}
+            \item After the verification of the Artificial Viscosity code (which itself is an essential task) - \textbf{couple it with the 1D radiation diffusion code} that was written with Kochavi - thereby making a full hydro-radiation 1D simulation that is the same one as in Shussman's paper (that Shay only ran and didn't write by himself, he says that it is an unattainable code from the south).
+            \item Shay says that this part may be complicated and take time.
+        \end{enumerate}
+        \item Thinking big together:
+        \begin{enumerate}
+            \item The main goal of my entire project is to be able to give analytic fits for the profile of the ablation region (and maybe also the shock region, I don't remember from the meeting) as a function of Eulerian space.
+            \item Shay says that Menahem already has partial analytic fits, but he hasn't done something complete yet.
+            \item The next paper can be in extending the fits to a diffusion in 1D in gray approximation (Shussman uses black physics) through coupling to the material, using equations similar to those Kochavi and me wrote in 1D self similar package (Su Olson's paper and the extension to non-linear diffusion constant).
+            \textbf{\textcolor{red}{physics explanation} Shay says that the global multiplier $\chi$ that we inserted in the equations apply only over the $\sigma_a$ of the material and not over the $\sigma_t$ of the radiation, so generally speaking - you can have a simulation in which the material and radiation are in equillibrium (e.g. $T_R = T_M$) but small $\sigma_t$ (so big $l_{mfp}$) and therefore the diffusion is not accurate (low opacity) or vice versa - high opacity but out of equillibrium. Shay says that such cases are possible in many materials, the first one appears in low-Z materials in which the wave is subsonic (so hydrodynamics matters) but the opacity is low - it doesn't happen in Au (high-Z so opaque) nor in in foam (low-Z but supersonic wave so hydro doesn't matter). Shay says that it happens in Be and Al (low Z but subsonic wave so hydro matters).}
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

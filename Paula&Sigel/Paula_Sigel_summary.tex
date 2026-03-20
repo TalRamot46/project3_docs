@@ -1,0 +1,207 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Pakula \& Sigel (1970) - Summary \& Questions}
+\author{Tal Ramot}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\subsection{Statement of the problem}
+\subsubsection{A The hydrodynamic phenomenon of a shock wave}
+The process described in the introduction goes like:
+\begin{itemize}
+    \item A supersonic heat wave propagates through a solid material with density $\rho_s$.
+    \item The velocity of the heat wave decreases as it travels through the material.
+    \item A hydrodynamic expansion of the heated material into the vaccum begins.
+    \item When the velocity of the front (heat wave) drops below the speed of sound in the material, 
+    it is taken by a shock wave (ablative heat wave). 
+\end{itemize}
+Then, there is a discussion about the conduction approximation. 
+\textcolor{red}{understand!}
+
+\subsection{Hydrodynamic Equations with nonlinear heat conduction}
+\subsubsection{Definition of Physical attributes \& unit analysis}
+The physical attributes used in the equations are:
+\begin{itemize}
+    \item $x$ - distance from the surface $[cm]$
+    \item $t$ - time since the beginning of the process $[s]$
+    \item $\rho$ - volume density of the material $[g/cm^3]$
+    \item $u$ - velocity of the material gathered mass $[cm/s]$
+    \item $p$ - pressure of the material gathered mass $[dyne/cm^2]=[g/(cm\cdot s^2)]$
+    \item $e$ - specific internal energy $[erg/g]$
+    \item $T$ - temperature of the material $[K]$
+    \item $\kappa$ - heat conduction coefficient $[erg/(cm \cdot s \cdot K)]$
+\end{itemize}
+
+\subsubsection{The hydrodynamic equations}
+\underline{Conservation of \textbf{MASS}}
+\begin{equation}
+    \frac{\partial v}{\partial t} - \frac{\partial u}{\partial m} = 0
+\end{equation}
+where $v = \frac{1}{\rho}\quad([u] = [cm/s])$ is the specific volume, i.e. volume per unit mass, 
+and $m = \int_0^x \rho dx\quad([m] = [g/cm^2])$ is the Lagrangian mass coordinate describing the gathered mass up to distance $x$.
+This means that \textit{a change in the specific volume with time is due to a change in velocity of that gathered mass.}
+\\ \\
+\underline{Conservation of \textbf{MOMENTUM}}
+\begin{equation}
+    \frac{\partial u}{\partial t} - \frac{\partial p}{\partial m} = 0
+\end{equation}
+where $[u] = [cm/s]$ is the velocity of the gathered mass and $[p] = [g/(cm \cdot s^2)]$ is the pressure (Force per unit Area)
+that the mass exerts. Notice that $\frac{\partial}{\partial m} = \frac{1}{\rho} \frac{\partial}{\partial x}$
+\textit{a change in the velocity of the gathered mass with time is due to a change in pressure of that gathered mass.}
+\\ \\ 
+\underline{Conservation of \textbf{ENERGY}}
+\begin{equation}
+    \frac{\partial e}{\partial t} + p \frac{\partial v}{\partial t} = \frac{\partial}{\partial m} \left( \kappa \frac{\partial T}{\partial m} \right)
+\end{equation}
+where $\frac{\partial}{\partial m} \left( \kappa \frac{\partial T}{\partial m} \right) = -\frac{\partial S}{\partial m}$.
+$S$ is the heat flux (energy per unit area per unit time) and $\kappa$ is the heat conduction coefficient. 
+\textit{a change in the internal energy of the gathered mass with time plus the work done by pressure due to change in specific volume
+is equal to the change in heat flux with respect to the gathered mass. (First law of thermodynamics).}
+
+
+\subsubsection{THe heat internal energy \& equation of state}
+\begin{equation}
+    e = \frac{1}{\gamma - 1}pv
+\end{equation}
+\underline{Note:} This equation is derived from finding the internal energy gained
+by an ideal gas when in an adiabatic expansion process.
+Important things to use (may ask GPT about): Mayer's relation $C_p - C_v = R$, definition of internal energy $de = C_v dT$,
+and the adiabatic process relation $pv^\gamma = const$.
+\begin{equation}
+    pv = KT^\delta
+\end{equation}
+and the constants $a, \lambda$ are both defined as the following wall:
+\begin{equation}
+    a = \frac{\kappa_0}{\delta \kappa^{\frac{\nu + 1}{\delta}}}
+\end{equation}
+\begin{equation}
+    \lambda = \frac{\nu + 1 - \delta}{\delta}
+\end{equation}
+substituting the above equations for $e$ and $pv$ in the energy conservation equation, we get:
+\begin{equation}
+    \frac{1}{\gamma - 1}  \frac{\partial (pv)}{\partial t} + p \frac{\partial v}{\partial t} = \frac{\partial}{\partial m} \left( a p^{\nu} v^{\lambda} \frac{\partial T}{\partial m} \right)
+\end{equation}
+or simplified:
+\begin{equation}
+    \frac{\partial p}{\partial t} + \gamma p \frac{\partial v}{\partial m} = a(\gamma - 1) \frac{\partial}{\partial m} \left( p^{\nu} v^{\lambda} \frac{\partial T}{\partial m} \right)
+\end{equation}
+
+\subsection{Self Similarity - Theory}
+\subsubsection{A proof for the Buckingham Pi's Theorem}
+\textcolor{red}{To be continued...}
+
+\subsubsection{Explaining the derivations for the self similarity analysis in this subsection}
+Consider a physical quantity $g(a_1,...,a_k,a_{k+1},...,a_n) = 0$ where $a_1,...,a_k$ have independent dimensions.
+\underline{statement:} $g$ can be rewritten as:
+\begin{equation}
+    g = g_1 (a_1,...,a_k) \tilde{G}(\xi_1,...,\xi_{n-k}) 
+\end{equation}
+where $\xi_i$ are dimensionless quantities defined as:
+\begin{equation}
+    \xi_i = a_{k+i} a_1^{x_1} a_2^{x_2} ... a_k^{x_k}
+\end{equation}
+and $g_1$ is the dimensional part of $g$ defined by:
+\begin{equation}
+    g_1 = a_1^{\alpha_1} a_2^{\alpha_2} ... a_k^{\alpha_k}
+\end{equation}
+\underline{proof outline:} Suppose a = $(a_1,...,a_n)$ is the units (dependent) of the physical problem, and that
+$D\in R^{k \times n}$ is the dimension matrix of the problem. Then, changing units corresponds to the transformation:
+\begin{equation}
+    log(a) \to log(a) + D^T \lambda, \quad \lambda \in R^k
+\end{equation}
+which is a group action of $R^k$ on $R^n$. Let $g(a) = 0$ be a physical law. It must be invariant under this group action, i.e.:
+\begin{equation}
+    g(a) = g(a') \quad \text{where} \quad log(a') = log(a) + D^T \lambda
+\end{equation}
+and we must remember that the transformation of g is:
+\begin{equation}
+    g(a') = g(a) + \sum_{i=1}^n \frac{\partial g}{\partial log(a_i)} \sum_{j=1}^k D_{j,i} \lambda_j
+\end{equation}
+which means that from Linear Algebra we get that:
+\begin{equation}
+    \mathbb{R}^n = \text{Im}(D^T) \oplus \text{Ker}D
+\end{equation}
+and therefore, we can choose a basis for $\mathbb{R}^n$ such that the first k basis vectors span Im$(D^T)$ (with dimension) and the last n-k basis vectors span Ker$(D)$ (dimensionless).
+which gives us:
+\begin{equation}
+    g(a) = a_1^{\alpha_1} a_2^{\alpha_2} ... a_k^{\alpha_k} \tilde{G}(\xi_1,...,\xi_{n-k})
+\end{equation}
+
+\subsection{Self Similarity of the 2nd kind (Assymptotic)}
+Here the text explains that besides the physical variables with dimensions $t, a, W_\nu^*, m$ - there is $\rho_s$.
+This extra variable makes the "dimensionless group" (achieved by Buckingham Pi's theorem) to be 2-dimensional.
+However, when $t \to \infty$, the influence of $\rho_s$ overwhelms the initial density $\rho_0$ and the remaining solution
+is fully self-similar.
+
+\subsection{}
+
+\section{Questions \& Tough Points}
+\begin{enumerate}
+    \item "The range of validity of the conduction approximation is 
+    discussed at the end of the paper (Sec V or VI)" 
+    - I suppose that it's referring to the relation of $K \sim T^\nu$,
+    I need to make sure of that and read the last paragraph of the introduction.
+    \item research on the derivation of the EOS and internal energy - they both might
+    come from basic thermodynamics.
+    \item How deeply should I understand the self-similarity derivation form Buckingham Pi's theorem shown in subsection 2.C?
+    Specifically the derivation of $g, g_1, \xi_i$? Chat GPT said that it involves many deep claims from group theory and linear algebra.
+    \item Relates to the subsection of thermodynamics relations - what exactly is the thermodynamical process that is discussed
+    there? is it adiabatic expansion? is it something else? How is is related to the given relations for $e$ etc.
+    \item The big picture - Undestand the goal of this article - Explain how to take hydrodynamic equations
+    and solve it using self-similarity of the 2nd kind (explained in the article), and with the approximations of the front boundary conditions.
+
+
+\end{enumerate}
+
+
+\section{Meeting with Shi - Week 12, Monday}
+\begin{enumerate}
+    \item The article has a corrction called "Euratom", about some of the power rules presented.
+    The Erratum still constains mistakes, though. For example, figure 1 describing the temperature profile misincludes
+    the flat region of the shockwave at the supersonic regime.
+    Despite the Euratom, the article is considered revolutinary as it discusses a solution of the subsonic region.
+    \item Relating to the figures - there is a special case in which the shock wave and the temperature wave move 
+    in the same speed. Need to read the course summary from Prof. Kreif to fully undertsand.
+    \item Shussman wrote solvers of the subsonic, sonic, shockwave and the connection-edges of the shockwave in Matlab -
+    after completing the article, \textcolor{red}{ask Shi for the code}.
+    \item Phonons - they are modeling the ions in a lattice. In our article, the conduction is performed through
+    the interaction between the ions. In Pomraning, the conduction is through photons (emission-absorption, who are 
+    encapsuled in the Boltzmann equation in $\sigma_a$, $\sigma_s$ which are determined by QM).
+    I need to understand better the difference between the two models.
+    \item In a hohlraun, in the incident point of the laser, the plasma is very diluted so the electronic conduction is negligible? 
+    understand better.
+    \item Understand what is the $\kappa$ term in the equation of heat conduction. Read on appendix C.
+    
+\end{enumerate}
+
+
+\end{document}
