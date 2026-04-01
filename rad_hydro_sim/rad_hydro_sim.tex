@@ -423,7 +423,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \begin{gathered}
       % insert the appropriate coefficients in front of each term:
   LHS = \left(-\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}} \right) E_{i-\frac{1}{2}}^{n+1} \\
-  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}-\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t}\right] E_{i+\frac{1}{2}}^{n+1} \\
+  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t}\right] E_{i+\frac{1}{2}}^{n+1} \\
   - \left(\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}\right) E_{i+\frac{3}{2}}^{n+1} \\
   - \frac{1}{\Delta t} E_{i+\frac{1}{2}}^n
   \end{gathered}
@@ -448,11 +448,11 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \begin{gather}
     % add boxes around the coefficients:
     \boxed{a_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}}} \\
-    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}-\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
+    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
     \boxed{c_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}} \\
     \boxed{d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
   \end{gather}
-  where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}).
+  where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}.
   \end{enumerate}
   \subsection{Deeper understanding of the tridiagonal form}
   \begin{enumerate}
