@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  1 APR 2026 15:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  1 APR 2026 16:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -238,13 +238,13 @@ Overfull \hbox (19.13383pt too wide) detected at line 160
 
 
 [4]
-Overfull \hbox (13.17085pt too wide) in paragraph at lines 186--188
+
+[5]
+Overfull \hbox (13.17085pt too wide) in paragraph at lines 204--206
 \OT1/cmr/m/n/10.95 We want to solve for $[\OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 ][]$. First, we can de-note $\OML/cmm/m/it/10.95 A[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 ^^L[]\OT1/cmr/m/n/10.95 ^^A\OML/cmm/m/it/10.95 t^^_c^^[[]$
  []
 
 
-
-[5]
 
 [6]
 
@@ -257,23 +257,13 @@ Overfull \hbox (13.17085pt too wide) in paragraph at lines 186--188
 [10]
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 390--393
+Underfull \hbox (badness 10000) in paragraph at lines 408--411
 
  []
 
 
 
 [12]
-Overfull \hbox (39.294pt too wide) detected at line 423
-[][][]
- []
-
-
-Overfull \hbox (24.95934pt too wide) detected at line 447
-[]
- []
-
-
 
 [13]
 
@@ -292,13 +282,13 @@ L3 programming layer <2025-09-02>
 Here is how much of TeX's memory you used:
  4605 strings out of 468081
  67338 string characters out of 5424820
- 503051 words of memory out of 5000000
+ 496051 words of memory out of 5000000
  33233 multiletter control sequences out of 15000+600000
  639358 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,16n,65p,770b,278s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rad_hydro_sim.pdf (17 pages, 270949 bytes).
+Output written on rad_hydro_sim.pdf (17 pages, 271102 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

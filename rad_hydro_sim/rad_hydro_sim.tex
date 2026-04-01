@@ -158,7 +158,25 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     &= \left(m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}\right) - \left(m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}}\right) = \frac{1}{2} \left(\Delta m_{i+\frac{1}{2}} + \Delta m_{i-\frac{1}{2}}\right)
     \end{aligned}
   \end{equation}
-  \textcolor{blue}{NOTE that in our case $\Delta m_{i+\frac{1}{2}}$ is constant for all $i$ and therefore $\Delta m_i = const$ and is a \textbf{predefined parameter} of the simulation.}
+  \item One should also regard the problem when taking the second derivative of $E$ with respect to $m$ - rising from the first derivative of the flux!
+  \begin{equation}
+    \frac{\partial F}{\partial x} = \rho \frac{\partial F}{\partial m} = \rho \frac{\partial}{\partial m} \left( -D\rho \frac{\partial E}{\partial m} \right)
+  \end{equation}
+  \textbf{What a mess! How are we supposed to discretize this?}
+  The solution is to discretize step by step - first the discretize the first derivative of the flux, and then the first derivative of each $E$ term.
+  \begin{equation}
+    \frac{\partial F}{\partial m} \approx \frac{F_{i+1}^{n} - F_{i}^{n}}{\Delta m_{i + \frac{1}{2}}}
+  \end{equation}
+  and it makes sense because the flux is defined at the faces of the cells $i+\frac{1}{2}$ whose mass is actually $\Delta m_{i+\frac{1}{2}} = m_{i+1} - m_{i}$.
+  Then, one should discretize each of the flux terms, as we have already done for the first derivative of $E$:
+  \begin{equation}
+    \begin{gathered}
+      F_{i+1}^{n} = -\rho_{i+1}^{n} D_{i+1}^{n} \frac{E_{i+\frac{3}{2}}^{n} - E_{i+\frac{1}{2}}^{n}}{\Delta m_{i+1}} \\
+      F_{i}^{n} = -\rho_{i}^{n} D_{i}^{n} \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{\Delta m_{i}}
+    \end{gathered}
+  \end{equation}
+  where $\Delta m_i$, $\rho_i$ and $D_i$ terms are all explained in the previous bullets.
+  \item \textcolor{blue}{NOTE that in our case $\Delta m_{i+\frac{1}{2}}$ is constant for all $i$ and therefore $\Delta m_i = const$ and is a \textbf{predefined parameter} of the simulation.}
   \subsubsection{Discretization of $D$ and $\rho$ faces}
   Since the derivative is a property of the vertex located between two adjacent cells, we should also pay attention to the fact that $F$, $D$ and $\rho$ should be defined at the faces of the cells (e.g. the vertices).
 
@@ -385,40 +403,29 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
 \begin{enumerate}
   \item The discretized equation for the radiation energy in Lagrangian coordinates is:
   \begin{equation}
-  \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} + \rho_{i+\frac{1}{2}}^{*} \frac{F_{i+1}^{n+1} - F_{i}^{n+1}}{m_{i+\frac{1}{2}}} =  \chi c \sigma_{i+\frac{1}{2}}^{n} ([U_R]_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1})
+  \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} + \rho_{i+\frac{1}{2}}^{*} \frac{F_{i+1}^{n+1} - F_{i}^{n+1}}{\Delta m_{i+\frac{1}{2}}} =  \chi c \sigma_{i+\frac{1}{2}}^{n} ([U_R]_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1})
   \end{equation}
   \item Recalling that the flux and $U_R$ are given as expressions of $E$, we can substitute them into the equation above to get a tridiagonal system for $E_{i+\frac{1}{2}}^{n+1}$. \\ \\ 
   \underline{LHS:}
   The flux is given by:
   \begin{equation}
-    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^n D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}} = -\rho_{i+\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i - \frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}
-  \end{equation}
-  and in our case (after the hydro step, and using the implicit scheme):
-  \begin{equation}
-    F_{i}^{n+1} = -\rho_{i+\frac{1}{2}}^* D_{i}^n \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}} = -\rho_{i+\frac{1}{2}}^* \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i - \frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}
+    F_{i}^{n} = -\rho_{i}^* D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{\Delta m_{i}} 
   \end{equation}
   NOTE: The radiation energy density $E$ is taken implicitely, and the D face is taken exaplicitly - because of numeric considerations (\textcolor{blue}{I need to ask Shay about this}).
   Substituting the fluxes into the balance equation gives:
   \begin{equation}
     \begin{gathered}
-  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}} = \\ \\
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+1}^n D_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i}^n D_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}\right)}^{-F_{i}^{n+1}}
   \end{gathered}
   \end{equation}
   Rearranging the terms gives us the tridiagonal form:
   \begin{equation}
     \begin{gathered}
       % insert the appropriate coefficients in front of each term:
-  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right) E_{i+\frac{3}{2}}^{n+1} \\
-  - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i-\frac{1}{2}}^{n+1} \\
-  + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i+\frac{1}{2}}^{n+1} 
-  \end{gathered}
-  \end{equation}
-  and finally:
-  \begin{equation}
-    \begin{gathered}
-  LHS = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right) E_{i+\frac{3}{2}}^{n+1} \\
-  - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) E_{i-\frac{1}{2}}^{n+1} \\
-  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) + \frac{1}{\Delta t} \right] E_{i+\frac{1}{2}}^{n+1} - \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n
+  LHS = \left(-\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}} \right) E_{i-\frac{1}{2}}^{n+1} \\
+  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}-\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t}\right] E_{i+\frac{1}{2}}^{n+1} \\
+  - \left(\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}\right) E_{i+\frac{3}{2}}^{n+1} \\
+  - \frac{1}{\Delta t} E_{i+\frac{1}{2}}^n
   \end{gathered}
   \end{equation}
   \underline{RHS:}
@@ -440,9 +447,9 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   and the coefficients are given by:
   \begin{gather}
     % add boxes around the coefficients:
-    \boxed{a_{i}^n = - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right)} \\
-    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}} - \rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
-    \boxed{c_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}^2} \left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\right)} \\
+    \boxed{a_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}}} \\
+    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}-\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
+    \boxed{c_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}} \\
     \boxed{d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
   \end{gather}
   where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}).
