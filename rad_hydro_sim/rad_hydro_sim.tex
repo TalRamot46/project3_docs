@@ -139,10 +139,19 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
 \begin{enumerate}
   \item One should notice that the flux is defined at the nodes, while the energy is defined at the cell centers. The definition for the flux is given by:
   \begin{equation}
-    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^{n} D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}
+    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^{n} D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{\Delta m_i}
   \end{equation}
-  \textcolor{red}{I have to ask Shay about the use of $m_{i+\frac{1}{2}}$ here, because maybe I should use $m_{i+\frac{1}{2}} \pm m_{i-\frac{1}{2}}$ instead like done in the hydrodynamics scheme for the acceleration.}
-  and the diffusion constant (which is also defined at the nodes) is an harmonic mean of the diffusion constants at the surrounding cell centers:
+  Where I used here the notation of:
+  \begin{equation}
+    \Delta m_i := \frac{1}{2} \left((m_{i+1} - m_{i}) + (m_{i} - m_{i-1})\right) = \frac{1}{2} (\Delta m_{i+\frac{1}{2}} + \Delta m_{i-\frac{1}{2}})
+  \end{equation}
+  where the lagrangina coordinate $m_i$ for $i=0,...,N$ is defined as the mass of the material up to the vertex located at $x_i$. Therefore $m_i$ = $\sum_{j = 0}^{i} \Delta m_{i+\frac{1}{2}}$. where $\Delta m_{i+\frac{1}{2}} = m_{i+1} - m_{i}$ is the mass of the cell $j = i+\frac{1}{2}$ ($j = 1,...,N$) between the vertices $i$ and $i+1$. 
+  It also be denoted $\Delta m_i = m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}}$ where $m_{i+\frac{1}{2}} = m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}$.
+  \begin{equation}
+    \Delta m_i = m_i + \frac{1}{2} \Delta m_{i+\frac{1}{2}} - \left(m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}}\right) 
+  \end{equation}
+  NOTE that in our case $\Delta m_{i+\frac{1}{2}}$ is constant for all $i$ and therefore $\Delta m_i = const$ and is a \textbf{predefined parameter} of the simulation.
+  \item The diffusion constant (which is also defined at the nodes) is an harmonic mean of the diffusion constants at the surrounding cell centers:
   \begin{equation}
     D_i^n = \frac{2 D_{i+\frac{1}{2}}^n D_{i-\frac{1}{2}}^n}{D_{i+\frac{1}{2}}^n + D_{i-\frac{1}{2}}^n}
   \end{equation}
@@ -209,6 +218,151 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \end{equation}
   and go back to the hydrodynamics step for the next iteration!
 \end{enumerate}
+\section{Corrections}
+\subsection{Correcting the scheme with black physics}
+\begin{enumerate}
+  \item In the radiation diffusion equation, the finite-difference form that we reached previously is:
+  \begin{equation}
+      LHS = \frac{\partial{E}}{\partial t}+\rho \frac{\partial F}{\partial m} 
+    \end{equation}  
+  \begin{equation} \Updownarrow \end{equation}
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+  \end{gathered}
+  \end{equation}
+  but wait! If we assume black physics, the radiation energy should be changed to $E^*$ and not $E^{n+1}$. That's why the new LHS is:
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{\textcolor{blue}{E_{i+\frac{1}{2}}^{*}} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+  \end{gathered}
+  \end{equation}
+  
+  \item And the RHS remains implicit, so it's the same as before:
+  \begin{equation}
+    RHS = \chi c\sigma(U_R-E)
+  \end{equation}
+  \begin{equation} \Updownarrow \end{equation}
+  \begin{equation}
+    \begin{gathered}
+  RHS = \chi c \sigma_{i+\frac{1}{2}}^{n} \left(\frac{A_{i+\frac{1}{2}}^n}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} + \frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \chi c \sigma_{i+\frac{1}{2}}^{n}
+  \left(\frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n -\frac{1}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} 
+  \end{gathered}
+  \end{equation}
+  \item Conclusion: The new LHS and RHS define a new tridiagonal system of equations for the radiation energy density $E^*$, which creates a new sparse matrix that needs to be solved.
+  \textcolor{blue}{Ask Shay about this conclusion - if it's correct, it requires a new algebric derivation of the tridiagonal constants, and implementation in python.}
+
+  \item CORRECTION: My conclusion is incorrect. $E^n$ should be replaced by \textcolor{blue}{$E^*$} and \textcolor{red}{NOT $E^{n+1}$}. It makes sense because we suppose that the radiation energy should also be changed.
+  
+  \item \underline{Implementation}: The only coefficient that had previously (prior to the correction) included $E^n$ is $d^n$. The new formula for $d^n$ is:
+  \begin{equation}
+    \begin{gathered}
+      d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}\textcolor{blue}{E_{i+\frac{1}{2}}^*}
+    \end{gathered}
+  \end{equation}
+  or in language of arrays:
+  \begin{equation}
+    \begin{gathered}
+      d_{j}^n = \frac{\chi c \sigma_{j}^{n}}{1 + A_{j}^n}[U_R]_{j}^n + \frac{1}{\Delta t}\textcolor{blue}{E_{j}^*}
+    \end{gathered}
+  \end{equation}
+\end{enumerate}
+\subsection{Black (LTE) radiation scheme}
+\begin{enumerate}
+  \item One can also solve the rad-hydro scheme under the LTE assumption that leads to the following simpler equation:
+  \begin{equation}
+    \begin{aligned}
+        \frac{\partial E}{\partial t} + \frac{\partial F}{\partial x} = Q \\
+        C_V \frac{\partial T}{\partial t} = -Q
+    \end{aligned}
+  \end{equation}
+  where we denoted:
+  \begin{equation}
+      \begin{gathered}
+          Q = \Sigma_a^\prime (aT_m^4 - E) \\
+          F = -D \frac{\partial E}{\partial x}
+      \end{gathered}
+  \end{equation}
+  \begin{equation} \Downarrow \end{equation}
+  \begin{equation}
+    \begin{gathered}
+    \frac{\partial e}{\partial t} + \frac{\partial F}{\partial x} = 0 \\
+    F = -D \frac{\partial e}{\partial x}
+    \end{gathered}
+  \end{equation}
+  The LTE assumption means that $T_m = T_R = T$ and the relation between the energy densities and the temperatures is given by:
+  \begin{equation}
+      \begin{aligned}
+          e = f T^\beta \rho^{-\mu} \quad \text{Rosen's notation} \\
+          E = a T^4 \quad \text{Stefan-Boltzmann law}
+      \end{aligned}
+  \end{equation}
+  \item The finite-difference schem for this equation is:
+  The starting point is the coupled energy equation in LTE conditions from above:
+  \begin{equation}
+    \begin{gathered}
+    \frac{\partial e}{\partial t} = \frac{\partial}{\partial x}\left(D \frac{\partial e}{\partial x}\right) \\ 
+    \frac{\partial e}{\partial t} = \rho \frac{\partial}{\partial m}\left(D \rho \frac{\partial e}{\partial m}\right)
+    \end{gathered}
+  \end{equation}
+  In the Lagrangian framework used here, the cell centers are indexed by $i+\frac{1}{2}$, while the cell faces (vertices) are indexed by $i$. In Lagrangian coordinates, the spatial derivative is written in terms of mass coordinates, using $1/\Delta x = \rho^* / \Delta m$, where $\Delta m$ is the cell mass and $\rho^*$ is the (hydro-updated) density at the cell center.
+
+  The finite-difference (implicit) scheme for the diffusion equation in Lagrangian coordinates reads:
+  \begin{equation}
+    \begin{gathered}
+    LHS = \frac{e_{i+\frac{1}{2}}^{n+1} - e_{i+\frac{1}{2}}^n}{\Delta t} \\
+    RHS = \frac{1}{\Delta m_{i+\frac{1}{2}}}
+      \left[
+        D_{i+1} \rho_{i+1}^* \frac{e_{i+\frac{3}{2}}^{n+1} - e_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}
+        - D_{i} \rho_{i}^* \frac{e_{i+\frac{1}{2}}^{n+1} - e_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}
+      \right]
+    \end{gathered}
+  \end{equation}
+  where $D_i$ is the diffusion coefficient at face (vertex) $i$, $\Delta m_{i}$ is the mass of the cell between vertices $i-1$ and $i$, and $\rho_{i+\frac{1}{2}}^*$ is the density at the cell center after the hydro update.
+
+  The harmonic mean is still used for $D_i$:
+  \begin{equation}
+    D_{i} = \frac{2 D_{i-\frac{1}{2}} D_{i+\frac{1}{2}}}{D_{i-\frac{1}{2}} + D_{i+\frac{1}{2}}}
+  \end{equation}
+  (harmonic mean), and similarly for $D_{i+1}$.
+
+  Rearranging terms to bring all unknowns $e_{j+\frac{1}{2}}^{n+1}$ to the left yields the tridiagonal system:
+  \begin{equation}
+    \boxed{
+      a_{i+\frac{1}{2}}\, e_{i-\frac{1}{2}}^{n+1}
+      + b_{i+\frac{1}{2}}\, e_{i+\frac{1}{2}}^{n+1}
+      + c_{i+\frac{1}{2}}\, e_{i+\frac{3}{2}}^{n+1}
+      = e_{i+\frac{1}{2}}^n
+    }
+  \end{equation}
+  where the boxed coefficients are:
+  \begin{gather}
+    \boxed{
+      a_{i+\frac{1}{2}} = -\frac{\Delta t}{\Delta m_{i}} \frac{\rho_{i+\frac{1}{2}}^*}{\Delta m_{i+\frac{1}{2}}} D_{i}
+    } \\[1em]
+    \boxed{
+      b_{i+\frac{1}{2}} = 1 + \frac{\Delta t}{\Delta m_{i+\frac{1}{2}}} \frac{\rho_{i+\frac{1}{2}}^*}{\Delta m_{i+\frac{1}{2}}} ( D_{i} + D_{i+1} )
+    } \\[1em]
+    \boxed{
+      c_{i+\frac{1}{2}} = -\frac{\Delta t}{\Delta m_{i+1}} \frac{\rho_{i+\frac{1}{2}}^*}{\Delta m_{i+\frac{1}{2}}} D_{i+1}
+    }
+  \end{gather}
+
+  Here, the index $i+\frac{1}{2}$ denotes the cell center, the left neighbor is at $i-\frac{1}{2}$ and the right neighbor at $i+\frac{3}{2}$, consistent with the Lagrangian grid convention.
+
+  For practical implementation, let $j = i+\frac{1}{2}$ and define arrays for $a_j$, $b_j$, $c_j$, $e_j$, etc. The resulting tridiagonal system is:
+  \begin{equation}
+    a_j\, e_{j-1}^{n+1} + b_j\, e_j^{n+1} + c_j\, e_{j+1}^{n+1} = e_j^n
+  \end{equation}
+  which can be efficiently solved using the Thomas algorithm or any suitable tridiagonal matrix solver.
+
+
+  Here, $e_{i+\frac{1}{2}}^{n+1}$ is the energy at cell center $i+\frac{1}{2}$ at the new timestep, and the resulting system is tridiagonal and can be solved by the Thomas algorithm.
+
+  \textcolor{blue}{Note: If $e$ and $E$ are directly connected via LTE (e.g.\ $e=fT^\beta \rho^{-\mu}$ and $E=aT^4$) and the same equation holds for $E$, a similar discrete scheme applies to $E$.}
+\end{enumerate}
 
 \section{Appendix: Derivation of the tridiagonal form coefficients in Lagrangian coordinates}
 \begin{enumerate}
@@ -222,6 +376,11 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \begin{equation}
     F_{i}^{n} = -\rho_{i+\frac{1}{2}}^n D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}} = -\rho_{i+\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i - \frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{m_{i+\frac{1}{2}}}
   \end{equation}
+  and in our case (after the hydro step, and using the implicit scheme):
+  \begin{equation}
+    F_{i}^{n+1} = -\rho_{i+\frac{1}{2}}^* D_{i}^n \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}} = -\rho_{i+\frac{1}{2}}^* \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i - \frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}
+  \end{equation}
+  NOTE: The radiation energy density $E$ is taken implicitely, and the D face is taken exaplicitly - because of numeric considerations (\textcolor{blue}{I need to ask Shay about this}).
   Substituting the fluxes into the balance equation gives:
   \begin{equation}
     \begin{gathered}
@@ -422,5 +581,4 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \end{equation}
   and, of course, the same for the other coefficients \& variables.
   \end{enumerate}
-
 \end{document}

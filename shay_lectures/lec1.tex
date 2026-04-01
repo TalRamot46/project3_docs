@@ -1,0 +1,117 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Lecture 1 - Motivation to the course}
+\author{Tal Ramot}
+\date{Week 2, 23.3.2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction and grade structure}
+\begin{enumerate}
+\item The grade will be structured from exercises and a final task. It will be about 50\% exercises and 50\% final task.
+The exercises will contain both numerical and analytical questions.
+\item Shay encourages us to use AI tools to code - this is how pe
+\end{enumerate}
+
+\section{Introduction to the course}
+\begin{enumerate}
+\item Shay presents the Boltzmann integro-differential equation.
+\item The most of the course will be trying to solve the Boltzmann equation indifferent scenarios.
+\item The course will use the Boltzmann equation as a description of neutron transport in a medium, but it may also be used for other types of particle transport. 
+\end{enumerate}
+\subsection{Why transport?}
+\begin{enumerate}
+    \item If you have small amount of particles, we can use columb, strong and weak interactions to describe the system and solve for the dynamics.
+    \item The problem is that for large amount of particles, we need to use a statistical description.
+    \item We try to model the problem by its collective behavior - for example, we can use the definition of particle density to describe the system.
+    \item One of the most famous example to the use of the Boltzmann equation is the nuclear reactor. Inside that reactor, there is a neutron transport process.
+    \item The transport of photons in astrophysics is also described by the Boltzmann equation. For example, the supernovas (types I, IA and II) are modeled by pluses of photons that obey the Boltzmann equation. In this field, it's called radiative transport.
+    \item Modeling plasma includes a modeling of the electron transport.
+    \item Alpha particles transport is also described by the Boltzmann equation. An alpha particle is a charged particle becuase it is only the core of the helium atom.
+\end{enumerate}
+
+\section{Motivation - Nuclear Energy}
+\begin{enumerate}
+    \item Shay shows two images from famous accidents of nuclear power plants - Fukushima in 2011 (Tsunami) and the 3-mile Island accident in 1979 (human error).
+    \item Shay also presents the biggest nuclear disaster in history - Chernobyl in 1986, and the power plant is Syria that was attacked.
+    \item Jane Fonda ("nice lady") was a movie star from the 1960s and is one of the biggest anti-nuclear activists in the world (Shay calls her the number one cause of global warming).
+    \item Equivalent Energy units - a tiny uranium rod (typical size is the same size as the head of a pencil) can produce the same amount of energy as 3 barrels of oil or 1 ton of coal.
+    \item We will learn how to use this energy for our purposes.
+\end{enumerate}
+\subsection{Atomic Structure}
+\begin{enumerate}
+    \item The atomic structure of Neils Bohr - the atom is composed of a tiny nuclear and the electron around the nuclear. This modeled was offered in 1913 and it was assumed that the atom nuclear can't be divided.
+    \item How can we obtain the energy from the atom? First Shay discusses the relative sizes - the size of the nuclear is about a fentometer ($10^{-15}$ meters) and the size of the atom is about a nanometer ($10^{-9}$ meters).
+\end{enumerate}
+\subsection{Nuclear Energy}
+\begin{enumerate}
+    \item The Einstein formula $E=mc^2$ shows us that matter can be converted to energy and vice versa.
+    \item THe nuclear binding energy vs. the atomic mass shows us two ways to obtain the energy from the atom - by fission (splitting Uranium) and by fusion (merging Hydrogen to Helium).
+    \item The strong interaction is the force that holds the atomic nucleus together - it fights the electromagnetic force that wants to split the nucleus.
+    \item Tye graph of the negative (e.g. gained) nuclear binding energy vs. the atomic mass shows us that the fusion segment is sharper than the fission segment - e.g. we gain more energy from merging two Hydrogen atoms than from splitting one Uranium atom.
+    \item The problem is that Fusion is very hard to achieve, and fission is easier.
+    \item In each fission reaction we gain about 200 MeV of energy, which is about $10^{11}$ joules. This is the energy released by a single fission reaction.
+\end{enumerate}
+\subsection{Nuclear Fission}
+\begin{enumerate}
+    \item Lise Meitner and Otto Hahn discovered the nuclear fission in 1938. Meitner was a Jewish woman who was the first woman to get a professorship in the university of Berlin.
+    \item They discovered that when a neutron is absorbed by a Uranium atom, it splits into two smaller atoms and releases energy because addition of a nucleon to the nucleus makes it unstable.
+    \item In the process of fission we get 3 other neutrons, two fragments and energy. The real glory is that the other neutrons can be used to split other Uranium atoms, and so on - initiating a chain reaction.
+    \begin{equation}
+        ^{235}U + n \rightarrow ^{140}Ba + ^{94}Kr + 3n + \text{energy}
+    \end{equation}
+    The other products are beta and gamma radiation. Shay shows different cartoons of the fission process.
+    \item Leo Szilard was a Hungarian-American physicist who was one of the first to realize the potential of the nuclear chain reactio - he even patented it in 1936 before Meitner and Hahn discovered the nuclear fission.
+    \item The Boltzmann equation is used to describe the population of the neutrons in the chain reaction.
+    \item The first attempt to use this potential energy was the atomic bomb. On August 2, 1939, Einstein and Szilard wrote a letter to President Roosevelt, recommending him to establish a military nuclear project before the Germans would do so.
+    \item The famous Manhattan project - Shay says that most of the scientists involved in the project (as well as the later Soviet project) were Jews. The project was led by Robert Oppenheimer and it was located in Los Alamos, New Mexico.
+    \item Shay wants us to catch the scale of the energy released by the atomic bomb - a bobm carried by a single person (by a terror belt) has about 2-10 kg of TNT. The latest Iranian missiles hits in Dimona and Arad were about 500 kg of TNT, and the Hiroshima \& Nagasaki bombs were about 15-20 kt of TNT. Nowadays, nuclear warheads are estimated to be about Mtons of TNT.
+\end{enumerate}
+
+\subsection{The Atom in Service of Humanity}
+\begin{enumerate}
+    \item A nuclear reactor is a device that uses the nuclear fission to produce energy.
+    \item Finding uranium in nature - in uranium ore, there is about 2 kg of uranium for every ton of ore. The uranium is processed into "yellow cake" ($U_3 O_8$). Only 0.7\% of the uranium is fissionable - the $U^{235}$ is the only fissionable isotope.
+    \item The first reactor - on December 2, 1942, Enrico Fermi and his team at the University of Chicago built the first nuclear reactor using Cuminium rods as a moderator (a material that absorbs neutrons).
+    \item Graphite was also used to slow down the neutrons and hence increas the chance of fission and increases the efficiency of the reactor.
+    \item Open pool reactor - a reactor that is open to the atmosphere. The chernekov radiation is generated in those cores and are explained by the fact that the speed of neutrons is higher than the speed of light in the water.
+    \item Fuel pellets are inserted into long tubes, each 4 meters long and a reactor consists of about 175 of such.
+    \item Use of nuclear power plants worldwide - in France about 80\% of the electricity is produced by nuclear power plants.
+\end{enumerate}
+
+\subsection{Risks in using nuclear reactors}
+\begin{enumerate}
+    \item Reserves of nuclear material is enough for about 1000 years of global energy consumption.
+    \item The Three Mile Island accident in 1979 - caused no death.
+    \item The Jane Fonda effect - in an article in Times magazine, she was considered as one of the main causes of global warming.
+    \item Her film "China Syndrome" was about a nuclear reactor that explodes, and in a crazy coincidence, the reactor accident at Three Mile Island happened two weeks after the film was released.
+\end{enumerate}
+\end{document}

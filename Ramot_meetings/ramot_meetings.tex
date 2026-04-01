@@ -111,4 +111,56 @@
         \end{enumerate}
     \end{enumerate}
 \end{enumerate}
+\section{Week 3 Mon - 30.3.26}
+\subsection{Main Points}
+    \begin{enumerate}
+        \item Talking with Shay about different directions that we can choose to proceed with the debugging of the rad-hydro simulation.
+        \item Shay says that he might falsely neglected the effect of the MMC - a special-relativistic correction to the equations of rad-hydro dynamics.
+    \end{enumerate}
+\subsection{Shay's Points}
+    \begin{enumerate}
+        \item Shay says the regular system of equations that we use in the rad-hydro simulation goes like:
+        \begin{equation}
+            \begin{aligned}
+                \frac{\partial E}{\partial t} + \frac{\partial F}{\partial x} = Q \\
+                C_V \frac{\partial T}{\partial t} = -Q
+            \end{aligned}
+        \end{equation}
+        where we denoted:
+        \begin{equation}
+            \begin{aligned}
+                Q = \Sigma_a^\prime (aT_m^4 - E) \\
+                F = -D \frac{\partial E}{\partial x}
+            \end{aligned}
+        \end{equation}
+
+        % Writing scheme for black physics
+        \item Shay says that in case of \textbf{black physics} (high-opacity), or LTE assumption (\textcolor{blue}{I have to understand the terms here}) the material is said to be highly coupled to the radiation, and therefore after adding eq. (3) one gets:
+        \begin{equation}
+            \frac{\partial e}{\partial t} - \frac{\partial}{\partial x}\left(D \frac{\partial e}{\partial x}\right) = 0
+        \end{equation}
+        The LTE assumption means that $T_m = T_R = T$ and the relation between the energy densities and the temperatures is given by:
+        \begin{equation}
+            \begin{aligned}
+                e = f T^\beta \rho^{-\mu} \quad \text{Rosen's notation} \\
+                E = a T^4 \quad \text{Stefan-Boltzmann law}
+            \end{aligned}
+        \end{equation}
+
+        % implementing a certain change in the simulation
+        \item Shay suggests that in the finite-difference scheme of the radiation diffusion equation, our equation:
+        \begin{equation}
+            \begin{gathered}
+                LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+            \end{gathered}
+        \end{equation}
+        instead, we should use:
+        \begin{equation}
+            \begin{gathered}
+                LHS = \frac{\textcolor{blue}{E_{i+\frac{1}{2}}^{*}} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+            \end{gathered}
+        \end{equation}
+        where $E_{i+\frac{1}{2}}^{*}$ is the radiation energy density after the hydrodynamical update.
+        \item In order to proceed, one should find the new coefficients of the tridiagonal system of equations for $E$.
+    \end{enumerate}
 \end{document}

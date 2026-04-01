@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+
+\title{Question about whether to use the MMC in the rad-hydro simulation}
+\author{Tal Ramot}
+\date{March 31, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Corrections}
+\subsection{Correcting the scheme with black physics}
+\begin{enumerate}
+  \item In the radiation diffusion equation, the finite-difference form that we reached previously is:
+  \begin{equation}
+      LHS = \frac{\partial{E}}{\partial t}+\rho \frac{\partial F}{\partial m} 
+    \end{equation}  
+  \begin{equation} \Updownarrow \end{equation}
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+  \end{gathered}
+  \end{equation}
+  but wait! If we assume black physics, the radiation energy should be changed to $E^*$ and not $E^{n+1}$. That's why the new LHS is:
+  \begin{equation}
+    \begin{gathered}
+  LHS = \frac{\textcolor{blue}{E_{i+\frac{1}{2}}^{*}} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+\frac{3}{2}}^n \frac{2D_{i+\frac{1}{2}}^{n} D_{i+\frac{3}{2}}^{n}}{D_{i+\frac{1}{2}}^{n} + D_{i+\frac{3}{2}}^{n}}\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{m_{i+\frac{3}{2}}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i-\frac{1}{2}}^n \frac{2D_{i-\frac{1}{2}}^{n} D_{i+\frac{1}{2}}^{n}}{D_{i-\frac{1}{2}}^{n} + D_{i+\frac{1}{2}}^{n}}\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{m_{i+\frac{1}{2}}}\right)}^{-F_{i}^{n+1}}
+  \end{gathered}
+  \end{equation}
+  
+  \item And the RHS remains implicit, so it's the same as before:
+  \begin{equation}
+    RHS = \chi c\sigma(U_R-E)
+  \end{equation}
+  \begin{equation} \Updownarrow \end{equation}
+  \begin{equation}
+    \begin{gathered}
+  RHS = \chi c \sigma_{i+\frac{1}{2}}^{n} \left(\frac{A_{i+\frac{1}{2}}^n}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} + \frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \chi c \sigma_{i+\frac{1}{2}}^{n}
+  \left(\frac{1}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n -\frac{1}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1}\right) \\
+  = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} 
+  \end{gathered}
+  \end{equation}
+  \item Conclusion: The new LHS and RHS define a new tridiagonal system of equations for the radiation energy density $E^*$, which creates a new sparse matrix that needs to be solved.
+  \textcolor{blue}{Ask Shay about this conclusion - if it's correct, it requires a new algebric derivation of the tridiagonal constants, and implementation in python.}
+\end{enumerate}
+\end{document}
