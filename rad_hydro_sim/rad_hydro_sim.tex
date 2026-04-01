@@ -136,26 +136,47 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   as done in the Appendix.
 \end{enumerate}
 \subsection{Finite Difference Scheme}
+\subsubsection{Discretization of a lagrangian PDE}
 \begin{enumerate}
-  \item One should notice that the flux is defined at the nodes, while the energy is defined at the cell centers. The definition for the flux is given by:
+  \item In the diffusion equation, we have terms like:
   \begin{equation}
-    F_{i}^{n} = -\rho_{i+\frac{1}{2}}^{n} D_{i}^n \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{\Delta m_i}
+    \frac{\partial E}{\partial x} = \rho \frac{\partial E}{\partial m}
   \end{equation}
-  Where I used here the notation of:
+  \textbf{but how are they being discretized?}
+  We can discretize them by simply writing (\textcolor{blue}{leaving $\rho$ outside of discussion for now}):
+  \begin{equation}
+    \frac{\partial E}{\partial m} \approx \frac{E_{i+\frac{1}{2}}^{n} - E_{i-\frac{1}{2}}^{n}}{\Delta m_i}
+  \end{equation}
   \begin{equation}
     \Delta m_i := \frac{1}{2} \left((m_{i+1} - m_{i}) + (m_{i} - m_{i-1})\right) = \frac{1}{2} (\Delta m_{i+\frac{1}{2}} + \Delta m_{i-\frac{1}{2}})
   \end{equation}
-  where the lagrangina coordinate $m_i$ for $i=0,...,N$ is defined as the mass of the material up to the vertex located at $x_i$. Therefore $m_i$ = $\sum_{j = 0}^{i} \Delta m_{i+\frac{1}{2}}$. where $\Delta m_{i+\frac{1}{2}} = m_{i+1} - m_{i}$ is the mass of the cell $j = i+\frac{1}{2}$ ($j = 1,...,N$) between the vertices $i$ and $i+1$. 
-  It also be denoted $\Delta m_i = m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}}$ where $m_{i+\frac{1}{2}} = m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}$.
+  where the lagrangina coordinate $m_i$ for $i=0,...,N$ is defined as the mass of the material up to the vertex located at $x_i$. Therefore $m_i$ = $\sum_{j = 0}^{i} \Delta m_{i+\frac{1}{2}}$ where $\Delta m_{i+\frac{1}{2}} = m_{i+1} - m_{i}$ is the mass of the cell $j = i+\frac{1}{2}$ ($j = 1,...,N$) between the vertices $i$ and $i+1$. 
+  \item It may also be denoted $\Delta m_i = m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}}$ where $m_{i+\frac{1}{2}} = m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}$ and $m_{i-\frac{1}{2}} = m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}} \textcolor{red}{= m_i - \frac{1}{2} \Delta m_{i-\frac{1}{2}}}$ (the expression in red leads to an incorrect result for some reason, left that open for now).
   \begin{equation}
-    \Delta m_i = m_i + \frac{1}{2} \Delta m_{i+\frac{1}{2}} - \left(m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}}\right) 
+    \begin{aligned}
+    \Delta m_i &= m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}} \\ 
+    &= \left(m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}\right) - \left(m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}}\right) = \frac{1}{2} \left(\Delta m_{i+\frac{1}{2}} + \Delta m_{i-\frac{1}{2}}\right)
+    \end{aligned}
   \end{equation}
-  NOTE that in our case $\Delta m_{i+\frac{1}{2}}$ is constant for all $i$ and therefore $\Delta m_i = const$ and is a \textbf{predefined parameter} of the simulation.
-  \item The diffusion constant (which is also defined at the nodes) is an harmonic mean of the diffusion constants at the surrounding cell centers:
+  \textcolor{blue}{NOTE that in our case $\Delta m_{i+\frac{1}{2}}$ is constant for all $i$ and therefore $\Delta m_i = const$ and is a \textbf{predefined parameter} of the simulation.}
+  \subsubsection{Discretization of $D$ and $\rho$ faces}
+  Since the derivative is a property of the vertex located between two adjacent cells, we should also pay attention to the fact that $F$, $D$ and $\rho$ should be defined at the faces of the cells (e.g. the vertices).
+
+  Since the natural definition of $D$ and $\rho$ is at the cell centers (we are used to terms like $\rho_{i+\frac{1}{2}}^{n}$ and $D_{i+\frac{1}{2}}^{n}$), we need to define them at the faces of the cells using some kind of averaging.
+
+  \item The most common way to average $D$ and $\rho$ at the faces is to use the average mean:
+
   \begin{equation}
-    D_i^n = \frac{2 D_{i+\frac{1}{2}}^n D_{i-\frac{1}{2}}^n}{D_{i+\frac{1}{2}}^n + D_{i-\frac{1}{2}}^n}
+    \begin{aligned}
+    D_{i+\frac{1}{2}} = \frac{D_{i} + D_{i+1}}{2} \\
+    \rho_{i+\frac{1}{2}} = \frac{\rho_{i} + \rho_{i+1}}{2}
+    \end{aligned}
   \end{equation}
-  \textcolor{blue}{I need to ask Yuval where he implemented simple average instead.}
+  \item In our simulation, the constant \texttt{HARMONIC\_MEAN} is set by default to \texttt{False}, which means that we use the arithmetic mean to average $D$ and $\rho$ at the faces.
+
+
+
+  \subsubsection{Solution of the discretized system of equations}
   \item We've seen that one can \textbf{eliminate the effective radiation density $U_R$} from the finite-difference equation for the matter energy. The discretized equation for the material energy density is:
   \begin{equation}
       \frac{1}{ \beta_{i+\frac{1}{2}}^{n}}\frac{[U_R]_{i+\frac{1}{2}}^{n+1} - [U_R]_{i+\frac{1}{2}}^n}{\Delta t} = \chi c \sigma_{i+\frac{1}{2}}^{n} (E_{i+\frac{1}{2}}^{n+1} - [U_R]_{i+\frac{1}{2}}^{n+1})
@@ -194,10 +215,6 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \item Solve the tridiagonal system for $E_i^{n+1}$ using the Thomas algorithm.
     \item Update the effective radiation density $U_R^{n+1}$ using the expression derived above.
   \end{enumerate}
-
-
-
-
 \end{enumerate}
 \section{Coupling the two schemes}
 \begin{enumerate}
