@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Lecture 3 - Approximating the Boltzmann equation}
+\author{Tal Ramot}
+\date{Week 5, 13.4.2026}
+
+\begin{document}
+\maketitle
+\section{Recap}
+\begin{enumerate}
+    \item We've seen the diffusion equation that describes the transport of a particle in a medium. What we're interested here it to show the connection between the diffusion equation and the Boltzmann equation.
+    \item Shay repeats the notation - 2 different ways to describe the phase space (using energy or momentum), Shay remarks the fact that the particle density is a an intensive property - and this is why the different conventions for the particle density aren't equal, and the extensive property of the amount of particles in a certain volume element is conserved.
+    \item We will see the Boltzmann equations in 2 ways - for the energy and for the momentum/velocity conventions.
+    \item Shay repeats the calculation of the flux or current of particles which is $j(r, \Omega, E, t) = v \Omega \hat n(r, \Omega, E, t)$.
+    \item Then the rate of passage of particles through a surface element is $j(r, \Omega, E, t) \cdot dA$ - which is found through the imagination of a surface element $dA$ and the normal vector $\hat n$ to the surface element, asking howselves how many particles pass through the surface element per unit time.
+    In addition, the angular flux is defines as $\phi = v n(r,\Omega, E, t)$. 
+    \item To summarize:
+    \begin{equation}
+        j = \Omega\hat \varphi = v\vec \Omega\hat n
+    \end{equation}
+    \item The definition of $\varphi$ helps a lot in the calculation of the rates. It can be extended to the definition of the scalar and mono-energetic-scalar flux.
+    \item Shay mentions that in order to move between conventions of units we use derivatives.
+\end{enumerate}
+
+\section{Definitions}
+    \begin{enumerate}
+        \item The macroscopic cross section is defined as 1 over the mean free path and denoted with capital sigma $\Sigma$.
+        \item side NOTE: From a book of the mithological head of UMI, the equation can be written as 
+        \begin{equation}
+            \frac{Dn}{Dt} = 0 = 0
+        \end{equation}
+        leads for free to the gain and loss of particles.
+        \item The definition of the expected value of particles emitted from a single event is (written in my notes).
+        \item This derivation appears in a book in the moodle.
+    \end{enumerate}
+
+\section{Derivation from first principles}
+\begin{enumerate}
+    \item The derivative
+\end{enumerate}
+\end{document}

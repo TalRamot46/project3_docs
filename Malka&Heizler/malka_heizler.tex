@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{ulem}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Supersonic-subsonic transition region in radiative
+heat flow via self-similar solutions}
+\author{Elad Malka \& Shay Heizler, 2022 | Phys. Fluids 34}
+\date{Summary written by Tal Ramot, April 2026}
+
+\begin{document}
+\maketitle
+\section*{Abstract and Structure}
+\begin{enumerate}
+  \item The article is about the intermidiate region between supersonic and subsonic flow in radiative heat flow.
+  \item The transition is difficult to describe because self similar solutions \textbf{cannot exist} since there are two competing velocity scales - the speed of the heat \& the shock wave (e.g. speed of sound).
+  \item The article is constructed in the following way:
+  \begin{itemize}
+    \item Section I - Introduction and statement of the problem.
+    \item Section II - Physical models and generalizations of Granier's model.
+    \item Section III - Main results, \textbf{tests with 1D numerical simulations} for gold and $Ta_2O_5$.
+    \item Section IV - Experimental comparison against Young et. al (involves hohlraums).
+    \item Section V - Summary and conclusions.
+  \end{itemize}
+\end{enumerate}
+
+\section{Introduction}
+\subsection{Motivation and statement of the problem}
+\begin{enumerate}
+  \item The article presents the concept of Marshak waves - when the heat conduction mechanism is dominated by radiation, rather than electrical conduction.
+  \item The case scenario - 1D semi infinite slab medium with a known microscopic info about the material:
+  \begin{itemize}
+    \item EOS ($p = r \rho e$)
+    \item Opacity ($\frac{1}{\kappa_R} = g T^\alpha \rho^{-\lambda}$)
+    \item Internal energy ($e = f T^\gamma \rho^{-\mu}$)
+  \end{itemize}
+  \item The governing equations involve \textbf{LTE assumption} for the spectral distribution of the radiation emitted by the source, and the heat conduction mechanism, leading to the set of Lagrangian equations for the hydrodynamic profiles \textbf{of the matter} (not the radiation field):
+  \begin{gather}
+    \frac{\partial v}{\partial t} - \frac{\partial u}{\partial m} = 0 \\
+    \frac{\partial u}{\partial t} + \frac{\partial P}{\partial m} = 0 \\
+    \frac{\partial e}{\partial t} + P \frac{\partial v}{\partial t} = \frac{\partial}{\partial m} \left( \frac{c}{3\kappa_R} \frac{\partial (aT^4)}{\partial m} \right)
+  \end{gather}
+  \item The article mentions some important articles that are relevant to the problem of analyzing radiation transfer in subsonic and supersonic regimes:
+  \begin{enumerate}
+    \item \uline{Pakula \& Sigel (1970) and Shussman \& Heizler (2015)} - Handling cases of strong shock ($P_S = \frac{\gamma + 1}{\gamma - 1}P_0$) at \textbf{subsonic} region. Assuming infinite density in the heat front, for the subsonic region to have a self-similar solution.
+    \item \uline{Henyey \& Zeldovich (1959)} - exact analytical solutions for the \textbf{supersonic} region - assuming a constant speed of the heat front ($x_f \propto t$ for $\tau = \frac{1}{4+\alpha-\beta}$). Zeldovich handled the energy impulse problem where $\tau = -\frac{1}{4+\alpha+\beta}$.
+    \item \uline{Hammer \& Rosen (2003)} - solved \textbf{supersonic} for a general temperature drive BC $T_s(t)$, not just the specific $\tau$s above.
+    \item \uline{Krief (2023)} - extended Shussman \& Heizler (2015) to inhomogeneous initial densities ($\rho = \rho_0 x^{-\omega}$).
+    \item \uline{Granier (1981)} - used self-similar solution when the heat front is equal to the sound speed, which happens at the "critical exponent" $\tau_c = \frac{1}{4+\alpha-2\beta}$.
+    \item \uline{Young et. al (2022)} - experimental data for the transition region between supersonic and subsonic flow, which happens \textbf{while the laser is on} to enable the modelling of the power-law temperature drive.
+  \end{enumerate}
+  \item The \textbf{main advancements} done in the article are:
+  \begin{enumerate}
+    \item \textbf{Generalized Granier's model} for the heat front and \textbf{generalized Hammer \& Rosen's solution} to the absorbed energy under any power law temperature drive BC $T_s(t) = T_0 t^\tau$.
+    \item Testing of the suggested models with \textbf{1D numerical simulations} and with \textbf{Young et. al (2022)} experimental data.
+  \end{enumerate}
+\end{enumerate}
+
+\section{THE PHYSICAL MODEL AND THE MAIN
+METHODOLOGY}
+\subsection{A. Physical model and assumptions}
+\begin{enumerate}
+  \item In order to have a full self-similar solution in the subsonic case, one needs to have only one velocity scale. In the introduction, the authors present the expression for the Mach number $M = \frac{v}{c_s}$ in the \textbf{supersonic} regime. (\textcolor{red}{I need to understand if Granier gets this expression for the subsonic region as well (for $\tau = \tau_c$)})
+  \begin{equation}
+    x_f (t) = \xi_f \sqrt{\frac{16}{3(4+\alpha)} \frac{g\sigma T_0^{4+\alpha-\beta}}{f\rho_0^{2+\lambda-\mu}}t_s \left(\frac{t}{t_s}\right)^{\frac{1+(4+\alpha-\beta)\tau}{2}}}
+  \end{equation}
+  and therefore the heat front speed is:
+  \begin{equation}
+    v_f = \dot{x_f} \propto t^{\frac{(4+\alpha-\beta)\tau-1}{2}}
+  \end{equation}
+  Assuming that the temperature profile is approximately constant (e.g. isothermal) behind the heat front, the isothermal speed of the heat front is:
+  \begin{equation}
+    c_s(t) = \sqrt{\frac{\partial P}{\partial \rho} |_T} 
+  \end{equation}
+  and the mach number is:
+  \begin{equation}
+    M(t) = \frac{v_f}{c_s(t)} 
+  \end{equation}
+  the relation between $M(t)$ and $1$ determines the relation between the heat front speed and the sound speed: $M\gg 1$ is supersonic, $M\ll 1$ is subsonic, and $M\approx 1$ is the intermidiate region discussed in the article.
+  \item Since $M(t) \propto t^{\frac{(4+\alpha-\beta)\tau-1}{2}}$, for $\tau_c = \frac{1}{4+\alpha-2\beta}$, one gets $M(t) = const$, meaning it's a conserved quantity.
+  Moreover, the specific volume in Granier's model is $v(m,t) = \frac{1}{\rho(m,t)} \propto t^{\frac{1-(4+\alpha-2\beta)\tau}{2+\lambda-2\mu}}$ which means that for $\tau = \tau_c$, $v(m,t) = const$, meaning that the density profile is conserved in time - an equivalent criterion of that there's one density scale that remains constant in time and enables the existence of a full self-similar solution.
+\end{enumerate}
+\end{document}

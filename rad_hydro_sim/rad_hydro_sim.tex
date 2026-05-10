@@ -101,7 +101,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
 \section{Radiation Scheme}
 \subsection{Physical PDEs}
 \begin{enumerate}
-  \item Writing the diffusion equation for the radiation energy $E$:
+  \item Writing the diffusion equation for the radiation energy $E=aT_r^4$ and the effective material radiative energy $U_R = aT_m^4$ (the energy that the material, modeled as a black body, would radiate outwards):
   \begin{equation}
       \frac{\partial{E}}{\partial t}+\rho \frac{\partial F}{\partial m} = \chi c\sigma(U_R-E) 
   \end{equation}
@@ -134,6 +134,14 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \frac{\partial}{\partial x} = \frac{\partial m}{\partial x} \frac{\partial}{\partial m} = \rho \frac{\partial}{\partial m}
   \end{equation}
   as done in the Appendix.
+  \item To sum up, we have \textbf{a system of PDEs over $T_m$ and $T_R$}:
+  \begin{equation}
+      \frac{\partial{\left(aT_r^4\right)}}{\partial t}-\rho \frac{\partial}{\partial m}\left(D \rho \frac{\partial (aT_r^4)}{\partial m}\right) = \chi c\sigma a(T_m^4-T_r^4) 
+  \end{equation}
+  \begin{equation}
+      \frac{1}{\beta} \frac{\partial \left(aT_m^4\right)}{\partial t}=-\chi c\sigma a(T_m^4-T_r^4)
+  \end{equation}
+  The system is solved over a domain of $N$ cells with BC of ... \textcolor{red}{to be defined}.
 \end{enumerate}
 \subsection{Finite Difference Scheme}
 \subsubsection{Discretization of a lagrangian PDE}
@@ -453,7 +461,8 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \boxed{d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
   \end{gather}
   where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}.
-  \end{enumerate}
+  NOTE: There is no difference here between $\rho^n$ and $rho^*$ - because the density used here is \texttt{state.rho} which is the density at the cell center after the hydro update.
+\end{enumerate}
   \subsection{Deeper understanding of the tridiagonal form}
   \begin{enumerate}
     \item First, let's make order in the celebration of indexes. Our staggered grid is as follows:
@@ -464,14 +473,27 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
         $j - \frac{3}{2}$ & $\boxed{j - 1}$ & $j - \frac{1}{2}$ & $\boxed{j}$ & $j + \frac{1}{2}$ & $\boxed{j + 1}$ \\
         \hline
         node & cell center & node & cell center & node & cell center \\
-         & $E_{i-\frac{1}{2}}$ &  & $E_{i+\frac{1}{2}}$ &  & $E_{i+\frac{3}{2}}$ \\
-         & $[U_R]_{i-\frac{1}{2}}$ &  & $[U_R]_{i+\frac{1}{2}}$ &  & $[U_R]_{i+\frac{3}{2}}$ \\
+         $\rho_{i-1}$ & $E_{i-\frac{1}{2}}$ & $\rho_{i}$ & $E_{i+\frac{1}{2}}$ & $\rho_{i+1}$ & $E_{i+\frac{3}{2}}$ \\
+         $D_{i-1}$ & $[U_R]_{i-\frac{1}{2}}$ & $D_{i}$ & $[U_R]_{i+\frac{1}{2}}$ & $D_{i+1}$ & $[U_R]_{i+\frac{3}{2}}$ \\
          & $\rho_{i-\frac{1}{2}}$ &  & $\rho_{i+\frac{1}{2}}$ &  & $\rho_{i+\frac{3}{2}}$ \\
          & $D_{i-\frac{1}{2}}$ &  & $D_{i+\frac{1}{2}}$ &  & $D_{i+\frac{3}{2}}$ \\
          & $\beta_{i-\frac{1}{2}}$ &  & $\beta_{i+\frac{1}{2}}$ &  & $\beta_{i+\frac{3}{2}}$ \\
          & $\sigma_{i-\frac{1}{2}}$ &  & $\sigma_{i+\frac{1}{2}}$ &  & $\sigma_{i+\frac{3}{2}}$ \\
       \end{tabular}
     \end{center}
+    \begin{center}
+      \small
+      \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \textbf{Start BC} & & \textbf{Internal} & $\dots$ & \textbf{Internal} & & \textbf{End BC} \\ \hline
+      $i=0$ & $i=\frac{1}{2}$ & $i=1$ & $\dots$ & $i=N-1$ & $i=N-\frac{1}{2}$ & $i=N$ \\ 
+      $j=\frac{1}{2}$ & $\boxed{j=1}$ & $j=\frac{3}{2}$ & $\dots$ & $j=N-\frac{1}{2}$ & $\boxed{j=N}$ & $j=N+\frac{1}{2}$ \\ \hline
+      node & cell center & node & $\dots$ & node & cell center & node \\ 
+      $\rho_0, D_0$ & $E_0, [U_R]_0$ & $\rho_1, D_1$ & $\dots$ & $\rho_{N-1}, D_{N-1}$ & $E_N, [U_R]_N$ & $\rho_N, D_N$ \\ 
+      & $\rho_{1/2}, D_{1/2}$ & & $\dots$ & & $\rho_{N-1/2}, D_{N-1/2}$ & \\ 
+      & $\beta_{1/2}, \sigma_{1/2}$ & & $\dots$ & & $\beta_{N-1/2}, \sigma_{N-1/2}$ & \\ \hline
+      \end{tabular}
+  \end{center}
     where we defined $j=i + \frac{1}{2}$ as the index for the cell centers. Now, the indexes values are:
     \begin{equation}
       \begin{gathered}
@@ -485,10 +507,10 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \end{equation}
     Before we think of the definitions for the coefficients, let's understand how this equation can be written in matrix form. Supposing that $E_0$ is given as a BC (discussed later) our unknowns are $E_1,E_2,...,E_N$ (remember the $E$ is indexed by $j$, the cell centers). The boundary conditions for a power-law self-similar solution with zero radiation energy at the end of the grid are: 
     \begin{equation}
-        E_0^{n+1}=a_{\text{Hev}} T_0 t^\tau
+        E_0^{n+1}=a_{\text{Hev}} T_0^4 t^{4\tau}
     \end{equation}
     \begin{equation}
-        E_{N-1}^{n+1}=0
+        E_{N}^{n+1}=0
     \end{equation}
     \textcolor{blue}{Two notes: (1) This derivation holds for any BCs, even without a BC at the end of the grid that will give us an equation for $E_{N-1}$ and make $a_{N-1}, b_{N-1}, c_{N-1}, d_{N-1}$ non-zero. (2) I need to ask Shay about the correct BC here and its physical meaning.}
     % Copilot - answer: what is the physical meaning of the zero radiation energy at the end of the grid?
@@ -506,7 +528,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
     0 & a_3 & b_3 & c_3 &\cdots & 0 \\
     \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0 & 0 & \cdots & a_{N-2} & b_{N-2} & c_{N-2}  \\
+    0 & 0 & \cdots & a_{N-1} & b_{N-1} & c_{N-1}  \\
     0 & 0 & 0 & 0 & \cdots & 1
     \end{bmatrix}
     \begin{bmatrix}
@@ -519,22 +541,22 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \end{bmatrix}
     =
     \begin{bmatrix}
-    a_{\text{Hev}} T_0 t^\tau \\
+    a_{\text{Hev}} T_0^4 t^{4\tau} \\
     d_2 \\
     d_3 \\
     \vdots \\
-    d_{N-2} \\
+    d_{N-1} \\
     0
     \end{bmatrix}
     \end{equation}
-    From now, we can reduce the $a_1$ and the $c_{N-2}$ from the $0^{th}$ and $(N-2)^{th}$ row and get the matrix equation:
+    From now, we can reduce the $a_2$ and the $c_{N-2}$ from the $0^{th}$ and $(N-2)^{th}$ row and get the matrix equation:
     \begin{equation}
     \begin{bmatrix}
     1 & 0 & 0 & \cdots & 0 & 0\\
     0 & b_2 & c_2 & \cdots & 0 & 0 \\  
     0 & a_3 & b_3 & c_3 &\cdots & 0 \\
     \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0 & 0 & \cdots & a_{N-2} & b_{N-2} & 0  \\
+    0 & 0 & \cdots & a_{N-1} & b_{N-1} & 0  \\
     0 & 0 & 0 & 0 & \cdots & 1
     \end{bmatrix}
     \begin{bmatrix}
@@ -547,11 +569,11 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \end{bmatrix}
     =
     \begin{bmatrix}
-    a_{\text{Hev}} T_0 t^\tau \\
-    d_2 - a_{\text{Hev}} T_0 t^\tau\\
+    a_{\text{Hev}} T_0^4 t^{4\tau} \\
+    d_2 - a_{\text{Hev}} T_0^4 t^{4\tau}\\
     d_3 \\
     \vdots \\
-    d_{N-2} \\
+    d_{N-1} \\
     0
     \end{bmatrix}
     \end{equation}
@@ -561,7 +583,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     b_2 & c_2 & \cdots & 0 & 0 \\  
     a_3 & b_3 & c_3 &\cdots & 0 \\
     \vdots & \vdots & \vdots & \ddots & \vdots\\
-    0 & 0 & \cdots & a_{N-2} & b_{N-2}   \\
+    0 & 0 & \cdots & a_{N-1} & b_{N-1}   \\
     \end{bmatrix}
     \begin{bmatrix}
     E_2^{n+1} \\
@@ -571,10 +593,10 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \end{bmatrix}
     =
     \begin{bmatrix}
-    d_2 - a_{\text{Hev}} T_0 t^\tau\\
+    d_2 - a_{\text{Hev}} T_0^4 t^{4\tau}\\
     d_3 \\
     \vdots \\
-    d_{N-2}
+    d_{N-1}
     \end{bmatrix}
     \end{equation}
     This is a \textit{tridiagonal system of equations} which can be solved by the \textit{Thomas algorithm} which is explained in previous files.
@@ -605,4 +627,79 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \end{equation}
   and, of course, the same for the other coefficients \& variables.
   \end{enumerate}
+
+  \newpage
+  \newpage
+  \section{Appendix: Boundary Conditions in the Diffusion Approximation}
+  
+  In the $P_1$ diffusion approximation, the specific intensity $I(x, \mu)$ is not tracked for every angle. Instead, we use \textbf{Marshak Boundary Conditions} to bridge the gap between averaged quantities (energy density $E$ and flux $F$) and the physical constraints at the boundaries.
+  
+  \subsection{General Physical Derivation}
+  At a boundary interface, the net inward partial flux $J_{in}$ must match the source drive. For a blackbody source at temperature $T_{bath}$, $J_{in} = \sigma_{sb} T_{bath}^4$. In the diffusion approximation, the partial fluxes are related to $E$ and $F$ by:
+  \begin{equation}
+      J_{in} = \frac{cE}{4} + \frac{F}{2}, \quad J_{out} = \frac{cE}{4} - \frac{F}{2}
+  \end{equation}
+  At the origin ($x=0$), the net flux into the material is $F_0$. The Marshak condition is:
+  \begin{equation}
+      \frac{cE(0,t)}{4} + \frac{F_0(t)}{2} = \sigma_{sb} T_{bath}^4 \implies F_0 = 2\sigma_{sb} T_{bath}^4 - \frac{cE(0,t)}{2}
+  \end{equation}
+  At the far boundary ($x=L$), we assume a vacuum where no radiation enters from the right ($J_{in, right} = 0$), leading to the free-streaming limit:
+  \begin{equation}
+      \frac{cE(L,t)}{4} - \frac{F_L(t)}{2} = 0 \implies F_L = \frac{cE(L,t)}{2}
+  \end{equation}
+  
+  \subsection{Discretization in Lagrangian Coordinates}
+  In our staggered grid, cell centers are indexed by $j=1 \dots N$ and faces by $i=0 \dots N$. We assume the face values of energy density $E$ are approximately equal to the adjacent cell centers ($E_0 \approx E_1$ and $E_{face, N} \approx E_N$). Substituting the boundary fluxes into the energy balance equation for the first and last cells:
+  
+  \paragraph{First Cell ($j=1$):}
+  \begin{equation}
+      \frac{E_1^{n+1} - E_1^n}{\Delta t} + \frac{\rho_1^*}{\Delta m_1} \left( F_1^{n+1} - \left[ 2 \sigma_{sb} T_{bath}^4 - \frac{c E_1^{n+1}}{2} \right] \right) = S_1^{n+1}
+  \end{equation}
+  Using $F_1^{n+1} = -\rho_1^* D_1^n \frac{E_2^{n+1} - E_1^{n+1}}{\Delta m_1}$, we group terms to find the modified coefficients:
+  \begin{gather}
+      \boxed{\tilde{b}_1^n = b_1^n + \frac{c \rho_1^*}{2 \Delta m_1}} \\
+      \boxed{\tilde{d}_1^n = d_1^n + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1}}
+  \end{gather}
+  
+  \paragraph{Last Cell ($j=N$):}
+  \begin{equation}
+      \frac{E_N^{n+1} - E_N^n}{\Delta t} + \frac{\rho_N^*}{\Delta m_N} \left( \frac{c E_N^{n+1}}{2} - F_{N-1}^{n+1} \right) = S_N^{n+1}
+  \end{equation}
+  This modifies the final diagonal element:
+  \begin{equation}
+      \boxed{\tilde{b}_N^n = b_N^n + \frac{c \rho_N^*}{2 \Delta m_N}}
+  \end{equation}
+  
+  \subsection{Final Tridiagonal Matrix System}
+  The resulting $N \times N$ system for the unknown vector $\mathbf{E}^{n+1} = [E_1, E_2, \dots, E_N]^T$ accounts for the drive at $j=1$ and the vacuum leakage at $j=N$:
+  
+  \begin{equation}
+  \begin{bmatrix}
+  \tilde{b}_1 & c_1 & 0 & \cdots & 0 \\
+  a_2 & b_2 & c_2 & \cdots & 0 \\
+  0 & a_3 & b_3 & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \ddots & \vdots \\
+  0 & 0 & \cdots & a_{N-1} & b_{N-1} & c_{N-1} \\
+  0 & 0 & 0 & \cdots & a_N & \tilde{b}_N
+  \end{bmatrix}
+  \begin{bmatrix}
+  E_1^{n+1} \\
+  E_2^{n+1} \\
+  E_3^{n+1} \\
+  \vdots \\
+  E_{N-1}^{n+1} \\
+  E_N^{n+1}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+  \tilde{d}_1 \\
+  d_2 \\
+  d_3 \\
+  \vdots \\
+  d_{N-1} \\
+  d_N
+  \end{bmatrix}
+  \end{equation}
+  
+  Where $a_j, b_j, c_j, d_j$ for internal cells ($1 < j < N$) remain as derived in the standard diffusion scheme. This system is solved using the Thomas algorithm.
 \end{document}

@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    % change caption to be below the listing
+    % choose appropriate font style.
+    captionpos=b,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+}
+
+\title{Lecture 2 - Boltzmann equation}
+\author{Tal Ramot}
+\date{Week 5, 13.4.2026}
+
+\begin{document}
+\maketitle
+\section{Recap and About the next weeks}
+\begin{enumerate}
+    \item In the previous lecture, we discussed the motivation to the course - nuclear energy.
+    \item Other intereseting phenomena - shielding of radiation, radiation transport in the atmosphere, plasma transport.
+    \item Our course is a statistical physics course - it will describe the collective behavior of particles.
+    \item In the next session we will derive the Boltzmann equation in 3 ways - a heuristic derivation, a rigorous derivation (almost from first principles, Lagrange and Hamilton). Shay says that the derivation of Boltzmann from first principles is a very interesting and beautiful one.
+    This derivation would also be very difficult.
+    \item Shay says that by using the ergodicity hypothesis, we can use Liouville's theorem (about the time evolution of the phase space density, equivalent to the hamilton equations). The BBGKY hierarchy is a set of equations that transforms this equation into moment equations, in which there will be a cut somewhere - which is the essence of the approximation in that derivation. It is called the spherical harmonic approximation.
+\end{enumerate}
+
+\section{Continuing the previous lecture}
+\begin{enumerate}
+    \item We talked previously about the global share of nuclear energy, and the stagnation in nuclear energy consumption because of the Fukushima accident in 2011.
+    \item Chernobyl 1986 - lead to severe hysteria and fear of nuclear energy.
+    \item Fukushima 2011 - A strong tsunami hit passed the wall that protected the reactors.
+    \item Nuclear waste - decays radioactively for tens of thousands of years.    
+\end{enumerate}
+
+\section{The Fusion}
+\begin{enumerate}
+    \item The cross section of a fusion reaction is $\bra\sigma v\ket(T,\rho)$. In a temperature of KeVs (like in the sun), the cross section enables some probability for an event to occur.
+    \item The interaction 
+    \begin{equation}
+        P + P \to 0
+    \end{equation}
+    Why do we need heavy water for nuclear reactors? A nuclear reactor needs to include a high energy producer of neutrons, and a decayer to a region of high fusion cross section.
+    \item The necessity for heavy water is because the deuterium includes a neutron, and the cross section for absorption of neutrons is higher than the regular helium (one proton) - so one can either use heavy water or enrich the uranium used to increase the fission cross section.
+    \item The cross section for a process of $D + T \to 4He + n$ is about 100 times higher than the cross section for $D + D \to 3He + n$, and it's the highest nominee for a fusion reaction.
+    \item The disadvantage is that the Tritium is that it is radiactive (decay time of about 12.5 years) and it is created inside nuclear reactors using the interaction of $Li^6 + n \to T + \alpha$ (alpha is a $He^4$ nucleus).
+\end{enumerate}
+\subsection{Methods for thermonuclear fusion}
+\begin{enumerate}
+    \item The most developed method is the tokamak.
+    \item The ICF - trying to impose an implosion over a capsule of D + T, using ~192 laser beams that create an $assymetric$ implosion.
+    \item Indirect drive - using a hohlraum that contains a D + T mixture and a has a shield that produces X-Ray radiation that creats a symmetric pulse.
+    \item Shay says that the D + T transforms into an alpha particle 
+    \item Laser functioning principle - there is a resonant cavity that amplifies the light intensity. In ICF, there is also use of tripleter of frequency of the lasers (becoming from red to violet) and it increases the probability of absorption of the laser in the hohlraum.
+    \item The use of Boltzmann equation regarding ICF is to describe the transprot of the X-ray radiation inside the hohlraum.
+\end{enumerate}
+
+\section{Heuristic Derivation of the Boltzmann equation}
+\subsection{Introduction}
+\begin{enumerate}
+    \item Quantum mechanical description - subatomic particle-uncertainty principle. Including the interactions of collisions between the neutrons and the matter of the medium. Baryon class particles (Fermions with spin 1/2). It includes the description of the strong nuclear force.
+    \item Relativistic description - can travel near light speed. It is more relevant in astrophysical scenarios of high energy galactic cosmic rays/
+    \item Wave/statitical Maxwell description - wave/particle duality. Used to describe ultra-low energy neutrons.
+    \item Classical particle motion - between scattering collisions.
+\end{enumerate}
+\subsection{Statistical Description}
+\begin{enumerate}
+    \item h
+\end{enumerate}
+\end{document}
