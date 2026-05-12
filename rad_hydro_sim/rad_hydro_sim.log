@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  10 MAY 2026 12:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  11 MAY 2026 07:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -170,26 +170,30 @@ File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 File: listings.cfg 2024/09/23 1.10c listings configuration
 ))
 Package: listings 2024/09/23 1.10c (Carsten Heinz)
- (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\eucal.sty
+Package: eucal 2009/06/22 v3.00 Euler Script fonts
+LaTeX Font Info:    Overwriting math alphabet `\EuScript' in version `bold'
+(Font)                  U/eus/m/n --> U/eus/b/n on input line 33.
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count304
 ) (rad_hydro_sim.aux)
 \openout1 = `rad_hydro_sim.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count305
@@ -205,16 +209,40 @@ LaTeX Font Info:    ... okay on input line 33.
 \everyMPtoPDFconversion=\toks27
 ) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count311
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 36.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 36.
  (C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -222,7 +250,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Overfull \hbox (4.472pt too wide) in paragraph at lines 69--70
+Overfull \hbox (4.472pt too wide) in paragraph at lines 70--71
 []\OT1/cmr/m/n/10.95 Calculate ar-ti-fi-cial vis-cos-ity $\OML/cmm/m/it/10.95 q$ \OT1/cmr/m/n/10.95 to han-dle shocks, us-ing the von Neumann-
  []
 
@@ -233,14 +261,14 @@ Overfull \hbox (4.472pt too wide) in paragraph at lines 69--70
 [3]
 
 [4]
-Overfull \hbox (19.13383pt too wide) detected at line 168
+Overfull \hbox (19.13383pt too wide) detected at line 169
 [][][]
  []
 
 
 
 [5]
-Overfull \hbox (13.17085pt too wide) in paragraph at lines 212--214
+Overfull \hbox (13.17085pt too wide) in paragraph at lines 213--215
 \OT1/cmr/m/n/10.95 We want to solve for $[\OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 ][]$. First, we can de-note $\OML/cmm/m/it/10.95 A[] \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 ^^L[]\OT1/cmr/m/n/10.95 ^^A\OML/cmm/m/it/10.95 t^^_c^^[[]$
  []
 
@@ -259,7 +287,7 @@ Overfull \hbox (13.17085pt too wide) in paragraph at lines 212--214
 [11]
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 416--419
+Underfull \hbox (badness 10000) in paragraph at lines 417--420
 
  []
 
@@ -268,7 +296,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 416--419
 [13]
 
 [14]
-Overfull \hbox (63.95952pt too wide) in paragraph at lines 486--496
+Overfull \hbox (63.95952pt too wide) in paragraph at lines 487--497
  [] 
  []
 
@@ -281,32 +309,41 @@ Overfull \hbox (63.95952pt too wide) in paragraph at lines 486--496
 [17]
 
 [18]
+Overfull \hbox (58.93416pt too wide) detected at line 659
+[][][]
+ []
+
+
 
 [19]
-Overfull \hbox (4.84398pt too wide) in paragraph at lines 674--675
+
+[20]
+
+[21]
+Overfull \hbox (4.84398pt too wide) in paragraph at lines 726--727
 \OT1/cmr/m/n/10.95 The re-sult-ing $\OML/cmm/m/it/10.95 N \OMS/cmsy/m/n/10.95 ^^B \OML/cmm/m/it/10.95 N$ \OT1/cmr/m/n/10.95 sys-tem for the un-known vec-tor $\OT1/cmr/bx/n/10.95 E[] \OT1/cmr/m/n/10.95 = [\OML/cmm/m/it/10.95 E[]; E[]; [] ; E[]\OT1/cmr/m/n/10.95 ][]$
  []
 
 
 
-[20] (rad_hydro_sim.aux)
+[22] (rad_hydro_sim.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4630 strings out of 468081
- 67607 string characters out of 5424820
- 499051 words of memory out of 5000000
- 33250 multiletter control sequences out of 15000+600000
+ 5237 strings out of 468081
+ 79470 string characters out of 5424820
+ 508541 words of memory out of 5000000
+ 33822 multiletter control sequences out of 15000+600000
  643814 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,16n,65p,770b,303s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 59i,16n,67p,770b,303s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rad_hydro_sim.pdf (20 pages, 314061 bytes).
+Output written on rad_hydro_sim.pdf (22 pages, 323121 bytes).
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
+ 168 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

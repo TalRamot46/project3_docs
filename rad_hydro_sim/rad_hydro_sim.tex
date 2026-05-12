@@ -7,6 +7,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage[mathscr]{eucal}
 
 \lstset{
     % change caption to be below the listing
@@ -424,7 +425,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \begin{equation}
     \begin{gathered}
   LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+1}^n D_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i}^n D_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}\right)}^{-F_{i}^{n+1}}
-  \end{gathered}
+    \end{gathered}
   \end{equation}
   Rearranging the terms gives us the tridiagonal form:
   \begin{equation}
@@ -634,34 +635,85 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   
   In the $P_1$ diffusion approximation, the specific intensity $I(x, \mu)$ is not tracked for every angle. Instead, we use \textbf{Marshak Boundary Conditions} to bridge the gap between averaged quantities (energy density $E$ and flux $F$) and the physical constraints at the boundaries.
   
-  \subsection{General Physical Derivation}
-  At a boundary interface, the net inward partial flux $J_{in}$ must match the source drive. For a blackbody source at temperature $T_{bath}$, $J_{in} = \sigma_{sb} T_{bath}^4$. In the diffusion approximation, the partial fluxes are related to $E$ and $F$ by:
-  \begin{equation}
-      J_{in} = \frac{cE}{4} + \frac{F}{2}, \quad J_{out} = \frac{cE}{4} - \frac{F}{2}
-  \end{equation}
-  At the origin ($x=0$), the net flux into the material is $F_0$. The Marshak condition is:
-  \begin{equation}
-      \frac{cE(0,t)}{4} + \frac{F_0(t)}{2} = \sigma_{sb} T_{bath}^4 \implies F_0 = 2\sigma_{sb} T_{bath}^4 - \frac{cE(0,t)}{2}
-  \end{equation}
-  At the far boundary ($x=L$), we assume a vacuum where no radiation enters from the right ($J_{in, right} = 0$), leading to the free-streaming limit:
-  \begin{equation}
-      \frac{cE(L,t)}{4} - \frac{F_L(t)}{2} = 0 \implies F_L = \frac{cE(L,t)}{2}
-  \end{equation}
+\subsection{General Physical Derivation}
+At a boundary interface, the net inward partial flux $J_{in}$ must match the source drive. For a blackbody source at temperature $T_{bath}$, $J_{in} = \sigma_{sb} T_{bath}^4$. In the diffusion approximation, the partial fluxes are related to $E$ and $F$ by:
+\begin{equation}
+    J_{in} = \frac{cE}{4} + \frac{F}{2}, \quad J_{out} = \frac{cE}{4} - \frac{F}{2}
+\end{equation}
+At the origin ($x=0$), the net flux into the material is $F_0$. The Marshak condition is:
+\begin{equation}
+    \frac{cE(0,t)}{4} + \frac{F_0(t)}{2} = \sigma_{sb} T_{bath}^4 \implies \boxed{F_0 = 2\sigma_{sb} T_{bath}^4 - \frac{cE(0,t)}{2}}
+\end{equation}
+At the far boundary ($x=L$), we assume a vacuum where no radiation enters from the right ($J_{in, right} = 0$), leading to the free-streaming limit:
+\begin{equation}
+    \frac{cE(L,t)}{4} - \frac{F_L(t)}{2} = 0 \implies \boxed{F_L = \frac{cE(L,t)}{2}}
+\end{equation}
+
+\subsection{Discretization in Lagrangian Coordinates}
+In our staggered grid, cell centers are indexed by $j=1, \dots, N$ and faces by $i=0, \dots, N$. The diffusion equation at the cell located between the faces $i$ and $i+1$ is:
+\begin{equation}
+\begin{gathered}
+    \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\hat{\rho}_{i+1}^n \hat{D}_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta \hat{m}_{i+1}}\right)}^{-\hat{F}_{i+1}^{n+1}} + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\hat{\rho}_{i}^n \hat{D}_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta \hat{m}_{i}}\right)}^{-\hat{F}_{i}^{n+1}} = \\ 
+    \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} 
+\end{gathered}   
+\end{equation}
+NOTE: I used the notation $\hat{F}$ for the arrays that satisfy $A_{integer}$ is the face-centered value of $A$ (i.e. $\hat{F}_1$ is the flux at the face between cell 1 and cell 2, which is the same as $F_{3/2}$ in the previous notation). This is to avoid confusion between the fluxes at the faces and the radiation energy density at the cell centers, where instead of notations of $i = j-\frac{1}{2}$ (integers are cell faces) and $j = i+\frac{1}{2}$ (integers are cell centers) are not denoted explicitly, but rather just the value of the index is given. \textcolor{blue}{I've come up to it after a discussion with Gemini}.
+\subsubsection*{First Cell ($j=1$)}
+For the first cell, we substitute the boundary flux $\hat{F}_0^{n+1}$ derived from the Marshak condition:
+\begin{equation}
+    \frac{E_{1}^{n+1} - E_{1}^n}{\Delta t} + \frac{\rho_{1}^{*}}{\Delta m_{1}} \left( \hat{F}_{1}^{n+1} - \underbrace{\left[ 2 \sigma_{sb} T_{bath}^4 - \frac{c E_0^{n+1}}{2} \right]}_{\hat{F}_0^{n+1}} \right) = S_1^{n+1}
+\end{equation}
+where the source term is defined as:
+\begin{equation}
+    S_1^{n+1} = \frac{\chi c \sigma_1^n}{1 + A_1^n}[U_R]_1^n - \frac{\chi c \sigma_1^n}{1 + A_1^n} E_1^{n+1}
+\end{equation}
+Substituting the internal flux $\hat{F}_1^{n+1}$ and $S_1^{n+1}$, one gets:
+\begin{equation}
+\begin{aligned}
+    \frac{E_1^{n+1} - E_1^n}{\Delta t} + \frac{\rho_1^*}{\Delta m_1} & \left[ \left( -\hat{\rho}_1^n \hat{D}_1^n \frac{E_2^{n+1} - E_1^{n+1}}{\Delta \hat{m}_1} \right) \right. \\
+    & \left. - \left( 2 \sigma_{sb} T_{bath}^4 - \frac{c E_0^{n+1}}{2} \right) \right] = \\
+    & \frac{\chi c \sigma_1^n}{1 + A_1^n} [U_R]_1^n - \frac{\chi c \sigma_1^n}{1 + A_1^n} E_1^{n+1}
+\end{aligned}
+\end{equation}
   
-  \subsection{Discretization in Lagrangian Coordinates}
-  In our staggered grid, cell centers are indexed by $j=1 \dots N$ and faces by $i=0 \dots N$. We assume the face values of energy density $E$ are approximately equal to the adjacent cell centers ($E_0 \approx E_1$ and $E_{face, N} \approx E_N$). Substituting the boundary fluxes into the energy balance equation for the first and last cells:
+Grouping terms for $E_1^{n+1}$ and $E_2^{n+1}$ yields the tridiagonal coefficients:
+\begin{equation}
+\begin{aligned}
+    E_1^{n+1} & \left( \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_1^n}{1 + A_1^n} \right) \\
+    & - E_2^{n+1} \left( \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} \right) = \\
+    & \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1} + \frac{\chi c \sigma_1^n}{1 + A_1^n} [U_R]_1^n - \frac{c \rho_1^* E_0^{n+1}}{2 \Delta m_1} 
+\end{aligned}
+\end{equation}
+which gives us the modified coefficients for the first cell:
+\begin{gather}
+    \boxed{ \tilde{b}_1^n = \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} } \\
+    \boxed{ \tilde{c}_1^n = -\frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} } \\
+    \boxed{ \tilde{d}_1^n = \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1} + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} [U_R]_{1}^n - \frac{c \rho_1^*}{2 \Delta m_1}}
+\end{gather}
+\subsection*{Relation between Boundary and General Coefficients}
+
+By comparing the boundary-modified equation for the first cell ($j=1$) to the general interior stencil for cell $i+1/2$, we identify the following modifications:
+
+\begin{enumerate}
+    \item \textbf{Diagonal Term ($b_1$ vs $b_i$):} The left-face diffusion term $\frac{\rho^* \hat{\rho}_i \hat{D}_i}{\Delta m \Delta \hat{m}}$ in the general $b_i$ is replaced by the Marshak cooling term $\frac{c \rho_1^*}{2 \Delta m_1}$.
+    \begin{equation}
+        \tilde{b}_1^n = b_{j=1}^n - \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} + \frac{c \rho_1^*}{2 \Delta m_1}
+    \end{equation}
+
+    \item \textbf{Upper-Diagonal Term ($c_1$ vs $c_i$):} The interaction with the neighbor to the right remains structurally identical.
+    \begin{equation}
+        \tilde{c}_1^n = c_{j=1}^n = -\frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1}
+    \end{equation}
+
+    \item \textbf{Source Vector ($d_1$ vs $d_i$):} The drive term from the bath temperature is added to the standard time-step and coupling sources.
+    \begin{equation}
+        \tilde{d}_1^n = d_{j=1}^n + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1}
+    \end{equation}
+\end{enumerate}
+
+\paragraph{Note on $a_1$:} In the tridiagonal matrix $\mathbf{A}\mathbf{x} = \mathbf{d}$, the coefficient $\tilde{a}_1$ is strictly $0$ because there is no cell $E_0$ to the left of the first cell. The physical influence of the left boundary is entirely absorbed into $\tilde{b}_1$ and $\tilde{d}_1$.
   
-  \paragraph{First Cell ($j=1$):}
-  \begin{equation}
-      \frac{E_1^{n+1} - E_1^n}{\Delta t} + \frac{\rho_1^*}{\Delta m_1} \left( F_1^{n+1} - \left[ 2 \sigma_{sb} T_{bath}^4 - \frac{c E_1^{n+1}}{2} \right] \right) = S_1^{n+1}
-  \end{equation}
-  Using $F_1^{n+1} = -\rho_1^* D_1^n \frac{E_2^{n+1} - E_1^{n+1}}{\Delta m_1}$, we group terms to find the modified coefficients:
-  \begin{gather}
-      \boxed{\tilde{b}_1^n = b_1^n + \frac{c \rho_1^*}{2 \Delta m_1}} \\
-      \boxed{\tilde{d}_1^n = d_1^n + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1}}
-  \end{gather}
-  
-  \paragraph{Last Cell ($j=N$):}
+  \paragraph{Last Cell ($i=N-\frac{1}{2}, j=N$):}
   \begin{equation}
       \frac{E_N^{n+1} - E_N^n}{\Delta t} + \frac{\rho_N^*}{\Delta m_N} \left( \frac{c E_N^{n+1}}{2} - F_{N-1}^{n+1} \right) = S_N^{n+1}
   \end{equation}
