@@ -8,6 +8,15 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage[mathscr]{eucal}
+\usepackage[most]{tcolorbox}
+
+\DeclareTColorBox{notebox}{ O{Note} O{blue} }{
+  colback=#2!5!white,
+  colframe=#2!75!black,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
 
 \lstset{
     % change caption to be below the listing
@@ -160,7 +169,9 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     \Delta m_i := \frac{1}{2} \left((m_{i+1} - m_{i}) + (m_{i} - m_{i-1})\right) = \frac{1}{2} (\Delta m_{i+\frac{1}{2}} + \Delta m_{i-\frac{1}{2}})
   \end{equation}
   where the lagrangina coordinate $m_i$ for $i=0,...,N$ is defined as the mass of the material up to the vertex located at $x_i$. Therefore $m_i$ = $\sum_{j = 0}^{i} \Delta m_{i+\frac{1}{2}}$ where $\Delta m_{i+\frac{1}{2}} = m_{i+1} - m_{i}$ is the mass of the cell $j = i+\frac{1}{2}$ ($j = 1,...,N$) between the vertices $i$ and $i+1$. 
-  \item It may also be denoted $\Delta m_i = m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}}$ where $m_{i+\frac{1}{2}} = m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}$ and $m_{i-\frac{1}{2}} = m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}} \textcolor{red}{= m_i - \frac{1}{2} \Delta m_{i-\frac{1}{2}}}$ (the expression in red leads to an incorrect result for some reason, left that open for now).
+  \item It may also be denoted $\Delta m_i = m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}}$ where $m_{i+\frac{1}{2}} = m_{i} + \frac{1}{2} \Delta m_{i+\frac{1}{2}}$ and $m_{i-\frac{1}{2}} = m_{i-1} + \frac{1}{2} \Delta m_{i-\frac{1}{2}}$.
+    % note: \Delta m_i is the mass of the cell i, and \Delta m_{i+1/2} is the mass difference between vertices i and i+1.
+
   \begin{equation}
     \begin{aligned}
     \Delta m_i &= m_{i+\frac{1}{2}} - m_{i-\frac{1}{2}} \\ 
@@ -220,7 +231,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \end{equation}
   \item Furthermore, after subtituting the expressions for $[U_R]_{i+\frac{1}{2}}^{n+1}$ \& $F_i^{n}$ into the discretized equation for the radiation energy $E$, we get a tridiagonal implicit scheme for $E_i^{n+1}$:
   \begin{equation}
-    \boxed{a_{i}^n E_{i-\frac{1}{2}}^{n+1}+b_{i}^n E_{i+\frac{1}{2}}^{n} +c_{i}^n E_{i+\frac{3}{2}}^{n+1}=d_{i}^n}
+    \boxed{a_{i+\frac{1}{2}}^n E_{i-\frac{1}{2}}^{n+1}+b_{i+\frac{1}{2}}^n E_{i+\frac{1}{2}}^{n} +c_{i+\frac{1}{2}}^n E_{i+\frac{3}{2}}^{n+1}=d_{i+\frac{1}{2}}^n}
   \end{equation}
   where the coefficients $a_i^n,b_i^n,c_i^n,d_i^n$ are calculated in the appendix.
   \item We notice that the coefficients $a_{i}^n,b_{i}^n,c_{i}^n,d_{i}^n$ depend on the hydrodynamics variables (e.g. density, temperature) through the diffusion constant $D$ and the opacity $\sigma$. The dependency is given through Rosen's formulae for the opacity and the internal energy. First, one should find the temperature at the previous time step:
@@ -424,16 +435,16 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   Substituting the fluxes into the balance equation gives:
   \begin{equation}
     \begin{gathered}
-  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+1}^n D_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i}^n D_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}\right)}^{-F_{i}^{n+1}}
+  LHS = \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+1}^* D_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}\right)}^{-F_{i+1}^{n+1}} \\ + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i}^* D_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}\right)}^{-F_{i}^{n+1}}
     \end{gathered}
   \end{equation}
   Rearranging the terms gives us the tridiagonal form:
   \begin{equation}
     \begin{gathered}
       % insert the appropriate coefficients in front of each term:
-  LHS = \left(-\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}} \right) E_{i-\frac{1}{2}}^{n+1} \\
-  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t}\right] E_{i+\frac{1}{2}}^{n+1} \\
-  - \left(\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}\right) E_{i+\frac{3}{2}}^{n+1} \\
+  LHS = \left(-\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^* D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}} \right) E_{i-\frac{1}{2}}^{n+1} \\
+  + \left[\frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^* D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^* D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t}\right] E_{i+\frac{1}{2}}^{n+1} \\
+  - \left(\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^* D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}\right) E_{i+\frac{3}{2}}^{n+1} \\
   - \frac{1}{\Delta t} E_{i+\frac{1}{2}}^n
   \end{gathered}
   \end{equation}
@@ -450,38 +461,25 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
   \item Finally, rearranging the equation $LHS = RHS$ gives us the tridiagonal form:
   \begin{equation}
     \begin{gathered}
-     a_{i}^n E_{i-\frac{1}{2}}^{n+1} + b_{i}^n E_{i+\frac{1}{2}}^{n+1} + c_{i}^n E_{i+\frac{3}{2}}^{n+1} = d_{i}^n
+     a_{i+\frac{1}{2}}^n E_{i-\frac{1}{2}}^{n+1} + b_{i+\frac{1}{2}}^n E_{i+\frac{1}{2}}^{n+1} + c_{i+\frac{1}{2}}^n E_{i+\frac{3}{2}}^{n+1} = d_{i+\frac{1}{2}}^n
     \end{gathered}
   \end{equation}
   and the coefficients are given by:
   \begin{gather}
     % add boxes around the coefficients:
-    \boxed{a_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^n D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}}} \\
-    \boxed{b_{i}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^n D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^n D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
-    \boxed{c_{i}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^n D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}} \\
-    \boxed{d_{i}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
+    \boxed{a_{i+\frac{1}{2}}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_i^* D_i^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i}}} \\
+    \boxed{b_{i+\frac{1}{2}}^n = \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\left(\frac{ \rho_{i}^* D_{i}^n}{ \Delta m_{i}}+\frac{ \rho_{i+1}^* D_{i+1}^n}{ \Delta m_{i+1}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}} \\
+    \boxed{c_{i+\frac{1}{2}}^n = -\frac{\rho_{i+\frac{1}{2}}^{*} \rho_{i+1}^* D_{i+1}^n}{\Delta m_{i+\frac{1}{2}} \Delta m_{i+1}}} \\
+    \boxed{d_{i+\frac{1}{2}}^n = \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n + \frac{1}{\Delta t}E_{i+\frac{1}{2}}^n}
   \end{gather}
-  where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter. \textcolor{red}{I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$}.
-  NOTE: There is no difference here between $\rho^n$ and $rho^*$ - because the density used here is \texttt{state.rho} which is the density at the cell center after the hydro update.
+  where $A_{i+\frac{1}{2}}^n = \beta_{i+\frac{1}{2}}^{n} \Delta t \chi c \sigma_{i+\frac{1}{2}}^{n}$ is the coupling coefficient between the radiation and matter.
+  \begin{notebox}[Two things to understand][red]
+    I need to understand how the Flek \& Cummings coefficient $f$ is related to the coupling coefficient $A$.
+  \end{notebox}
 \end{enumerate}
   \subsection{Deeper understanding of the tridiagonal form}
   \begin{enumerate}
     \item First, let's make order in the celebration of indexes. Our staggered grid is as follows:
-    \begin{center}
-      \begin{tabular}{c|c|c|c|c|c}
-        % make cells more spaced out to make it more readable:
-        $i-1$ & $i-\frac{1}{2}$ & $i$ & $i+\frac{1}{2}$ & $i+1$ & $i+\frac{3}{2}$ \\
-        $j - \frac{3}{2}$ & $\boxed{j - 1}$ & $j - \frac{1}{2}$ & $\boxed{j}$ & $j + \frac{1}{2}$ & $\boxed{j + 1}$ \\
-        \hline
-        node & cell center & node & cell center & node & cell center \\
-         $\rho_{i-1}$ & $E_{i-\frac{1}{2}}$ & $\rho_{i}$ & $E_{i+\frac{1}{2}}$ & $\rho_{i+1}$ & $E_{i+\frac{3}{2}}$ \\
-         $D_{i-1}$ & $[U_R]_{i-\frac{1}{2}}$ & $D_{i}$ & $[U_R]_{i+\frac{1}{2}}$ & $D_{i+1}$ & $[U_R]_{i+\frac{3}{2}}$ \\
-         & $\rho_{i-\frac{1}{2}}$ &  & $\rho_{i+\frac{1}{2}}$ &  & $\rho_{i+\frac{3}{2}}$ \\
-         & $D_{i-\frac{1}{2}}$ &  & $D_{i+\frac{1}{2}}$ &  & $D_{i+\frac{3}{2}}$ \\
-         & $\beta_{i-\frac{1}{2}}$ &  & $\beta_{i+\frac{1}{2}}$ &  & $\beta_{i+\frac{3}{2}}$ \\
-         & $\sigma_{i-\frac{1}{2}}$ &  & $\sigma_{i+\frac{1}{2}}$ &  & $\sigma_{i+\frac{3}{2}}$ \\
-      \end{tabular}
-    \end{center}
     \begin{center}
       \small
       \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -502,132 +500,232 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
         j = 1,2,...,N \quad (\text{cell centers})
       \end{gathered}
     \end{equation}
-    \item We wish to write the tridiagonal equation as:
+    \item We wish to write the tridiagonal equations in a comfortable matrix form. Under the assumption that the radiation energy array $E_j$ is defined on cell centers $j = 1,...,N$ but also at $j=0$ and $j=N+1$ (ghost cells in which the value is defined via the BC), we get the follows. \newline
+    \underline{For $j = 1, ..., N$ where $i = j - \frac{1}{2}$}: 
     \begin{equation}
-      a_{j}^n E_{j-1}^{n+1} + b_{j}^n E_{j}^{n+1} + c_{j}^n E_{j+1}^{n+1} = d_{j}^n
+      \begin{gathered}
+        a_{i+\frac{1}{2}}^n E_{i-\frac{1}{2}}^{n+1} + b_{i+\frac{1}{2}}^n E_{i+\frac{1}{2}}^{n+1} + c_{i+\frac{1}{2}}^n E_{i+\frac{3}{2}}^{n+1} = d_{i+\frac{1}{2}}^n \\
+        \Downarrow\\
+        a_{j}^n E_{j-1}^{n+1} + b_{j}^n E_{j}^{n+1} + c_{j}^n E_{j+1}^{n+1} = d_{j}^n \\
+      \end{gathered}
     \end{equation}
-    Before we think of the definitions for the coefficients, let's understand how this equation can be written in matrix form. Supposing that $E_0$ is given as a BC (discussed later) our unknowns are $E_1,E_2,...,E_N$ (remember the $E$ is indexed by $j$, the cell centers). The boundary conditions for a power-law self-similar solution with zero radiation energy at the end of the grid are: 
-    \begin{equation}
-        E_0^{n+1}=a_{\text{Hev}} T_0^4 t^{4\tau}
-    \end{equation}
-    \begin{equation}
-        E_{N}^{n+1}=0
-    \end{equation}
-    \textcolor{blue}{Two notes: (1) This derivation holds for any BCs, even without a BC at the end of the grid that will give us an equation for $E_{N-1}$ and make $a_{N-1}, b_{N-1}, c_{N-1}, d_{N-1}$ non-zero. (2) I need to ask Shay about the correct BC here and its physical meaning.}
-    % Copilot - answer: what is the physical meaning of the zero radiation energy at the end of the grid?
-    % The physical meaning of the zero radiation energy at the end of the grid is that there is no incoming radiation from outside the system. This is a common boundary condition used in radiative transfer problems, where the system is assumed to be isolated and there is no external source of radiation. It implies that all the radiation energy within the system is generated internally, and there is no contribution from outside sources. This can be particularly relevant in astrophysical contexts, such as modeling the radiation from a star or a supernova, where the outer boundary of the computational domain is set to have zero radiation energy to simulate an open space environment.
-
-    % So is it a Vaccum BC?
-    % Yes, the zero radiation energy at the end of the grid can be considered a vacuum boundary condition.
-
-    % Thanks.
-    % You're welcome! If you have any more questions, feel free to ask.
-    Therefore, the entire matrix equation for the vector of unknowns is:
+    which build the following matrix system of equations:
     \begin{equation}
     \begin{bmatrix}
-    1 & 0 & 0 & \cdots & 0 & 0\\
-    a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
-    0 & a_3 & b_3 & c_3 &\cdots & 0 \\
-    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0 & 0 & \cdots & a_{N-1} & b_{N-1} & c_{N-1}  \\
-    0 & 0 & 0 & 0 & \cdots & 1
+    a_1 & b_1 & c_1 & 0 & \cdots & 0 & 0\\
+    0 & a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & 0 & a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0  & \cdots & 0 & 0 & a_{N-1} & b_{N-1} & c_{N-1} & 0 \\
+    0 & 0 & 0 & \cdots & 0 & a_{N} & b_{N} & c_{N}
     \end{bmatrix}
     \begin{bmatrix}
+    E_0^{n+1} \\
     E_1^{n+1} \\
-    E_2^{n+1} \\
-    E_3^{n+1} \\
     \vdots \\
-    E_{N-1}^{n+1} \\
-    E_{N}^{n+1}
+    \vdots \\
+    \vdots \\
+    E_{N}^{n+1} \\
+    E_{N+1}^{n+1}
     \end{bmatrix}
     =
     \begin{bmatrix}
-    a_{\text{Hev}} T_0^4 t^{4\tau} \\
+    d_1 \\
     d_2 \\
     d_3 \\
     \vdots \\
     d_{N-1} \\
-    0
+    d_{N}
     \end{bmatrix}
     \end{equation}
-    From now, we can reduce the $a_2$ and the $c_{N-2}$ from the $0^{th}$ and $(N-2)^{th}$ row and get the matrix equation:
+    which gives us a system of \textbf{$N$ equations with $N+2$ variables}. \newline \newline
+    Before we discuss the definition of the cell-centered coefficients $a_j^n, b_j^n, c_j^n, d_j^n$ for $j=1,...,N$, let's think of how one would implement them on a \textbf{computer program}.
+    \begin{notebox}[Implementation of the coefficient calculations][blue]
+      There are two important factors to consider when calculating the coefficients:
+      \begin{enumerate}
+        \item How one correctly implement the cell-valued arrays and the face-valued arrays in a computer program, where there isn't a way to create half indexes or differentiate between $i$ and $j$ in a simple array.
+        \item The validity of the indexes of the coefficients and other variables are affected by the boundary conditions.
+      \end{enumerate}
+    \end{notebox}
+    \subsubsection{The matrix equation for different BCs}
+    \begin{enumerate}
+    \item In \textbf{Dirichlet BC} we define:
+    \begin{gather}
+      E_0^{n} = T_s(t) \\
+      E_{N+1}^{n} = 0
+    \end{gather}
+    so that the system of equations is now:
     \begin{equation}
     \begin{bmatrix}
-    1 & 0 & 0 & \cdots & 0 & 0\\
-    0 & b_2 & c_2 & \cdots & 0 & 0 \\  
-    0 & a_3 & b_3 & c_3 &\cdots & 0 \\
-    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0 & 0 & \cdots & a_{N-1} & b_{N-1} & 0  \\
-    0 & 0 & 0 & 0 & \cdots & 1
+    a_1 & b_1 & c_1 & 0 & \cdots & 0 & 0\\
+    0 & a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & 0 & a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0  & \cdots & 0 & 0 & a_{N-1} & b_{N-1} & c_{N-1} & 0 \\
+    0 & 0 & 0 & \cdots & 0 & a_{N} & b_{N} & c_{N}
     \end{bmatrix}
     \begin{bmatrix}
+    T_s(t) \\
     E_1^{n+1} \\
-    E_2^{n+1} \\
-    E_3^{n+1} \\
     \vdots \\
-    E_{N-1}^{n+1} \\
-    E_{N}^{n+1}
+    \vdots \\
+    \vdots \\
+    E_{N}^{n+1} \\
+    0
     \end{bmatrix}
     =
     \begin{bmatrix}
-    a_{\text{Hev}} T_0^4 t^{4\tau} \\
-    d_2 - a_{\text{Hev}} T_0^4 t^{4\tau}\\
+    d_1 \\
+    d_2 \\
     d_3 \\
     \vdots \\
     d_{N-1} \\
-    0
+    d_{N}
     \end{bmatrix}
     \end{equation}
-    Notice that we thereby received an invariant matrix equation of $N-2$ equations in $N-2$ unknowns, which is:
+    And now we are left with $N$ equations with $N$ unknowns! (in fact we have just added the two missing equations, that directly solve for $E_0$ and $E_{N+1}$). \newline \newline
+    At this point, the $1$st and $N$'th equations become:
+    \begin{gather}
+      a_1 T_s(t) + b_1 E_1^{n+1} + c_1 E_2^{n+1} = d_1 \\
+      a_N E_{N-1}^{n+1} + b_N E_N^{n+1} + c_N \cdot 0= d_N
+    \end{gather}
+    which can be written as:
+    \begin{gather}
+      b_1 E_1^{n+1} + c_1 E_2^{n+1} = d_1 - a_1 T_s(t)\\
+      a_N E_{N-1}^{n+1} + b_N E_N^{n+1} = d_N
+    \end{gather}
+    So that the elements $a_1$ and $c_N$ are ommitted, and their effect is inserted inside the $d$ coefficients to provide the \textbf{reduced matrix equation:}
     \begin{equation}
     \begin{bmatrix}
-    b_2 & c_2 & \cdots & 0 & 0 \\  
-    a_3 & b_3 & c_3 &\cdots & 0 \\
-    \vdots & \vdots & \vdots & \ddots & \vdots\\
-    0 & 0 & \cdots & a_{N-1} & b_{N-1}   \\
+    b_1 & c_1 & 0 & \cdots & 0 \\
+    a_2 & b_2 & c_2 & \cdots & 0  \\  
+    0 & a_3 & b_3 & c_3 &\cdots  \\
+    \vdots & \vdots & \vdots & \ddots & \vdots  \\
+    \cdots & 0 & 0 & a_{N-1} & b_{N-1} & c_{N-1} \\
+    0 & 0 & \cdots & 0 & a_{N} & b_{N}
     \end{bmatrix}
     \begin{bmatrix}
-    E_2^{n+1} \\
-    E_3^{n+1} \\
+    E_1^{n+1} \\
     \vdots \\
-    E_{N-1}^{n+1} 
+    \vdots \\
+    \vdots \\
+    E_{N}^{n+1} \\
     \end{bmatrix}
     =
     \begin{bmatrix}
-    d_2 - a_{\text{Hev}} T_0^4 t^{4\tau}\\
+    d_1 - a_1 T_s(t) \\
+    d_2 \\
     d_3 \\
     \vdots \\
-    d_{N-1}
+    d_{N-1} \\
+    d_{N}
     \end{bmatrix}
     \end{equation}
-    This is a \textit{tridiagonal system of equations} which can be solved by the \textit{Thomas algorithm} which is explained in previous files.
-  \item Now, we can define the coefficients $a_j^n, b_j^n, c_j^n, d_j^n$ for $j=2,...,N-2$ (the index $N-1$ is irrelevant for the end BC that we have, but it will be relevant if we have a different BC at the end of the grid). The transition is simply $j = i + \frac{1}{2}$, so we can rewrite the coefficients in terms of $j$ instead of $i$:
-  \begin{equation}
-    \begin{gathered}
-    a_{j}^n = - \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j-1}^n \frac{2D_{j-1}^{n} D_{j}^{n}}{D_{j-1}^{n} + D_{j}^{n}}\right) \\
-    b_{j}^n = \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j+1}^n \frac{2D_{j}^{n} D_{j+1}^{n}}{D_{j}^{n} + D_{j+1}^{n}} - \rho_{j-1}^n \frac{2D_{j-1}^{n} D_{j}^{n}}{D_{j-1}^{n} + D_{j}^{n}}\right) + \frac{1}{\Delta t} + \frac{\chi c \sigma_{j}^{n}}{1 + A_{j}^n} \\
-    c_{j}^n = \frac{\rho_{j}^{*}}{m_{j}^2} \left(\rho_{j+1}^n \frac{2D_{j}^{n} D_{j+1}^{n}}{D_{j}^{n} + D_{j+1}^{n}}\right) \\
-    d_{j}^n = \frac{\chi c \sigma_{j}^{n}}{1 + A_{j}^n}[U_R]_{j}^n + \frac{1}{\Delta t}E_{j}^n
-    \end{gathered}
-  \end{equation}
-  \item IMPORTANT NOTE: $\rho, m, D, \sigma$ are all given as arrays for the cell centers (i.e. $\rho_j$ = \texttt{rho[j - 1]}) for $j = 1,...,N$. However, even for the non-zero BC at $j = N$, the coefficients $a_j^n, b_j^n, c_j^n, d_j^n$ are defined for $j = 2,...,N-1$ so we will define them so that $a_j$ = \texttt{a[j - 2]} (so that \texttt{a.size()=N-2} and \texttt{a=[a[0],a[1],...,a[N-3]]}). Therefore, each time a variable $\rho_j$ appears in the formula for $a_j$ (for example), we will replace $a_j$ by \texttt{a[j-2]} and $\rho_j$ by \texttt{rho[j-1]}. \textbf{To sum up}, the arrays look like this:
-  \begin{equation}
-    \begin{gathered}
-    \text{\texttt{a=[a[0],a[1],...,a[N-3]]}} \\
-    \text{\texttt{rho=[rho[0],rho[1],...,rho[N-1]]}} \\
-    \end{gathered}
-  \end{equation}
-  and the rules for translating the formulas for the coefficients into array assignment with the correct indexing, are:
-  \begin{equation}
-    \begin{gathered}
-      a_{j}^n \to \text{\texttt{a[:] or just a}} \\
-      \rho_{j}^n \to \text{\texttt{rho[1:-1]}} \\
-      \rho_{j-1}^n \to \text{\texttt{rho[:-2]}} \\
-      \rho_{j+1}^n \to \text{\texttt{rho[2:]}} \\
+    \item In \textbf{Marshak BC} we define:
+    \begin{gather}
+      F_0^{n} = F(T_{bath}) \\
+      E_{N+1}^{n} = 0
+    \end{gather}
+    Through a derivation that appears in detail in Appendix 6 % make that clickable
+    one can reduce the equation at the surface ($i=0$) into an equation of the form:
+    \begin{equation}
+      \tilde{b}_1 E_1^{n+1} + \tilde{c}_1 E_2^{n+1} = \tilde{d}_1 
+    \end{equation}
+    where $\tilde{b}_1, \tilde{c}_1, \tilde{d}_1$ are of course defined in Appendix 6.
+    Therefore, after ommiting the last equation (which involves a trivial Dirichlet BC at the edge ghost cell):
+    \begin{equation}
+    \begin{bmatrix}
+    0 & \tilde{b}_1 & \tilde{c}_1 & 0 & \cdots & 0 & 0\\
+    a_1 & b_1 & c_1 & 0 & \cdots & 0 & 0\\
+    0 & a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & 0 & a_3 & b_3 & c_3 &\cdots & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0  & \cdots & 0 & 0 & a_{N-1} & b_{N-1} & c_{N-1} & 0 \\
+    0 & 0 & 0 & \cdots & 0 & a_{N} & b_{N} & c_{N}
+    \end{bmatrix}
+    \begin{bmatrix}
+    E_0^{n+1} \\
+    E_1^{n+1} \\
+    \vdots \\
+    \vdots \\
+    \vdots \\
+    E_{N}^{n+1} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    \tilde{d}_1 \\
+    d_1 \\
+    d_2 \\
+    d_3 \\
+    \vdots \\
+    d_{N-1} \\
+    d_{N}
+    \end{bmatrix}
+    \end{equation}
+    We are now left with $N+1$ equations in $N+1$ unknowns.
+    \end{enumerate}
+    \subsubsection{The tridiagonal coefficient calculation}
+    $\rho, \Delta m, D, \sigma$ are all given as arrays for the cell centers (i.e. $\rho_j$ = \texttt{rho[j - 1]}) for $j = 1,...,N$. Starting from this principle, we can calculate the face-valued arrays as follows. 
+    \newline \underline{For $i = 0,..., N$} (notice the \texttt{[1:], [:-1]} notation that forbids invalid indices):
+    \begin{equation}
+      \begin{gathered}
+        \rho_i^* = \text{avg}(\rho_{i-\frac{1}{2}}^*, \rho_{i+\frac{1}{2}}^*) \implies \texttt{rho\_face[:]=avg(rho[:-1], rho[1:])}\\
+        D_i^n = \text{avg}(D_{i-\frac{1}{2}}^n, D_{i+\frac{1}{2}}^n) \implies \texttt{D\_face[:]=avg(D[:-1], D[1:])}\\
+        \Delta m_i = \text{avg}(\Delta m_{i-\frac{1}{2}}, \Delta m_{i+\frac{1}{2}}) \implies \texttt{m\_face[:]=avg(m\_cells[:-1], m\_cells[1:])}\\
       \end{gathered}
-  \end{equation}
-  and, of course, the same for the other coefficients \& variables.
+    \end{equation}
+    of \texttt{size=N-1}.
+    We will define:
+    \begin{equation}
+      f_i^* = \frac{\rho_i^* D_i^n}{\Delta m_i} 
+    \end{equation}
+    and now we are ready to define the \texttt{flux\_coeff} so that \texttt{flux\_coeff.size()} is $N-1$:
+    \begin{equation}
+      \texttt{flux\_coeff}[i - 1] = f_{i}^*
+    \end{equation}
+    \begin{notebox}[Face values at the first node ($i=0$)]
+      Since the size of the \texttt{flux\_coeff} array is $N-1$, and it should be multiplied element-wise by other $N$ sized arrays (e.g., \texttt{lagrangian\_coeff}) that are computed at the cell centers (specifically - the cell center of which the corresponding node is located at its left face since $i = j - 1/2$), we shall define the value of $\rho^*$, $D^n$, $\Delta m$ at $i=0$ by reflecting their values across the boundary, i.e., $f_0^* = f_1^*$.
+    \end{notebox}
+    \item We will also define the following numeric arrays for notation comfort.
+    \newline \underline{For $j = 1,...,N$}: 
+    Under the definitions:
+    \begin{equation}
+      \begin{gathered}
+        \mathcal{L}_j^* = \frac{\rho_j^*}{\Delta m_j} \\
+        B_j^n = \frac{\chi c \sigma_j^n}{1 + A_j^n}
+      \end{gathered}
+    \end{equation}
+    The numeric arrays are:
+    \begin{equation}
+      \begin{gathered}
+        \texttt{lagrangian\_coeff[j-1]} = \mathcal{L}_j^*\\
+        \texttt{total\_coupling[j-1]} = B_j^n
+      \end{gathered}
+    \end{equation}
+    \item To sum up, the coefficients are defined as follows. \newline
+    \underline{For $j = 1,...,N$ and $i = j $ (left face)}:
+    \begin{equation}
+      \begin{gathered}
+        a_{j}^n = -\mathcal{L}_j^* f_i^* \\
+        b_{j}^n = \mathcal{L}_j^*(f_i^* + f_{i+1}^*) + \frac{1}{\Delta t} + B_j^n \\
+        c_{j}^n = -\mathcal{L}_j^* f_{i+1}^* \\
+        d_{j}^n = B_j^n[U_R]_{j}^n + \frac{1}{\Delta t}E_{j}^n
+      \end{gathered}
+    \end{equation}
+    and in code notation (after defining \texttt{a, b, c, d} arrays of \texttt{size = N}):
+    \begin{equation}
+      \begin{gathered}
+        \texttt{a[j - 1]} = \mathcal{L}_j^* f_i^* \\
+        \texttt{b[j - 1]} = \mathcal{L}_j^*(f_i^* + f_{i+1}^*) + \frac{1}{\Delta t} + B_j^n \\
+        \texttt{c[j - 1]} = \mathcal{L}_j^* f_{i+1}^* \\
+        \texttt{d[j - 1]} = B_j^n[U_R]_{j}^n + \frac{1}{\Delta t}E_{j}^n
+      \end{gathered}
+    \end{equation}
+    \begin{notebox}[Between code arrays and physical quantities]
+      As stated at the beginning of this subsection, the physical quantities $\rho, \Delta m, D, \sigma$ are all given as arrays for the cell centers (i.e. $\rho_j$ = \texttt{rho[j - 1]}) for $j = 1,...,N$ so assumptions such as \texttt{arr[j-1]} = $f(\rho, \Delta m, D, \sigma)$ just mean direct array assignment!
+    \end{notebox}
   \end{enumerate}
+
 
   \newpage
   \newpage
@@ -641,9 +739,12 @@ At a boundary interface, the net inward partial flux $J_{in}$ must match the sou
     J_{in} = \frac{cE}{4} + \frac{F}{2}, \quad J_{out} = \frac{cE}{4} - \frac{F}{2}
 \end{equation}
 At the origin ($x=0$), the net flux into the material is $F_0$. The Marshak condition is:
-\begin{equation}
-    \frac{cE(0,t)}{4} + \frac{F_0(t)}{2} = \sigma_{sb} T_{bath}^4 \implies \boxed{F_0 = 2\sigma_{sb} T_{bath}^4 - \frac{cE(0,t)}{2}}
-\end{equation}
+\begin{gather}
+    \frac{cE(0,t)}{4} + \frac{F_0(t)}{2} = \sigma_{sb} T_{bath}^4 \\
+    F_0 = 2\sigma_{sb} T_{bath}^4 - \frac{cE(0,t)}{2} \\
+    F_0 = \frac{a c}{2} T_{bath}(t)^4 - \frac{c a T_s(t)^4}{2} \\
+    \boxed{F_0 = 2\sigma_{sb} \left[ T_{bath}(t)^4 - T_s(t)^4 \right]}
+\end{gather}
 At the far boundary ($x=L$), we assume a vacuum where no radiation enters from the right ($J_{in, right} = 0$), leading to the free-streaming limit:
 \begin{equation}
     \frac{cE(L,t)}{4} - \frac{F_L(t)}{2} = 0 \implies \boxed{F_L = \frac{cE(L,t)}{2}}
@@ -653,15 +754,17 @@ At the far boundary ($x=L$), we assume a vacuum where no radiation enters from t
 In our staggered grid, cell centers are indexed by $j=1, \dots, N$ and faces by $i=0, \dots, N$. The diffusion equation at the cell located between the faces $i$ and $i+1$ is:
 \begin{equation}
 \begin{gathered}
-    \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\hat{\rho}_{i+1}^n \hat{D}_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta \hat{m}_{i+1}}\right)}^{-\hat{F}_{i+1}^{n+1}} + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\hat{\rho}_{i}^n \hat{D}_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta \hat{m}_{i}}\right)}^{-\hat{F}_{i}^{n+1}} = \\ 
+    \frac{E_{i+\frac{1}{2}}^{n+1} - E_{i+\frac{1}{2}}^n}{\Delta t} - \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}} \overbrace{\left(\rho_{i+1}^n D_{i+1}^n\frac{E_{i+\frac{3}{2}}^{n+1} - E_{i+\frac{1}{2}}^{n+1}}{\Delta m_{i+1}}\right)}^{-\hat{F}_{i+1}^{n+1}} + \frac{\rho_{i+\frac{1}{2}}^{*}}{\Delta m_{i+\frac{1}{2}}}\overbrace{\left(\rho_{i}^n D_{i}^n\frac{E_{i+\frac{1}{2}}^{n+1} - E_{i-\frac{1}{2}}^{n+1}}{\Delta m_{i}}\right)}^{-\hat{F}_{i}^{n+1}} = \\ 
     \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n}[U_R]_{i+\frac{1}{2}}^n - \frac{\chi c \sigma_{i+\frac{1}{2}}^{n}}{1 + A_{i+\frac{1}{2}}^n} E_{i+\frac{1}{2}}^{n+1} 
 \end{gathered}   
 \end{equation}
-NOTE: I used the notation $\hat{F}$ for the arrays that satisfy $A_{integer}$ is the face-centered value of $A$ (i.e. $\hat{F}_1$ is the flux at the face between cell 1 and cell 2, which is the same as $F_{3/2}$ in the previous notation). This is to avoid confusion between the fluxes at the faces and the radiation energy density at the cell centers, where instead of notations of $i = j-\frac{1}{2}$ (integers are cell faces) and $j = i+\frac{1}{2}$ (integers are cell centers) are not denoted explicitly, but rather just the value of the index is given. \textcolor{blue}{I've come up to it after a discussion with Gemini}.
+\begin{notebox}[Quick note about notation]
+I used the notation "$\hat{F}_1$" to indicate that the subscript denotes $i$ and not $j$. For comfort indexing, in the notation "$E_1$" (without hat) the subscript denotes $j$ (default notation prefers cell centers).
+\end{notebox}
 \subsubsection*{First Cell ($j=1$)}
 For the first cell, we substitute the boundary flux $\hat{F}_0^{n+1}$ derived from the Marshak condition:
 \begin{equation}
-    \frac{E_{1}^{n+1} - E_{1}^n}{\Delta t} + \frac{\rho_{1}^{*}}{\Delta m_{1}} \left( \hat{F}_{1}^{n+1} - \underbrace{\left[ 2 \sigma_{sb} T_{bath}^4 - \frac{c E_0^{n+1}}{2} \right]}_{\hat{F}_0^{n+1}} \right) = S_1^{n+1}
+    \frac{E_{1}^{n+1} - E_{1}^n}{\Delta t} + \frac{\rho_{1}^{*}}{\Delta m_{1}} \left( \hat{F}_{1}^{n+1} - \overbrace{2\sigma_{sb}\left[T_{bath}^4(t) - T_s^4(t) \right]}^{\hat{F}_0^{n+1}} \right) = S_1^{n+1}
 \end{equation}
 where the source term is defined as:
 \begin{equation}
@@ -671,7 +774,7 @@ Substituting the internal flux $\hat{F}_1^{n+1}$ and $S_1^{n+1}$, one gets:
 \begin{equation}
 \begin{aligned}
     \frac{E_1^{n+1} - E_1^n}{\Delta t} + \frac{\rho_1^*}{\Delta m_1} & \left[ \left( -\hat{\rho}_1^n \hat{D}_1^n \frac{E_2^{n+1} - E_1^{n+1}}{\Delta \hat{m}_1} \right) \right. \\
-    & \left. - \left( 2 \sigma_{sb} T_{bath}^4 - \frac{c E_0^{n+1}}{2} \right) \right] = \\
+    & \left. - 2\sigma_{sb} [T_{bath}^4(t) - T_s^4(t)] \right] = \\
     & \frac{\chi c \sigma_1^n}{1 + A_1^n} [U_R]_1^n - \frac{\chi c \sigma_1^n}{1 + A_1^n} E_1^{n+1}
 \end{aligned}
 \end{equation}
@@ -679,41 +782,22 @@ Substituting the internal flux $\hat{F}_1^{n+1}$ and $S_1^{n+1}$, one gets:
 Grouping terms for $E_1^{n+1}$ and $E_2^{n+1}$ yields the tridiagonal coefficients:
 \begin{equation}
 \begin{aligned}
-    E_1^{n+1} & \left( \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_1^n}{1 + A_1^n} \right) \\
-    & - E_2^{n+1} \left( \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} \right) = \\
-    & \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1} + \frac{\chi c \sigma_1^n}{1 + A_1^n} [U_R]_1^n - \frac{c \rho_1^* E_0^{n+1}}{2 \Delta m_1} 
+    & \left( \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_1^n}{1 + A_1^n} \right)E_1^{n+1} \\
+    & - \left( \frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} \right)E_2^{n+1} = \\
+    & \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb}}{\Delta m_1} \left[ T_{bath}^4(t) - T_{s}^4(t) \right] + \frac{\chi c \sigma_1^n}{1 + A_1^n} [U_R]_1^n
 \end{aligned}
 \end{equation}
-which gives us the modified coefficients for the first cell:
+which gives us an additional tridiagonal coefficient for the first cell:
+\begin{equation}
+  \begin{gathered}  \tilde{a}_1^n E_0^{n+1} + \tilde{b}_1^n E_1^{n+1} - \tilde{c}_1^n E_2^{n+1} = \tilde{d}_1^n \\ \Downarrow \end{gathered}
+\end{equation}
 \begin{gather}
-    \boxed{ \tilde{b}_1^n = \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} } \\
-    \boxed{ \tilde{c}_1^n = -\frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} } \\
-    \boxed{ \tilde{d}_1^n = \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1} + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} [U_R]_{1}^n - \frac{c \rho_1^*}{2 \Delta m_1}}
+    \boxed{ \tilde{b}_1^n = \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} } \\
+    \boxed{ \tilde{c}_1^n = -\frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} } \\
+    \boxed{ \tilde{d}_1^n = \frac{E_1^n}{\Delta t} + \frac{2 \rho_1^* \sigma_{sb}}{\Delta m_1} \left[ T_{bath}^4(t) - T_{s}^4(t) \right] + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} [U_R]_{1}^n }
 \end{gather}
-\subsection*{Relation between Boundary and General Coefficients}
-
-By comparing the boundary-modified equation for the first cell ($j=1$) to the general interior stencil for cell $i+1/2$, we identify the following modifications:
-
-\begin{enumerate}
-    \item \textbf{Diagonal Term ($b_1$ vs $b_i$):} The left-face diffusion term $\frac{\rho^* \hat{\rho}_i \hat{D}_i}{\Delta m \Delta \hat{m}}$ in the general $b_i$ is replaced by the Marshak cooling term $\frac{c \rho_1^*}{2 \Delta m_1}$.
-    \begin{equation}
-        \tilde{b}_1^n = b_{j=1}^n - \frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1} + \frac{c \rho_1^*}{2 \Delta m_1}
-    \end{equation}
-
-    \item \textbf{Upper-Diagonal Term ($c_1$ vs $c_i$):} The interaction with the neighbor to the right remains structurally identical.
-    \begin{equation}
-        \tilde{c}_1^n = c_{j=1}^n = -\frac{\rho_1^* \hat{\rho}_1 \hat{D}_1}{\Delta m_1 \Delta \hat{m}_1}
-    \end{equation}
-
-    \item \textbf{Source Vector ($d_1$ vs $d_i$):} The drive term from the bath temperature is added to the standard time-step and coupling sources.
-    \begin{equation}
-        \tilde{d}_1^n = d_{j=1}^n + \frac{2 \rho_1^* \sigma_{sb} T_{bath}^4}{\Delta m_1}
-    \end{equation}
-\end{enumerate}
-
-\paragraph{Note on $a_1$:} In the tridiagonal matrix $\mathbf{A}\mathbf{x} = \mathbf{d}$, the coefficient $\tilde{a}_1$ is strictly $0$ because there is no cell $E_0$ to the left of the first cell. The physical influence of the left boundary is entirely absorbed into $\tilde{b}_1$ and $\tilde{d}_1$.
-  
   \paragraph{Last Cell ($i=N-\frac{1}{2}, j=N$):}
+  This is not done in our simulation because the Marshak waves don't reach the edge boundary in our simulation setup.
   \begin{equation}
       \frac{E_N^{n+1} - E_N^n}{\Delta t} + \frac{\rho_N^*}{\Delta m_N} \left( \frac{c E_N^{n+1}}{2} - F_{N-1}^{n+1} \right) = S_N^{n+1}
   \end{equation}
@@ -721,37 +805,4 @@ By comparing the boundary-modified equation for the first cell ($j=1$) to the ge
   \begin{equation}
       \boxed{\tilde{b}_N^n = b_N^n + \frac{c \rho_N^*}{2 \Delta m_N}}
   \end{equation}
-  
-  \subsection{Final Tridiagonal Matrix System}
-  The resulting $N \times N$ system for the unknown vector $\mathbf{E}^{n+1} = [E_1, E_2, \dots, E_N]^T$ accounts for the drive at $j=1$ and the vacuum leakage at $j=N$:
-  
-  \begin{equation}
-  \begin{bmatrix}
-  \tilde{b}_1 & c_1 & 0 & \cdots & 0 \\
-  a_2 & b_2 & c_2 & \cdots & 0 \\
-  0 & a_3 & b_3 & \cdots & 0 \\
-  \vdots & \vdots & \ddots & \ddots & \vdots \\
-  0 & 0 & \cdots & a_{N-1} & b_{N-1} & c_{N-1} \\
-  0 & 0 & 0 & \cdots & a_N & \tilde{b}_N
-  \end{bmatrix}
-  \begin{bmatrix}
-  E_1^{n+1} \\
-  E_2^{n+1} \\
-  E_3^{n+1} \\
-  \vdots \\
-  E_{N-1}^{n+1} \\
-  E_N^{n+1}
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-  \tilde{d}_1 \\
-  d_2 \\
-  d_3 \\
-  \vdots \\
-  d_{N-1} \\
-  d_N
-  \end{bmatrix}
-  \end{equation}
-  
-  Where $a_j, b_j, c_j, d_j$ for internal cells ($1 < j < N$) remain as derived in the standard diffusion scheme. This system is solved using the Thomas algorithm.
 \end{document}
