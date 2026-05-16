@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  16 MAY 2026 09:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  16 MAY 2026 10:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -834,7 +834,7 @@ Overfull \hbox (19.32976pt too wide) in paragraph at lines 681--683
 [19]
 
 [20]
-Overfull \hbox (58.93416pt too wide) detected at line 760
+Overfull \hbox (58.93416pt too wide) detected at line 758
 [][][]
  []
 
@@ -844,17 +844,19 @@ Overfull \hbox (58.93416pt too wide) detected at line 760
 
 [22]
 
-[23] (rad_hydro_sim.aux)
+[23]
+
+[24] (rad_hydro_sim.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20646 strings out of 468081
- 451663 string characters out of 5424820
+ 20647 strings out of 468081
+ 451678 string characters out of 5424820
  873092 words of memory out of 5000000
- 48952 multiletter control sequences out of 15000+600000
+ 48953 multiletter control sequences out of 15000+600000
  643468 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,16n,101p,704b,725s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -879,9 +881,9 @@ Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb>
-Output written on rad_hydro_sim.pdf (23 pages, 321760 bytes).
+Output written on rad_hydro_sim.pdf (24 pages, 325579 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
+ 208 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 
