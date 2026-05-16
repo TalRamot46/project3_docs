@@ -632,29 +632,28 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
       \tilde{b}_1 E_1^{n+1} + \tilde{c}_1 E_2^{n+1} = \tilde{d}_1 
     \end{equation}
     where $\tilde{b}_1, \tilde{c}_1, \tilde{d}_1$ are of course defined in Appendix 6.
-    Therefore, after ommiting the last equation (which involves a trivial Dirichlet BC at the edge ghost cell):
+    Because this new equation completely replaces the standard diffusion equation for the first cell, the ghost cell $E_0^{n+1}$ is algebraically eliminated from our active unknowns. 
+    Therefore, the system remains exactly $N$ equations for the $N$ internal cells:
     \begin{equation}
     \begin{bmatrix}
-    0 & \tilde{b}_1 & \tilde{c}_1 & 0 & \cdots & 0 & 0\\
-    a_1 & b_1 & c_1 & 0 & \cdots & 0 & 0\\
-    0 & a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
-    0 & 0 & a_3 & b_3 & c_3 &\cdots & 0 \\
-    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0  & \cdots & 0 & 0 & a_{N-1} & b_{N-1} & c_{N-1} & 0 \\
-    0 & 0 & 0 & \cdots & 0 & a_{N} & b_{N} & c_{N}
+    \tilde{b}_1 & \tilde{c}_1 & 0 & \cdots & 0 & 0\\
+    a_2 & b_2 & c_2 & \cdots & 0 & 0 \\  
+    0 & a_3 & b_3 & \ddots & \vdots & \vdots \\
+    \vdots & \vdots & \ddots & \ddots & c_{N-2} & 0 \\
+    0 & \cdots & 0 & a_{N-1} & b_{N-1} & c_{N-1} \\
+    0 & 0 & \cdots & 0 & a_{N} & b_{N}
     \end{bmatrix}
     \begin{bmatrix}
-    E_0^{n+1} \\
     E_1^{n+1} \\
+    E_2^{n+1} \\
+    E_3^{n+1} \\
     \vdots \\
-    \vdots \\
-    \vdots \\
+    E_{N-1}^{n+1} \\
     E_{N}^{n+1} \\
     \end{bmatrix}
     =
     \begin{bmatrix}
     \tilde{d}_1 \\
-    d_1 \\
     d_2 \\
     d_3 \\
     \vdots \\
@@ -662,7 +661,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
     d_{N}
     \end{bmatrix}
     \end{equation}
-    We are now left with $N+1$ equations in $N+1$ unknowns.
+    We are now left with exactly $N$ equations in $N$ unknowns, which perfectly matches the implementation size in the numerical code.
     \end{enumerate}
     \subsubsection{The tridiagonal coefficient calculation}
     $\rho, \Delta m, D, \sigma$ are all given as arrays for the cell centers (i.e. $\rho_j$ = \texttt{rho[j - 1]}) for $j = 1,...,N$. Starting from this principle, we can calculate the face-valued arrays as follows. 

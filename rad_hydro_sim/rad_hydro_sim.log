@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  16 MAY 2026 10:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  16 MAY 2026 11:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -812,17 +812,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 585--588
 
 
 [17]
-Overfull \hbox (6.8019pt too wide) detected at line 664
-[][] [] \OT1/cmr/m/n/10.95 = []
- []
-
-
-Overfull \hbox (58.46538pt too wide) detected at line 676
+Overfull \hbox (58.46538pt too wide) detected at line 675
 [][][]
  []
 
 
-Overfull \hbox (19.32976pt too wide) in paragraph at lines 681--683
+Overfull \hbox (19.32976pt too wide) in paragraph at lines 680--682
 \OT1/cmr/m/n/10.95 and now we are ready to de-fine the \OT1/cmtt/m/n/10.95 flux
 []coeff \OT1/cmr/m/n/10.95 so that \OT1/cmtt/m/n/10.95 flux[]coeff.size()
  []
@@ -834,7 +829,7 @@ Overfull \hbox (19.32976pt too wide) in paragraph at lines 681--683
 [19]
 
 [20]
-Overfull \hbox (58.93416pt too wide) detected at line 758
+Overfull \hbox (58.93416pt too wide) detected at line 757
 [][][]
  []
 
@@ -881,7 +876,7 @@ Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb>
-Output written on rad_hydro_sim.pdf (24 pages, 325579 bytes).
+Output written on rad_hydro_sim.pdf (24 pages, 325784 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
