@@ -289,6 +289,13 @@ INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\c
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy5.tfm
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt8.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmib10.tfm
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT rad_hydro_sim.aux
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx10.pfb
@@ -298,6 +305,8 @@ INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\TLP-001\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb

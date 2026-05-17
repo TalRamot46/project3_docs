@@ -702,7 +702,7 @@ which means that the energy isn't updated yet! we then assume that $U_m^{n} = \r
       \end{gathered}
     \end{equation}
     \item To sum up, the coefficients are defined as follows. \newline
-    \underline{For $j = 1,...,N$ and $i = j $ (left face)}:
+    \underline{For $j = 1,...,N$ and $i=j-1=0,...,N-1$ (left face)}:
     \begin{equation}
       \begin{gathered}
         a_{j}^n = -\mathcal{L}_j^* f_i^* \\
@@ -792,7 +792,7 @@ Grouping terms for $E_1^{n+1}$ and $E_2^{n+1}$ yields the modified tridiagonal s
 \end{equation}
 where $E_{bath} = a T_{bath}^4(t)$. 
 
-This gives us the modified tridiagonal coefficients for the first cell:
+This gives us the modified tridiagonal coefficients for the first cell: 
 \begin{gather}
     \boxed{ \tilde{b}_1^n = \frac{1}{\Delta t} + \frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} + C_1 + \frac{\chi c \sigma_{1}^{n}}{1 + A_{1}^n} } \\
     \boxed{ \tilde{c}_1^n = -\frac{\rho_1^* \hat{\rho}_1^n \hat{D}_1^n}{\Delta m_1 \Delta \hat{m}_1} } \\
@@ -819,4 +819,78 @@ This avoids recalculating the shared terms (like the right-face flux or the sour
   \begin{equation}
       \boxed{\tilde{b}_N^n = b_N^n + \frac{c \rho_N^*}{2 \Delta m_N}}
   \end{equation}
+  \begin{notebox}[Missing implementation details][red]
+    I've not included here the implementation of the calculation of $T_{bath}(t)$ from  using Menahem's subsonic solver. What it actually does is use the semi-analytic solver to draw the 
+  \end{notebox}
+\newpage
+\newpage
+\section{Calculation of $T_{bath}(t)$ from Menahem's subsonic solver}
+  When solving Marshak BC problems, one gives $T_{bath}(t)$ rather than $T_{surface}(t)$ as the BC. In our \textbf{building of test cases}, we would like to calculate $T_{bath}(t)$ that when used in the simulation via Marshak BC is \textbf{consistent with some other Dirichlet BC} solution.
+\subsection*{Derivation of driving radiation bath temperature}
+
+At the boundary ($m=0$), the net radiation energy flux entering the system is governed by the physical Marshak boundary condition:
+\begin{equation}
+    F(0, t) = \sigma_{\text{sb}} \left[ T_{\text{bath}}^4(t) - T_s^4(t) \right]
+\end{equation}
+Given the power-law surface material temperature boundary condition, $T_s(t) = T_0 t^\tau$, this yields:
+\begin{equation}
+    T_{\text{bath}}(t) = \left[ T_0^4 t^{4\tau} + \frac{F(0, t)}{\sigma_{\text{sb}}} \right]^{1/4}
+\end{equation}
+
+From the subsonic similarity formulation (Eq. 638), the physical flux boundary value is matched to the self-similar dimensional radiation energy flux at the origin ($\xi = 0$), $F(0,t) = s(0,t)$:
+\begin{equation}
+    F(0, t) = A^{a + (q+1)a_1 + n a_3} B^{1 + b + (q+1)b_1 + n b_3} t^{c + (q+1)c_1 + n c_3} S(0)
+\end{equation}
+
+By fully substituting the structural expressions for the powers computed in the code:
+\begin{align*}
+    n &= \frac{4+\alpha}{\beta} \\
+    k &= 1 - \mu \\
+    q &= (1 - \mu)\left(\frac{4+\alpha}{\beta}\right) + \lambda - 1 \\
+    \text{denom} &= \frac{1}{4 + 2\lambda - 4\mu}
+\end{align*}
+
+We write the explicit algebraic components for the exponents $a, b, c$, $a_1, b_1, c_1$, and $a_3, b_3, c_3$:
+\begin{align}
+    a &= \frac{2\beta - \beta\lambda - 8 - 2\alpha + \mu(4+\alpha)}{4 + 2\lambda - 4\mu} \\
+    a_1 &= \frac{-2(4+\alpha-2\beta)}{4 + 2\lambda - 4\mu} \\
+    a_3 &= \frac{-2\left[\mu(4+\alpha) - \beta\lambda - 4 - \alpha\right]}{4 + 2\lambda - 4\mu} \\[1ex]
+    b &= \frac{\mu - 2}{4 + 2\lambda - 4\mu} \\
+    b_1 &= \frac{-2}{4 + 2\lambda - 4\mu} \\
+    b_3 &= \frac{-2(\mu-1)}{4 + 2\lambda - 4\mu} \\[1ex]
+    c &= \frac{3\mu - 2\lambda - 2 + \tau\left[2(\beta-\alpha-4) - \beta\lambda + \mu(4+\alpha)\right]}{4 + 2\lambda - 4\mu} \\
+    c_1 &= \frac{-2\left[\tau(4+\alpha-2\beta) - 1\right]}{4 + 2\lambda - 4\mu} \\
+    c_3 &= \frac{-2\left[\tau\left(\mu(4+\alpha) - \beta\lambda - 4 - \alpha\right) + 1 - \mu\right]}{4 + 2\lambda - 4\mu}
+\end{align}
+Now, substituting the definitions of the dimensional constants $A$ and $B$:
+\begin{equation}
+    A = T_b ((\gamma - 1) f)^{1/\beta}, \quad B = \frac{16 \sigma_{\text{sb}} g}{3\beta ((\gamma - 1) f)^n}
+\end{equation}
+
+The cumulative explicit time-independent pre-factor is:
+\begin{equation}
+    \left[ T_b ((\gamma - 1) f)^{1/\beta} \right]^{a + (q+1)a_1 + n a_3} \left[ \frac{16 \sigma_{\text{sb}} g}{3\beta ((\gamma - 1) f)^n} \right]^{1 + b + (q+1)b_1 + n b_3} S(0)
+\end{equation}
+
+Substituting this complete expansion back into the Marshak expression, we isolate $T_0 t^\tau$ outside the bracket to reveal the explicit non-equilibrium boundary correction term:
+\begin{equation}
+    T_{\text{bath}}(t) = T_0 t^\tau \left[ 1 + \mathcal{M}_{\text{explicit}} \cdot t^{\Delta \eta} \right]^{1/4}
+\end{equation}
+
+Where the fully expanded constant scalar $\mathcal{M}_{\text{explicit}}$ is defined by:
+\begin{equation}
+    \mathcal{M}_{\text{explicit}} = \frac{S(0)}{\sigma_{\text{sb}} T_0^4} \left[ T_b ((\gamma - 1) f)^{1/\beta} \right]^{a + (q+1)a_1 + n a_3} \left[ \frac{16 \sigma_{\text{sb}} g}{3\beta ((\gamma - 1) f)^n} \right]^{1 + b + (q+1)b_1 + n b_3}
+\end{equation}
+
+And the explicit net power law deviation parameter $\Delta \eta$ is:
+\begin{align}
+    \Delta \eta &= c + (q+1)c_1 + n c_3 - 4\tau \\
+    &= \frac{1}{4 + 2\lambda - 4\mu} \Big\{ 2\left[ (4+\alpha)(1 - \beta^{-1}) - 1 - \lambda \right] \nonumber \\
+    &\quad + \tau \left[ 2\beta - \lambda(4+\alpha) - 4\alpha - 18 \right] \Big\} - 4\tau
+\end{align}
+
+Under strict thermodynamic self-similarity where the internal drive completely tracks the external source, $\Delta \eta = 0$, meaning $c + (q+1)c_1 + n c_3 = 4\tau$. In this configuration, the temporal term cancels from the bracket, delivering a constant scaling parameter over the entire timeline:
+\begin{equation}
+    T_{\text{bath}}(t) = T_0 \left[ 1 + \frac{S(0)}{\sigma_{\text{sb}} T_0^4} \left[ T_b ((\gamma - 1) f)^{1/\beta} \right]^{a + (q+1)a_1 + n a_3} \left[ \frac{16 \sigma_{\text{sb}} g}{3\beta ((\gamma - 1) f)^n} \right]^{1 + b + (q+1)b_1 + n b_3} \right]^{1/4} t^\tau
+\end{equation}    
 \end{document}
