@@ -1,0 +1,37 @@
+\contentsline {section}{\numberline {1}Problem Setup and Self-Similar Ansatz}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Dimensional Constants and Self-Similar Coordinate}{4}{}%
+\contentsline {section}{\numberline {2}Relation to Eulerian Coordinate -- Positions in Space}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Ablated Mass}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Exact Position for a Given Mass}{5}{}%
+\contentsline {subsection}{\numberline {2.3}Distance from Boundary to Ablation Front}{5}{}%
+\contentsline {subsection}{\numberline {2.4}Boundary Position}{5}{}%
+\contentsline {subsection}{\numberline {2.5}Ablation Front Position}{6}{}%
+\contentsline {subsection}{\numberline {2.6}Ablation Front Velocity}{6}{}%
+\contentsline {subsection}{\numberline {2.7}Positions as a Function of Time (Final Result)}{6}{}%
+\contentsline {section}{\numberline {3}Calculation of the $V(\xi )$ Integral}{7}{}%
+\contentsline {section}{\numberline {4}Bath Temperature for the Marshak Boundary Condition}{8}{}%
+\contentsline {subsection}{\numberline {4.1}Derivation}{8}{}%
+\contentsline {subsection}{\numberline {4.2}Self-Similar Flux at the Surface}{9}{}%
+\contentsline {subsection}{\numberline {4.3}Final Bath Temperature}{9}{}%
+\contentsline {section}{\numberline {5}Self-Similar Radiation Flux}{10}{}%
+\contentsline {section}{\numberline {6}Energy Integrals}{10}{}%
+\contentsline {section}{\numberline {7}Stitching the Subsonic Heat Wave and the Shock}{11}{}%
+\contentsline {subsection}{\numberline {7.1}The Two Regions}{11}{}%
+\contentsline {subsection}{\numberline {7.2}Matching Conditions at the Ablation Front}{11}{}%
+\contentsline {subsection}{\numberline {7.3}Position Patching}{12}{}%
+\contentsline {subsection}{\numberline {7.4}Hydrodynamic Profile Patching}{12}{}%
+\contentsline {subsection}{\numberline {7.5}Summary of the Patching Procedure}{13}{}%
+\contentsline {section}{\numberline {8}Asymptotic Solution Near the Ablation Front}{13}{}%
+\contentsline {section}{\numberline {9}Explicit Position Formulas for the Two Test Cases}{14}{}%
+\contentsline {subsection}{\numberline {9.1}Dimensional Constants}{14}{}%
+\contentsline {subsection}{\numberline {9.2}The Five Position Functions}{14}{}%
+\contentsline {subsubsection}{\numberline {9.2.1}1. Boundary Position: $x_{\mathrm {boundary}}(t)$}{14}{}%
+\contentsline {subsubsection}{\numberline {9.2.2}2. Subsonic Region Position: $x_{\mathrm {sub}}(m,t)$}{15}{}%
+\contentsline {subsubsection}{\numberline {9.2.3}3. Ablation Front Position: $x_{\mathrm {ablation}}(t)$}{15}{}%
+\contentsline {subsubsection}{\numberline {9.2.4}4. Shock Region Position: $x_{\mathrm {shock}}(m,t)$}{16}{}%
+\contentsline {subsubsection}{\numberline {9.2.5}5. Shock Front Position: $x_{\mathrm {shock\,front}}(t)$}{16}{}%
+\contentsline {subsubsection}{\numberline {9.2.6}Ablated Mass}{16}{}%
+\contentsline {subsection}{\numberline {9.3}Numeric Coefficients for the Two Test Cases}{16}{}%
+\contentsline {subsubsection}{\numberline {9.3.1}Fig~8: $\tau =0$ (Constant Boundary Temperature)}{16}{}%
+\contentsline {subsubsection}{\numberline {9.3.2}Fig~9: $\tau =0.123$ (Constant Flux Temperature)}{17}{}%
+\contentsline {subsection}{\numberline {9.4}Summary of All Exponent Relations}{17}{}%

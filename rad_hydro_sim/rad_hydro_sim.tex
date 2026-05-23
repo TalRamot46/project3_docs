@@ -830,11 +830,11 @@ This avoids recalculating the shared terms (like the right-face flux or the sour
 
 At the boundary ($m=0$), the net radiation energy flux entering the system is governed by the physical Marshak boundary condition:
 \begin{equation}
-    F(0, t) = \sigma_{\text{sb}} \left[ T_{\text{bath}}^4(t) - T_s^4(t) \right]
+    \frac{F(0, t)}{2} = \sigma_{\text{sb}} \left[ T_{\text{bath}}^4(t) - T_s^4(t) \right]
 \end{equation}
 Given the power-law surface material temperature boundary condition, $T_s(t) = T_0 t^\tau$, this yields:
 \begin{equation}
-    T_{\text{bath}}(t) = \left[ T_0^4 t^{4\tau} + \frac{F(0, t)}{\sigma_{\text{sb}}} \right]^{1/4}
+    T_{\text{bath}}(t) = \left[ T_0^4 t^{4\tau} + \frac{F(0, t)}{2\sigma_{\text{sb}}} \right]^{1/4}
 \end{equation}
 
 From the subsonic similarity formulation (Eq. 638), the physical flux boundary value is matched to the self-similar dimensional radiation energy flux at the origin ($\xi = 0$), $F(0,t) = s(0,t)$:

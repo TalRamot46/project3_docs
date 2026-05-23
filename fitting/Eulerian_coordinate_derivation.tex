@@ -1,0 +1,768 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[mathscr]{eucal}
+\usepackage[most]{tcolorbox}
+
+\DeclareTColorBox{notebox}{ O{Note} O{blue} }{
+  colback=#2!5!white,
+  colframe=#2!75!black,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
+\title{Eulerian Coordinate Derivation \\ and Sub--Shock Patching Method}
+\author{Tal Ramot}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%=======================================================================
+\section{Problem Setup and Self-Similar Ansatz}
+%=======================================================================
+
+We consider the one-temperature radiation-hydrodynamics equations in the diffusion approximation, written in Lagrangian (mass) coordinates $(m,t)$:
+\begin{align}
+  \frac{\partial v}{\partial t} - \frac{\partial u}{\partial m} &= 0 \label{eq:cont}\\[4pt]
+  \frac{\partial u}{\partial t} + \frac{\partial p}{\partial m} &= 0 \label{eq:mom}\\[4pt]
+  \frac{\partial e}{\partial t} + p\,\frac{\partial v}{\partial t}
+      &= -\frac{\partial s}{\partial m} \label{eq:energy}
+\end{align}
+where $v = 1/\rho$ is the specific volume, $u$ is the velocity, $p$ the pressure, and $e$ the specific internal energy. The radiation energy flux is:
+\begin{equation}
+  s(m,t) = -\frac{c_{\mathrm{light}}}{3\kappa_R}\,
+            \frac{\partial}{\partial m}\!\left(a_R\,T^4\right).
+\end{equation}
+
+The material model consists of an ideal gas EOS with adiabatic index $\gamma$ (writing $r = \gamma - 1$), power-law Rosseland opacity, and power-law specific internal energy:
+\begin{align}
+  p\,v &= r\,e, \label{eq:eos}\\[2pt]
+  \frac{1}{\kappa_R(T,\rho)} &= g\,T^{\alpha}\,\rho^{-\lambda}
+       = g\,T^{\alpha}\,v^{\lambda}, \\[2pt]
+  e(T,\rho) &= f\,T^{\beta}\,\rho^{-\mu}
+       = f\,T^{\beta}\,v^{\mu}.
+\end{align}
+
+Defining the derived constants:
+\begin{equation}
+  n = \frac{4+\alpha}{\beta}, \quad
+  k = 1 - \mu, \quad
+  q = k\,n + \lambda - 1,
+\end{equation}
+the radiation flux can be rewritten as:
+\begin{equation}
+  s(m,t) = -B\,v^{\lambda}\!\left(p\,v^{k}\right)^{n-1}
+            \frac{\partial}{\partial m}\!\left(p\,v^{k}\right),
+\end{equation}
+where the diffusion prefactor is:
+\begin{equation}
+  B = \frac{16\,\sigma_{\mathrm{sb}}\,g}
+           {3\,\beta\,(r\,f)^{n}}.
+\end{equation}
+
+The boundary conditions are:
+\begin{equation}
+  T(0,t) = T_0\,t^{\tau}, \qquad p(0,t) = 0.
+  \label{eq:bc}
+\end{equation}
+
+\subsection{Dimensional Constants and Self-Similar Coordinate}
+
+Two dimensional constants characterise the problem:
+\begin{equation}
+  A = T_0\,(r\,f)^{1/\beta}, \qquad
+  B = \frac{16\,\sigma_{\mathrm{sb}}\,g}
+           {3\,\beta\,(r\,f)^{n}}.
+\end{equation}
+
+The self-similar coordinate is:
+\begin{equation}
+  \xi = m\,A^{a}\,B^{b}\,t^{c},
+  \label{eq:xi_def}
+\end{equation}
+where the exponents $(a,b,c)$ are determined by dimensional analysis:
+\begin{align}
+  a &= \frac{2\beta - \beta\lambda - 8 - 2\alpha + \mu(4+\alpha)}
+            {4 + 2\lambda - 4\mu}, \\[4pt]
+  b &= \frac{\mu - 2}{4 + 2\lambda - 4\mu}, \\[4pt]
+  c &= \frac{3\mu - 2\lambda - 2
+             + \tau\bigl(2(\beta-\alpha-4) - \beta\lambda + \mu(4+\alpha)\bigr)}
+            {4 + 2\lambda - 4\mu}.
+\end{align}
+
+The self-similar profiles are:
+\begin{align}
+  v(m,t) &= V(\xi)\,A^{a_1}\,B^{b_1}\,t^{c_1}, \\[2pt]
+  u(m,t) &= U(\xi)\,A^{a_2}\,B^{b_2}\,t^{c_2}, \\[2pt]
+  p(m,t) &= P(\xi)\,A^{a_3}\,B^{b_3}\,t^{c_3},
+  \label{eq:ss_profiles}
+\end{align}
+with the exponent relations (from the mass, momentum, and energy equations):
+\begin{align}
+  a_2 &= a_1 - a, &\quad b_2 &= b_1 - b, &\quad c_2 + 1 &= c_1 - c, \label{eq:pow_rel_u}\\
+  a_3 &= a_1 - 2a, &\quad b_3 &= b_1 - 2b, &\quad c_3 + 2 &= c_1 - 2c. \label{eq:pow_rel_p}
+\end{align}
+
+%=======================================================================
+\section{Relation to Eulerian Coordinate -- Positions in Space}
+\label{sec:eulerian}
+%=======================================================================
+
+\subsection{Ablated Mass}
+
+The ablated (heat-front) mass is:
+\begin{equation}
+  \xi_f = m_f(t)\,A^{a}\,B^{b}\,t^{c},
+  \qquad\Longrightarrow\qquad
+  m_f(t) = A^{-a}\,B^{-b}\,t^{-c}\,\xi_f.
+  \label{eq:mf}
+\end{equation}
+For the heat wave to propagate outwards we require $-c > 0$, i.e.\ $c < 0$.
+
+\subsection{Exact Position for a Given Mass}
+
+The Eulerian position of a Lagrangian element $m$ relative to the boundary is obtained by integrating the specific volume:
+\begin{equation}
+  x(t,m) - x_b(t) = \int_0^{m} v(m',t)\,dm'.
+  \label{eq:x_integral_def}
+\end{equation}
+
+Substituting the self-similar profile $v(m,t) = V(\xi)\,A^{a_1}B^{b_1}t^{c_1}$ and changing variables from $m'$ to $\xi'$ using $m' = A^{-a}B^{-b}t^{-c}\,\xi'$, hence $dm' = A^{-a}B^{-b}t^{-c}\,d\xi'$:
+\begin{align}
+  x(t,m) - x_b(t)
+  &= \int_0^{\xi(m)} V(\xi')\,A^{a_1}\,B^{b_1}\,t^{c_1}\,
+     A^{-a}\,B^{-b}\,t^{-c}\,d\xi' \nonumber\\[4pt]
+  &= A^{a_1-a}\,B^{b_1-b}\,t^{c_1-c}
+     \int_0^{\xi(m)} V(\xi')\,d\xi'.
+  \label{eq:x_from_V_integral}
+\end{align}
+Using the power relations~\eqref{eq:pow_rel_u}, this simplifies to:
+\begin{equation}
+  \boxed{
+  x(t,m) - x_b(t) = A^{a_2}\,B^{b_2}\,t^{c_2+1}
+     \int_0^{\xi(m)} V(\xi')\,d\xi'.}
+  \label{eq:x_minus_xb}
+\end{equation}
+
+\subsection{Distance from Boundary to Ablation Front}
+
+Setting $m = m_f(t)$ in~\eqref{eq:x_minus_xb}:
+\begin{equation}
+  \Delta x_f(t) = x(t,m_f) - x_b(t)
+  = A^{a_2}\,B^{b_2}\,t^{c_2+1}
+    \int_0^{\xi_f} V(\xi')\,d\xi'.
+  \label{eq:delta_xf}
+\end{equation}
+
+\subsection{Boundary Position}
+\label{sec:boundary_pos}
+
+The boundary velocity is:
+\begin{equation}
+  u_b(t) \equiv u(m{=}0,t) = U(0)\,A^{a_2}\,B^{b_2}\,t^{c_2}.
+\end{equation}
+Integrating in time:
+\begin{equation}
+  x_b(t) = \int_0^{t} u_b(t')\,dt'
+  = U(0)\,A^{a_2}\,B^{b_2}\int_0^{t} t'^{\,c_2}\,dt'
+  = \frac{A^{a_2}\,B^{b_2}}{c_2 + 1}\,U(0)\,t^{c_2+1}.
+  \label{eq:xb}
+\end{equation}
+This requires $c_2 > -1$ for convergence.
+
+\subsection{Ablation Front Position}
+
+We expect the ablation front to remain at $x = 0$:
+\begin{equation}
+  x_f(t) \equiv x_b(t) + \Delta x_f(t) = 0.
+  \label{eq:xf_zero}
+\end{equation}
+
+Combining \eqref{eq:xb} and \eqref{eq:delta_xf}:
+\begin{equation}
+  x_f(t) = A^{a_2}\,B^{b_2}\,t^{c_2+1}
+    \left[\frac{U(0)}{c_2+1} + \int_0^{\xi_f} V(\xi')\,d\xi'\right] = 0.
+\end{equation}
+This is satisfied by the integral identity (proven below):
+\begin{equation}
+  \boxed{
+  \int_0^{\xi_f} V(\xi')\,d\xi' = -\frac{U(0)}{c_2 + 1}.}
+  \label{eq:V_integral_identity}
+\end{equation}
+Since $U(0) < 0$ (boundary moves in the negative direction) and $c_2 + 1 > 0$, the integral is positive as expected.
+
+\subsection{Ablation Front Velocity}
+
+Since $x_f(t) \equiv 0$ for all $t$:
+\begin{equation}
+  v_f(t) = \frac{dx_f}{dt} = 0.
+\end{equation}
+
+\subsection{Positions as a Function of Time (Final Result)}
+
+For any Lagrangian element with mass $m < m_f(t)$ (inside the ablated region):
+\begin{equation}
+  x(t,m) = A^{a_2}\,B^{b_2}\,t^{c_2+1}
+    \left[\frac{U(0)}{c_2+1} + \int_0^{\xi(m)} V(\xi')\,d\xi'\right],
+  \label{eq:x_tm_integral}
+\end{equation}
+where $\xi(m) = m\,A^{a}\,B^{b}\,t^{c}$.
+
+Using the integral identity (derived in \S\ref{sec:V_integral_proof}):
+\begin{equation}
+  \int_0^{\xi_0} V(\xi)\,d\xi
+  = \frac{1}{c_1 - c}\Bigl[U(\xi_0) - U(0) - c\,\xi_0\,V(\xi_0)\Bigr],
+  \label{eq:V_integral_general}
+\end{equation}
+and substituting $c_1 - c = c_2 + 1$, we obtain:
+\begin{equation}
+  x(t,m) = A^{a_2}\,B^{b_2}\,t^{c_2+1}
+    \left[\frac{U(0)}{c_2+1}
+    + \frac{U(\xi(m)) - U(0) - c\,\xi(m)\,V(\xi(m))}{c_2+1}\right],
+\end{equation}
+which simplifies to the closed-form expression:
+\begin{equation}
+  \boxed{
+  x(t,m) = \frac{A^{a_2}\,B^{b_2}\,t^{c_2+1}}{c_2 + 1}
+    \Bigl[U\!\bigl(\xi(m)\bigr) - c\,\xi(m)\,V\!\bigl(\xi(m)\bigr)\Bigr]}
+  \label{eq:x_tm_closed}
+\end{equation}
+for $m \leq m_f(t)$, and $x(t,m) = 0$ for $m \geq m_f(t)$.
+
+\begin{notebox}[Numerical caveat][red]
+At the ablation front, $U_f = V_f = 0$ exactly, so $x(t,m_f) = 0$. However, due to numerical errors, $U_f$ and $V_f$ may not be exactly zero, and the factor $U(\xi) - c\,\xi\,V(\xi)$ can be slightly positive near $\xi \approx \xi_f$ (since $U \leq 0$, $V \geq 0$, but $c < 0$). In practice, if this factor is slightly positive, it should be clamped to zero to ensure $x(t, m \geq m_f) = 0$.
+\end{notebox}
+
+%=======================================================================
+\section{Calculation of the $V(\xi)$ Integral}
+\label{sec:V_integral_proof}
+%=======================================================================
+
+From the self-similar mass (continuity) equation:
+\begin{equation}
+  c\,\xi\,V' + c_1\,V - U' = 0.
+  \label{eq:ss_mass}
+\end{equation}
+
+We can write:
+\begin{equation}
+  V(\xi) = \frac{1}{c_1}\!\left(U' - c\,\xi\,V'\right)
+  = p_\xi\,\xi\,V' + q_\xi\,U',
+\end{equation}
+with $p_\xi = -c/c_1$ and $q_\xi = 1/c_1$.
+
+Integrating from $0$ to $\xi_0$:
+\begin{equation}
+  \int_0^{\xi_0} V(\xi)\,d\xi
+  = p_\xi \int_0^{\xi_0} \xi\,V'(\xi)\,d\xi
+  + q_\xi\bigl[U(\xi_0) - U(0)\bigr].
+\end{equation}
+
+Integration by parts for the first term:
+\begin{equation}
+  \int_0^{\xi_0} \xi\,V'(\xi)\,d\xi
+  = \bigl[\xi\,V(\xi)\bigr]_0^{\xi_0}
+  - \int_0^{\xi_0} V(\xi)\,d\xi.
+\end{equation}
+
+Note that $\lim_{\xi\to 0}\xi\,V(\xi) = 0$, since the integral $\int_0^{\xi_0}V(\xi)\,d\xi$ must be finite (it represents a physical position), requiring $V(\xi) \sim V_0\,\xi^{w}$ with $w > -1$ near the origin, hence $\xi\,V(\xi) \sim \xi^{w+1} \to 0$.
+
+Collecting terms:
+\begin{equation}
+  (1 + p_\xi)\int_0^{\xi_0} V(\xi)\,d\xi
+  = p_\xi\,\xi_0\,V(\xi_0) + q_\xi\bigl[U(\xi_0) - U(0)\bigr].
+\end{equation}
+
+Since:
+\begin{equation}
+  \frac{p_\xi}{1+p_\xi} = \frac{-c}{c_1 - c}, \qquad
+  \frac{q_\xi}{1+p_\xi} = \frac{1}{c_1 - c},
+\end{equation}
+we obtain:
+\begin{equation}
+  \boxed{
+  \int_0^{\xi_0} V(\xi)\,d\xi
+  = \frac{1}{c_1 - c}
+    \Bigl[U(\xi_0) - U(0) - c\,\xi_0\,V(\xi_0)\Bigr].}
+  \label{eq:V_integral_identity_proof}
+\end{equation}
+
+For $\xi_0 = \xi_f$, using $V_f = U_f = 0$ and $c_1 - c = c_2 + 1$:
+\begin{equation}
+  \int_0^{\xi_f} V(\xi)\,d\xi = -\frac{U(0)}{c_2 + 1} > 0,
+\end{equation}
+since $U(0) < 0$ and $c_2 + 1 > 0$.
+
+%=======================================================================
+\section{Bath Temperature for the Marshak Boundary Condition}
+\label{sec:bath_temp}
+%=======================================================================
+
+\subsection{Derivation}
+
+Let the imposed surface temperature drive be:
+\begin{equation}
+  T_s(t) = T_0\,t^{\tau}.
+\end{equation}
+The Marshak boundary condition is:
+\begin{equation}
+  \frac{c}{4}\,F_{\mathrm{inc}}(t) = \frac{a_R\,c}{4}\,T_s^4(t)
+  + \frac{c}{2}\,F_s(t),
+\end{equation}
+where $F_s(t)$ is the outgoing radiation flux at the surface. For a bath temperature $T_{\mathrm{bath}}$:
+\begin{equation}
+  F_{\mathrm{inc}}(t) = a_R\,c\,T_{\mathrm{bath}}^4(t).
+\end{equation}
+Therefore:
+\begin{equation}
+  T_{\mathrm{bath}}^4(t) = T_s^4(t) + \frac{2\,F_s(t)}{a_R\,c}.
+\end{equation}
+Using $a_R\,c = 4\,\sigma_{\mathrm{sb}}$:
+\begin{equation}
+  T_{\mathrm{bath}}^4(t) = T_s^4(t) + \frac{F_s(t)}{2\,\sigma_{\mathrm{sb}}}.
+  \label{eq:Tbath4}
+\end{equation}
+
+\subsection{Self-Similar Flux at the Surface}
+
+The self-similar radiation energy flux is:
+\begin{equation}
+  S(\xi) = -P^{n-1}\,V^{q}\bigl(V\,P' + k\,P\,V'\bigr),
+  \label{eq:S_def}
+\end{equation}
+and the dimensional flux is:
+\begin{equation}
+  s(m,t) = S(\xi)\,A^{a_S}\,B^{b_S}\,t^{c_S},
+\end{equation}
+with flux powers:
+\begin{align}
+  a_S &= a + (q+1)\,a_1 + n\,a_3, \\
+  b_S &= 1 + b + (q+1)\,b_1 + n\,b_3, \\
+  c_S &= c + (q+1)\,c_1 + n\,c_3.
+\end{align}
+
+At the surface/origin:
+\begin{equation}
+  F_s(t) = s(0,t) = S_0\,A^{a_S}\,B^{b_S}\,t^{c_S},
+\end{equation}
+where $S_0 = S(\xi{=}0)$.
+
+\subsection{Final Bath Temperature}
+
+Substituting into~\eqref{eq:Tbath4}:
+\begin{equation}
+  T_{\mathrm{bath}}^4(t) = T_0^4\,t^{4\tau}
+    + \frac{S_0\,A^{a_S}\,B^{b_S}}{2\,\sigma_{\mathrm{sb}}}\,t^{c_S}.
+\end{equation}
+Factoring out $T_0^4\,t^{4\tau}$:
+\begin{equation}
+  T_{\mathrm{bath}}^4(t) = T_0^4\,t^{4\tau}
+    \left[1 + \frac{S_0\,A^{a_S}\,B^{b_S}}{2\,\sigma_{\mathrm{sb}}\,T_0^4}\,
+    t^{c_S - 4\tau}\right].
+\end{equation}
+Therefore:
+\begin{equation}
+  \boxed{
+  T_{\mathrm{bath}}(t) = T_0\,t^{\tau}
+    \Bigl[1 + \mathcal{B}_{\mathrm{bath}}\,t^{\eta_{\mathrm{bath}}}\Bigr]^{1/4}}
+  \label{eq:Tbath_final}
+\end{equation}
+with:
+\begin{align}
+  \mathcal{B}_{\mathrm{bath}} &= \frac{S_0\,A^{a_S}\,B^{b_S}}
+       {2\,\sigma_{\mathrm{sb}}\,T_0^4}, \\[6pt]
+  \eta_{\mathrm{bath}} &= c_S - 4\,\tau
+  = \frac{\tau\bigl[3\beta\lambda + 2\beta + 2\alpha - 8 - 8\lambda
+          + 4\mu - 3\alpha\mu\bigr] + 3\mu - 2}
+         {4 + 2\lambda - 4\mu}.
+  \label{eq:eta_bath}
+\end{align}
+
+The explicit form of $\mathcal{B}_{\mathrm{bath}}$ is:
+\begin{equation}
+  \mathcal{B}_{\mathrm{bath}} = \frac{S_0}{2\,\sigma_{\mathrm{sb}}\,T_0^4}
+  \left[T_0\bigl((\gamma{-}1)\,f\bigr)^{1/\beta}\right]^{a_S}
+  \left[\frac{16\,\sigma_{\mathrm{sb}}\,g}
+       {3\,\beta\,\bigl((\gamma{-}1)\,f\bigr)^{n}}\right]^{b_S}.
+\end{equation}
+
+The correction term $\mathcal{B}_{\mathrm{bath}}\,t^{\eta_{\mathrm{bath}}}$ is dimensionless and measures the ratio of the outgoing surface flux to the blackbody radiation:
+\begin{equation}
+  \mathcal{B}_{\mathrm{bath}}\,t^{\eta_{\mathrm{bath}}}
+  = \frac{F_s(t)}{2\,\sigma_{\mathrm{sb}}\,T_s^4(t)}
+  = \frac{2\,F_s(t)}{a_R\,c\,T_s^4(t)}.
+\end{equation}
+
+%=======================================================================
+\section{Self-Similar Radiation Flux}
+\label{sec:flux}
+%=======================================================================
+
+Starting from the dimensional flux:
+\begin{equation}
+  s(m,t) = -B\left(p\,v^k\right)^{n-1} v^{\lambda}\,
+            \frac{\partial}{\partial m}\!\left(p\,v^k\right),
+\end{equation}
+and substituting the self-similar profiles:
+\begin{align}
+  v &= V\,A^{a_1}\,B^{b_1}\,t^{c_1}, &
+  p &= P\,A^{a_3}\,B^{b_3}\,t^{c_3}, \\
+  \frac{\partial v}{\partial m} &= A^{a_1+a}\,B^{b_1+b}\,t^{c_1+c}\,V', &
+  \frac{\partial p}{\partial m} &= A^{a_3+a}\,B^{b_3+b}\,t^{c_3+c}\,P',
+\end{align}
+we find after collecting powers:
+\begin{equation}
+  s(m,t) = A^{a+(q+1)a_1+n\,a_3}\,B^{1+b+(q+1)b_1+n\,b_3}\,
+            t^{c+(q+1)c_1+n\,c_3}\,S(\xi),
+\end{equation}
+where the dimensionless self-similar flux profile is:
+\begin{equation}
+  \boxed{
+  S(\xi) = -P^{n-1}(\xi)\,V^{q}(\xi)\,
+            \bigl[V(\xi)\,P'(\xi) + k\,P(\xi)\,V'(\xi)\bigr].}
+\end{equation}
+
+%=======================================================================
+\section{Energy Integrals}
+\label{sec:energy}
+%=======================================================================
+
+The internal energy is:
+\begin{equation}
+  E_{\mathrm{in}}(t) = \int_0^{m_f(t)} e(m,t)\,dm
+  = \frac{1}{r}\int_0^{m_f(t)} p\,v\,dm
+  = A^{2a_2-a}\,B^{2b_2-b}\,t^{2c_2-c}\int_0^{\xi_f}\frac{P\,V}{r}\,d\xi.
+\end{equation}
+
+The kinetic energy is:
+\begin{equation}
+  E_k(t) = \int_0^{m_f(t)} \frac{1}{2}\,u^2\,dm
+  = A^{2a_2-a}\,B^{2b_2-b}\,t^{2c_2-c}\int_0^{\xi_f}\frac{U^2}{2}\,d\xi.
+\end{equation}
+
+Both energies share the same temporal power law $t^{2c_2-c}$, hence the ratio $E_k/E_{\mathrm{in}}$ is constant in time.
+
+The total energy integral satisfies the exact identity (for any $\xi_0 \leq \xi_f$):
+\begin{equation}
+  \boxed{
+  \int_0^{\xi_0}\!\left(\frac{PV}{r} + \frac{U^2}{2}\right)d\xi
+  = \frac{1}{2c_2 - c}
+    \left[-S(\xi) - P(\xi)\,U(\xi) - c\,\xi\left(\frac{PV}{r}+\frac{U^2}{2}\right)
+    \right]_0^{\xi_0}.}
+\end{equation}
+
+%=======================================================================
+\section{Stitching the Subsonic Heat Wave and the Shock}
+\label{sec:stitching}
+%=======================================================================
+
+In the subsonic ablation problem, the heat wave drives material outward (in the negative-$x$ direction in our convention), creating an ablation front at $x_f(t) \equiv 0$. Beyond this front, the unperturbed material is at rest. However, in a realistic problem, the ablated material sweeps up the ambient gas, generating a \textbf{piston-driven shock wave} that propagates ahead of the ablation front. The full problem therefore consists of two self-similar regions that must be patched together.
+
+\subsection{The Two Regions}
+
+\begin{enumerate}
+\item \textbf{Subsonic ablation (heat wave) region} ($m < m_f(t)$): \newline
+Governed by the radiation-hydrodynamics self-similar ODEs derived above, with profiles $V(\xi)$, $U(\xi)$, $P(\xi)$ and the self-similar coordinate $\xi = m\,A^a\,B^b\,t^c$.
+
+\item \textbf{Piston shock region} ($m \geq m_f(t)$): \newline
+Governed by the pure-hydrodynamic (adiabatic) piston shock self-similar equations. The piston shock solution uses a different self-similar coordinate
+\begin{equation}
+  \xi_{\mathrm{shock}} = m\,v_0^{1/(2-\omega)}\,
+  p_0^{(\omega-1)/(2-\omega)}\,t^{(\tau_s+2)(\omega-1)/(2-\omega)},
+\end{equation}
+with shock profiles $V_{\mathrm{shock}}(\xi_{\mathrm{shock}})$, $U_{\mathrm{shock}}(\xi_{\mathrm{shock}})$, $P_{\mathrm{shock}}(\xi_{\mathrm{shock}})$.
+\end{enumerate}
+
+\subsection{Matching Conditions at the Ablation Front}
+\label{sec:matching}
+
+The patching is performed at the ablation front mass $m = m_f(t)$. The key matching condition is that the \textbf{pressure at the origin of the shock problem} equals the \textbf{pressure at the ablation front of the subsonic heat wave}:
+\begin{equation}
+  p_{\mathrm{shock}}(0,t) = P_f\,A^{a_3}\,B^{b_3}\,t^{c_3},
+  \label{eq:p_match}
+\end{equation}
+where $P_f = P(\xi_f)$ is the self-similar pressure at the heat front.
+
+This determines the piston shock parameters:
+\begin{equation}
+  \boxed{
+  p_{0,s} = P_f\,A^{a_3}\,B^{b_3}, \qquad \tau_s = c_3.}
+  \label{eq:shock_params}
+\end{equation}
+
+That is, the pressure boundary condition for the piston shock problem is directly inherited from the subsonic heat wave solution.
+
+\subsection{Position Patching}
+\label{sec:pos_patching}
+
+In the subsonic ablation problem alone, the ablation front sits at $x_f(t) \equiv 0$. In the coupled problem, the ablation front instead sits at the piston position of the shock solution:
+\begin{equation}
+  x_f(t) \equiv x_{\mathrm{shock}}(t,\, m_f(t)).
+  \label{eq:xf_shock}
+\end{equation}
+
+The complete Eulerian position is therefore:
+\begin{equation}
+  \boxed{
+  x(t,m) = \begin{cases}
+    x_{\mathrm{heat}}(t,m) + x_f(t)
+      & \text{if } m < m_f(t) \quad \text{(ablated region)}, \\[6pt]
+    x_{\mathrm{shock}}(t,m)
+      & \text{if } m \geq m_f(t) \quad \text{(shocked/unshocked region)},
+  \end{cases}}
+  \label{eq:x_stitched}
+\end{equation}
+where:
+\begin{itemize}
+  \item $x_{\mathrm{heat}}(t,m)$ is the position from the \emph{pure} subsonic ablation solution (Eq.~\eqref{eq:x_tm_closed}), which by itself would place the ablation front at $x = 0$.
+  \item $x_f(t) = x_{\mathrm{shock}}(t,m_f(t))$ is the position of the ablation front (the ``piston'' of the shock), computed from the shock solution.
+  \item $x_{\mathrm{shock}}(t,m)$ is the position from the piston shock solution, valid from the piston ($m = m_f$) through the shock front and into the unperturbed region.
+\end{itemize}
+
+\subsection{Hydrodynamic Profile Patching}
+
+For the hydrodynamic profiles (density, velocity, pressure, temperature), the patching is simpler since the profiles are continuous (though not necessarily smooth) across the ablation front:
+\begin{equation}
+  \boxed{
+  h(m,t) = \begin{cases}
+    h_{\mathrm{heat}}(m,t)
+      & \text{if } m < m_f(t), \\[4pt]
+    h_{\mathrm{shock}}(m,t)
+      & \text{if } m \geq m_f(t),
+  \end{cases}}
+  \label{eq:h_stitched}
+\end{equation}
+where $h$ denotes any of the hydrodynamic fields: $v$, $u$, $p$, or derived quantities such as $T = (pv^{1-\mu}/(rf))^{1/\beta}$.
+
+\subsection{Summary of the Patching Procedure}
+
+The full subsonic heat wave + shock solution is constructed as follows:
+
+\begin{enumerate}
+  \item \textbf{Solve the subsonic ablation problem}: Find $\xi_f$, $P_f$, and the self-similar profiles $V(\xi)$, $U(\xi)$, $P(\xi)$ by the double-shooting method (find $P_f$ such that $P(0) = 0$, then find $\xi_f$ such that $T(0) = 1$).
+
+  \item \textbf{Extract shock parameters}: From the subsonic solution, compute
+  \begin{equation}
+    p_{0,s} = P_f\,A^{a_3}\,B^{b_3}, \qquad
+    \tau_s = c_3.
+  \end{equation}
+
+  \item \textbf{Solve the piston shock problem}: Using $p_{0,s}$, $\tau_s$, the initial density $\rho_0$ (from the unperturbed medium), and $\omega = 0$ (uniform initial density), solve for the shock self-similar coordinate $\xi_s$ and profiles.
+
+  \item \textbf{Compute the ablation front position}: Using the shock solution, evaluate $x_f(t) = x_{\mathrm{shock}}(t, m_f(t))$.
+
+  \item \textbf{Assemble the full solution}: Use Eqs.~\eqref{eq:x_stitched} and~\eqref{eq:h_stitched} to construct the complete spatial profiles for any given time $t$.
+\end{enumerate}
+
+\begin{notebox}[Key physical insight][blue]
+The subsonic heat wave problem provides the pressure history at the ablation front, which acts as the ``piston'' that drives the shock. The ablation front mass $m_f(t)$ defines the interface between the two regions. In the sub region ($m < m_f$), radiation diffusion dominates and the material is expanding (being ablated). In the shock region ($m > m_f$), the dynamics is purely hydrodynamic (adiabatic compression by the piston).
+\end{notebox}
+
+%=======================================================================
+\section{Asymptotic Solution Near the Ablation Front}
+\label{sec:asymptotics}
+%=======================================================================
+
+For completeness, the asymptotic behaviour near $\xi \to \xi_f$ is:
+\begin{align}
+  V(\xi) &\approx V_*\,(\xi_f - \xi)^{1/q}, \label{eq:V_asymp}\\
+  U(\xi) &\approx c\,\xi_f\,V(\xi), \label{eq:U_asymp}\\
+  P(\xi) &\approx P_f - c^2\,\xi_f^2\,V(\xi), \label{eq:P_asymp}
+\end{align}
+with:
+\begin{equation}
+  V_* = \left[-\left(1+\frac{1}{r}\right)\frac{q\,c}{k}\,\xi_f\,P_f^{1-n}\right]^{1/q}.
+  \label{eq:Vstar}
+\end{equation}
+
+These provide the initial conditions for the numerical ODE integration from $\xi_f$ inward to the origin.
+
+%=======================================================================
+\section{Explicit Position Formulas for the Two Test Cases}
+\label{sec:explicit_positions}
+%=======================================================================
+
+We specialize the general formulas to the two verification test cases: both use \textbf{Gold (Au)} with identical material parameters but different temporal drive exponents $\tau$:
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Parameter & Fig~8 & Fig~9 \\
+\hline
+$\tau$ & 0 & 0.123 \\
+$\alpha$ & 1.5 & 1.5 \\
+$\beta$ & 1.6 & 1.6 \\
+$\lambda$ & 0.2 & 0.2 \\
+$\mu$ & 0.14 & 0.14 \\
+$\gamma$ & 1.25 & 1.25 \\
+$\omega$ & 0 & 0 \\
+$\rho_0$ & 19.32 g/cm$^3$ & 19.32 g/cm$^3$ \\
+$T_0$ & 1 HeV & 1 HeV \\
+\hline
+\end{tabular}
+\end{center}
+
+All formulas below assume $\omega = 0$ (uniform initial density).
+
+\subsection{Dimensional Constants}
+
+\begin{equation}
+  A = T_0\,(r\,f)^{1/\beta}, \qquad
+  B = \frac{16\,\sigma_{\mathrm{sb}}\,g}{3\,\beta\,(r\,f)^{n}}, \qquad
+  v_0 = \frac{1}{\rho_0}, \qquad
+  p_{0,s} = P_f\,A^{a_3}\,B^{b_3}.
+\end{equation}
+
+\subsection{The Five Position Functions}
+
+\subsubsection{1. Boundary Position: $x_{\mathrm{boundary}}(t)$}
+
+The deepest point reached by the ablation heat wave (where $m=0$):
+\begin{equation}
+  \boxed{
+  x_{\mathrm{boundary}}(t) = \frac{A^{a_2}\,B^{b_2}}{c_2+1}\,U(0)\;\,t^{\,c_2+1}}
+  \label{eq:x_bnd}
+\end{equation}
+Since $U(0) < 0$, the boundary moves in the negative $x$ direction.
+
+\subsubsection{2. Subsonic Region Position: $x_{\mathrm{sub}}(m,t)$}
+
+Position of a Lagrangian element with mass $m < m_f(t)$ inside the ablated region:
+\begin{equation}
+  \boxed{
+  x_{\mathrm{sub}}(m,t)
+  = x_{\mathrm{ablation}}(t)
+  + \frac{A^{a_2}\,B^{b_2}}{c_2+1}\,
+    \Bigl[U\!\bigl(\xi(m,t)\bigr) - c\,\xi(m,t)\,V\!\bigl(\xi(m,t)\bigr)\Bigr]\;\,t^{\,c_2+1}}
+  \label{eq:x_sub}
+\end{equation}
+where $\xi(m,t) = m\,A^{a}\,B^{b}\,t^{c}$ is the subsonic self-similar coordinate, and $U(\xi), V(\xi)$ are the subsonic self-similar velocity and specific volume profiles.
+
+\subsubsection{3. Ablation Front Position: $x_{\mathrm{ablation}}(t)$}
+
+The ablation front $m = m_f(t)$ separates the ablated and shocked regions.
+Its Eulerian position is obtained by evaluating the \emph{shock} solution at the ablated mass:
+\begin{equation}
+  \boxed{
+  x_{\mathrm{ablation}}(t) = \left(v_0\,p_{0,s}\right)^{1/2}\,t^{\,(2+\tau_s)/2}
+    \left[\hat{\xi}(t)\,V_s\!\bigl(\hat{\xi}(t)\bigr) + \frac{2}{\tau_s+2}\,U_s\!\bigl(\hat{\xi}(t)\bigr)\right]}
+  \label{eq:x_ablation}
+\end{equation}
+where $V_s(\hat{\xi})$, $U_s(\hat{\xi})$ are the \emph{shock} self-similar profiles, and $\hat{\xi}(t)$ is the self-similar coordinate of the ablated mass in the shock frame:
+\begin{equation}
+  \hat{\xi}(t) = m_f(t)\left(\frac{v_0}{p_{0,s}}\right)^{1/2} t^{-(2+\tau_s)/2}
+  = \underbrace{\xi_f\,A^{-a}\,B^{-b}\left(\frac{v_0}{p_{0,s}}\right)^{1/2}}_{C_{\hat{\xi}}}\;
+  t^{\overbrace{-c - (2+\tau_s)/2}^{d_{\hat{\xi}}}}.
+  \label{eq:xsi_mf}
+\end{equation}
+
+\begin{notebox}[Key point][red]
+The exponent $d_{\hat{\xi}} = -c-(2+\tau_s)/2 \neq 0$ in general. This means the ablated mass's coordinate in the shock frame is \textbf{time-dependent}: the combined sub+shock problem is \emph{not} fully self-similar. Consequently, $x_{\mathrm{ablation}}(t)$ is \emph{not} a simple power law $C\,t^d$, but a composite expression involving the shock profiles evaluated at a time-varying argument.
+\end{notebox}
+
+\subsubsection{4. Shock Region Position: $x_{\mathrm{shock}}(m,t)$}
+
+Position of a Lagrangian element $m > m_f(t)$ in the shocked region (for $\omega=0$):
+\begin{equation}
+  \boxed{
+  x_{\mathrm{shock}}(m,t)
+  = \left(v_0\,p_{0,s}\right)^{1/2}\,t^{\,(2+\tau_s)/2}
+    \left[\xi_s(m,t)\,V_s\!\bigl(\xi_s(m,t)\bigr)
+    + \frac{2}{\tau_s+2}\,U_s\!\bigl(\xi_s(m,t)\bigr)\right]}
+  \label{eq:x_shock}
+\end{equation}
+where $\xi_s(m,t) = m\left(\frac{v_0}{p_{0,s}\,t^{\tau_s+2}}\right)^{1/2}$ is the shock self-similar coordinate.
+
+For mass elements in the unshocked region ($\xi_s > \xi_s^{\mathrm{front}}$): $x(m,t) = v_0\,m$ (initial position).
+
+\subsubsection{5. Shock Front Position: $x_{\mathrm{shock\,front}}(t)$}
+
+The outer edge of the shock wave (for $\omega=0$):
+\begin{equation}
+  \boxed{
+  x_{\mathrm{shock\,front}}(t) = \left(v_0\,p_{0,s}\right)^{1/2}\,\xi_s\;\,t^{\,(2+\tau_s)/2}}
+  \label{eq:x_shock_front}
+\end{equation}
+where $\xi_s$ is the (constant) self-similar shock coordinate.
+
+\subsubsection{Ablated Mass}
+\begin{equation}
+  m_f(t) = \xi_f\,A^{-a}\,B^{-b}\;\,t^{-c}
+  \label{eq:mf_explicit}
+\end{equation}
+
+\subsection{Numeric Coefficients for the Two Test Cases}
+
+Let each power-law position be written as $x_i(t) = C_i\,t^{d_i}$ where applicable.
+
+\subsubsection{Fig~8: $\tau=0$ (Constant Boundary Temperature)}
+
+\begin{center}
+\begin{tabular}{l r r}
+\hline
+Quantity & Coefficient $C_i$ & Time power $d_i$ \\
+\hline
+$x_{\mathrm{boundary}}$ & $-6.411 \times 10^{7}$ & 1.0365 \\
+$x_{\mathrm{shock\,front}}$ & $6.060 \times 10^{3}$ & 0.7760 \\
+$m_f$ & $4.454 \times 10^{1}$ & 0.5156 \\
+\hline
+\end{tabular}
+\end{center}
+
+Self-similar constants:
+$\xi_f = 0.4277$, $P_f = 0.3871$, $U(0) = -10.544$.
+
+Shock parameters:
+$p_{0,s} = 2.540 \times 10^{8}$ Ba, $\tau_s = -0.4479$, $\xi_s = 1.671$.
+
+Ablation front coordinate:
+$C_{\hat{\xi}} = 6.389\times10^{-1}$, $d_{\hat{\xi}} = -0.2604$.
+
+\subsubsection{Fig~9: $\tau=0.123$ (Constant Flux Temperature)}
+
+\begin{center}
+\begin{tabular}{l r r}
+\hline
+Quantity & Coefficient $C_i$ & Time power $d_i$ \\
+\hline
+$x_{\mathrm{boundary}}$ & $-2.697 \times 10^{8}$ & 1.1245 \\
+$x_{\mathrm{shock\,front}}$ & $1.293 \times 10^{5}$ & 0.9377 \\
+$m_f$ & $4.787 \times 10^{3}$ & 0.7510 \\
+\hline
+\end{tabular}
+\end{center}
+
+Self-similar constants:
+$\xi_f = 0.3502$, $P_f = 0.4372$, $U(0) = -7.760$.
+
+Shock parameters:
+$p_{0,s} = 2.335 \times 10^{11}$ Ba, $\tau_s = -0.1245$, $\xi_s = 1.177$.
+
+Ablation front coordinate:
+$C_{\hat{\xi}} = 7.142\times10^{-2}$, $d_{\hat{\xi}} = -0.1868$.
+
+\subsection{Summary of All Exponent Relations}
+
+For convenient reference, the temporal exponents of the five position functions are given by the following expressions (valid for $\omega=0$):
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Position & Time exponent $d$ & Expression \\
+\hline
+$x_{\mathrm{boundary}}$ & $c_2+1$ & $\frac{3\mu - 2\lambda - 2 + \tau\left[2(\beta-\alpha-4)-\beta\lambda+\mu(4+\alpha)\right]}{4+2\lambda-4\mu}+\mu$ \\[6pt]
+$x_{\mathrm{shock\,front}}$ & $\frac{2+\tau_s}{2} = \frac{2+c_3}{2}$ & (from shock) \\[6pt]
+$m_f$ & $-c$ & $\frac{2+2\lambda-3\mu-\tau\left[2(\beta-\alpha-4)-\beta\lambda+\mu(4+\alpha)\right]}{4+2\lambda-4\mu}$ \\[6pt]
+$x_{\mathrm{ablation}}$ & composite & not a single power law \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}

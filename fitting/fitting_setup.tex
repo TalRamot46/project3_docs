@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[mathscr]{eucal}
+\usepackage[most]{tcolorbox}
+
+\DeclareTColorBox{notebox}{ O{Note} O{blue} }{
+  colback=#2!5!white,
+  colframe=#2!75!black,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
+\title{Radiation-Hydrodynamics Simulation Verification Suite}
+\author{Tal Ramot}
+\date{Exams week 3, 2026}
+
+\begin{document}
+\maketitle
+
+\section{Setups for IMC and Rad-Hydro Simulations}
+
+This section contains exact physical benchmarks to verify supersonic radiative transfer implementations. The parameters are calculated to isolate local thermodynamic equilibrium (LTE) supersonic diffusion behavior against known analytical profiles.
+
+\subsection{Test 1 - Supersonic Henyey Wave (Power-Law Surface Drive)}
+For the first verification case, we deploy a supersonic Henyey wave matching a gold-like material model at a high-energy characteristic scale of $1\,\text{HeV} = 0.1\,\text{KeV} \approx 1.160452 \times 10^6\,\text{K}$. At this scale, the material energy density dominates, and independent radiation energy density ($a_R T^4$) can be neglected in the material energy balance during non-LTE tracking.
+
+\subsubsection{Material Model and Equation of State}
+The Rosseland mean opacity and specific internal energy are defined using power-law dependencies on temperature $T$ under a constant spatially homogeneous material density $\rho_0$. 
+We set the material exponents to $\alpha = 1.5$ and $\gamma = 1.6$, with a density coupling parameter $\mu = 0$ and $\lambda = 0$.
+
+The macroscopic opacity matches the parameterization:
+\begin{equation}
+    k(T) = \rho_0 \kappa_R(T) = k_0 T^{-\alpha} = 10^4 \left(\frac{T}{\text{HeV}}\right)^{-1.5} \,\text{cm}^{-1}
+\end{equation}
+Thus, the opacity prefactor is $k_0 = 10^4\,\text{HeV}^{1.5}/\text{cm}$, which implies the face-averaging prefactor is:
+\begin{equation}
+    g = \frac{1}{\rho_0 k_0} = \frac{1}{10^4 \rho_0} \,\text{cm}\cdot\text{HeV}^{-1.5}
+\end{equation}
+
+The specific internal energy equation of state follows:
+\begin{equation}
+    e(T) = f T^{\gamma} = f T^{1.6}
+\end{equation}
+By matching the total energy density to the standard benchmark equation $u(T) = \rho_0 e(T) = u_0 T^b$ (where $b = \gamma = 1.6$), we select $u_0 = 10^{13}\,\text{erg}/(\text{cm}^3\cdot\text{HeV}^{1.6})$. The material prefactor input is therefore:
+\begin{equation}
+    f = \frac{u_0}{\rho_0} = \frac{10^{13}}{\rho_0} \,\text{erg}/(\text{g}\cdot\text{HeV}^{1.6})
+\end{equation}
+
+\subsubsection{Boundary Conditions and Driving Parameters}
+The problem imposes a power-law temporal surface temperature boundary condition at the slab edge ($x = 0$):
+\begin{equation}
+    T_s(t) = T_0 t^s = 1.0 \times \left(\frac{t}{\text{ns}}\right)^{10/39} \,\text{HeV}
+\end{equation}
+where the temporal drive exponent is precisely the Henyey exponent $s = s_H$:
+\begin{equation}
+    s_H = \frac{1}{4 + \alpha - b} = \frac{1}{4 + 1.5 - 1.6} = \frac{10}{39} \approx 0.256410
+\end{equation}
+
+For implementations running on an incident radiation field boundary condition (such as Implicit Monte Carlo or transport codes utilizing a Marshak/Milne boundary interface), the corresponding source bath temperature must be explicitly driven over time via:
+\begin{equation}
+    T_{\text{bath}}(t) = T_s(t) \left[ 1 + \mathcal{B} \right]^{1/4} = \left(\frac{t}{\text{ns}}\right)^{10/39} \left[ 1 + 0.0576603 \left(\frac{t}{\text{ns}}\right)^{-8/13} \right]^{1/4} \,\text{HeV}
+\end{equation}
+This formulation yields an exact dimensionless boundary flux normalization value $S(0) = 2.003$ matching the internal solver metrics, which tracks the net energy flux flowing through the origin boundary.
+
+\subsubsection{Analytical Wavefront Verification Metrics}
+Because $s = s_H$, the similarity profile propagates at a perfectly constant wavefront velocity ($d = 1$), meaning the heat front position $x_F(t)$ changes linearly in time. Code developers should verify their spatial tracking arrays against the following baseline metrics at the final simulation time $t_{\text{final}} = 1\,\text{ns}$:
+\begin{itemize}
+    \item \textbf{Heat Front Position:} 
+    \begin{equation}
+        xF(t) = 0.00118584 \times \left(\frac{t}{\text{ns}}\right) \,\text{cm}
+    \end{equation}
+    \item \textbf{Total System Energy Integral:} 
+    \begin{equation}
+        E_{\text{total}}(t) = 8.40870 \times 10^9 \times \left(\frac{t}{\text{ns}}\right)^{55/39} \,\text{erg}
+    \end{equation}
+    \item \textbf{System Optical Thickness:} At $t = 1\,\text{ns}$, the cumulative optical depth across the heated domain scales to $\tau \approx 11.86$, proving the medium is sufficiently thick to validate the LTE diffusion equations against higher-order structural transport solvers.
+\end{itemize}
+
+\subsection{Test 2 - Linear Front Wave (High-Temperature Regime)}
+\textit{[Content for Test 2 follows here...]}
+
+\end{document}
