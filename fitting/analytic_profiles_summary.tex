@@ -1,0 +1,749 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage[mathscr]{eucal}
+\usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\DeclareTColorBox{notebox}{ O{Note} O{blue} }{
+  colback=#2!5!white,
+  colframe=#2!75!black,
+  fonttitle=\bfseries,
+  title={#1}
+}
+
+\newcommand{\xsi}{\xi}
+\newcommand{\xsif}{\xi_f}
+\newcommand{\xsis}{\xi_s}
+
+\title{Summary of Analytic Profiles, Variables, and Self-Similar Fits \\
+for the Subsonic (Ablation) and Shock Regimes}
+\author{Compiled from: \texttt{piston\_shock.pdf}, \texttt{sub\,(2).pdf},\\
+\texttt{bath\_temperature\_derivation\,(1).pdf},\\
+and \texttt{Eulerian\_coordinate\_derivation.tex}}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%=======================================================================
+\section{Problem Setup}
+\label{sec:setup}
+%=======================================================================
+
+One-temperature radiation-hydrodynamics in Lagrangian $(m,t)$ coordinates with an ideal-gas EOS ($\gamma$, $r = \gamma - 1$), power-law Rosseland opacity and specific internal energy:
+\begin{align}
+  p\,v &= r\,e, \qquad
+  \frac{1}{\kappa_R} = g\,T^{\alpha}\,v^{\lambda}, \qquad
+  e = f\,T^{\beta}\,v^{\mu}.
+\end{align}
+
+Derived constants:
+\begin{equation}
+  n = \frac{4+\alpha}{\beta}, \qquad
+  k = 1 - \mu, \qquad
+  q = k\,n + \lambda - 1.
+\end{equation}
+
+Dimensional constants:
+\begin{equation}
+  A = T_0\,(r\,f)^{1/\beta}, \qquad
+  B = \frac{16\,\sigma_{\mathrm{sb}}\,g}{3\,\beta\,(r\,f)^{n}}, \qquad
+  v_0 = \frac{1}{\rho_0}.
+\end{equation}
+
+\subsection{Test Case Parameters (Gold)}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Parameter & $\tau=0$ (Fig~8) & $\tau=0.123$ (Fig~9) \\
+\midrule
+$\alpha$ & 1.5 & 1.5 \\
+$\beta$ & 1.6 & 1.6 \\
+$\lambda$ & 0.2 & 0.2 \\
+$\mu$ & 0.14 & 0.14 \\
+$\gamma$ & 1.25 & 1.25 \\
+$\omega$ & 0 & 0 \\
+$\rho_0$ & 19.32 g/cm$^3$ & 19.32 g/cm$^3$ \\
+$T_0$ & 1 HeV & 1 HeV \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%=======================================================================
+\section{Self-Similar Coordinates and Exponents}
+\label{sec:exponents}
+%=======================================================================
+
+\subsection{Subsonic (Ablation) Self-Similar Coordinate}
+
+\begin{equation}
+  \xsi = m\,A^{a}\,B^{b}\,t^{c},
+\end{equation}
+with exponents:
+\begin{align}
+  a &= \frac{2\beta - \beta\lambda - 8 - 2\alpha + \mu(4+\alpha)}
+            {4 + 2\lambda - 4\mu}, \\
+  b &= \frac{\mu - 2}{4 + 2\lambda - 4\mu}, \\
+  c &= \frac{3\mu - 2\lambda - 2
+             + \tau\bigl(2(\beta-\alpha-4) - \beta\lambda + \mu(4+\alpha)\bigr)}
+            {4 + 2\lambda - 4\mu}.
+\end{align}
+
+\subsection{Self-Similar Profile Exponents}
+
+The physical fields factor as $h(m,t) = H(\xsi)\,A^{a_i}\,B^{b_i}\,t^{c_i}$:
+\begin{align}
+  v(m,t) &= V(\xsi)\,A^{a_1}\,B^{b_1}\,t^{c_1}, \\
+  u(m,t) &= U(\xsi)\,A^{a_2}\,B^{b_2}\,t^{c_2}, \\
+  p(m,t) &= P(\xsi)\,A^{a_3}\,B^{b_3}\,t^{c_3},
+\end{align}
+where the exponent relations are:
+\begin{align}
+  (a_2, b_2, c_2) &= (a_1 - a,\; b_1 - b,\; c_1 - c - 1), \\
+  (a_3, b_3, c_3) &= (a_1 - 2a,\; b_1 - 2b,\; c_1 - 2c - 2).
+\end{align}
+
+Additional derived profiles:
+\begin{align}
+  T(m,t) &= \left(\frac{p\,v^{1-\mu}}{r\,f}\right)^{1/\beta}, \\
+  e(m,t) &= \frac{p\,v}{r} = \frac{P(\xsi)\,V(\xsi)}{r}\,A^{a_1+a_3}\,B^{b_1+b_3}\,t^{c_1+c_3}, \\
+  \rho(m,t) &= \frac{1}{v(m,t)} = \frac{1}{V(\xsi)}\,A^{-a_1}\,B^{-b_1}\,t^{-c_1}.
+\end{align}
+
+\subsection{Shock Self-Similar Coordinate}
+
+For the piston-driven shock with $\omega = 0$ (uniform initial density):
+\begin{equation}
+  \xsi_{\mathrm{shock}} = m\,\sqrt{\frac{v_0}{p_{0,s}\,t^{\tau_s+2}}},
+\end{equation}
+where $p_{0,s}$ and $\tau_s$ are inherited from the subsonic solution (see \S\ref{sec:matching}).
+
+%=======================================================================
+\section{Part 1: All Profiles in Both Regimes}
+\label{sec:profiles}
+%=======================================================================
+
+\subsection{Subsonic (Ablation) Regime ($m < m_f(t)$)}
+
+All profiles are expressed in Lagrangian coordinates unless otherwise noted. We define $y = \xsi/\xsif$ as the normalized self-similar coordinate.
+
+\subsubsection{Specific Volume}
+\begin{equation}
+  \boxed{v_{\mathrm{sub}}(m,t) = V(\xsi)\,A^{a_1}\,B^{b_1}\,t^{c_1}}
+\end{equation}
+
+\subsubsection{Density}
+\begin{equation}
+  \boxed{\rho_{\mathrm{sub}}(m,t) = \frac{1}{V(\xsi)}\,A^{-a_1}\,B^{-b_1}\,t^{-c_1}}
+\end{equation}
+
+\subsubsection{Velocity}
+\begin{equation}
+  \boxed{u_{\mathrm{sub}}(m,t) = U(\xsi)\,A^{a_2}\,B^{b_2}\,t^{c_2}}
+\end{equation}
+
+\subsubsection{Pressure}
+\begin{equation}
+  \boxed{p_{\mathrm{sub}}(m,t) = P(\xsi)\,A^{a_3}\,B^{b_3}\,t^{c_3}}
+\end{equation}
+
+\subsubsection{Temperature}
+\begin{equation}
+  \boxed{T_{\mathrm{sub}}(m,t) = T(\xsi)\,T_0\,t^{\tau}
+  = \left(\frac{P(\xsi)\,V(\xsi)^{1-\mu}}{r\,f}\right)^{1/\beta}\!\cdot A^{(a_3+a_1(1-\mu))/\beta}\,B^{(b_3+b_1(1-\mu))/\beta}\,t^{(c_3+c_1(1-\mu))/\beta}}
+\end{equation}
+In practice, from the ODE solver, $T(\xsi) = (P(\xsi)\,V(\xsi)^{1-\mu})^{1/\beta}$ and $T(0) = 1$ by construction.
+
+\subsubsection{Specific Internal Energy}
+\begin{equation}
+  \boxed{e_{\mathrm{sub}}(m,t) = \frac{P(\xsi)\,V(\xsi)}{r}\,A^{a_1+a_3}\,B^{b_1+b_3}\,t^{c_1+c_3}}
+\end{equation}
+
+\subsubsection{Radiation Energy Flux}
+\begin{equation}
+  \boxed{s_{\mathrm{sub}}(m,t) = S(\xsi)\,A^{a_S}\,B^{b_S}\,t^{c_S}}
+\end{equation}
+where:
+\begin{equation}
+  S(\xsi) = -P^{n-1}(\xsi)\,V^{q}(\xsi)\,
+  \bigl[V(\xsi)\,P'(\xsi) + k\,P(\xsi)\,V'(\xsi)\bigr]
+\end{equation}
+and the flux power exponents are:
+\begin{align}
+  a_S &= a + (q+1)\,a_1 + n\,a_3, \\
+  b_S &= 1 + b + (q+1)\,b_1 + n\,b_3, \\
+  c_S &= c + (q+1)\,c_1 + n\,c_3.
+\end{align}
+
+\bigskip
+\subsection{Shock Regime ($m \geq m_f(t)$, \;$\xsi_{\mathrm{shock}} \leq \xsis$)}
+
+The shock regime uses a separate self-similar coordinate $\xsi_s = m\sqrt{v_0/(p_{0,s}\,t^{\tau_s+2})}$ and self-similar profiles $V_s(\xsi_s)$, $U_s(\xsi_s)$, $P_s(\xsi_s)$.
+
+\subsubsection{Specific Volume}
+\begin{equation}
+  \boxed{v_{\mathrm{shock}}(m,t) = V_s(\xsi_s)\,\left(v_0^2\,p_{0,s}^{\omega}\,t^{\omega(\tau_s+2)}\right)^{1/(2-\omega)}}
+\end{equation}
+For $\omega = 0$:
+\begin{equation}
+  v_{\mathrm{shock}}(m,t) = V_s(\xsi_s)\,v_0
+\end{equation}
+(i.e.\ $V_s$ directly gives the ratio $v/v_0 = \rho_0/\rho$).
+
+\subsubsection{Density}
+\begin{equation}
+  \boxed{\rho_{\mathrm{shock}}(m,t) = \frac{1}{V_s(\xsi_s)\,v_0} \qquad(\omega=0)}
+\end{equation}
+
+\subsubsection{Velocity}
+\begin{equation}
+  \boxed{u_{\mathrm{shock}}(m,t) = U_s(\xsi_s)\,\left(v_0\,p_{0,s}\,t^{\omega+\tau_s}\right)^{1/(2-\omega)}}
+\end{equation}
+For $\omega = 0$:
+\begin{equation}
+  u_{\mathrm{shock}}(m,t) = U_s(\xsi_s)\,\sqrt{v_0\,p_{0,s}}\;t^{\tau_s/2}
+\end{equation}
+
+\subsubsection{Pressure}
+\begin{equation}
+  \boxed{p_{\mathrm{shock}}(m,t) = P_s(\xsi_s)\,p_{0,s}\,t^{\tau_s}}
+\end{equation}
+
+\subsubsection{Temperature (via EOS)}
+\begin{equation}
+  \boxed{T_{\mathrm{shock}}(m,t) = \left(\frac{p_{\mathrm{shock}}\,\rho_{\mathrm{shock}}^{\mu-1}}{r\,f}\right)^{1/\beta}}
+\end{equation}
+
+\subsubsection{Specific Internal Energy}
+\begin{equation}
+  \boxed{e_{\mathrm{shock}}(m,t) = \frac{p_{\mathrm{shock}}\,v_{\mathrm{shock}}}{r} = \frac{P_s(\xsi_s)\,V_s(\xsi_s)\,p_{0,s}\,v_0}{r}\;t^{\tau_s}}
+  \qquad(\omega=0)
+\end{equation}
+
+\subsubsection{Radiation Energy Flux}
+\begin{equation}
+  \boxed{s_{\mathrm{shock}}(m,t) = 0}
+\end{equation}
+(Adiabatic region --- no radiation transport.)
+
+\subsubsection{Hugoniot Jump Relations at the Shock Front ($\xsi_s = \xsis$)}
+
+For $\omega = 0$:
+\begin{align}
+  V_s(\xsis) &= \frac{r}{r+2}, &
+  U_s(\xsis) &= \frac{2(\tau_s+2)}{r(2-\omega)}\,\xsis\,V_s(\xsis), &
+  P_s(\xsis) &= \frac{r}{V_s(\xsis)}\cdot\frac{U_s^2(\xsis)}{2}.
+\end{align}
+At the piston ($\xsi_s = 0$): $P_s(0) = 1$ by the shooting normalization.
+
+\subsection{Unshocked Region ($\xsi_{\mathrm{shock}} > \xsis$)}
+
+\begin{equation}
+  v = v_0, \quad u = 0, \quad p = 0, \quad T = 0, \quad e = 0, \quad s = 0.
+\end{equation}
+
+
+%=======================================================================
+\section{Part 2: All Variables in Lagrangian and Eulerian Coordinates}
+\label{sec:variables}
+%=======================================================================
+
+\subsection{Subsonic (Ablation) Regime Variables}
+
+\subsubsection{Ablation Boundary ($m=0$)}
+
+\textbf{Lagrangian:} $m_b(t) = 0$ identically.
+
+\textbf{Eulerian position:}
+\begin{equation}
+  \boxed{x_b(t) = \frac{A^{a_2}\,B^{b_2}}{c_2+1}\,U(0)\;t^{c_2+1}}
+\end{equation}
+Since $U(0) < 0$, the boundary moves in the $-x$ direction. This is a power law $x_b(t) = C_b\,t^{d_b}$ with:
+\begin{equation}
+  C_b = \frac{A^{a_2}\,B^{b_2}}{c_2+1}\,U(0), \qquad d_b = c_2 + 1.
+\end{equation}
+
+\subsubsection{Ablation (Heat) Front}
+
+\textbf{Lagrangian --- ablated mass:}
+\begin{equation}
+  \boxed{m_f(t) = \xsif\,A^{-a}\,B^{-b}\;t^{-c}}
+  \label{eq:mf}
+\end{equation}
+This is a power law $m_f(t) = C_m\,t^{d_m}$ with $d_m = -c > 0$.
+
+\textbf{Eulerian position (standalone subsonic):} $x_f(t) \equiv 0$ (by construction, the heat front is fixed at the origin in the pure subsonic problem).
+
+\textbf{Ablation front velocity:} $\dot{x}_f(t) = 0$.
+
+\subsubsection{Distance from Boundary to Ablation Front}
+
+\begin{equation}
+  \boxed{\Delta x_f(t) = x_f(t) - x_b(t) = -x_b(t) = -\frac{A^{a_2}\,B^{b_2}}{c_2+1}\,U(0)\;t^{c_2+1} > 0}
+\end{equation}
+Equivalently, from the integral formula:
+\begin{equation}
+  \Delta x_f(t) = A^{a_2}\,B^{b_2}\,t^{c_2+1}\int_0^{\xsif} V(\xsi')\,d\xsi'
+  = -\frac{A^{a_2}\,B^{b_2}}{c_2+1}\,U(0)\;t^{c_2+1},
+\end{equation}
+using the integral identity $\int_0^{\xsif} V\,d\xsi = -U(0)/(c_2+1)$.
+
+\subsubsection{Subsonic Region Position $x_{\mathrm{sub}}(m,t)$}
+
+For $m < m_f(t)$:
+\begin{equation}
+  \boxed{x_{\mathrm{sub}}(m,t) = x_{\mathrm{ablation}}(t) +
+  \frac{A^{a_2}\,B^{b_2}\,t^{c_2+1}}{c_2+1}
+  \Bigl[U\bigl(\xsi(m)\bigr) - c\,\xsi(m)\,V\bigl(\xsi(m)\bigr)\Bigr]}
+  \label{eq:x_sub}
+\end{equation}
+where $\xsi(m) = m\,A^{a}\,B^{b}\,t^{c}$. In the standalone subsonic problem, $x_{\mathrm{ablation}}(t) = 0$; in the patched problem, it is the piston position of the shock solution (see \S\ref{sec:shock_variables}).
+
+\subsection{Shock Regime Variables}
+\label{sec:shock_variables}
+
+\subsubsection{Matching Conditions}
+
+The pressure at the ablation front provides the piston boundary condition for the shock:
+\begin{equation}
+  \boxed{p_{0,s} = P_f\,A^{a_3}\,B^{b_3}, \qquad \tau_s = c_3.}
+\end{equation}
+
+\subsubsection{Shock Front}
+
+\textbf{Lagrangian --- shocked mass:}
+\begin{equation}
+  \boxed{m_s(t) = m_f(t) + \frac{\xsis}{\sqrt{v_0/(p_{0,s}\,t^{\tau_s+2})}}}
+  \qquad\text{(total mass up to the shock)}
+\end{equation}
+The shocked-only mass (from piston to shock) for $\omega=0$:
+\begin{equation}
+  m_{\mathrm{shocked}}(t) = \xsis\,\sqrt{\frac{p_{0,s}\,t^{\tau_s+2}}{v_0}}.
+\end{equation}
+
+\textbf{Eulerian --- shock front position ($\omega = 0$):}
+\begin{equation}
+  \boxed{x_{\mathrm{shock\,front}}(t) = \sqrt{v_0\,p_{0,s}}\;\xsis\;t^{(\tau_s+2)/2}}
+\end{equation}
+This is a power law $x_s(t) = C_s\,t^{d_s}$ with $d_s = (\tau_s + 2)/2$.
+
+\subsubsection{Ablation Front Position (in the Patched Problem)}
+
+Evaluated from the shock solution at $m = m_f(t)$:
+\begin{equation}
+  \boxed{x_{\mathrm{ablation}}(t) = \sqrt{v_0\,p_{0,s}}\;t^{(\tau_s+2)/2}
+  \left[\hat{\xsi}(t)\,V_s\!\bigl(\hat{\xsi}(t)\bigr) + \frac{2}{\tau_s+2}\,U_s\!\bigl(\hat{\xsi}(t)\bigr)\right]}
+\end{equation}
+where the time-dependent coordinate of the ablated mass in the shock frame is:
+\begin{equation}
+  \hat{\xsi}(t) = C_{\hat{\xsi}}\;t^{d_{\hat{\xsi}}}, \qquad
+  C_{\hat{\xsi}} = \xsif\,A^{-a}\,B^{-b}\sqrt{\frac{v_0}{p_{0,s}}}, \qquad
+  d_{\hat{\xsi}} = -c - \frac{\tau_s+2}{2}.
+\end{equation}
+
+\begin{notebox}[Not a simple power law][red]
+Since $d_{\hat{\xsi}} \neq 0$ in general, the combined sub+shock problem is \emph{not} fully self-similar. The ablation front position $x_{\mathrm{ablation}}(t)$ involves the shock profiles evaluated at a time-varying argument and is therefore \textbf{not} a simple $C\,t^d$ power law.
+\end{notebox}
+
+\subsubsection{Distance: Ablation Front to Shock Front}
+
+\begin{equation}
+  \boxed{\Delta x_{\mathrm{shock}}(t) = x_{\mathrm{shock\,front}}(t) - x_{\mathrm{ablation}}(t)
+  = \sqrt{v_0\,p_{0,s}}\;t^{(\tau_s+2)/2}\;\int_{\hat{\xsi}(t)}^{\xsis} V_s(\xsi')\,d\xsi'}
+\end{equation}
+where the integral is computed via the exact analytic formula (for $\omega = 0$):
+\begin{equation}
+  \int_{\xsi_a}^{\xsi_b} V_s\,d\xsi = (1-\omega)\bigl(\xsi_b V_s(\xsi_b) - \xsi_a V_s(\xsi_a)\bigr) + \frac{1-\omega}{(\tau_s+2)/(2-\omega)}\bigl(U_s(\xsi_b) - U_s(\xsi_a)\bigr).
+\end{equation}
+
+\subsubsection{Shock Region Position $x_{\mathrm{shock}}(m,t)$}
+
+For $m \geq m_f(t)$ and $\xsi_s(m,t) \leq \xsis$ ($\omega = 0$):
+\begin{equation}
+  \boxed{x_{\mathrm{shock}}(m,t) = \sqrt{v_0\,p_{0,s}}\;t^{(\tau_s+2)/2}
+  \left[\xsi_s(m,t)\,V_s\!\bigl(\xsi_s(m,t)\bigr) + \frac{2}{\tau_s+2}\,U_s\!\bigl(\xsi_s(m,t)\bigr)\right]}
+\end{equation}
+For $m$ beyond the shock: $x(m,t) = v_0\,m$ (unperturbed).
+
+\subsection{Energy Integrals}
+
+\subsubsection{Subsonic Regime}
+
+\textbf{Total internal energy in ablated region:}
+\begin{equation}
+  \boxed{E_{\mathrm{in,sub}}(t) = A^{2a_2-a}\,B^{2b_2-b}\,t^{2c_2-c}\int_0^{\xsif}\frac{P\,V}{r}\,d\xsi}
+\end{equation}
+
+\textbf{Total kinetic energy in ablated region:}
+\begin{equation}
+  \boxed{E_{k,\mathrm{sub}}(t) = A^{2a_2-a}\,B^{2b_2-b}\,t^{2c_2-c}\int_0^{\xsif}\frac{U^2}{2}\,d\xsi}
+\end{equation}
+Both share the time power $t^{2c_2-c}$, so $E_k/E_{\mathrm{in}}$ is constant.
+
+\subsubsection{Shock Regime ($\omega=0$)}
+
+\textbf{Total energy in shocked region:}
+\begin{equation}
+  \boxed{E_{\mathrm{total,shock}}(t) = \sqrt{v_0\,p_{0,s}^{3}}\;t^{\tau_s+1}\cdot\frac{U_s(0)}{\tau_s+1}}
+\end{equation}
+(using the exact identity from piston shock theory).
+
+\subsection{Albedo and Surface Flux}
+
+\textbf{Flux at $m=0$ (surface/boundary) in the heat region:}
+\begin{equation}
+  \boxed{F_s(t) = s(0,t) = S_0\,A^{a_S}\,B^{b_S}\,t^{c_S}}
+\end{equation}
+where $S_0 = S(\xsi=0)$ from the subsonic self-similar solution.
+
+\textbf{Albedo (ratio of outgoing flux to incoming blackbody flux):}
+\begin{equation}
+  \boxed{\alpha_{\mathrm{albedo}}(t) = \frac{2\,F_s(t)}{a_R\,c_{\mathrm{light}}\,T_s^4(t)}
+  = \mathcal{B}_{\mathrm{bath}}\,t^{\eta_{\mathrm{bath}}}}
+\end{equation}
+with:
+\begin{align}
+  \mathcal{B}_{\mathrm{bath}} &= \frac{S_0\,A^{a_S}\,B^{b_S}}{2\,\sigma_{\mathrm{sb}}\,T_0^4}, \\
+  \eta_{\mathrm{bath}} &= c_S - 4\,\tau.
+\end{align}
+
+\textbf{Bath temperature (Marshak boundary condition):}
+\begin{equation}
+  \boxed{T_{\mathrm{bath}}(t) = T_0\,t^{\tau}
+  \left[1 + \mathcal{B}_{\mathrm{bath}}\,t^{\eta_{\mathrm{bath}}}\right]^{1/4}}
+\end{equation}
+
+%=======================================================================
+\section{Part 2 (cont.): Numeric Values for the Two Test Cases}
+\label{sec:numeric}
+%=======================================================================
+
+\subsection{$\tau = 0$ (Constant Boundary Temperature)}
+
+\textbf{Self-similar constants:}
+$\xsif = 0.4277$, \quad $P_f = 0.3871$, \quad $U(0) = -10.544$, \quad $S_0 \approx 1.603$.
+
+\textbf{Shock parameters:}
+$p_{0,s} = 2.540\times10^{8}$ Ba, \quad $\tau_s = -0.4479$, \quad $\xsis = 1.671$.
+
+\begin{center}
+\begin{tabular}{l r r}
+\toprule
+Quantity & Coefficient $C_i$ & Time power $d_i$ \\
+\midrule
+$x_b(t)$ & $-6.411 \times 10^{7}$ cm/s$^{d}$ & 1.0365 \\
+$m_f(t)$ & $4.454 \times 10^{1}$ g\,cm$^{-2}$/s$^{d}$ & 0.5156 \\
+$x_{\mathrm{shock\,front}}(t)$ & $6.060 \times 10^{3}$ cm/s$^{d}$ & 0.7760 \\
+$\hat{\xsi}(t)$ & $6.389\times10^{-1}$ s$^{-d}$ & $d_{\hat{\xsi}} = -0.2604$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Bath drive:}
+$\mathcal{B}_{\mathrm{bath}} \approx 0.0577$ (for $t$ in ns), \quad $\eta_{\mathrm{bath}} \approx -0.615$ (constant bath at $\tau=0$).
+
+\subsection{$\tau = 0.123$ (Constant Flux Temperature)}
+
+\textbf{Self-similar constants:}
+$\xsif = 0.3502$, \quad $P_f = 0.4372$, \quad $U(0) = -7.760$, \quad $S_0 \approx 1.931$.
+
+\textbf{Shock parameters:}
+$p_{0,s} = 2.335\times10^{11}$ Ba, \quad $\tau_s = -0.1245$, \quad $\xsis = 1.177$.
+
+\begin{center}
+\begin{tabular}{l r r}
+\toprule
+Quantity & Coefficient $C_i$ & Time power $d_i$ \\
+\midrule
+$x_b(t)$ & $-2.697 \times 10^{8}$ cm/s$^{d}$ & 1.1245 \\
+$m_f(t)$ & $4.787 \times 10^{3}$ g\,cm$^{-2}$/s$^{d}$ & 0.7510 \\
+$x_{\mathrm{shock\,front}}(t)$ & $1.293 \times 10^{5}$ cm/s$^{d}$ & 0.9377 \\
+$\hat{\xsi}(t)$ & $7.142\times10^{-2}$ s$^{-d}$ & $d_{\hat{\xsi}} = -0.1868$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%=======================================================================
+\section{Part 3: Self-Similar Profile Fits and Explicit Formulas}
+\label{sec:fits}
+%=======================================================================
+
+The subsonic self-similar profiles $\tilde{T}$, $\tilde{P}$, $\tilde{U}$, $\tilde{S}$ are obtained numerically from the ODE solver. The following power-law fits were produced by \texttt{plot\_test\_cases.py}, expressed in the normalized variable $y = \xsi/\xsif \in [0,1]$.
+
+\subsection{Subsonic Self-Similar Profile Fits}
+
+\subsubsection{$\tau = 0$ (Constant Boundary Temperature)}
+
+\begin{center}
+\begin{tabular}{l l c}
+\toprule
+Profile & Fit Formula & $R^2$ \\
+\midrule
+$\tilde{T}(y)$ & $1.011\,(1-y)^{0.242}$ & 0.9996 \\
+$\tilde{P}(y)$ & $0.355\,y^{0.902}$ & 0.9987 \\
+$\tilde{S}(y)$ & $1.603\,(1-y)^{0.545}$ & 0.9975 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Velocity fits (selected):}} \\
+$\tilde{U}_{\mathrm{fit\,3}}(y)$ & $-1.978\,(1-y)\,y^{-0.293}$ & 0.9950 \\
+$\tilde{U}_{\mathrm{fit\,4}}(y)$ & $-3.337\,(1-y^{0.516})\,y^{-0.190}$ & 0.9970 \\
+$\tilde{U}_{\mathrm{fit\,5}}(y)$ & $-1.964\,(1-y)\,(y^{8.473}+y^{-0.295})$ & 0.9958 \\
+$\tilde{U}_{\mathrm{fit\,7}}(y)$ & $-2.152\,(1-y)\,y^{-0.271}\,(1-0.194\,y)$ & 0.9958 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{$\tau = 0.123$ (Constant Flux Temperature)}
+
+\begin{center}
+\begin{tabular}{l l c}
+\toprule
+Profile & Fit Formula & $R^2$ \\
+\midrule
+$\tilde{T}(y)$ & $1.011\,(1-y)^{0.243}$ & 0.9997 \\
+$\tilde{P}(y)$ & $0.394\,y^{0.909}$ & 0.9976 \\
+$\tilde{S}(y)$ & $1.931\,(1-y)^{0.560}$ & 0.9972 \\
+\midrule
+\multicolumn{3}{l}{\textbf{Velocity fits (selected):}} \\
+$\tilde{U}_{\mathrm{fit\,3}}(y)$ & $-1.832\,(1-y)\,y^{-0.254}$ & 0.9947 \\
+$\tilde{U}_{\mathrm{fit\,4}}(y)$ & $-2.067\,(1-y^{0.846})\,y^{-0.227}$ & 0.9949 \\
+$\tilde{U}_{\mathrm{fit\,5}}(y)$ & $-1.798\,(1-y)\,(y^{5.988}+y^{-0.259})$ & 0.9971 \\
+$\tilde{U}_{\mathrm{fit\,7}}(y)$ & $-1.828\,(1-y)\,y^{-0.254}\,(1+0.005\,y)$ & 0.9947 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{notebox}[Best velocity fit][blue]
+The best $R^2$ for velocity is consistently Fit~4 ($c(1-y^a)y^{-b}$, 3 parameters) for $\tau=0$, and Fit~5 ($c(1-y)(y^a + y^{-b})$, 3 parameters) for $\tau=0.123$. Both achieve $R^2 > 0.997$.
+\end{notebox}
+
+\subsection{Substituting Fits into Dimensional Profiles}
+\label{sec:explicit_profiles}
+
+The entire point of the self-similar fits is to produce \textbf{explicit closed-form} expressions for the full dimensional profiles. Below we show how this works for each profile, and then specialize to the two test cases.
+
+\subsubsection{Pressure $p(m,t)$ --- Explicit Formula}
+
+From $p(m,t) = P(\xsi)\,A^{a_3}\,B^{b_3}\,t^{c_3}$ and the fit $\tilde{P}_{\mathrm{fit}}(y) = c_P\,y^{d_P}$:
+\begin{equation}
+  \boxed{p(m,t) = c_P \left(\frac{m}{m_f(t)}\right)^{d_P}\!\cdot A^{a_3}\,B^{b_3}\,t^{c_3}}
+\end{equation}
+Since $y = \xsi/\xsif = m/m_f(t)$, this becomes:
+\begin{equation}
+  p(m,t) = c_P\,\xsif^{-d_P}\,A^{a_3 + a\,d_P}\,B^{b_3+b\,d_P}\;m^{d_P}\;t^{c_3+c\,d_P}
+\end{equation}
+which is an explicit power law in both $m$ and $t$.
+
+\textbf{For $\tau=0$:} $c_P = 0.355$, $d_P = 0.902$:
+\begin{equation}
+  p(m,t) = 0.355\,(0.4277)^{-0.902}\,A^{a_3 + 0.902\,a}\,B^{b_3+0.902\,b}\;m^{0.902}\;t^{c_3+0.902\,c}
+\end{equation}
+
+\textbf{For $\tau=0.123$:} $c_P = 0.394$, $d_P = 0.909$:
+\begin{equation}
+  p(m,t) = 0.394\,(0.3502)^{-0.909}\,A^{a_3 + 0.909\,a}\,B^{b_3+0.909\,b}\;m^{0.909}\;t^{c_3+0.909\,c}
+\end{equation}
+
+\subsubsection{Temperature $T(m,t)$ --- Explicit Formula}
+
+From the fit $\tilde{T}_{\mathrm{fit}}(y) = c_T\,(1-y)^{d_T}$ and $T(m,t) = T(\xsi)\,T_0\,t^{\tau}$:
+\begin{equation}
+  \boxed{T(m,t) = c_T\,T_0\,t^{\tau}\,\left(1 - \frac{m}{m_f(t)}\right)^{d_T}}
+\end{equation}
+
+\textbf{For $\tau=0$:}
+\begin{equation}
+  T(m,t) = 1.011\,T_0\left(1 - \frac{m}{m_f(t)}\right)^{0.242}
+  \qquad\text{(time-independent profile shape!)}
+\end{equation}
+
+\textbf{For $\tau=0.123$:}
+\begin{equation}
+  T(m,t) = 1.011\,T_0\,t^{0.123}\left(1 - \frac{m}{m_f(t)}\right)^{0.243}
+\end{equation}
+
+\subsubsection{Velocity $u(m,t)$ --- Explicit Formula}
+
+Using the best fit (Fit~4: $\tilde{U}_{\mathrm{fit}}(y) = c_U\,(1-y^{a_U})\,y^{-b_U}$):
+\begin{equation}
+  \boxed{u(m,t) = c_U\,A^{a_2}\,B^{b_2}\,t^{c_2}\,
+  \left(1 - \left(\frac{m}{m_f(t)}\right)^{a_U}\right)
+  \left(\frac{m}{m_f(t)}\right)^{-b_U}}
+\end{equation}
+
+\textbf{For $\tau=0$:} $(c_U, a_U, b_U) = (-3.337, 0.516, 0.190)$:
+\begin{equation}
+  u(m,t) = -3.337\,A^{a_2}\,B^{b_2}\,t^{c_2}\,
+  \left(1 - \left(\frac{m}{m_f(t)}\right)^{0.516}\right)
+  \left(\frac{m}{m_f(t)}\right)^{-0.190}
+\end{equation}
+
+\textbf{For $\tau=0.123$:} $(c_U, a_U, b_U) = (-2.067, 0.846, 0.227)$:
+\begin{equation}
+  u(m,t) = -2.067\,A^{a_2}\,B^{b_2}\,t^{c_2}\,
+  \left(1 - \left(\frac{m}{m_f(t)}\right)^{0.846}\right)
+  \left(\frac{m}{m_f(t)}\right)^{-0.227}
+\end{equation}
+
+\subsubsection{Specific Volume / Density --- Explicit Formula}
+
+From the velocity fit and the relation $V = (U' - c\,\xsi\,V')/(c_1)$ from the ODE, no independent simple fit for $V$ is produced. However, we can note that the density profile is implicitly determined by the pressure and temperature fits via the EOS:
+\begin{equation}
+  \rho(m,t) = \left(\frac{r\,f\,T(m,t)^{\beta}}{e(m,t)}\right)^{1/(1-\mu)},
+  \qquad e(m,t) = \frac{p(m,t)}{\rho(m,t)\,r}.
+\end{equation}
+So combining the $p$ and $T$ fits:
+\begin{equation}
+  \boxed{v(m,t) = \left(\frac{p(m,t)}{r\,f\,T(m,t)^{\beta}}\right)^{-1/(1-\mu)}}
+\end{equation}
+
+\subsubsection{Flux $s(m,t)$ --- Explicit Formula}
+
+From the fit $\tilde{S}_{\mathrm{fit}}(y) = c_S\,(1-y)^{d_S}$:
+\begin{equation}
+  \boxed{s(m,t) = c_S\,A^{a_S}\,B^{b_S}\,t^{c_S}\,\left(1-\frac{m}{m_f(t)}\right)^{d_S}}
+\end{equation}
+
+\textbf{For $\tau=0$:}
+$s(m,t) = 1.603\,A^{a_S}\,B^{b_S}\,t^{c_S}\,\left(1-m/m_f(t)\right)^{0.545}$
+
+\textbf{For $\tau=0.123$:}
+$s(m,t) = 1.931\,A^{a_S}\,B^{b_S}\,t^{c_S}\,\left(1-m/m_f(t)\right)^{0.560}$
+
+
+\subsection{Converting from $p(m,t)$ to $p(x,t)$ in the Subsonic Region}
+
+Given the closed-form Eulerian coordinate (from Eq.~\eqref{eq:x_sub}):
+\begin{equation}
+  x_{\mathrm{sub}}(m,t) = x_{\mathrm{ablation}}(t) + \frac{A^{a_2}\,B^{b_2}\,t^{c_2+1}}{c_2+1}
+  \Bigl[U\bigl(\xsi(m)\bigr) - c\,\xsi(m)\,V\bigl(\xsi(m)\bigr)\Bigr],
+\end{equation}
+one can (numerically) invert $x \mapsto m(x,t)$ and then substitute into $p(m,t)$ to get $p(x,t)$. Since the $x(m)$ mapping involves the self-similar profiles $U$ and $V$, the inversion is generally not analytic, but the fits make it efficiently computable.
+
+\subsection{Shock Regime: Profiles as Functions of $x$}
+
+For $\omega = 0$, the shock position of a mass element is:
+\begin{equation}
+  x_{\mathrm{shock}}(m,t) = \sqrt{v_0\,p_{0,s}}\;t^{(\tau_s+2)/2}
+  \left[\xsi_s(m,t)\,V_s(\xsi_s) + \frac{2}{\tau_s+2}\,U_s(\xsi_s)\right].
+\end{equation}
+So any profile $h(m,t)$ can be expressed as $h(x,t)$ by inverting this mapping.
+
+%=======================================================================
+\section{Shock Regime: Self-Similar Profile Structure}
+\label{sec:shock_profiles_structure}
+%=======================================================================
+
+The shock self-similar profiles $V_s(\xsi_s)$, $U_s(\xsi_s)$, $P_s(\xsi_s)$ are governed by a different set of ODEs (the adiabatic piston-shock self-similar equations). They satisfy:
+\begin{itemize}
+  \item At the shock $\xsi_s = \xsis$: Rankine--Hugoniot relations (see above).
+  \item At the piston $\xsi_s \to 0$: $P_s(0) = 1$ (normalization), $V_s \to V_0^s$ (finite), $U_s \to U_0^s$ (finite).
+\end{itemize}
+
+These profiles are smooth and monotonic between the piston and the shock. The $V$ integral (exact) is:
+\begin{equation}
+  \int_0^{\xsi_0} V_s(\xsi)\,d\xsi = (1-\omega)\,\xsi_0\,V_s(\xsi_0) + \frac{2-\omega}{\tau_s+2}\bigl(U_s(\xsi_0) - U_s(0)\bigr).
+\end{equation}
+
+\begin{notebox}[Note on shock fits][blue]
+Currently, no power-law fits are produced for the shock self-similar profiles $V_s$, $U_s$, $P_s$ (the existing fitting pipeline in \texttt{plot\_test\_cases.py} only fits the subsonic profiles). Fits for the shock profiles can be added analogously using the piston shock solver output. As placeholders:
+\begin{align}
+  \tilde{V}_s^{\mathrm{fit}}(z) &= \tilde{V}_{s,\mathrm{fit}}(z), \quad z = \xsi_s/\xsis, \\
+  \tilde{U}_s^{\mathrm{fit}}(z) &= \tilde{U}_{s,\mathrm{fit}}(z), \\
+  \tilde{P}_s^{\mathrm{fit}}(z) &= \tilde{P}_{s,\mathrm{fit}}(z).
+\end{align}
+Once these fits are determined, the same substitution procedure from \S\ref{sec:explicit_profiles} applies to produce explicit $p_{\mathrm{shock}}(m,t)$ etc.
+\end{notebox}
+
+
+%=======================================================================
+\appendix
+\section{Derivation of the Boundary Position}
+\label{app:boundary}
+%=======================================================================
+
+The boundary velocity is $u_b(t) = U(0)\,A^{a_2}\,B^{b_2}\,t^{c_2}$. Integrating:
+\begin{equation}
+  x_b(t) = \int_0^t u_b(t')\,dt' = U(0)\,A^{a_2}\,B^{b_2}\int_0^t t'^{c_2}\,dt'
+  = \frac{U(0)\,A^{a_2}\,B^{b_2}}{c_2+1}\,t^{c_2+1},
+\end{equation}
+requiring $c_2 > -1$ for convergence.
+
+\section{Derivation of the Ablation Front Position Identity}
+\label{app:xf}
+
+The Eulerian position of a Lagrangian element $m$ is:
+\begin{equation}
+  x(t,m) - x_b(t) = \int_0^m v(m',t)\,dm' = A^{a_2}\,B^{b_2}\,t^{c_2+1}\int_0^{\xsi(m)} V(\xsi')\,d\xsi'.
+\end{equation}
+At $m = m_f(t)$, the integral identity $\int_0^{\xsif} V\,d\xsi = -U(0)/(c_2+1)$ ensures $x_f(t) = 0$.
+
+\textbf{Proof:} From the self-similar continuity equation $c\,\xsi\,V' + c_1\,V - U' = 0$:
+\begin{equation}
+  \int_0^{\xsi_0} V\,d\xsi = \frac{1}{c_1-c}\left[U(\xsi_0) - U(0) - c\,\xsi_0\,V(\xsi_0)\right].
+\end{equation}
+For $\xsi_0 = \xsif$ where $U(\xsif) = V(\xsif) = 0$: $\int_0^{\xsif} V\,d\xsi = -U(0)/(c_1-c) = -U(0)/(c_2+1)$.
+
+\section{Derivation of the Closed-Form Position $x(m,t)$}
+\label{app:x_closed}
+
+Starting from:
+\begin{equation}
+  x(t,m) = A^{a_2}\,B^{b_2}\,t^{c_2+1}\left[\frac{U(0)}{c_2+1} + \int_0^{\xsi(m)} V\,d\xsi\right],
+\end{equation}
+and using the general integral identity:
+\begin{equation}
+  \int_0^{\xsi_0} V\,d\xsi = \frac{1}{c_2+1}\left[U(\xsi_0) - U(0) - c\,\xsi_0\,V(\xsi_0)\right],
+\end{equation}
+we get:
+\begin{equation}
+  x(t,m) = \frac{A^{a_2}\,B^{b_2}\,t^{c_2+1}}{c_2+1}\left[U(\xsi) - c\,\xsi\,V(\xsi)\right].
+\end{equation}
+
+\section{Derivation of the Bath Temperature}
+\label{app:bath}
+
+The Marshak boundary condition gives:
+\begin{equation}
+  T_{\mathrm{bath}}^4(t) = T_s^4(t) + \frac{F_s(t)}{2\,\sigma_{\mathrm{sb}}}.
+\end{equation}
+Using $F_s(t) = S_0\,A^{a_S}\,B^{b_S}\,t^{c_S}$:
+\begin{equation}
+  T_{\mathrm{bath}}(t) = T_0\,t^{\tau}\left[1 + \frac{S_0\,A^{a_S}\,B^{b_S}}{2\,\sigma_{\mathrm{sb}}\,T_0^4}\,t^{c_S-4\tau}\right]^{1/4}.
+\end{equation}
+
+\section{Shock V Integral Identity}
+\label{app:V_shock}
+
+From the piston-shock self-similar continuity equation (for $\omega = 0$):
+\begin{equation}
+  \int_0^{\xsi_0} V_s\,d\xsi = \xsi_0\,V_s(\xsi_0) + \frac{2}{\tau_s+2}\bigl(U_s(\xsi_0) - U_s(0)\bigr).
+\end{equation}
+This gives the piston position: $x_{\mathrm{piston}}(t) = \sqrt{v_0\,p_{0,s}}\,t^{(\tau_s+2)/2}\cdot U_s(0)\cdot 2/(\tau_s+2)$.
+
+\section{Energy Integral Identity}
+\label{app:energy}
+
+The total energy integral satisfies (subsonic regime):
+\begin{equation}
+  \int_0^{\xsi_0}\left(\frac{PV}{r} + \frac{U^2}{2}\right)d\xsi
+  = \frac{1}{2c_2-c}\left[-S(\xsi) - P(\xsi)\,U(\xsi) - c\,\xsi\left(\frac{PV}{r}+\frac{U^2}{2}\right)\right]_0^{\xsi_0}.
+\end{equation}
+At $\xsi_0 = \xsif$ (where $P=V=U=S=0$):
+\begin{equation}
+  E_{\mathrm{total}} = \frac{1}{2c_2-c}\left[S(0) + P(0)\,U(0)\right] = \frac{S_0}{2c_2-c}
+\end{equation}
+(since $P(0) = 0$ in the subsonic problem).
+
+\end{document}

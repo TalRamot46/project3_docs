@@ -1,0 +1,63 @@
+\contentsline {section}{\numberline {1}Problem Setup}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Test Case Parameters (Gold)}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Self-Similar Coordinates and Exponents}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Subsonic (Ablation) Self-Similar Coordinate}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Self-Similar Profile Exponents}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Shock Self-Similar Coordinate}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Part 1: All Profiles in Both Regimes}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Subsonic (Ablation) Regime ($m < m_f(t)$)}{4}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Specific Volume}{4}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Density}{4}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Velocity}{4}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Pressure}{4}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}Temperature}{5}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.6}Specific Internal Energy}{5}{subsubsection.3.1.6}%
+\contentsline {subsubsection}{\numberline {3.1.7}Radiation Energy Flux}{5}{subsubsection.3.1.7}%
+\contentsline {subsection}{\numberline {3.2}Shock Regime ($m \geq m_f(t)$, \tmspace +\thickmuskip {.2777em}$\xi _{\mathrm {shock}} \leq \xi _s$)}{5}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Specific Volume}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Density}{5}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Velocity}{5}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Pressure}{6}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Temperature (via EOS)}{6}{subsubsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.6}Specific Internal Energy}{6}{subsubsection.3.2.6}%
+\contentsline {subsubsection}{\numberline {3.2.7}Radiation Energy Flux}{6}{subsubsection.3.2.7}%
+\contentsline {subsubsection}{\numberline {3.2.8}Hugoniot Jump Relations at the Shock Front ($\xi _s = \xi _s$)}{6}{subsubsection.3.2.8}%
+\contentsline {subsection}{\numberline {3.3}Unshocked Region ($\xi _{\mathrm {shock}} > \xi _s$)}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Part 2: All Variables in Lagrangian and Eulerian Coordinates}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Subsonic (Ablation) Regime Variables}{6}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Ablation Boundary ($m=0$)}{6}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Ablation (Heat) Front}{7}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Distance from Boundary to Ablation Front}{7}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Subsonic Region Position $x_{\mathrm {sub}}(m,t)$}{7}{subsubsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.2}Shock Regime Variables}{7}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Matching Conditions}{7}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Shock Front}{7}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Ablation Front Position (in the Patched Problem)}{8}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Distance: Ablation Front to Shock Front}{8}{subsubsection.4.2.4}%
+\contentsline {subsubsection}{\numberline {4.2.5}Shock Region Position $x_{\mathrm {shock}}(m,t)$}{8}{subsubsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.3}Energy Integrals}{8}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Subsonic Regime}{8}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Shock Regime ($\omega =0$)}{9}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Albedo and Surface Flux}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Part 2 (cont.): Numeric Values for the Two Test Cases}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}$\tau = 0$ (Constant Boundary Temperature)}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}$\tau = 0.123$ (Constant Flux Temperature)}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Part 3: Self-Similar Profile Fits and Explicit Formulas}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Subsonic Self-Similar Profile Fits}{10}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}$\tau = 0$ (Constant Boundary Temperature)}{10}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}$\tau = 0.123$ (Constant Flux Temperature)}{10}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}Substituting Fits into Dimensional Profiles}{11}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Pressure $p(m,t)$ --- Explicit Formula}{11}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Temperature $T(m,t)$ --- Explicit Formula}{11}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Velocity $u(m,t)$ --- Explicit Formula}{12}{subsubsection.6.2.3}%
+\contentsline {subsubsection}{\numberline {6.2.4}Specific Volume / Density --- Explicit Formula}{12}{subsubsection.6.2.4}%
+\contentsline {subsubsection}{\numberline {6.2.5}Flux $s(m,t)$ --- Explicit Formula}{12}{subsubsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.3}Converting from $p(m,t)$ to $p(x,t)$ in the Subsonic Region}{12}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Shock Regime: Profiles as Functions of $x$}{13}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Shock Regime: Self-Similar Profile Structure}{13}{section.7}%
+\contentsline {section}{\numberline {A}Derivation of the Boundary Position}{13}{appendix.A}%
+\contentsline {section}{\numberline {B}Derivation of the Ablation Front Position Identity}{14}{appendix.B}%
+\contentsline {section}{\numberline {C}Derivation of the Closed-Form Position $x(m,t)$}{14}{appendix.C}%
+\contentsline {section}{\numberline {D}Derivation of the Bath Temperature}{14}{appendix.D}%
+\contentsline {section}{\numberline {E}Shock V Integral Identity}{14}{appendix.E}%
+\contentsline {section}{\numberline {F}Energy Integral Identity}{15}{appendix.F}%
