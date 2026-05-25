@@ -1,0 +1,116 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[mathscr]{eucal}
+\usepackage[most]{tcolorbox}
+\usepackage[margin=1in]{geometry}
+
+\title{Piecewise Self-Similar Radiation-Hydrodynamics Analytic Profiles}
+\author{Antigravity \& Tal Ramot}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This document summarizes the complete piecewise self-similar analytical profiles for the radiation-hydrodynamics simulation under a constant boundary temperature drive of $T(0,t) = 1\,\text{HeV}$ ($\tau = 0$) in a gold-like medium ($\rho_0 = 19.32\,\text{g/cm}^3$). The system contains two distinct physical domains separated by the ablation front $m_f(t)$:
+\begin{enumerate}
+    \item \textbf{Subsonic Ablation Regime ($m < m_f(t)$):} A radiation-diffusion-driven heat wave with low density and high temperature.
+    \item \textbf{Shock/Piston Regime ($m > m_f(t)$):} A hydrodynamically driven shock wave where radiation is negligible, resulting in high compressed density and high pressure.
+\end{enumerate}
+The solutions are patched at $m = m_f(t)$ by matching the pressure and velocity. We present the explicit formulas for each profile ($p, u, \rho, T$) as functions of the Lagrangian mass coordinate $m$ and time $t$.
+
+\section{Wave Front and Mass Coordinates}
+All physical quantities are scaled using nanoseconds ($\text{ns}$) for time, $\text{g/cm}^2$ for mass coordinates, $\text{g/cm}^3$ for density, $\text{MBar}$ for pressure, $\text{km/s}$ for velocity, and $\text{HeV}$ for temperature.
+
+\subsection{Ablation (Heat) Front}
+The ablation front in similarity coordinates is $\xi_f \approx 0.427735$. In physical coordinates, the total ablated mass grows as a power law in time:
+\begin{equation}
+    m_f(t) = m_{f0} \left(\frac{t}{\text{ns}}\right)^{0.515625} \approx 0.00767554 \left(\frac{t}{\text{ns}}\right)^{0.515625} \,\text{g/cm}^2
+\end{equation}
+
+\subsection{Shock Front}
+The shock front mass in similarity coordinates is $\xi_s \approx 1.669247$. The total shocked mass scales as:
+\begin{equation}
+    m_s(t) = m_{s0} \left(\frac{t}{\text{ns}}\right)^{0.7765} \approx 0.0120786 \left(\frac{t}{\text{ns}}\right)^{0.7765} \,\text{g/cm}^2
+\end{equation}
+
+\section{Explicit Piecewise Profiles}
+
+\subsection{Subsonic Ablation Region ($m < m_f(t)$)}
+In this region, the similarity variable is normalized to:
+\begin{equation}
+    y = \frac{m}{m_f(t)} \in [0, 1]
+\end{equation}
+
+\paragraph{Density Profile $\rho(m,t)$:}
+The bulk density profile is fitted using a singular power law near the front:
+\begin{equation}
+    \rho(m,t) \approx 0.173930 \left(\frac{t}{\text{ns}}\right)^{-0.520833} (1 - y)^{-0.491367} \,\text{g/cm}^3
+\end{equation}
+
+\paragraph{Pressure Profile $p(m,t)$:}
+The pressure scales as:
+\begin{equation}
+    p(m,t) \approx 7.051327 \left(\frac{t}{\text{ns}}\right)^{-0.447917} \left[ 0.348591 y^{0.876766} + 0.029050 y^{20.948361} \right] \,\text{MBar}
+\end{equation}
+
+\paragraph{Velocity Profile $u(m,t)$:}
+We provide two alternative high-accuracy fits for the velocity profile:
+\begin{itemize}
+    \item \textbf{Rational Fit ($R^2 = 0.9689$):}
+    \begin{equation}
+        u(m,t) \approx -202.645 \left(\frac{t}{\text{ns}}\right)^{0.036458} \frac{1 - y}{1 + 5.48441 y} \,\text{km/s}
+    \end{equation}
+    \item \textbf{Rational Fractional Fit ($R^2 = 0.9849$):}
+    \begin{equation}
+        u(m,t) \approx -289.838 \left(\frac{t}{\text{ns}}\right)^{0.036458} \frac{1 - y^{0.2340}}{1 + 0.7524 y} \,\text{km/s}
+    \end{equation}
+\end{itemize}
+
+\paragraph{Temperature Profile $T(m,t)$:}
+The temperature profile satisfies:
+\begin{equation}
+    T(m,t) \approx 1.011087 (1 - y)^{0.241582} \,\text{HeV}
+\end{equation}
+Note that at the boundary $m=0$, $T(0,t) \approx 1\,\text{HeV}$ is constant.
+
+\subsection{Shock Region ($m_f(t) < m < m_s(t)$)}
+In the shocked region, the similarity variable is normalized to:
+\begin{equation}
+    y_s = \frac{m - m_f(t)}{m_s(t) - m_f(t)} \in [0, 1]
+\end{equation}
+
+\paragraph{Density Profile $\rho(m,t)$:}
+The density increases from the piston boundary towards the shock front due to compression:
+\begin{equation}
+    \rho(m,t) \approx 173.88 \, y_s^{0.647468} \,\text{g/cm}^3
+\end{equation}
+At the shock front $y_s=1$, the density reaches the strong shock Hugoniot limit of $\rho_s = 9 \rho_0 = 173.88\,\text{g/cm}^3$.
+
+\paragraph{Pressure Profile $p(m,t)$:}
+The pressure profile scales as:
+\begin{equation}
+    p(m,t) \approx 2.710000 \left(\frac{t}{\text{ns}}\right)^{-0.447} \left[ 1.0 + 0.493384 \, y_s^{1.133029} \right] \,\text{MBar}
+\end{equation}
+At the piston boundary $y_s=0$, the pressure is precisely matched to the subsonic ablation pressure $p(m_f, t) \approx 2.71 \left(t/\text{ns}\right)^{-0.447}\,\text{MBar}$.
+
+\paragraph{Velocity Profile $u(m,t)$:}
+The velocity satisfies:
+\begin{equation}
+    u(m,t) \approx \left(\frac{t}{\text{ns}}\right)^{-0.2235} \left[ 3.65776 + 0.65734 \, y_s^{0.644937} \right] \,\text{km/s}
+\end{equation}
+At the piston boundary $y_s=0$, $u(m_f, t) \approx 3.65776 \left(t/\text{ns}\right)^{-0.2235}\,\text{km/s}$.
+
+\paragraph{Temperature Profile $T(m,t)$:}
+Using the ideal gas relation $T = p / ((\gamma-1)\rho)$ in HeV:
+\begin{equation}
+    T(m,t) \approx 3.2091 \times 10^5 \left(\frac{t}{\text{ns}}\right)^{-0.447} y_s^{-0.438483} \,\text{HeV}
+\end{equation}
+Note the temperature singularity at the piston boundary $y_s \to 0$ due to the vanishing density.
+
+\end{document}
