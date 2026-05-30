@@ -9,6 +9,8 @@
 \usepackage[most]{tcolorbox}
 \usepackage[margin=1in]{geometry}
 
+\newcommand{\HeV}{\text{HeV}}
+
 \title{Piecewise Self-Similar Radiation-Hydrodynamics Analytic Profiles}
 \author{Antigravity \& Tal Ramot}
 \date{May 2026}
@@ -16,21 +18,249 @@
 \begin{document}
 \maketitle
 
-\section{Introduction}
-This document summarizes the complete piecewise self-similar analytical profiles for the radiation-hydrodynamics simulation under a constant boundary temperature drive of $T(0,t) = 1\,\text{HeV}$ ($\tau = 0$) in a gold-like medium ($\rho_0 = 19.32\,\text{g/cm}^3$). The system contains two distinct physical domains separated by the ablation front $m_f(t)$:
-\begin{enumerate}
-    \item \textbf{Subsonic Ablation Regime ($m < m_f(t)$):} A radiation-diffusion-driven heat wave with low density and high temperature.
-    \item \textbf{Shock/Piston Regime ($m > m_f(t)$):} A hydrodynamically driven shock wave where radiation is negligible, resulting in high compressed density and high pressure.
-\end{enumerate}
-The solutions are patched at $m = m_f(t)$ by matching the pressure and velocity. We present the explicit formulas for each profile ($p, u, \rho, T$) as functions of the Lagrangian mass coordinate $m$ and time $t$.
-
 \section{Wave Front and Mass Coordinates}
 All physical quantities are scaled using nanoseconds ($\text{ns}$) for time, $\text{g/cm}^2$ for mass coordinates, $\text{g/cm}^3$ for density, $\text{MBar}$ for pressure, $\text{km/s}$ for velocity, and $\text{HeV}$ for temperature.
+
+Exact physical constants (according to SI):
+\begin{center}
+\begin{tabular}{l c r}
+\hline
+Quantity & value & SI units\\
+\hline
+$c$ & $299792458$ & m / s \\
+$k_B$ & $1.380649 \times 10^{-23}$ & J / K \\
+$q$ & $1.602176634 \times 10^{-19}$ & J \\
+$h$ & $6.62607015 \times 10^{-34}$ & J s \\
+\hline
+\end{tabular}
+\end{center}
+
+Other fundemental quantities derived are:
+\begin{center}
+\begin{tabular}{l c r}
+\hline
+Quantity & Theoretical Expression (SI) & CGS Units \\ % & conversion factor (CGS) & CGS value & CGS units\\ 
+\hline
+$\HeV$ & $\frac{q}{k_B} \cdot 100$ &  K \\
+$\sigma_{SB}$ & $\frac{2\pi^5 k_B^4}{15 c^2 h^3}$ & erg/(cm$^2$ $\cdot$ s $\cdot$ K$^4$) \\
+$a$ & $\frac{4 \sigma_{SB}}{c}$ & erg/(cm$^3$ $\cdot$ K$^4$)
+\end{tabular}
+\end{center}
+
+\subsection*{Case 1: $\tau=0$}
+
+\paragraph{Material model.}
+\begin{center}
+\begin{tabular}{l c r}
+\hline
+Quantity & value & CGS units\\
+\hline
+$f$ & $3.4\times10^{13}$ & erg / g\\
+$f_{\text{Kelvin}}$ & $\frac{f}{\HeV^{\beta}}$ & erg / g\\
+$\beta$ & $1.6$ & - \\
+$\mu$ & $-0.14$ &  \\
+
+$g$ & $7200$ & cm$^2$ / g\\
+$g_{\text{Kelvin}}$ & $\frac{g}{\HeV^{\alpha}}$ & erg / g\\
+$\alpha$ &  1.5 & - \\
+$\lambda$ & 0.2 & - \\
+
+$\gamma$ & $1.25$ & - \\ 
+$r$ & 0.25 & - \\
+$\rho_0$ & 19.32 & g/cm$^3$\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Self Similar Constants}
+\begin{gather}
+    A = T_0 (rf)^\frac{1}{\beta} = \dots \\
+    B = \frac{16 \sigma g}{3\beta(rf)^{\frac{4+\alpha}{\beta}}} = \dots \\
+    n = \frac{4+\alpha}{\beta} = \frac{5.5}{1.6} = \frac{55}{16} \\
+    k = 1 - \mu = 1 - 0.14 = 0.86
+\end{gather}
+
+% --- Dimensional Exponents for Parameter A (i=1) ---
+% [A] = [M]^(a_1) * [L]^(a_2) * [T]^(a_3)
+% a_1 = \mu / \beta = (7/50) / (8/5) = 7/80 [cite: 126]
+\begin{equation}
+a_1 = \frac{\mu}{\beta} = \frac{7}{80}
+\end{equation}
+
+% a_2 = (2 - \mu) / \beta = (2 - 7/50) / (8/5) = (93/50) * (5/8) = 93/80 [cite: 126]
+\begin{equation}
+a_2 = \frac{2 - \mu}{\beta} = \frac{93}{80}
+\end{equation}
+
+% a_3 = -2/\beta - \tau = -2/(8/5) - 0 = -5/4 [cite: 126]
+\begin{equation}
+a_3 = -\frac{2}{\beta} - \tau = -\frac{5}{4}
+\end{equation}
+
+
+% --- Dimensional Exponents for Parameter B (i=2) ---
+% [B] = [M]^(b_1) * [L]^(b_2) * [T]^(b_3)
+% b_1 = ( \beta(2+\lambda) - \mu(4+\alpha) ) / \beta [cite: 135]
+% Numerator: (8/5)*(11/5) - (7/50)*(11/2) = 88/25 - 77/100 = 275/100 = 11/4
+% b_1 = (11/4) / (8/5) = 55/32
+\begin{equation}
+b_1 = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{\beta} = \frac{55}{32}
+\end{equation}
+
+% b_2 = ( 2\beta - \beta\lambda - 8 - 2\alpha + \mu(4+\alpha) ) / \beta [cite: 137]
+% Numerator: 16/5 - 8/25 - 8 - 3 + 77/100 = -723/100
+% b_2 = (-723/100) / (8/5) = -723/160
+\begin{equation}
+b_2 = \frac{2\beta - \beta\lambda - 8 - 2\alpha + \mu(4 + \alpha)}{\beta} = -\frac{723}{160}
+\end{equation}
+
+% b_3 = (8 - 3\beta + 2\alpha) / \beta = (8 - 24/5 + 3) / (8/5) = (31/5) / (8/5) = 31/8 [cite: 139]
+% *CORRECTION*: Previous evaluation incorrectly yielded 41/8. The true value is 31/8.
+\begin{equation}
+b_3 = \frac{8 - 3\beta + 2\alpha}{\beta} = \frac{31}{8}
+\end{equation}
+
+
+% --- Common Denominator for Similarity and Profile Solutions ---
+% Both denominator terms share structural forms:
+% (4 + 2\lambda - 4\mu) = 4 + 2/5 - 14/50 = 4 + 2/5 - 7/25 = 103/25 [cite: 194]
+% (2 + \lambda - 2\mu) = 2 + 1/5 - 14/50 = 2 + 1/5 - 7/25 = 48/25 [cite: 270]
+
+
+% --- Similarity Variable Exponents (\xi = m * A^a * B^b * t^c) ---
+% a = Numerator_b2 / (4 + 2\lambda - 4\mu) [cite: 194]
+% Numerator_b2 = \beta * b_2 = -723/100. Denominator = 103/25.
+% a = (-723/100) / (103/25) = -723/412
+\begin{equation}
+a = \frac{2\beta - \beta\lambda - 8 - 2\alpha + \mu(4+\alpha)}{4 + 2\lambda - 4\mu} = -\frac{723}{412}
+\end{equation}
+
+% b = (\mu - 2) / (4 + 2\lambda - 4\mu) = (-93/50) / (103/25) = -93/206 [cite: 195]
+\begin{equation}
+b = \frac{\mu - 2}{4 + 2\lambda - 4\mu} = -\frac{93}{206}
+\end{equation}
+
+% c = (3\mu - 2\lambda - 2 + 0) / (4 + 2\lambda - 4\mu) = (21/50 - 1/5 - 2) / (103/25) [cite: 208]
+% Numerator = -89/50. c = (-89/50) / (103/25) = -89/206
+\begin{equation}
+c = \frac{3\mu - 2\lambda - 2 + \tau\left(2(\beta - \alpha - 4) - \beta\lambda + \mu(4+\alpha)\right)}{4 + 2\lambda - 4\mu} = -\frac{89}{206}
+\end{equation}
+
+
+% --- Profile Exponents for Specific Volume (v = V(\xi) * A^(a_v) * B^(b_v) * t^(c_v)) ---
+% a_v = (2\beta - 4 - \alpha) / (2 + \lambda - 2\mu) = (3.2 - 4 - 1.5) / (48/25) [cite: 1364]
+% Numerator = -2.3 = -23/10. a_v = (-23/10) / (48/25) = -115/96
+\begin{equation}
+a_v = \frac{2\beta - 4 - \alpha}{2 + \lambda - 2\mu} = -\frac{115}{96}
+\end{equation}
+
+% b_v = -1 / (2 + \lambda - 2\mu) = -1 / (48/25) = -25/48 [cite: 1364]
+\begin{equation}
+b_v = \frac{-1}{2 + \lambda - 2\mu} = -\frac{25}{48}
+\end{equation}
+
+% c_v = (1 - 0) / (2 + \lambda - 2\mu) = 1 / (48/25) = 25/48 [cite: 1364]
+\begin{equation}
+c_v = \frac{1 - \tau(4 + \alpha - 2\beta)}{2 + \lambda - 2\mu} = \frac{25}{48}
+\end{equation}
+
+
+% --- Profile Exponents for Fluid Velocity (u = U(\xi) * A^(a_u) * B^(b_u) * t^(c_u)) ---
+% a_u = Numerator_b1 / (4 + 2\lambda - 4\mu) = (\beta * b_1) / Denominator [cite: 1365]
+% Numerator = 11/4. Denominator = 103/25. a_u = (11/4) / (103/25) = 275/412
+\begin{equation}
+a_u = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{4 + 2\lambda - 4\mu} = \frac{275}{412}
+\end{equation}
+
+% b_u = -\mu / (4 + 2\lambda - 4\mu) = (-7/50) / (103/25) = -7/206 [cite: 1365]
+\begin{equation}
+b_u = \frac{-\mu}{4 + 2\lambda - 4\mu} = -\frac{7}{206}
+\end{equation}
+
+% c_u = (0 + \mu) / (4 + 2\lambda - 4\mu) = (7/50) / (103/25) = 7/206 [cite: 1365]
+\begin{equation}
+c_u = \frac{\tau\left(\beta(2 + \lambda) - \mu(4 + \alpha)\right) + \mu}{4 + 2\lambda - 4\mu} = \frac{7}{206}
+\end{equation}
+
+
+% --- Profile Exponents for Pressure (p = P(\xi) * A^(a_p) * B^(b_p) * t^(c_p)) ---
+% a_p = ( \beta\lambda + 4 + \alpha - \mu(4+\alpha) ) / (2 + \lambda - 2\mu) [cite: 1365]
+% Numerator: (1.6)*(0.2) + 4 + 1.5 - (0.14)*(5.5) = 0.32 + 5.5 - 0.77 = 5.05 = 101/20
+% a_p = (101/20) / (48/25) = 505/192
+\begin{equation}
+a_p = \frac{\beta\lambda + 4 + \alpha - \mu(4 + \alpha)}{2 + \lambda - 2\mu} = \frac{505}{192}
+\end{equation}
+
+% b_p = (1 - \mu) / (2 + \lambda - 2\mu) = (1 - 0.14) / (48/25) = (43/50) / (48/25) = 43/96 [cite: 1365]
+\begin{equation}
+b_p = \frac{1 - \mu}{2 + \lambda - 2\mu} = \frac{43}{96}
+\end{equation}
+
+% c_p = (0 + \mu - 1) / (2 + \lambda - 2\mu) = -43/96 [cite: 1365]
+\begin{equation}
+c_p = \frac{\tau\left(\beta\lambda + 4 + \alpha - \mu(4 + \alpha)\right) + \mu - 1}{2 + \lambda - 2\mu} = -\frac{43}{96}
+\end{equation}
+% --- Specific Volume Profile ---
+\begin{equation}
+\begin{split}
+v(m,t) &= V(\xi) \, A^{a_v} \, B^{b_v} \, t^{c_v} 
+  = V(\xi) \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}} \\
+  &\approx 5.749439 \left(1 - \frac{m}{m_f(t)}\right)^{0.491367} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}} \\
+  &\approx 1.180662\times10^{-4} \left(1 - 981.4602 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.491367} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}
+\end{split}
+\end{equation}
+
+% --- Density Profile (\rho = 1/v) ---
+\begin{equation}
+\begin{split}
+\rho(m,t) &= \left( \frac{r f \, T(m,t)^\beta}{p(m,t)} \right)^{\frac{1}{\mu-1}}
+\end{split}
+\end{equation}
+\textit{Note: The density profile diverges sharply at the ablation front ($\xi \to 1$), so instead of independently fitting $\tilde{\rho}(\xi)$, we compute it explicitly using the equation of state (EOS) along with the well-behaved analytical fits for pressure $p(m,t)$ and temperature $T(m,t)$.}
+
+% --- Fluid Velocity Profile ---
+\begin{equation}
+\begin{split}
+u(m,t) &= U(\xi) \, A^{a_u} \, B^{b_u} \, t^{c_u} 
+  = U(\xi) \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}} \\
+  &\approx -6.46229 \frac{1 - \frac{m}{m_f(t)}}{1 + 4.78201 \frac{m}{m_f(t)}} \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}} \\
+  &\approx -3.03570 \frac{1 - 981.4602 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + 4693.35 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}}
+\end{split}
+\end{equation}
+
+% --- Pressure Profile ---
+\begin{equation}
+\begin{split}
+p(m,t) &= P(\xi) \, A^{a_p} \, B^{b_p} \, t^{c_p} 
+  = P(\xi) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}} \\
+  &\approx 7.051327 \left[ 0.348591 \left(\frac{m}{m_f(t)}\right)^{0.876766} + 0.029050 \left(\frac{m}{m_f(t)}\right)^{20.948361} \right] \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}} \\
+  &\approx 7.577405\times10^{4} \left[ 0.348591 \left(981.4602 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.876766} \right. \\
+  &\quad \left. + 0.029050 \left(981.4602 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{20.948361} \right] \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}
+\end{split}
+\end{equation}
+
+% --- Temperature Profile ---
+% Defined via the self-similar temperature relation: \mathcal{T}(\xi) = (P(\xi) * V(\xi)^{1-\mu})^(1/\beta)
+% The dimensional scaling factors combine to yield exactly: T(0,t) = T_0 * t^\tau (where \tau=0)
+% --- Specific Internal Energy (e) ---
+% Derived directly from e = (p * v) / r
+\begin{align}
+e(m,t) &= \frac{P(\xi)V(\xi)}{r} \, A^{\left(\frac{505}{192} - \frac{115}{96}\right)} \, B^{\left(\frac{43}{96} - \frac{25}{48}\right)} \, t^{\left(-\frac{43}{96} + \frac{25}{48}\right)}
+\\ &= \frac{P(\xi)V(\xi)}{r} \, A^{\frac{275}{192}} \, B^{-\frac{7}{96}} \, t^{\frac{7}{96}}
+\end{align}
+
+% --- Temperature (T) ---
+% Derived directly from T = ( (p * v^(1-\mu)) / (r * f) )^(1/\beta)
+\begin{equation}
+  T(m,t) = T(\xi) T_0 t^0 = T(\xi) T_0
+\end{equation}
+
 
 \subsection{Ablation (Heat) Front}
 The ablation front in similarity coordinates is $\xi_f \approx 0.427735$. In physical coordinates, the total ablated mass grows as a power law in time:
 \begin{equation}
-    m_f(t) = m_{f0} \left(\frac{t}{\text{ns}}\right)^{0.515625} \approx 0.00767554 \left(\frac{t}{\text{ns}}\right)^{0.515625} \,\text{g/cm}^2
+    m_f(t) = xsi_f A^{-a} B^{-b} t^{-c} = 0.427735 \cdot 
+    m_{f0} \left(\frac{t}{\text{ns}}\right)^{0.515625} \approx 0.00767554 \left(\frac{t}{\text{ns}}\right)^{0.515625} \,\text{g/cm}^2
 \end{equation}
 
 \subsection{Shock Front}
@@ -48,15 +278,15 @@ In this region, the similarity variable is normalized to:
 \end{equation}
 
 \paragraph{Density Profile $\rho(m,t)$:}
-The bulk density profile is fitted using a singular power law near the front:
+The bulk density profile is derived algebraically from the temperature and pressure fits via the physical EOS:
 \begin{equation}
-    \rho(m,t) \approx 0.173930 \left(\frac{t}{\text{ns}}\right)^{-0.520833} (1 - y)^{-0.491367} \,\text{g/cm}^3
+    \rho(m,t) = \left( \frac{r \, f_{\text{Kelvin}} \, T(m,t)^{\beta}}{p(m,t)} \right)^{\frac{1}{\mu-1}}
 \end{equation}
 
 \paragraph{Pressure Profile $p(m,t)$:}
 The pressure scales as:
 \begin{equation}
-    p(m,t) \approx 7.051327 \left(\frac{t}{\text{ns}}\right)^{-0.447917} \left[ 0.348591 y^{0.876766} + 0.029050 y^{20.948361} \right] \,\text{MBar}
+    p(m,t) \approx 7.05133 \left(\frac{t}{\text{ns}}\right)^{-0.44792} \left[ 0.34866 y^{0.87714} + 0.02903 y^{21.08862} \right] \,\text{MBar}
 \end{equation}
 
 \paragraph{Velocity Profile $u(m,t)$:}
@@ -64,7 +294,7 @@ We provide two alternative high-accuracy fits for the velocity profile:
 \begin{itemize}
     \item \textbf{Rational Fit ($R^2 = 0.9689$):}
     \begin{equation}
-        u(m,t) \approx -202.645 \left(\frac{t}{\text{ns}}\right)^{0.036458} \frac{1 - y}{1 + 5.48441 y} \,\text{km/s}
+        u(m,t) \approx -191.294 \left(\frac{t}{\text{ns}}\right)^{0.03646} \frac{1 - y}{1 + 4.78201 y} \,\text{km/s}
     \end{equation}
     \item \textbf{Rational Fractional Fit ($R^2 = 0.9849$):}
     \begin{equation}
@@ -75,7 +305,7 @@ We provide two alternative high-accuracy fits for the velocity profile:
 \paragraph{Temperature Profile $T(m,t)$:}
 The temperature profile satisfies:
 \begin{equation}
-    T(m,t) \approx 1.011087 (1 - y)^{0.241582} \,\text{HeV}
+    T(m,t) \approx \left[ (1 - y) (1 + 0.20224 \, y) \right]^{\frac{10}{39}} \,\text{HeV}
 \end{equation}
 Note that at the boundary $m=0$, $T(0,t) \approx 1\,\text{HeV}$ is constant.
 
@@ -86,9 +316,9 @@ In the shocked region, the similarity variable is normalized to:
 \end{equation}
 
 \paragraph{Density Profile $\rho(m,t)$:}
-The density increases from the piston boundary towards the shock front due to compression:
+Rather than using an independent curve fit, the density in the shocked region is algebraically derived from the pressure and temperature fits via the physical equation of state (EOS):
 \begin{equation}
-    \rho(m,t) \approx 173.88 \, y_s^{0.647468} \,\text{g/cm}^3
+    \rho(m,t) = \left( \frac{r \, f_{\text{Kelvin}} \, T(m,t)^{\beta}}{p(m,t)} \right)^{\frac{1}{\mu-1}}
 \end{equation}
 At the shock front $y_s=1$, the density reaches the strong shock Hugoniot limit of $\rho_s = 9 \rho_0 = 173.88\,\text{g/cm}^3$.
 

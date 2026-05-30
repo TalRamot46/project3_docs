@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=2.5cm]{geometry}
+
+\newcommand{\HeV}{\text{HeV}}
+
+\begin{document}
+
+\section*{Simulation Setup: Subsonic Ablative Heat Wave in Gold}
+
+Two test cases are considered, differing only in the temporal power
+$\tau$ of the surface temperature drive.
+The medium is an ideal gas with polytropic equation of state
+$p=(\gamma-1)\rho e$, where $e$ is the specific
+internal energy.
+The Rosseland mean opacity governs the radiation diffusion.
+The simulation runs from $t=0$ to $t_\text{end}=2.0$~ns.
+
+%% ====================================================================
+\subsection*{Case 1: $\tau=0$}
+
+\paragraph{Material model.}
+Adiabatic index $\gamma=\frac{5}{4}$, initial density
+$\rho_0=19.32$~g/cm$^3$ (Gold).
+\begin{equation}
+  e(T,\rho)
+  = 3.4\times10^{13}
+    \left(\frac{T}{\HeV}\right)^{1.6}
+    \left(\frac{\rho}{\text{g/cm}^3}\right)^{-0.14}
+  \;\text{erg/g}\,,
+\end{equation}
+\begin{equation}
+  \kappa_R(T,\rho)
+  = 7200
+    \left(\frac{T}{\HeV}\right)^{-1.5}
+    \left(\frac{\rho}{\text{g/cm}^3}\right)^{0.2}
+  \;\text{cm}^2\text{/g}\,.
+\end{equation}
+
+\paragraph{Boundary conditions.}
+\begin{equation}
+  T_s(t)
+  = 1\;\HeV\,,
+\end{equation}
+\begin{equation}
+  T_\text{bath}(t)
+  = \left[
+      1 + 0.169141\left(\frac{t}{\text{ns}}\right)^{-\frac{79}{192}}
+    \right]^{1/4}
+  T_s(t)\,.
+\end{equation}
+
+\paragraph{Self-similar solution.}
+\begin{equation}
+  m_\text{front}(t)
+  = 1.01889\times10^{-3}
+    \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}}
+  \;\text{g/cm}^2\,.
+\end{equation}
+
+%% ====================================================================
+\subsection*{Case 2: $\tau=\frac{158}{1285}\approx0.12296$ (time-independent surface flux)}
+
+Same material model as Case~1
+($\gamma=\frac{5}{4}$, $\rho_0=19.32$~g/cm$^3$,
+same $e$ and $\kappa_R$),
+with a different drive.
+
+\paragraph{Boundary conditions.}
+The value of $\tau$ is chosen so that the self-similar radiation
+energy flux at the surface is time-independent ($c_S=0$):
+\begin{equation}
+  \tau
+  = \frac{2-3\mu}{8+2\alpha+2\beta+3\beta\lambda-3(4+\alpha)\mu}
+  = \frac{158}{1285}\,.
+\end{equation}
+\begin{equation}
+  T_s(t)
+  = \left(\frac{t}{\text{ns}}\right)^{\frac{158}{1285}}
+  \;\HeV\,,
+\end{equation}
+\begin{equation}
+  T_\text{bath}(t)
+  = \left[
+      1 + 0.204154\left(\frac{t}{\text{ns}}\right)^{-\frac{632}{1285}}
+    \right]^{1/4}
+  T_s(t)\,.
+\end{equation}
+
+\paragraph{Self-similar solution.}
+\begin{equation}
+  m_\text{front}(t)
+  = 8.34319\times10^{-4}
+    \left(\frac{t}{\text{ns}}\right)^{\frac{193}{257}}
+  \;\text{g/cm}^2\,.
+\end{equation}
+
+\end{document}
