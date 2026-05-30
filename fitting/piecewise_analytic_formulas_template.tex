@@ -74,8 +74,8 @@ $\rho_0$ & 19.32 & g/cm$^3$\\
 
 \subsection{Self Similar Constants}
 \begin{gather}
-    A = T_0 (rf)^\frac{1}{\beta} = 120472196.47695 \\
-    B = \frac{16 \sigma g}{3\beta(rf)^{\frac{4+\alpha}{\beta}}} = 1.70920e-28 \\
+    A = T_0 (rf)^\frac{1}{\beta} = __A_VAL__ \\
+    B = \frac{16 \sigma g}{3\beta(rf)^{\frac{4+\alpha}{\beta}}} = __B_VAL__ \\
     n = \frac{4+\alpha}{\beta} = \frac{55}{16} \\
     k = 1 - \mu = 1 - 0.14 = 0.86
 \end{gather}
@@ -121,53 +121,53 @@ c = \frac{3\mu - 2\lambda - 2 + \tau\left(2(\beta - \alpha - 4) - \beta\lambda +
 
 % --- Profile Exponents for Specific Volume ---
 \begin{equation}
-a_v = \frac{2\beta - 4 - \alpha}{2 + \lambda - 2\mu} = -\frac{115}{96}
+a_v = \frac{2\beta - 4 - \alpha}{2 + \lambda - 2\mu} = __A_V_FRAC__
 \end{equation}
 
 \begin{equation}
-b_v = \frac{-1}{2 + \lambda - 2\mu} = -\frac{25}{48}
+b_v = \frac{-1}{2 + \lambda - 2\mu} = __B_V_FRAC__
 \end{equation}
 
 \begin{equation}
-c_v = \frac{1 - \tau(4 + \alpha - 2\beta)}{2 + \lambda - 2\mu} = \frac{25}{48}
+c_v = \frac{1 - \tau(4 + \alpha - 2\beta)}{2 + \lambda - 2\mu} = __C_V_FRAC__
 \end{equation}
 
 % --- Profile Exponents for Fluid Velocity ---
 \begin{equation}
-a_u = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{4 + 2\lambda - 4\mu} = \frac{275}{384}
+a_u = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{4 + 2\lambda - 4\mu} = __A_U_FRAC__
 \end{equation}
 
 \begin{equation}
-b_u = \frac{-\mu}{4 + 2\lambda - 4\mu} = -\frac{7}{192}
+b_u = \frac{-\mu}{4 + 2\lambda - 4\mu} = __B_U_FRAC__
 \end{equation}
 
 \begin{equation}
-c_u = \frac{\tau\left(\beta(2 + \lambda) - \mu(4 + \alpha)\right) + \mu}{4 + 2\lambda - 4\mu} = \frac{7}{192}
+c_u = \frac{\tau\left(\beta(2 + \lambda) - \mu(4 + \alpha)\right) + \mu}{4 + 2\lambda - 4\mu} = __C_U_FRAC__
 \end{equation}
 
 % --- Profile Exponents for Pressure ---
 \begin{equation}
-a_p = \frac{\beta\lambda + 4 + \alpha - \mu(4 + \alpha)}{2 + \lambda - 2\mu} = \frac{505}{192}
+a_p = \frac{\beta\lambda + 4 + \alpha - \mu(4 + \alpha)}{2 + \lambda - 2\mu} = __A_P_FRAC__
 \end{equation}
 
 \begin{equation}
-b_p = \frac{1 - \mu}{2 + \lambda - 2\mu} = \frac{43}{96}
+b_p = \frac{1 - \mu}{2 + \lambda - 2\mu} = __B_P_FRAC__
 \end{equation}
 
 \begin{equation}
-c_p = \frac{\tau\left(\beta\lambda + 4 + \alpha - \mu(4 + \alpha)\right) + \mu - 1}{2 + \lambda - 2\mu} = -\frac{43}{96}
+c_p = \frac{\tau\left(\beta\lambda + 4 + \alpha - \mu(4 + \alpha)\right) + \mu - 1}{2 + \lambda - 2\mu} = __C_P_FRAC__
 \end{equation}
 
 \subsection{Wave Coordinate Normalization Variables}
 The ablated mass coordinate $m_f(t)$ and shocked mass coordinate $m_s(t)$ grow as exact power laws in time:
 \begin{gather}
-    m_f(t) = \xi_f A^{-a} B^{-b} t^{-c} \approx 0.00102 \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}} \quad \text{g/cm}^2 \\
-    m_s(t) = m_{s0} \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \approx 0.01209 \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2
+    m_f(t) = \xi_f A^{-a} B^{-b} t^{-c} \approx __M_F_SCALE__ \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}} \quad \text{g/cm}^2 \\
+    m_s(t) = m_{s0} \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \approx __M_S_SCALE__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2
 \end{gather}
 So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s(t)$ directly as:
 \begin{gather}
-    y = \frac{m}{m_f(t)} \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} \\
-    y_s = \frac{m}{m_s(t)} \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}
+    y = \frac{m}{m_f(t)} \approx __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} \\
+    y_s = \frac{m}{m_s(t)} \approx __INV_MS__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}
 \end{gather}
 
 \section{Explicit Subsonic Ablation Profiles ($m < m_f(t)$)}
@@ -175,68 +175,68 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \subsection*{Fluid Velocity $u(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$U(y) \approx -6.76974 \, \frac{1 - y}{1 + 5.34241 y}$$
+    $$U(y) \approx __U0_H__ \, \frac{1 - y}{1 + __B_U_H__ y}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$u(m,t) = U(y) \, A^{a_u} \, B^{b_u} \, t^{c_u} = U(y) \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$u(m,t) \approx -6.76974 \frac{1 - y}{1 + 5.34241 y} \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
+    $$u(m,t) \approx __U0_H__ \frac{1 - y}{1 + __B_U_H__ y} \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using physical conversions ($u_{\text{scale}} \approx 29.60156 \text{ km/s}$):
-    $$u(m,t) \approx -6.76974 \frac{1 - y}{1 + 5.34241 y} \cdot 29.60156 \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
-    $$\approx -200.39472 \, \frac{1 - y}{1 + 5.34241 y} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
+    Using physical conversions ($u_{\text{scale}} \approx __U_SCALE_H_KMS__ \text{ km/s}$):
+    $$u(m,t) \approx __U0_H__ \frac{1 - y}{1 + __B_U_H__ y} \cdot __U_SCALE_H_KMS__ \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
+    $$\approx __LEAD_U_H__ \, \frac{1 - y}{1 + __B_U_H__ y} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$u(m,t) \approx -200.39472 \, \frac{1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + 5243.32440 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
+    Substituting $y \approx __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$u(m,t) \approx __LEAD_U_H__ \, \frac{1 - __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + __DENOM_COEFF_U_H__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection*{Specific Volume $v(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$V(y) \approx 483.36492 \, (1 - y)^{39.54884}$$
+    $$V(y) \approx __V0_H__ \, (1 - y)^{__D_V_H__}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$v(m,t) = V(y) \, A^{a_v} \, B^{b_v} \, t^{c_v} = V(y) \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
+    $$v(m,t) \approx __V0_H__ (1 - y)^{__D_V_H__} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using physical conversions ($v_{\text{scale}} \approx 1.24268 \text{ cm}^3/\text{g}$):
-    $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \cdot 1.24268 \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
-    $$\approx 600.66640 \, (1 - y)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    Using physical conversions ($v_{\text{scale}} \approx __V_SCALE_H__ \text{ cm}^3/\text{g}$):
+    $$v(m,t) \approx __V0_H__ (1 - y)^{__D_V_H__} \cdot __V_SCALE_H__ \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    $$\approx __LEAD_V_H__ \, (1 - y)^{__D_V_H__} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$v(m,t) \approx 600.66640 \left(1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    Substituting $y \approx __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$v(m,t) \approx __LEAD_V_H__ \left(1 - __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{__D_V_H__} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
 \end{enumerate}
 
 \subsection*{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$P(y) \approx 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029}$$
+    $$P(y) \approx __A_P_H__ \, y^{__C_P_H__} + __B_P_H__ \, y^{__C_P_H_D__}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$p(m,t) = P(y) \, A^{a_p} \, B^{b_p} \, t^{c_p} = P(y) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$p(m,t) \approx \left[ 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029} \right] \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
+    $$p(m,t) \approx \left[ __A_P_H__ \, y^{__C_P_H__} + __B_P_H__ \, y^{__C_P_H_D__} \right] \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using physical conversions ($p_{\text{scale}} \approx 7.05133 \text{ MBar}$):
-    $$p(m,t) \approx 7.05133 \left[ 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
-    $$\approx \left[ 2.45709 \, y^{0.87633} + 0.19901 \, y^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    Using physical conversions ($p_{\text{scale}} \approx __P_SCALE_H__ \text{ MBar}$):
+    $$p(m,t) \approx __P_SCALE_H__ \left[ __A_P_H__ \, y^{__C_P_H__} + __B_P_H__ \, y^{__C_P_H_D__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$\approx \left[ __LEAD_COEFF_P_A_H__ \, y^{__C_P_H__} + __LEAD_COEFF_P_B_H__ \, y^{__C_P_H_D__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$p(m,t) \approx \left[ 2.45709 \left(981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.19901 \left(981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    Substituting $y \approx __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$p(m,t) \approx \left[ __LEAD_COEFF_P_A_H__ \left(__INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{__C_P_H__} + __LEAD_COEFF_P_B_H__ \left(__INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{__C_P_H_D__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection*{Temperature $T(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$T(y) \approx \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}}$$
+    $$T(y) \approx \left[ (1 - y)(1 + __R_VAL__ y) \right]^{\frac{10}{39}}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$T(m,t) = T(y) \, T_0$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$T(m,t) \approx \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \, T_0$$
+    $$T(m,t) \approx \left[ (1 - y)(1 + __R_VAL__ y) \right]^{\frac{10}{39}} \, T_0$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
     Using physical boundary drive ($T_0 = 1.00000 \text{ HeV}$):
-    $$T(m,t) \approx 1.00000 \, \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \quad \text{HeV}$$
+    $$T(m,t) \approx 1.00000 \, \left[ (1 - y)(1 + __R_VAL__ y) \right]^{\frac{10}{39}} \quad \text{HeV}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
+    Substituting $y \approx __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - __INV_MF__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + __DENOM_T__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
 \end{enumerate}
 
 \subsection*{Density $\rho(m,t)$}
@@ -256,51 +256,51 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \subsection*{Fluid Velocity $u(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$U(y_s) \approx 0.97536 + (0.17755) \, y_s^{0.63757}$$
+    $$U(y_s) \approx __U_0_S__ + (__U_DIFF_COEFF_S__) \, y_s^{__D_U_S__}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$u(m,t) = U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$u(m,t) \approx \left[ 0.97536 + (0.17755) \, y_s^{0.63757} \right] \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
+    $$u(m,t) \approx \left[ __U_0_S__ + (__U_DIFF_COEFF_S__) \, y_s^{__D_U_S__} \right] \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using physical conversions ($u_{\text{scale}} \approx 3.74525 \text{ km/s}$):
-    $$u(m,t) \approx \left[ 0.97536 + (0.17755) \, y_s^{0.63757} \right] \cdot 3.74525 \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
-    $$\approx \left[ 3.65295 + 0.66499 \, y_s^{0.63757} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    Using physical conversions ($u_{\text{scale}} \approx __U_SCALE_S_KMS__ \text{ km/s}$):
+    $$u(m,t) \approx \left[ __U_0_S__ + (__U_DIFF_COEFF_S__) \, y_s^{__D_U_S__} \right] \cdot __U_SCALE_S_KMS__ \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    $$\approx \left[ __LEAD_COEFF_U_0_S__ + __LEAD_COEFF_U_DIFF_S__ \, y_s^{__D_U_S__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$u(m,t) \approx \left[ 3.65295 + 11.10002 \, m^{0.63757} \, \left(\frac{t}{\text{ns}}\right)^{-0.49478} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    Substituting $y_s \approx __INV_MS__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$u(m,t) \approx \left[ __LEAD_COEFF_U_0_S__ + __LEAD_U_MULT_S__ \, m^{__D_U_S__} \, \left(\frac{t}{\text{ns}}\right)^{__POWER_U_T_S__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection*{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$P(y_s) \approx 1.0 + 0.49535 \, y_s^{1.13315}$$
+    $$P(y_s) \approx 1.0 + __P_DIFF_COEFF_S__ \, y_s^{__D_P_S__}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$p(m,t) = P(y_s) \, p_0 \, t^\tau$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$p(m,t) \approx \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right] \, p_0 \, t^\tau$$
+    $$p(m,t) \approx \left[ 1.0 + __P_DIFF_COEFF_S__ \, y_s^{__D_P_S__} \right] \, p_0 \, t^\tau$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using physical boundary drive ($p_0 = 2.71000 \text{ MBar}$):
-    $$p(m,t) \approx 2.71000 \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
-    $$\approx \left[ 2.71000 + 1.34240 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    Using physical boundary drive ($p_0 = __LEAD_COEFF_P_0_S__ \text{ MBar}$):
+    $$p(m,t) \approx __LEAD_COEFF_P_0_S__ \left[ 1.0 + __P_DIFF_COEFF_S__ \, y_s^{__D_P_S__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$\approx \left[ __LEAD_COEFF_P_0_S__ + __LEAD_COEFF_P_DIFF_S__ \, y_s^{__D_P_S__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$p(m,t) \approx \left[ 2.71000 + 199.81724 \, m^{1.13315} \, \left(\frac{t}{\text{ns}}\right)^{-0.87937} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    Substituting $y_s \approx __INV_MS__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$p(m,t) \approx \left[ __LEAD_COEFF_P_0_S__ + __LEAD_P_MULT_S__ \, m^{__D_P_S__} \, \left(\frac{t}{\text{ns}}\right)^{__POWER_P_T_S__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection*{Density $\rho(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$V(y_s)^{-1} \approx 9.00000 \, y_s^{0.64939}$$
+    $$V(y_s)^{-1} \approx __RHO_S_S__ \, y_s^{__D_RHO_S__}$$
     \item \textbf{Level 1 (Theoretical Scaling)}:
     $$\rho(m,t) = \frac{1}{v_0} \, V(y_s)^{-1}$$
     \item \textbf{Level 2 (Parametrized Shape)}:
-    $$\rho(m,t) \approx \rho_0 \, \rho_s \, y_s^{0.64939}$$
+    $$\rho(m,t) \approx \rho_0 \, \rho_s \, y_s^{__D_RHO_S__}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
     Using physical density $\rho_0 = 19.32 \text{ g/cm}^3$:
-    $$\rho(m,t) \approx 173.88000 \, y_s^{0.64939} \quad \text{g/cm}^3$$
+    $$\rho(m,t) \approx __LEAD_RHO_S__ \, y_s^{__D_RHO_S__} \quad \text{g/cm}^3$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$\rho(m,t) \approx 3057.82924 \, m^{0.64939} \, \left(\frac{t}{\text{ns}}\right)^{-0.50395} \quad \text{g/cm}^3$$
+    Substituting $y_s \approx __INV_MS__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$\rho(m,t) \approx __LEAD_RHO_MULT_S__ \, m^{__D_RHO_S__} \, \left(\frac{t}{\text{ns}}\right)^{__POWER_RHO_T_S__} \quad \text{g/cm}^3$$
 \end{enumerate}
 
 \subsection*{Temperature $T(m,t)$}
@@ -314,12 +314,12 @@ In the shocked region, the temperature profile $T(m,t)$ is derived algebraically
     We pull the power $y_s^{(\mu-1)}$ out of the bracket raised to $1/\beta = 0.625$, grouping all constants:
     $$T(y_s, t) = T_{\text{scale}} \cdot y_s^{-0.7125 \, d_\rho} \left[ 1.0 + (P_s - 1.0) \, y_s^{d_p} \right]^{0.625} \, t^{-\frac{215}{768}}$$
     \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
-    Using evaluated prefactors ($T_{\text{scale\_hev}} \approx 0.01240 \text{ HeV}$):
-    $$T(m,t) \approx 0.01240 \cdot y_s^{-0.46269} \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
-    $$\text{Or in Kelvin: } T(m,t) \approx 14393.59038 \cdot y_s^{-0.46269} \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{Kelvin}$$
+    Using evaluated prefactors ($T_{\text{scale\_hev}} \approx __T_COEFF_HEV__ \text{ HeV}$):
+    $$T(m,t) \approx __T_COEFF_HEV__ \cdot y_s^{__POWER_T_Y1__} \left[ 1.0 + __DIFF_P_S__ \, y_s^{__POWER_T_Y2__} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
+    $$\text{Or in Kelvin: } T(m,t) \approx __T_COEFF_KELVIN__ \cdot y_s^{__POWER_T_Y1__} \left[ 1.0 + __DIFF_P_S__ \, y_s^{__POWER_T_Y2__} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{Kelvin}$$
     \item \textbf{Level 3 (Fully Substituted $m,t$ function in HeV)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$T(m,t) \approx 0.00161 \, \left[ m^{-0.74030} \left(\frac{t}{\text{ns}}\right)^{0.57450} + 73.73330 \, m^{0.39285} \left(\frac{t}{\text{ns}}\right)^{-0.30487} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
+    Substituting $y_s \approx __INV_MS__ \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$T(m,t) \approx __LEAD_T_MULT_S__ \, \left[ m^{__POWER_T_M_S__} \left(\frac{t}{\text{ns}}\right)^{__POWER_T_T_S__} + __LEAD_T_DIFF_MULT_S__ \, m^{__POWER_T_M_S2__} \left(\frac{t}{\text{ns}}\right)^{__POWER_T_T_S2__} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
 \end{enumerate}
 
 \end{document}
