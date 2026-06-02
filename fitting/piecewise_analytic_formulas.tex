@@ -164,10 +164,14 @@ The ablated mass coordinate $m_f(t)$ and shocked mass coordinate $m_s(t)$ grow a
     m_f(t) = \xi_f A^{-a} B^{-b} t^{-c} \approx 0.00102 \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}} \quad \text{g/cm}^2 \\
     m_s(t) = m_{s0} \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \approx 0.01209 \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2
 \end{gather}
+where $m_s(t)$ was calculated as:
+\begin{equation}
+    \xi_s(t) = #TODO
+\end{equation}
 So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s(t)$ directly as:
 \begin{gather}
-    y = \frac{m}{m_f(t)} \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} \\
-    y_s = \frac{m}{m_s(t)} \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}
+    y = \frac{m}{m_f(t)} \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} \\
+    y_s = \frac{m}{m_s(t)} \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}
 \end{gather}
 
 \section{Explicit Subsonic Ablation Profiles ($m < m_f(t)$)}
@@ -176,79 +180,79 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$U(y) \approx -6.76974 \, \frac{1 - y}{1 + 5.34241 y}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$u(m,t) = U(y) \, A^{a_u} \, B^{b_u} \, t^{c_u} = U(y) \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$u(m,t) \approx -6.76974 \frac{1 - y}{1 + 5.34241 y} \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($u_{\text{scale}} \approx 29.60156 \text{ km/s}$):
     $$u(m,t) \approx -6.76974 \frac{1 - y}{1 + 5.34241 y} \cdot 29.60156 \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
     $$\approx -200.39472 \, \frac{1 - y}{1 + 5.34241 y} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$u(m,t) \approx -200.39472 \, \frac{1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + 5243.32440 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$u(m,t) \approx -200.39472 \, \frac{1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + 5243.32440 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection*{Specific Volume $v(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$V(y) \approx 483.36492 \, (1 - y)^{39.54884}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$v(m,t) = V(y) \, A^{a_v} \, B^{b_v} \, t^{c_v} = V(y) \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($v_{\text{scale}} \approx 1.24268 \text{ cm}^3/\text{g}$):
     $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \cdot 1.24268 \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
     $$\approx 600.66640 \, (1 - y)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$v(m,t) \approx 600.66640 \left(1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$v(m,t) \approx 600.66640 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
 \end{enumerate}
 
 \subsection*{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$P(y) \approx 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y) \, A^{a_p} \, B^{b_p} \, t^{c_p} = P(y) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$p(m,t) \approx \left[ 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029} \right] \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($p_{\text{scale}} \approx 7.05133 \text{ MBar}$):
     $$p(m,t) \approx 7.05133 \left[ 0.34846 \, y^{0.87633} + 0.02822 \, y^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     $$\approx \left[ 2.45709 \, y^{0.87633} + 0.19901 \, y^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$p(m,t) \approx \left[ 2.45709 \left(981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.19901 \left(981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$p(m,t) \approx \left[ 2.45709 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.19901 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection*{Temperature $T(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$T(y) \approx \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$T(m,t) = T(y) \, T_0$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$T(m,t) \approx \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \, T_0$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical boundary drive ($T_0 = 1.00000 \text{ HeV}$):
     $$T(m,t) \approx 1.00000 \, \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \quad \text{HeV}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y \approx 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
+    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
 \end{enumerate}
 
 \subsection*{Density $\rho(m,t)$}
-\textit{Note: The subsonic density profile diverges sharply at the ablation front ($\xi \to 1$), so instead of independently fitting $\tilde{\rho}(\xi)$, we compute it explicitly using the equation of state (EOS) along with the well-behaved analytical fits for pressure $p(m,t)$ and temperature $T(m,t)$.}
+\textit{Note: The subsonic density profile diverges sharply at the ablation front ($\xi \to 1$), so instead of independently fitting $\tilde{\rho}(\xi)$, we compute it explicitly using the equation of state (EOS) along with the well-behaved analytical fits for pressure $p(m,t)$ and temperature $T(m,t)$.} \textcolor{red}{NOTE: I think that f should be in \HeV in the following relataions because the fit over $T$ (appearing above is in \HeV)}
 \begin{enumerate}
-    \item \textbf{Level 1 (Theoretical relation)}:
+    \item \textbf{Theoretical relation}:
     $$\rho(m,t) = \left( \frac{r \, f \, T(m,t)^\beta}{p(m,t)} \right)^{\frac{1}{\mu-1}}$$
-    \item \textbf{Level 2 (CGS Parametrized form)}:
+    \item \textbf{CGS Parametrized form}:
     $$\rho(m,t) = \left( \frac{r \, f_{\text{Kelvin}} \, T(m,t)^\beta}{p(m,t)} \right)^{\frac{1}{\mu-1}}$$
-    \item \textbf{Level 3 (Explicit numerical relation in g/cm$^3$)}:
-    Using $r = 0.25$, $f_{\text{Kelvin}} = 3.4 \times 10^{13} / (\text{KELVIN\_PER\_HEV})^{1.6}$, $\beta = 1.6$, and $\mu = 0.14$:
-    $$\rho(m,t) = \left( \frac{r \, f_{\text{Kelvin}} \, T(m,t)^{1.6}}{p(m,t)} \right)^{-\frac{1}{0.86}} \quad \text{g/cm}^3$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting the actual dimensional fits of $T(m,t)$ and $p(m,t)$ (where $r=0.25$, $\beta=1.6$, $\mu=0.14$) yields the final explicit solution:
+    $$\rho(m,t) \approx 4.03377 \cdot \left[ \frac{\left\{ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right\}^{\frac{16}{39}}}{0.34846 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.02822 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029}} \right]^{-1.16279} \left(\frac{t}{\text{ns}}\right)^{-\frac{25}{48}} \quad \text{g/cm}^3$$
 \end{enumerate}
 
 \section{Explicit Shock compressed Profiles ($m_f(t) < m < m_s(t)$)}
@@ -257,69 +261,92 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$U(y_s) \approx 0.97536 + (0.17755) \, y_s^{0.63757}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$u(m,t) = U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$u(m,t) \approx \left[ 0.97536 + (0.17755) \, y_s^{0.63757} \right] \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($u_{\text{scale}} \approx 3.74525 \text{ km/s}$):
     $$u(m,t) \approx \left[ 0.97536 + (0.17755) \, y_s^{0.63757} \right] \cdot 3.74525 \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
     $$\approx \left[ 3.65295 + 0.66499 \, y_s^{0.63757} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$u(m,t) \approx \left[ 3.65295 + 11.10002 \, m^{0.63757} \, \left(\frac{t}{\text{ns}}\right)^{-0.49478} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$u(m,t) \approx \left[ 3.65295 + 11.10002 \left(\frac{m}{\text{g/cm}^2}\right)^{0.63757} \, \left(\frac{t}{\text{ns}}\right)^{-0.49478} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection*{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$P(y_s) \approx 1.0 + 0.49535 \, y_s^{1.13315}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y_s) \, p_0 \, t^\tau$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$p(m,t) \approx \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right] \, p_0 \, t^\tau$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical boundary drive ($p_0 = 2.71000 \text{ MBar}$):
     $$p(m,t) \approx 2.71000 \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     $$\approx \left[ 2.71000 + 1.34240 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$p(m,t) \approx \left[ 2.71000 + 199.81724 \, m^{1.13315} \, \left(\frac{t}{\text{ns}}\right)^{-0.87937} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$p(m,t) \approx \left[ 2.71000 + 199.81724 \left(\frac{m}{\text{g/cm}^2}\right)^{1.13315} \, \left(\frac{t}{\text{ns}}\right)^{-0.87937} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection*{Density $\rho(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     $$V(y_s)^{-1} \approx 9.00000 \, y_s^{0.64939}$$
-    \item \textbf{Level 1 (Theoretical Scaling)}:
+    \item \textbf{Theoretical Scaling}:
     $$\rho(m,t) = \frac{1}{v_0} \, V(y_s)^{-1}$$
-    \item \textbf{Level 2 (Parametrized Shape)}:
+    \item \textbf{Parametrized Shape}:
     $$\rho(m,t) \approx \rho_0 \, \rho_s \, y_s^{0.64939}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using physical density $\rho_0 = 19.32 \text{ g/cm}^3$:
     $$\rho(m,t) \approx 173.88000 \, y_s^{0.64939} \quad \text{g/cm}^3$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$\rho(m,t) \approx 3057.82924 \, m^{0.64939} \, \left(\frac{t}{\text{ns}}\right)^{-0.50395} \quad \text{g/cm}^3$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$\rho(m,t) \approx 3057.82924 \left(\frac{m}{\text{g/cm}^2}\right)^{0.64939} \, \left(\frac{t}{\text{ns}}\right)^{-0.50395} \quad \text{g/cm}^3$$
 \end{enumerate}
 
 \subsection*{Temperature $T(m,t)$}
 In the shocked region, the temperature profile $T(m,t)$ is derived algebraically from the equation of state (EOS) along with the well-behaved fits for pressure $p(m,t)$ and density $\rho(m,t)$:
 \begin{enumerate}
-    \item \textbf{Level 1 (Theoretical relation)}:
+    \item \textbf{Theoretical relation}:
     $$T(m,t) = \left( \frac{p(m,t) \, v(m,t)^{1-\mu}}{r \, f} \right)^{\frac{1}{\beta}} = \left( \frac{p(m,t) \, \rho(m,t)^{\mu-1}}{r \, f} \right)^{\frac{1}{\beta}}$$
-    \item \textbf{Level 2 (CGS Parametrized form)}:
+    \item \textbf{CGS Parametrized form}:
     $$T(m,t) \approx \left( \frac{P(y_s) \, p_0 \, t^\tau \left( \rho_0 \, \rho_s \, y_s^{d_\rho} \right)^{\mu-1}}{r \, f_{\text{Kelvin}}} \right)^{\frac{1}{\beta}}$$
-    \item \textbf{Level 2.25 (Algebraic simplification of bracket)}:
+    \item \textbf{Algebraic simplification of bracket}:
     We pull the power $y_s^{(\mu-1)}$ out of the bracket raised to $1/\beta = 0.625$, grouping all constants:
     $$T(y_s, t) = T_{\text{scale}} \cdot y_s^{-0.7125 \, d_\rho} \left[ 1.0 + (P_s - 1.0) \, y_s^{d_p} \right]^{0.625} \, t^{-\frac{215}{768}}$$
-    \item \textbf{Level 2.5 (Substitute Constants at 1 ns)}:
+    \item \textbf{Substitution of scaling constants and units}:
     Using evaluated prefactors ($T_{\text{scale\_hev}} \approx 0.01240 \text{ HeV}$):
     $$T(m,t) \approx 0.01240 \cdot y_s^{-0.46269} \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
     $$\text{Or in Kelvin: } T(m,t) \approx 14393.59038 \cdot y_s^{-0.46269} \left[ 1.0 + 0.49535 \, y_s^{1.13315} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{Kelvin}$$
-    \item \textbf{Level 3 (Fully Substituted $m,t$ function in HeV)}:
-    Substituting $y_s \approx 82.68924 \, m \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$T(m,t) \approx 0.00161 \, \left[ m^{-0.74030} \left(\frac{t}{\text{ns}}\right)^{0.57450} + 73.73330 \, m^{0.39285} \left(\frac{t}{\text{ns}}\right)^{-0.30487} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
+    \item \textbf{Fully Substituted CGS function}:
+    Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
+    $$T(m,t) \approx 0.00161 \, \left[ \left(\frac{m}{\text{g/cm}^2}\right)^{-0.74030} \left(\frac{t}{\text{ns}}\right)^{0.57450} + 73.73330 \, \left(\frac{m}{\text{g/cm}^2}\right)^{0.39285} \left(\frac{t}{\text{ns}}\right)^{-0.30487} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}} \quad \text{HeV}$$
 \end{enumerate}
+
+\section{Boxed Summary of Piecewise Profiles}
+
+\subsection*{Subsonic Ablation Region ($m < m_f(t)$)}
+\begin{gather}
+    \boxed{ m_f(t) \approx 0.00102 \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}} \quad \text{g/cm}^2 } \\
+    \boxed{ y = 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} } \\
+    \boxed{ u(m,t) \approx -200.39472 \, \frac{1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}}{1 + 5243.32440 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}} \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}}\quad\text{km/s} } \\
+    \boxed{ v(m,t) \approx 600.66640 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}\quad\text{cm}^3/\text{g} } \\
+    \boxed{ \rho(m,t) \approx 4.03377 \cdot \left[ \frac{\left\{ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right\}^{\frac{16}{39}}}{0.34846 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.02822 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029}} \right]^{-1.16279} \left(\frac{t}{\text{ns}}\right)^{-\frac{25}{48}} \quad \text{g/cm}^3 } \\
+    \boxed{ p(m,t) \approx \left[ 2.45709 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{0.87633} + 0.19901 \left(981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{19.97029} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}}\quad\text{HeV} }
+\end{gather}
+
+\subsection*{Shock Compressed Region ($m_f(t) \le m < m_s(t)$)}
+\begin{gather}
+    \boxed{ m_s(t) \approx 0.01209 \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2 } \\
+    \boxed{ y_s = 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}} } \\
+    \boxed{ u(m,t) \approx \left[ 3.65295 + 11.10002 \left(\frac{m}{\text{g/cm}^2}\right)^{0.63757} \, \left(\frac{t}{\text{ns}}\right)^{-0.49478} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
+    \boxed{ \rho(m,t) \approx 3057.82924 \left(\frac{m}{\text{g/cm}^2}\right)^{0.64939} \, \left(\frac{t}{\text{ns}}\right)^{-0.50395}\quad\text{g/cm}^3 } \\
+    \boxed{ p(m,t) \approx \left[ 2.71000 + 199.81724 \left(\frac{m}{\text{g/cm}^2}\right)^{1.13315} \, \left(\frac{t}{\text{ns}}\right)^{-0.87937} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ T(m,t) \approx 0.00161 \, \left[ \left(\frac{m}{\text{g/cm}^2}\right)^{-0.74030} \left(\frac{t}{\text{ns}}\right)^{0.57450} + 73.73330 \, \left(\frac{m}{\text{g/cm}^2}\right)^{0.39285} \left(\frac{t}{\text{ns}}\right)^{-0.30487} \right]^{0.625} \, \left(\frac{t}{\text{ns}}\right)^{-\frac{215}{768}}\quad\text{HeV} }
+\end{gather}
 
 \end{document}
