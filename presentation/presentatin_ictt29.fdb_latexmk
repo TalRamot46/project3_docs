@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1779452302.0564 "c:/Users/TLP-001/Documents/GitHub/project3_docs/presentation/presentatin_ictt29.tex" "presentatin_ictt29.pdf" "presentatin_ictt29" 1779452303.95186 0
-  "C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1779446441 1790191 60023c0996852a19288d666b7d9463fc ""
+["pdflatex"] 1780408039.46274 "c:/Users/TLP-001/Documents/GitHub/project3_docs/presentation/presentatin_ictt29.tex" "presentatin_ictt29.pdf" "presentatin_ictt29" 1780408041.67133 0
+  "C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1779531576 1790191 60023c0996852a19288d666b7d9463fc ""
   "C:/Users/TLP-001/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766608234 13322591 416bd87c1347c522aaba8eb7ca07b895 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -20,6 +20,7 @@
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmss9.tfm" 1136765053 1320 49357c421c0d469f88b867dd0c3d10e8 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmssbx10.tfm" 1136765053 1272 e2d13f0df30bf3ad990bb9d028e37f34 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmssi10.tfm" 1136765053 1520 ca2bb4b78ac9800bd686e30c6d19ef95 ""
+  "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmssi12.tfm" 1136765053 1532 48589e216c7fb787d0f3ee1a3047705d ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
@@ -37,6 +38,7 @@
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb" 1247596666 24373 a91d375736817a75026663adcb2190c1 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.pfb" 1247596666 28902 2f5c04fd2884d1878057baa5aad22765 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb" 1247596666 25150 e0d09798d232ab9d00c5c0a8df6cc22d ""
+  "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi12.pfb" 1247596666 25095 0ff1f6d531b320ecbbd6ea84d875816c ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb" 1247596667 25168 c89d909bac101e478326bb9e00519ca3 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1247596666 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
@@ -203,11 +205,11 @@
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/translator/translator.sty" 1622471510 8765 56d370785f0143111ff9898b5adfe08e ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/TLP-001/Documents/GitHub/project3_docs/presentation/presentatin_ictt29.tex" 1779452301 11528 ee5600f29a8fc3f215f9159bdad4fef2 ""
-  "presentatin_ictt29.aux" 1779452303 1851 97126c382d6e481c57976def502c453b "pdflatex"
-  "presentatin_ictt29.nav" 1779452303 1202 a971439ba5eedf62b158aa4c3f07763d "pdflatex"
-  "presentatin_ictt29.out" 1779452303 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "presentatin_ictt29.tex" 1779452301 11528 ee5600f29a8fc3f215f9159bdad4fef2 ""
+  "c:/Users/TLP-001/Documents/GitHub/project3_docs/presentation/presentatin_ictt29.tex" 1780408038 16339 26839f05ae38fec4bc7d50994b9e061d ""
+  "presentatin_ictt29.aux" 1780408041 3270 31fab9f6ca09829be45875ef526895b4 "pdflatex"
+  "presentatin_ictt29.nav" 1780408041 2225 c1c5afbecb67aec0ba53ac1043f451e4 "pdflatex"
+  "presentatin_ictt29.out" 1780408040 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "presentatin_ictt29.tex" 1780408038 16339 26839f05ae38fec4bc7d50994b9e061d ""
   (generated)
   "presentatin_ictt29.aux"
   "presentatin_ictt29.log"

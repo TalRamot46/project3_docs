@@ -515,5 +515,90 @@ where:
         __TS_SHOCK__ __C1_T_HIGH_SIGNED__ (1 - y_s)^{__A_T_HIGH__} __C2_T_HIGH_SIGNED__ (1 - y_s)^{__B_T_HIGH__} & \text{for } y_s \ge 0.1
     \end{cases}$ \quad [Avg Err: __ERR_TS_AVG__\%, Max Err: __ERR_TS_MAX__\%]
 \end{itemize}
+\section{Eulerian Coordinate Transformations}
+In the Lagrangian coordinate system, physical variables are expressed in terms of the mass coordinate $m$ and time $t$. To transition to Eulerian coordinates, we define the absolute spatial position $x(m,t)$ by integrating the specific volume $v(m,t)$ relative to a reference front location:
+\begin{equation}
+    x(m,t) = x_{\text{ref}}(t) + \int_{m_{\text{ref}}}^{m} v(m',t) \, dm'
+\end{equation}
+
+\subsection{Wave Front Trajectories and Position Scales}
+The time-dependent trajectories of the boundaries and shock interfaces are expressed using fully substituted physical constants and scales evaluated at $t = 1\text{ ns}$.
+
+\begin{enumerate}
+    \item \textbf{Ablation Front / Piston Interface position} $x_{af}(t)$:
+    The ablation front lies at the boundary of the subsonic region, which maps to $y_s = y_{mf} \approx 0.08425$ in the shock coordinates. Its position scale is determined by the shock integration factor:
+    \begin{equation}
+        x_{af}(t) = \text{pos\_scale}_s(t) \left[ (1-\omega)\xi_{mf} V(y_{mf}) + \frac{2-\omega}{\tau_s+2} U(y_{mf}) \right]
+    \end{equation}
+    Substituting physical values yields the CGS trajectory:
+    \begin{equation}
+        x_{af}(t) \approx __X_AF_1NS__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{cm}
+    \end{equation}
+
+    \item \textbf{Ablation Boundary position} $x_b(t)$:
+    The ablation boundary corresponds to the zero-mass coordinate $m=0$. Its position is obtained by integrating specific volume from the ablation front to $m=0$:
+    \begin{equation}
+        x_b(t) = x_{af}(t) + C_{\text{pos}}(t) \, U_0
+    \end{equation}
+    where $C_{\text{pos}}(t) = \frac{A^{a_u} B^{b_u} t^{c_u+1}}{c_u+1}$. Substituting the physical values (with $U_0 \approx __U0_SUB__$) yields:
+    \begin{equation}
+        x_b(t) \approx __X_AF_1NS__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} __LEAD_XB_COEFF_SIGNED__ \left(\frac{t}{\text{ns}}\right)^{\frac{199}{192}} \quad \text{cm}
+    \end{equation}
+
+    \item \textbf{Shock Piston position} $x_p(t)$:
+    The piston driving the shock corresponds to the inner boundary of the shock-compressed region ($m = 0$ in shock mass coordinates, or $y_s = 0$). Its position trajectory scales as:
+    \begin{equation}
+        x_p(t) = \text{pos\_scale}_s(t) \left( \frac{2-\omega}{\tau_s+2} \right) U(0)
+    \end{equation}
+    Substituting the initial shock velocity factor $U_0 \approx __U0_SHOCK__$ yields:
+    \begin{equation}
+        x_p(t) \approx __X_P_1NS__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{cm}
+    \end{equation}
+
+    \item \textbf{Shock Front position} $x_s(t)$:
+    The outer edge of the shock wave ($m = m_s(t)$, or $y_s = 1$) moves according to:
+    \begin{equation}
+        x_s(t) = \text{pos\_scale}_s(t) \left[ (1-\omega)\xi_s V_s + \frac{2-\omega}{\tau_s+2} U_s \right]
+    \end{equation}
+    Substituting the shock coordinate $\xi_s = __XSI_S_S__$ and the fitted boundary values yields:
+    \begin{equation}
+        x_s(t) \approx __X_S_1NS__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{cm}
+    \end{equation}
+\end{enumerate}
+
+\subsection{General Position Mapping $x(m,t)$}
+The absolute Eulerian coordinate $x(m,t)$ is defined piecewise across the spatial domain based on the normalized similarity variables $y$ and $y_s$:
+
+\begin{enumerate}
+    \item \textbf{Subsonic Ablation Region} ($m \le m_f(t)$):
+    \begin{equation}
+        x_{\text{sub}}(m,t) = x_{af}(t) + C_{\text{pos}}(t) \left[ U_h(y) - c \, \xi(m) V_h(y) \right]
+    \end{equation}
+    Substituting $c = -33/64$ and the CGS scales yields:
+    \begin{equation}
+        x_{\text{sub}}(m,t) \approx __X_AF_1NS__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} + __C_POS_SCALE__ \left(\frac{t}{\text{ns}}\right)^{\frac{199}{192}} \left[ U_h(y) + \frac{33}{64} \xi(m) V_h(y) \right] \quad \text{cm}
+    \end{equation}
+    where $y = m/m_f(t)$, and $\xi(m) = m \cdot \text{xsi\_over\_m}(t)$.
+
+    \item \textbf{Shock Compressed Region} ($m_f(t) < m \le m_s(t)$):
+    \begin{equation}
+        x_{\text{shock}}(m,t) = \text{pos\_scale}_s(t) \left[ (1-\omega)\xi(m) V_s(y_s) + \frac{2-\omega}{\tau_s+2} U_s(y_s) \right]
+    \end{equation}
+    Substituting $\omega = 0$ and $\tau_s = -43/96$ yields:
+    \begin{equation}
+        x_{\text{shock}}(m,t) \approx __POS_SCALE_S__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \left[ \xi(m) V_s(y_s) + 1.28859 U_s(y_s) \right] \quad \text{cm}
+    \end{equation}
+    where $y_s = m/m_s(t)$ and $\xi(m) = y_s \xi_s \approx __XSI_S_S__ y_s$.
+
+    \item \textbf{Unshocked Cold Region} ($m > m_s(t)$):
+    Since the material is at rest and uncompressed initially, the Eulerian position coordinate matches the initial density-profile mapping:
+    \begin{equation}
+        x_{\text{un}}(m,t) = \left[ v_0 (1-\omega) m \right]^{\frac{1}{1-\omega}}
+    \end{equation}
+    For constant density $\rho_0 = 19.32 \text{ g/cm}^3$ ($\omega = 0$):
+    \begin{equation}
+        x_{\text{un}}(m,t) = \frac{m}{\rho_0} \approx 0.05176 \left( \frac{m}{\text{g/cm}^2} \right) \quad \text{cm}
+    \end{equation}
+\end{enumerate}
 
 \end{document}

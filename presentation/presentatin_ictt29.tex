@@ -10,14 +10,13 @@
 \usepackage{graphicx}
 
 % --- Presentation Metadata ---
-\title[Subsonic Marshak Wave]{Complete Self-Similar Solution of the Subsonic Marshak Wave}
+\title[Subsonic Marshak Wave Fitted Solutions]{Generalized Self-Similar Solutions of \\ Subsonic Marshak Waves}
 \subtitle{Theory and Numerical Validation Structure}
-\author[Shussman \& Heizler]{Tomer Shussman\inst{1} \and Shay I. Heizler\inst{2}}
-\institute[TAU / BIU]{
-  \inst{1}Tel Aviv University / Soreq Nuclear Research Centre \and % [cite: 2]
-  \inst{2}Bar-Ilan University / Nuclear Research Centre Negev % [cite: 2]
+\author[Ramot \& Krief]{Tal Ramot \and Shay I. Heizler \and Menahem Krief}
+\institute[HUJI]{
+  Hebrew university of Jerusalem, Physics dept. 
 }
-\date{Physics Conference 2026}
+\date{ICTT-29, Aix en Provence, July 17, 2026}
 
 \begin{document}
 
@@ -30,31 +29,212 @@
 \begin{frame}{Motivation}
   \begin{block}{Inertial Confinement Fusion (ICF)}
     \begin{itemize}
-      \item **Hohlraum Modeling:** Crucial for radiation temperature prediction and experimental measurement accuracy[cite: 5, 6].
-      \item **Energy Delivery:** Key to analyzing laser--walls coupling and refining pulse shaping techniques[cite: 7, 8].
-      \item **Historical Context:** Builds upon classical foundations established by \emph{Lindl (1995)}, \emph{Kauffman (1995)}, and \emph{Rosen (2005)}[cite: 9].
+      \item Hohlraum Modeling Crucial for radiation temperature prediction and experimental measurement accuracy.
+      \item Energy Delivery Key to analyzing laser--walls coupling and refining pulse shaping techniques.
+      \item Historical Context Builds upon classical foundations established by \emph{Lindl (1995)}, \emph{Kauffman (1995)}, and \emph{Rosen (2005)}.
     \end{itemize}
   \end{block}
 
-  \begin{block}{Equation of State (EOS) Verification}
+  \begin{alertblock}{Adding Shay \& Menahem's suggestions}
     \begin{itemize}
-      \item Critical for laboratory astrophysics and high-energy density physics (HEDP) experiments under dynamic, time-varying pressure profiles \emph{[Thomas 2006]}[cite: 10].
+      \item Slides about the Aluminum article...
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% --- Slide 2: General Introduction ---
+\begin{frame}{The Theory Of Subsonic Heat Waves}
+  \begin{alertblock}{Physics Of The Problem}
+    \begin{itemize}
+      \item We treat a semi-infinite wall subjected to high-temperature boundary heating.
+      \item Dynamic equilibrium is mediated strictly via \textbf{photon transport}.
+      \item In the \textbf{optically-thick limit}, an exceptionally sharp temperature front develops.
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{0.3cm}
+  \begin{block}{The Transfer Equation Coupled to Euler Equations}
+    \begin{itemize}
+      \item Coupled Boltzmann \& internal energy equation.
+      \item The diffusion equation under the gray approximation.
+      \item Euler equations for the hydrodynamic evolution of the material - in two words.
+      \item The EOS for different materials fitted by H \& R (2003 or previously).
     \end{itemize}
   \end{block}
 \end{frame}
 
-% --- Slide 2: Physical Mechanism ---
-\begin{frame}{The Subsonic Wave Mechanism}
-  \begin{itemize}
-    \item We treat a semi-infinite wall subjected to high-temperature boundary heating[cite: 43].
-    \item Dynamic equilibrium is mediated strictly via **photon transport**[cite: 44].
-    \item In the optically thick limit, an exceptionally sharp temperature front develops[cite: 45].
-  \end{itemize}
+% --- Slide 3: Super Introduction ---
+\begin{frame}{The Supersonic Regime}
+  \begin{block}{The Equations of the Supersonic Regime}
+    \begin{itemize}
+      \item "Black Physics" - Using the LTE assumption.
+      \item The image of the supersonic regime from Shussman.
+      \item Discussing the equivalence to $chi \to \infty$.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+% --- Slide 4: Sub Introduction ---
+\begin{frame}{The Subsonic Regime}
+  \begin{block}{The Equations of the Subsonic Regime}
+    \begin{itemize}
+      \item Present the Euler equations for inviscid \& inconducting (adiabatic) fluid flow.
+      \item The image of the subsonic regime from Shussman.
+      \item Explain about the assumed EOS of
+      \item Discussing the equivalence to $chi \to \infty$.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% --- Slide 5: Previous Works ---
+\begin{frame}{Previous Works}
+  \begin{block}{Some recent works in the field of subsonic wave}
+    \begin{itemize}
+      \item Shussman-Heizler (2015) - a full solver using the patching method (More on next slide).
+      \item Pakula \& Sigel (1985) - the strong shock approximation.
+      \item Hammer \& Rosen (2003) - New solutions based on perturbation theory.
+      \item Granier (2006) - solved the full domain for a specific BC.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+% --- Slide 6: Shussman & Heizler ---
+\begin{frame}{Shussman \& Heizler (2015)}
+  \begin{block}{The patching method}
+    \begin{itemize}
+      \item Elaborating on the problem solved (see Shussman presentation).
+      \item The assumptions made - strong shock approximation, vanishing $\rho_0$ and diverging $\rho_f$. 
+      \item Discuss the Hugoniot relations and usefulness for the solver method (\textcolor{red}{how much and whether I should talk about the solver's logic?})
+      \item The assembling of two different self similar problems.
+      \item Solving for the full domain using a special patching method.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% --- Slide 7: Self similarity ---
+\begin{frame}{Self similarity (Optional)}
+  \begin{block}{Diving into self similarity (emphasizing the usefulness of the method)}
+    \begin{itemize}
+      \item Taking the Pi-Backingham theorem slide from Menahem.
+      \item Showing the unit-analysis table for both regions.
+      \item system of PDEs $\implies$ system of ODEs (yielding a semi-analytical solution).
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% --- Transition Slide 8: Self similarity ---
+\begin{frame}{Transition}
+  \begin{block}{The actual research}
+  \end{block}
+\end{frame}
+
+% --- Slide 9: Our work ---
+\begin{frame}{Our Work}
+  \begin{block}{What We Bring To The Table}
+    \begin{itemize}
+      \item Value - Building a \textit{benchmark} for IMC simulation codes (\textcolor{red}{Shay remarks that Steinberg has already debugged his IMC simulation with the solution from our code}).
+      \item Generality - different materials, varying density at the shock domain, different cases, Eulerian coordinates.
+      \item Method - fitting Shussman-Heizler's self-similar solutions to provide precise solutions for profiles and other important values produced by the solvers \textbf{in all times}.
+      \item Practical - provide our work to your favorite AI agent and let it test itself in the subsonic regime. 
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+% --- Slide 10: Example for our work ---
+\begin{frame}{Example Of The Usefulness Of Fittings}
+  \begin{block}{Giving an example for a profile \& the total energy in the domain}
+    \begin{itemize}
+      \item Presenting the photo of, for example, the ablative pressure profile (looks good and relatively simple but representative of some other fits).
+      \item Presenting the total energy integral curve - with the expression in the ablation region that is explicit in the language of the hydro profiles.
+      \item Describing the 3 options of our users when they get our results - either use a formula, or a table, 
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
+% --- Slide 11: About T_bath ---
+\begin{frame}{Bridging the BCs between IMC to solver/simulation}
+  \begin{block}{Marshak Boundary Condition (IMC)}
+    \begin{itemize}
+      \item Explain in one or two words the general idea (Shay said the audience will be familiar with the thoery).
+      \item Present the equation that includes $T_s$ (surface temperature) and $T_{bath}$ (the effective temperature produced by the outside environment).
+      \item Present the graph of $T_s(t)$ vs $T_{bath}(t)$ for the base case of $\tau = 0$.
+    \end{itemize}
+  \end{block}
+  \begin{block}{$T_\text{Bath}$ \textit{vs} $T_\text{surface}$}
+    \begin{itemize}
+      \item Which accepts what (IMC accepts $T_{bath}$, solver \& simulation work with $T_s$).
+      \item Deriving a self similar equation for $T_{bath}$ for any $T_s(t)=T_0 t^\tau$.
+    \end{itemize} 
+  \end{block}
+  \begin{alertblock}{NOTE}
+    I should understand where it should be included, it's important as it bridges over the gap between IMC and the solver or simulation in terms of BC. \textbf{Maybe I should combine the "example of our work" \& "marshak BC" slides into the "simulation setup" slide as a general example of the solutions}
+  \end{alertblock}
+\end{frame}
+
+% --- Transition Slide 12: Simulation Setup ---
+\begin{frame}{Transition}
+  \begin{block}{The actual research}
+  \end{block}
+\end{frame}
+
+% --- Slide 13: Simulation Setup Case 1 ---
+\begin{frame}{\textcolor{red}{UNEDITED} Simulation Setup: Case 1 ($\tau = 0$)}
+  \begin{block}{Medium Framework: Gold Target}
+    The numerical validation uses an ideal gas with polytropic index $\gamma = \frac{5}{4}$ and initial high material density $\rho_0 = 19.32\text{ g/cm}^3$[cite: 477, 480].
+  \end{block}
+
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+      \textbf{Specific Internal Energy:} [cite: 481]
+      $$e(T,\rho) = 3.4\times 10^{13} \left(\frac{T}{\text{HeV}}\right)^{1.6} \left(\frac{\rho}{\text{g/cm}^3}\right)^{-0.14}\frac{\text{erg}}{\text{g}}$$
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \textbf{Rosseland Opacity Coefficient:} [cite: 481]
+      $$\kappa_R(T,\rho) = 7200 \left(\frac{T}{\text{HeV}}\right)^{-1.5} \left(\frac{\rho}{\text{g/cm}^3}\right)^{0.2}\frac{\text{cm}^2}{\text{g}}$$
+    \end{column}
+  \end{columns}
 
   \vspace{0.3cm}
-  \begin{alertblock}{Subsonic Regime Conditioning}
-    If the localized heat front travels **slower than the material speed of sound**, hydrodynamics decouples into two distinct zones: a **shock region** driven forward ahead of the high-temperature **ablation region**[cite: 46].
-  \end{alertblock}
+  \begin{block}{Boundary Conditions \& Self-Similar Evolution ($\tau = 0$)}
+    Surface drive is maintained via a fixed thermal profile $T_s(t) = 1\text{ HeV}$[cite: 479, 485]. 
+    The dynamic radiation bath drive and the calculated mass front position trace as[cite: 488, 489]:
+    $$T_{\text{bath}}(t) = \left[1 + 0.169141 \left(\frac{t}{\text{ns}}\right)^{-\frac{79}{192}}\right]^{1/4} T_s(t)$$ % [cite: 488]
+    $$m_{\text{front}}(t) = 1.01889\times 10^{-3} \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}}\text{ g/cm}^2$$ % [cite: 489]
+  \end{block}
+\end{frame}
+
+% --- Transition Slide 14: Showing fits ---
+\begin{frame}{Fits}
+  \begin{block}{fits}
+    \begin{itemize}
+      \item 4 slides - $T$, $P$, $\rho$, $u$.
+      \item Touch in two words about chosen more complex fitting startegies that involved clever choice of fitting expressions or uses of the EOS in different domains.
+      \item Slides for verification of the use of the profile fits in dimensional plots.
+      \item Show slides with Eulerian coordinates in dimensional plots.
+      \item Show slides with the Eulerian variables and plot them as axvline (the fronts for example) on the dimensional plots.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% --- Slide XX: Summary ---
+\begin{frame}{Summary}
+  \begin{block}{Presentation Summary \& Plans for ahead}
+    \begin{itemize}
+      \item A complete benchmark for IMC simulations in a variety of test cases - different materials, varying density.
+      \item User-friendly, your favorite agent will love that, and it is guruanteed to save you a valuable amount of time in debugging and especially authenticating your simulation against a subsonic solver (in the high-opcaity regime) which is backed-up by a well-established theory (Shussman \& Heizler, 2015).
+      \item Plans for ahead - fittings for the problem in gray-physics, improving the solver with different EOS, applying more complex multi-group approximations.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Archived Shussman slides}
+  \end{block}
 \end{frame}
 
 % --- Slide 3: Methodological Approach ---
@@ -152,69 +332,6 @@
     \item **Shock Coordinate Mapping:** mass variables scale via[cite: 180]:
     $$m_S = \xi P_0^{1/2} V_0^{-1/2} t^{1 + \frac{\tau_S}{2}}$$
   \end{itemize}
-\end{frame}
-
-% --- Slide 8: Simulation Setup Case 1 ---
-\begin{frame}{Simulation Setup: Case 1 ($\tau = 0$)}
-  \begin{block}{Medium Framework: Gold Target}
-    The numerical validation uses an ideal gas with polytropic index $\gamma = \frac{5}{4}$ and initial high material density $\rho_0 = 19.32\text{ g/cm}^3$[cite: 477, 480].
-  \end{block}
-
-  \begin{columns}[t]
-    \begin{column}{0.5\textwidth}
-      \textbf{Specific Internal Energy:} [cite: 481]
-      $$e(T,\rho) = 3.4\times 10^{13} \left(\frac{T}{\text{HeV}}\right)^{1.6} \left(\frac{\rho}{\text{g/cm}^3}\right)^{-0.14}\frac{\text{erg}}{\text{g}}$$
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \textbf{Rosseland Opacity Coefficient:} [cite: 481]
-      $$\kappa_R(T,\rho) = 7200 \left(\frac{T}{\text{HeV}}\right)^{-1.5} \left(\frac{\rho}{\text{g/cm}^3}\right)^{0.2}\frac{\text{cm}^2}{\text{g}}$$
-    \end{column}
-  \end{columns}
-
-  \vspace{0.3cm}
-  \begin{block}{Boundary Conditions \& Self-Similar Evolution ($\tau = 0$)}
-    Surface drive is maintained via a fixed thermal profile $T_s(t) = 1\text{ HeV}$[cite: 479, 485]. 
-    The dynamic radiation bath drive and the calculated mass front position trace as[cite: 488, 489]:
-    $$T_{\text{bath}}(t) = \left[1 + 0.169141 \left(\frac{t}{\text{ns}}\right)^{-\frac{79}{192}}\right]^{1/4} T_s(t)$$ % [cite: 488]
-    $$m_{\text{front}}(t) = 1.01889\times 10^{-3} \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}}\text{ g/cm}^2$$ % [cite: 489]
-  \end{block}
-\end{frame}
-
-% --- Slide 9: Simulation Setup Case 2 ---
-\begin{frame}{Simulation Setup: Case 2 ($\tau \approx 0.123$)}
-  \begin{block}{Time-Independent Surface Flux Environment}
-    To simulate a completely steady, time-independent surface radiation energy flux ($c_S = 0$), the temporal power component is optimized analytically[cite: 490, 494]:
-    $$\tau = \frac{2-3\mu}{8+2\alpha+2\beta+3\beta\lambda-3(4+\alpha)\mu} = \frac{158}{1285} \approx 0.12296$$ % [cite: 490, 496]
-  \end{block}
-
-  \begin{itemize}
-    \item **Material Invariance:** Identical baseline properties as Case 1 ($\gamma=\frac{5}{4}$, same $e$, same $\kappa_R$)[cite: 493].
-    \item **Time-Dependent Surface Drive:** Scales upward explicitly as $T_s(t) = \left(\frac{t}{\text{ns}}\right)^{\frac{158}{1285}}\text{ HeV}$[cite: 496].
-  \end{itemize}
-
-  \begin{block}{Self-Similar Validation Metrics}
-    Analytical tracking metrics for the flux-matched drive are implemented as[cite: 496, 497]:
-    $$T_{\text{bath}}(t) = \left[1 + 0.204154 \left(\frac{t}{\text{ns}}\right)^{-\frac{632}{1285}}\right]^{1/4} T_s(t)$$ % [cite: 496]
-    $$m_{\text{front}}(t) = 8.34319\times 10^{-4} \left(\frac{t}{\text{ns}}\right)^{\frac{103}{257}}\text{ g/cm}^2$$ % [cite: 497]
-  \end{block}
-\end{frame}
-
-% --- Slide 10: Summary ---
-\begin{frame}{Summary}
-  \begin{itemize}
-    \item **Complete Solution Matrix:** Provides a rigorous, closed-form analytic description of a subsonic radiation heat wave for generalized power-law boundaries[cite: 470].
-    \item **Robust Decoupled Framework:** Separates the localized ablation and shock regions successfully, utilizing cross-boundary patching values[cite: 471].
-    \item **Practical Utility:** Enables higher fidelity planning for laser-plasma and high-energy-density experiments while revealing the physical structure of ablation-driven shock waves[cite: 472].
-  \end{itemize}
-
-  \vfill
-  \begin{center}
-    \begin{alertblock}{Primary Literature Source}
-      Full mathematical derivations and comprehensive simulation arrays are published in: \\
-      \vspace{0.1cm}
-      \centering{\textbf{Phys. Plasmas 22, 082109 (2015)}} [cite: 473]
-    \end{alertblock}
-  \end{center}
 \end{frame}
 
 \end{document}
