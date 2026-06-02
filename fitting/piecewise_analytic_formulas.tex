@@ -333,7 +333,7 @@ In the shock compressed region under the \texttt{FIT\_RHO\_AROUND\_PISTON} optio
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
     $$\rho(m,t) \approx \begin{cases}
-        9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
+        19.32000 \left[ 9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} \right] & \text{for } y_s < 0.1 \\
         \left( \frac{p(m,t)}{r \, f_{\text{Kelvin}} \, T(m,t)^\beta} \right)^{\frac{1}{1-\mu}} & \text{for } y_s \ge 0.1 
     \end{cases} \quad \text{g/cm}^3$$
 \end{enumerate}
@@ -386,7 +386,7 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \boxed{ u(m,t) \approx \left[ 3.62869 + 0.68824 \left(y_s\right)^{0.59966} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
     \boxed{ p(m,t) \approx \left[ 2.71000 + 1.34240 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
     \boxed{ \rho(m,t) \approx \begin{cases}
-        9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
+        19.32000 \left[ 9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} \right] & \text{for } y_s < 0.1 \\
         \left( \frac{p(m,t)}{0.25 \cdot 6730.91 \cdot T(m,t)^{1.6}} \right)^{-1.16279} & \text{for } y_s \ge 0.1 
     \end{cases} \quad \text{g/cm}^3 } \\
     \boxed{ T(m,t) \approx \begin{cases}
@@ -394,5 +394,126 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
         115642.73611 \left[ 0.00380 - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} \right] \, \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin} }
 \end{gather}
+
+\section{Parametrized Scaling Profiles}
+
+\subsection{Subsonic Ablation Region ($m < m_f(t)$)}
+In this section, profiles are written using fully evaluated numerical prefactors:
+\begin{gather}
+    u(m,t) \approx 29.60156 U_h(y) \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s} \\
+    \text{where: } \begin{cases}
+        U_h(y) = W(y) U_{\text{left}}(y) + (1-W(y)) U_{\text{right}}(y) \\
+        U_{\text{left}}(y) = -8.36010 + 33.08430 y^{0.69118} - 50.00000 y^{2 0.69118} - 50.00000 y^{3 0.69118} - 50.00000 y^{4 0.69118} \\
+        U_{\text{right}}(y) = -0.00002 - 3.51428 (1-y) + 10.16871 (1-y)^2 - 20.00000 (1-y)^3 + 14.76371 (1-y)^4 \\
+        W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}
+    \end{cases} \nonumber \\
+    v(m,t) \approx 1.24268 V_h(y) \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g} \\
+    \text{where: } V_h(y) = 483.36492 \, (1 - y)^{39.54884} \nonumber \\
+    p(m,t) \approx 7.05133 P_h(y) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar} \\
+    \text{where: } P_h(y) = 0.38708 - 0.18660 \, (1-y)^{0.49607} - 0.18444 \, (1-y)^{1.51128} - 0.01335 \, (1-y)^{6.20384} \nonumber \\
+    T(m,t) \approx 1.16045 \times 10^{6} T_h(y) \quad \text{Kelvin} \\
+    \text{where: } T_h(y) = \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \nonumber \\
+    \rho(m,t) \approx 4.03377 \rho_h(y) \left(\frac{t}{\text{ns}}\right)^{-\frac{25}{48}} \quad \text{g/cm}^3 \\
+    \text{where: } \rho_h(y) = \left[ \frac{T_h(y)^{1.6}}{P_h(y)} \right]^{-1.16279} \nonumber
+\end{gather}
+
+\subsection{Shock Compressed Region ($m_f(t) \le m < m_s(t)$)}
+In this section, profiles are written using fully evaluated numerical prefactors:
+\begin{gather}
+    u(m,t) \approx 3.74525 U_s(y_s) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s} \\
+    \text{where: } U_s(y_s) = 0.96888 + 0.18376 \, y_s^{0.59966} \nonumber \\
+    p(m,t) \approx 2.71000 P_s(y_s) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar} \\
+    \text{where: } P_s(y_s) = 1.0 + 0.49535 \, y_s^{1.13315} \nonumber \\
+    \rho(m,t) \approx 19.32000 \rho_s(y_s) \quad \text{g/cm}^3 \\
+    \text{where: } \rho_s(y_s) = \begin{cases}
+        9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
+        \left( \frac{P_s(y_s)}{T_s(y_s)^{1.6}} \right)^{1.16279} & \text{for } y_s \ge 0.1
+    \end{cases} \nonumber \\
+    T(m,t) \approx 115642.73611 T_s(y_s) \left(\frac{t}{\text{ns}}\right)^{0.13717} \quad \text{Kelvin} \\
+    \text{where: } T_s(y_s) = \begin{cases}
+        \left( P_s(y_s) \rho_s(y_s)^{-0.86} \right)^{0.625} & \text{for } y_s < 0.1 \\
+        0.00380 - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} & \text{for } y_s \ge 0.1
+    \end{cases} \nonumber
+\end{gather}
+
+\newpage
+\section{Unified Full Solution Profiles \& Fits}
+We can construct the full solution profiles valid over the entire spatial domain ($m \ge 0$) at any time $t > 0$ using the wave front limits:
+\begin{gather}
+    m_f(t) \approx 0.00102 \left(\frac{t}{\text{ns}}\right)^{\frac{33}{64}} \quad \text{g/cm}^2 \\
+    m_s(t) \approx 0.01209 \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2 \\
+    y_h = \frac{m}{m_f(t)} \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} \\
+    y_s = \frac{m}{m_s(t)} \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}
+\end{gather}
+
+\subsection{Unified Fluid Velocity $u(m,t)$}
+\begin{equation}
+\boxed{
+    u(m,t) \approx \begin{cases}
+        29.60156 U_h(y_h) \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} & \text{for } m < m_f(t) \\
+        3.74525 U_s(y_s) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} & \text{for } m_f(t) \le m \le m_s(t) \\
+        0 & \text{for } m > m_s(t)
+    \end{cases} \quad \text{km/s}
+}
+\end{equation}
+where:
+\begin{itemize}
+    \item $U_h(y_h) = W(y_h) U_{\text{left}}(y_h) + (1-W(y_h)) U_{\text{right}}(y_h)$ as defined in 5.1 \quad [Avg Err: 3.059\%, Max Err: 90.949\%]
+    \item $U_s(y_s) = 0.96888 + 0.18376 \, y_s^{0.59966}$ as defined in 5.2 \quad [Avg Err: 0.019\%, Max Err: 0.350\%]
+\end{itemize}
+
+\subsection{Unified Pressure $p(m,t)$}
+\begin{equation}
+\boxed{
+    p(m,t) \approx \begin{cases}
+        7.05133 P_h(y_h) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} & \text{for } m < m_f(t) \\
+        2.71 P_s(y_s) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} & \text{for } m_f(t) \le m \le m_s(t) \\
+        0 & \text{for } m > m_s(t)
+    \end{cases} \quad \text{MBar}
+}
+\end{equation}
+where:
+\begin{itemize}
+    \item $P_h(y_h) = 0.38708 - 0.18660 \, (1-y_h)^{0.49607} - 0.18444 \, (1-y_h)^{1.51128} - 0.01335 \, (1-y_h)^{6.20384}$ \quad [Avg Err: 0.279\%, Max Err: 41.257\%]
+    \item $P_s(y_s) = 1.0 + 0.49535 \, y_s^{1.13315}$ \quad [Avg Err: 0.136\%, Max Err: 0.307\%]
+\end{itemize}
+
+\subsection{Unified Density $\rho(m,t)$}
+\begin{equation}
+\boxed{
+    \rho(m,t) \approx \begin{cases}
+        4.03377 \rho_h(y_h) \left(\frac{t}{\text{ns}}\right)^{-\frac{25}{48}} & \text{for } m < m_f(t) \\
+        19.32 \rho_s(y_s) & \text{for } m_f(t) \le m \le m_s(t) \\
+        19.32 & \text{for } m > m_s(t)
+    \end{cases} \quad \text{g/cm}^3
+}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\rho_h(y_h) = \left[ \frac{T_h(y_h)^{1.6}}{P_h(y_h)} \right]^{-1.16279}$ \quad [Avg Err: 0.741\%, Max Err: 46.110\%]
+    \item $\rho_s(y_s) = \begin{cases}
+        9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
+        \left( \frac{P_s(y_s)}{T_s(y_s)^{1.6}} \right)^{1.16279} & \text{for } y_s \ge 0.1
+    \end{cases}$ \quad [Avg Err: 0.075\%, Max Err: 17.103\%]
+\end{itemize}
+
+\subsection{Unified Temperature $T(m,t)$}
+\begin{equation}
+\boxed{
+    T(m,t) \approx \begin{cases}
+        1160451 T_h(y_h) & \text{for } m < m_f(t) \\
+        115642.73611 T_s(y_s) \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } m_f(t) \le m \le m_s(t) \\
+        300 & \text{for } m > m_s(t)
+    \end{cases} \quad \text{Kelvin}
+}
+\end{equation}
+where:
+\begin{itemize}
+    \item $T_h(y_h) = \left[ (1 - y_h)(1 + 0.20287 y_h) \right]^{\frac{10}{39}}$ \quad [Avg Err: 0.261\%, Max Err: 13.258\%]
+    \item $T_s(y_s) = \begin{cases}
+        \left( P_s(y_s) \rho_s(y_s)^{-0.86} \right)^{0.625} & \text{for } y_s < 0.1 \\
+        0.00380 - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} & \text{for } y_s \ge 0.1
+    \end{cases}$ \quad [Avg Err: 0.106\%, Max Err: 8.129\%]
+\end{itemize}
 
 \end{document}
