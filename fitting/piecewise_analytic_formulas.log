@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  2 JUN 2026 13:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  2 JUN 2026 13:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -787,19 +787,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 
 [2]
-Overfull \hbox (25.25046pt too wide) detected at line 185
-\OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10
-.95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 8\OML/cmm/m/it/10.95 :\OT1/cm
-r/m/n/10.95 36010 + 33\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 08430\OML/cmm/m/i
-t/10.95 y[] \OT1/cmr/m/n/10.95 + \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 50\O
-ML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00000\OML/cmm/m/it/10.95 y[] \OT1/cmr/m/n
-/10.95 + \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 50\OML/cmm/m/it/10.95 :\OT1/
-cmr/m/n/10.95 00000\OML/cmm/m/it/10.95 y[] \OT1/cmr/m/n/10.95 + \OMS/cmsy/m/n/1
-0.95 ^^@\OT1/cmr/m/n/10.95 50\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00000\OML/
-cmm/m/it/10.95 y[]
- []
-
-
 
 [3]
 Overfull \hbox (39.77644pt too wide) in paragraph at lines 195--197
@@ -810,30 +797,29 @@ n/10.95 ^^Y \OT1/cmr/m/n/10.95 29\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 60156[
  []
 
 
-Overfull \hbox (73.3175pt too wide) detected at line 203
+Overfull \hbox (47.76743pt too wide) detected at line 203
 \OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10
 .95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 247\OML/cmm/m/it/10.95 :\OT1/
 cmr/m/n/10.95 47183 + 979\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 34686\OML/cmm/
-m/it/10.95 y[] \OT1/cmr/m/n/10.95 + \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 1
-480\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[] \OT1/cm
-r/m/n/10.95 + \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95
- :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[] \OT1/cmr/m/n/10.95 + \OMS/cms
-y/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 0
-7779\OML/cmm/m/it/10.95 y[]
+m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.
+95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT
+1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/
+10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\
+OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[]
  []
 
 
-Overfull \hbox (21.187pt too wide) detected at line 204
+Overfull \hbox (4.15361pt too wide) detected at line 204
 \OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10
 .95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT1/cm
-r/m/n/10.95 00048 + \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 104\OML/cmm/m/it/
-10.95 :\OT1/cmr/m/n/10.95 02827(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y
-\OT1/cmr/m/n/10.95 ) + 301\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00969(1 \OMS/
-cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] + \OMS/cmsy/m/n/
-10.95 ^^@\OT1/cmr/m/n/10.95 592\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 03112(1 
-\OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] + 437\OML/c
-mm/m/it/10.95 :\OT1/cmr/m/n/10.95 02875(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it
-/10.95 y\OT1/cmr/m/n/10.95 )[]
+r/m/n/10.95 00048 \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 104\OML/cmm/m/it/1
+0.95 :\OT1/cmr/m/n/10.95 02827(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\
+OT1/cmr/m/n/10.95 ) + 301\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00969(1 \OMS/c
+msy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.
+95 ^^@ \OT1/cmr/m/n/10.95 592\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 03112(1 \O
+MS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] + 437\OML/cmm
+/m/it/10.95 :\OT1/cmr/m/n/10.95 02875(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/1
+0.95 y\OT1/cmr/m/n/10.95 )[]
  []
 
 
@@ -855,7 +841,7 @@ $):
  []
 
 
-Overfull \hbox (97.31674pt too wide) detected at line 243
+Overfull \hbox (71.76666pt too wide) detected at line 243
 \OML/cmm/m/it/10.95 p\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 m; t\OT1/cmr/m/n/1
 0.95 ) \OMS/cmsy/m/n/10.95 ^^Y []  [][]  []
  []
@@ -889,20 +875,33 @@ Overfull \hbox (23.13179pt too wide) in paragraph at lines 308--310
 
 
 [7]
-Overfull \hbox (124.73332pt too wide) detected at line 361
+Overfull \hbox (81.19342pt too wide) detected at line 354
 \OML/cmm/m/it/10.95 T\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 m; t\OT1/cmr/m/n/1
 0.95 ) \OMS/cmsy/m/n/10.95 ^^Y []  []
  []
 
 
-Overfull \hbox (125.0392pt too wide) detected at line 380
+Overfull \hbox (0.50237pt too wide) in paragraph at lines 356--358
+[]\OT1/cmr/bx/n/10.95 Fully Sub-sti-tuted CGS func-tion\OT1/cmr/m/n/10.95 : Sub
+-sti-tut-ing the fit-ted co-ef-fi-cients (where $\OML/cmm/m/it/10.95 T[] \OT1/c
+mr/m/n/10.95 = 0\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00380$): 
+ []
+
+
+Overfull \hbox (127.09447pt too wide) detected at line 361
+\OML/cmm/m/it/10.95 T\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 m; t\OT1/cmr/m/n/1
+0.95 ) \OMS/cmsy/m/n/10.95 ^^Y []  []
+ []
+
+
+Overfull \hbox (99.48912pt too wide) detected at line 380
 []
  []
 
 
 
 [8]
-Overfull \hbox (104.15825pt too wide) detected at line 396
+Overfull \hbox (106.5194pt too wide) detected at line 396
 []
  []
 
@@ -944,7 +943,7 @@ P-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
 :/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
 ti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb>
-Output written on piecewise_analytic_formulas.pdf (10 pages, 273026 bytes).
+Output written on piecewise_analytic_formulas.pdf (10 pages, 272376 bytes).
 PDF statistics:
  159 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -138,7 +138,7 @@ a_u = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{4 + 2\lambda - 4\mu} = \frac{2
 \end{equation}
 
 \begin{equation}
-b_u = \frac{-\mu}{4 + 2\lambda - 4\mu} = -\frac{7}{192}
+b_u = \frac{-mu}{4 + 2\lambda - 4\mu} = -\frac{7}{192}
 \end{equation}
 
 \begin{equation}
@@ -182,8 +182,8 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Using the optimal Candidate 12 (Asymptotic Blend 10-Parameter 4-Power model):
     $$U(y) \approx W(y) U_{\text{left}}(y) + (1 - W(y)) U_{\text{right}}(y)$$
     where:
-    $$U_{\text{left}}(y) = -8.36010 + 33.08430 y^{0.69118} + -50.00000 y^{2 0.69118} + -50.00000 y^{3 0.69118} + -50.00000 y^{4 0.69118}$$
-    $$U_{\text{right}}(y) = -0.00002 + -3.51428 (1-y) + 10.16871 (1-y)^2 + -20.00000 (1-y)^3 + 14.76371 (1-y)^4$$
+    $$U_{\text{left}}(y) = -8.36010 + 33.08430 y^{0.69118} - 50.00000 y^{2 0.69118} - 50.00000 y^{3 0.69118} - 50.00000 y^{4 0.69118}$$
+    $$U_{\text{right}}(y) = -0.00002 - 3.51428 (1-y) + 10.16871 (1-y)^2 - 20.00000 (1-y)^3 + 14.76371 (1-y)^4$$
     $$W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}$$
     
     \item \textbf{Theoretical Scaling}:
@@ -200,8 +200,8 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
     $$u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
     where:
-    $$u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} + -1480.07779 y^{2 0.69118} + -1480.07779 y^{3 0.69118} + -1480.07779 y^{4 0.69118}$$
-    $$u_{\text{right}}(y) = -0.00048 + -104.02827 (1-y) + 301.00969 (1-y)^2 + -592.03112 (1-y)^3 + 437.02875 (1-y)^4$$
+    $$u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} - 1480.07779 y^{2 0.69118} - 1480.07779 y^{3 0.69118} - 1480.07779 y^{4 0.69118}$$
+    $$u_{\text{right}}(y) = -0.00048 - 104.02827 (1-y) + 301.00969 (1-y)^2 - 592.03112 (1-y)^3 + 437.02875 (1-y)^4$$
     with $W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}$.
 \end{enumerate}
 
@@ -226,7 +226,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     Using the optimal Candidate 4 (Power Law $y=1$ 3-Term 6-Parameter model):
-    $$P(y) \approx 0.38708 + -0.18660 \, (1-y)^{0.49607} + -0.18444 \, (1-y)^{1.51128} + -0.01335 \, (1-y)^{6.20384}$$
+    $$P(y) \approx 0.38708 - 0.18660 \, (1-y)^{0.49607} - 0.18444 \, (1-y)^{1.51128} - 0.01335 \, (1-y)^{6.20384}$$
     
     \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y) \, A^{a_p} \, B^{b_p} \, t^{c_p} = P(y) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
@@ -240,7 +240,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$p(m,t) \approx \left[ 2.72945 + -1.31578 (1-y)^{0.49607} + -1.30057 (1-y)^{1.51128} + -0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx \left[ 2.72945 - 1.31578 (1-y)^{0.49607} - 1.30057 (1-y)^{1.51128} - 0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection{Temperature $T(m,t)$}
@@ -277,37 +277,37 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     Using the optimal Candidate 3 (3-Parameter Power Law):
-    $$U(y_s) \approx 0.96888 - -0.18376 \, y_s^{0.59966}$$
+    $$U(y_s) \approx 0.96888 + 0.18376 \, y_s^{0.59966}$$
     
     \item \textbf{Theoretical Scaling}:
     $$u(m,t) = U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     
     \item \textbf{Parametrized Shape}:
-    $$u(m,t) \approx \left[ 0.96888 - -0.18376 \, y_s^{0.59966} \right] \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
+    $$u(m,t) \approx U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     
     \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($u_{\text{scale}} \approx 3.74525 \text{ km/s}$):
-    $$u(m,t) \approx \left[ 0.96888 - -0.18376 \, y_s^{0.59966} \right] \cdot 3.74525 \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    $$u(m,t) \approx U(y_s) \cdot 3.74525 \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$u(m,t) \approx \left[ 3.62869 - -0.68824 \left(y_s\right)^{0.59966} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    $$u(m,t) \approx \left[ 3.62869 + 0.68824 \left(y_s\right)^{0.59966} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$P(y_s) \approx 1.0 - (1.0 - 1.49535) \, y_s^{1.13315}$$
+    $$P(y_s) \approx 1.0 + 0.49535 \, y_s^{1.13315}$$
     
     \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y_s) \, p_0 \, t^\tau$$
     
     \item \textbf{Parametrized Shape}:
-    $$p(m,t) \approx \left[ 1.0 - (1.0 - 1.49535) \, y_s^{1.13315} \right] \, p_0 \, t^\tau$$
+    $$p(m,t) \approx P(y_s) \, p_0 \, t^\tau$$
     
     \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($p_0 = 2.71000 \text{ MBar}$):
-    $$p(m,t) \approx 2.71000 \left[ 1.0 - (1.0 - 1.49535) \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx 2.71000 \, P(y_s) \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y_s \approx 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
@@ -344,20 +344,20 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \item \textbf{Dimensionless Fit Function}:
     $$T(y_s) \approx \begin{cases}
         \left( \frac{P(y_s) \, \rho(y_s)^{\mu-1}}{r \, f_{\text{dim}}} \right)^{\frac{1}{\beta}} & \text{for } y_s < 0.1 \\
-        T_s + c_1 (1 - y_s)^{a_T} + c_2 (1 - y_s)^{b_T} & \text{for } y_s \ge 0.1
+        T_s - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} & \text{for } y_s \ge 0.1
     \end{cases}$$
     
     \item \textbf{CGS Parametrized form} (derived from CGS EOS in Kelvin):
     $$T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{\mu-1}}{r \, f_{\text{Kelvin}}} \right)^{\frac{1}{\beta}} & \text{for } y_s < 0.1 \\
-        T_{\text{scale\_Kelvin}} \left[ T_s + c_1 (1 - y_s)^{a_T} + c_2 (1 - y_s)^{b_T} \right] \, \left(\frac{t}{\text{ns}}\right)^{T_{pow}} & \text{for } y_s \ge 0.1
+        T_{\text{scale\_Kelvin}} \left[ T_s - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} \right] \, \left(\frac{t}{\text{ns}}\right)^{T_{pow}} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin}$$
     
     \item \textbf{Fully Substituted CGS function}:
-    Substituting the fitted coefficients (where $T_s = 0.00380$, $c_1 = 0.00250$, $c_2 = 1.20490$, $a_T = 2.20858$, $b_T = 70.01672$, and $T_{\text{scale\_Kelvin}} \approx 115642.73611$):
+    Substituting the fitted coefficients (where $T_s = 0.00380$):
     $$T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{-0.86}}{0.25 \cdot 6730.91} \right)^{0.625} & \text{for } y_s < 0.1 \\
-        115642.73611 \left[ 0.00380 + 0.00250 (1 - y_s)^{2.20858} + 1.20490 (1 - y_s)^{70.01672} \right] \, \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } y_s \ge 0.1
+        115642.73611 \left[ 0.00380 - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} \right] \, \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin}$$
 \end{enumerate}
 
@@ -369,12 +369,12 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \boxed{ y = 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} } \\
     \boxed{ u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}}\quad\text{km/s} } \\
     \text{where: } \begin{cases}
-        u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} + -1480.07779 y^{2 0.69118} + -1480.07779 y^{3 0.69118} + -1480.07779 y^{4 0.69118} \\
-        u_{\text{right}}(y) = -0.00048 + -104.02827 (1-y) + 301.00969 (1-y)^2 + -592.03112 (1-y)^3 + 437.02875 (1-y)^4 \\
+        u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} - 1480.07779 y^{2 0.69118} - 1480.07779 y^{3 0.69118} - 1480.07779 y^{4 0.69118} \\
+        u_{\text{right}}(y) = -0.00048 - 104.02827 (1-y) + 301.00969 (1-y)^2 - 592.03112 (1-y)^3 + 437.02875 (1-y)^4 \\
         W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}
     \end{cases} \nonumber \\
     \boxed{ v(m,t) \approx 600.66640 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}\quad\text{cm}^3/\text{g} } \\
-    \boxed{ p(m,t) \approx \left[ 2.72945 + -1.31578 (1-y)^{0.49607} + -1.30057 (1-y)^{1.51128} + -0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ p(m,t) \approx \left[ 2.72945 - 1.31578 (1-y)^{0.49607} - 1.30057 (1-y)^{1.51128} - 0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
     \boxed{ T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}}\quad\text{HeV} } \\
     \boxed{ \rho(m,t) \approx 4.03377 \cdot \left[ \frac{T(m,t)^{1.6}}{p(m,t)} \right]^{-1.16279} \quad \text{g/cm}^3 }
 \end{gather}
@@ -383,7 +383,7 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
 \begin{gather}
     \boxed{ m_s(t) \approx 0.01209 \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2 } \\
     \boxed{ y_s = 82.68924 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}} } \\
-    \boxed{ u(m,t) \approx \left[ 3.62869 - -0.68824 \left(y_s\right)^{0.59966} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
+    \boxed{ u(m,t) \approx \left[ 3.62869 + 0.68824 \left(y_s\right)^{0.59966} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
     \boxed{ p(m,t) \approx \left[ 2.71000 + 1.34240 \, y_s^{1.13315} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
     \boxed{ \rho(m,t) \approx \begin{cases}
         9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
@@ -391,7 +391,7 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \end{cases} \quad \text{g/cm}^3 } \\
     \boxed{ T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{-0.86}}{0.25 \cdot 6730.91} \right)^{0.625} & \text{for } y_s < 0.1 \\
-        115642.73611 \left[ 0.00380 + 0.00250 (1 - y_s)^{2.20858} + 1.20490 (1 - y_s)^{70.01672} \right] \, \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } y_s \ge 0.1
+        115642.73611 \left[ 0.00380 - 6.82764 (1 - y_s)^{-1.06205} + 8.03503 (1 - y_s)^{0.99688} \right] \, \left(\frac{t}{\text{ns}}\right)^{0.13717} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin} }
 \end{gather}
 

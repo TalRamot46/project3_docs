@@ -138,7 +138,7 @@ a_u = \frac{\beta(2 + \lambda) - \mu(4 + \alpha)}{4 + 2\lambda - 4\mu} = __A_U_F
 \end{equation}
 
 \begin{equation}
-b_u = \frac{-\mu}{4 + 2\lambda - 4\mu} = __B_U_FRAC__
+b_u = \frac{-mu}{4 + 2\lambda - 4\mu} = __B_U_FRAC__
 \end{equation}
 
 \begin{equation}
@@ -182,8 +182,8 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Using the optimal Candidate 12 (Asymptotic Blend 10-Parameter 4-Power model):
     $$U(y) \approx W(y) U_{\text{left}}(y) + (1 - W(y)) U_{\text{right}}(y)$$
     where:
-    $$U_{\text{left}}(y) = __U0_SUB__ + __UA1_SUB__ y^{__UALPHA_SUB__} + __UA2_SUB__ y^{2 __UALPHA_SUB__} + __UA3_SUB__ y^{3 __UALPHA_SUB__} + __UA4_SUB__ y^{4 __UALPHA_SUB__}$$
-    $$U_{\text{right}}(y) = __UF_SUB__ + __UB1_SUB__ (1-y) + __UB2_SUB__ (1-y)^2 + __UB3_SUB__ (1-y)^3 + __UB4_SUB__ (1-y)^4$$
+    $$U_{\text{left}}(y) = __U0_SUB__ __UA1_SUB_SIGNED__ y^{__UALPHA_SUB__} __UA2_SUB_SIGNED__ y^{2 __UALPHA_SUB__} __UA3_SUB_SIGNED__ y^{3 __UALPHA_SUB__} __UA4_SUB_SIGNED__ y^{4 __UALPHA_SUB__}$$
+    $$U_{\text{right}}(y) = __UF_SUB__ __UB1_SUB_SIGNED__ (1-y) __UB2_SUB_SIGNED__ (1-y)^2 __UB3_SUB_SIGNED__ (1-y)^3 __UB4_SUB_SIGNED__ (1-y)^4$$
     $$W(y) = \frac{1 - y}{1 + \left( y / __UY0_SUB__ \right)^4}$$
     
     \item \textbf{Theoretical Scaling}:
@@ -200,8 +200,8 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Substituting $y \approx __INV_MF__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
     $$u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
     where:
-    $$u_{\text{left}}(y) = __LEAD_U0_SUB__ + __LEAD_UA1_SUB__ y^{__UALPHA_SUB__} + __LEAD_UA2_SUB__ y^{2 __UALPHA_SUB__} + __LEAD_UA3_SUB__ y^{3 __UALPHA_SUB__} + __LEAD_UA4_SUB__ y^{4 __UALPHA_SUB__}$$
-    $$u_{\text{right}}(y) = __LEAD_UF_SUB__ + __LEAD_UB1_SUB__ (1-y) + __LEAD_UB2_SUB__ (1-y)^2 + __LEAD_UB3_SUB__ (1-y)^3 + __LEAD_UB4_SUB__ (1-y)^4$$
+    $$u_{\text{left}}(y) = __LEAD_U0_SUB__ __LEAD_UA1_SUB_SIGNED__ y^{__UALPHA_SUB__} __LEAD_UA2_SUB_SIGNED__ y^{2 __UALPHA_SUB__} __LEAD_UA3_SUB_SIGNED__ y^{3 __UALPHA_SUB__} __LEAD_UA4_SUB_SIGNED__ y^{4 __UALPHA_SUB__}$$
+    $$u_{\text{right}}(y) = __LEAD_UF_SUB__ __LEAD_UB1_SUB_SIGNED__ (1-y) __LEAD_UB2_SUB_SIGNED__ (1-y)^2 __LEAD_UB3_SUB_SIGNED__ (1-y)^3 __LEAD_UB4_SUB_SIGNED__ (1-y)^4$$
     with $W(y) = \frac{1 - y}{1 + \left( y / __UY0_SUB__ \right)^4}$.
 \end{enumerate}
 
@@ -226,7 +226,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     Using the optimal Candidate 4 (Power Law $y=1$ 3-Term 6-Parameter model):
-    $$P(y) \approx __PF_SUB__ + __A_P_SUB__ \, (1-y)^{__C_P_SUB__} + __B_P_SUB__ \, (1-y)^{__CPD_P_SUB__} + __E_P_SUB__ \, (1-y)^{__CPDF_P_SUB__}$$
+    $$P(y) \approx __PF_SUB__ __A_P_SUB_SIGNED__ \, (1-y)^{__C_P_SUB__} __B_P_SUB_SIGNED__ \, (1-y)^{__CPD_P_SUB__} __E_P_SUB_SIGNED__ \, (1-y)^{__CPDF_P_SUB__}$$
     
     \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y) \, A^{a_p} \, B^{b_p} \, t^{c_p} = P(y) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
@@ -240,7 +240,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y \approx __INV_MF__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$p(m,t) \approx \left[ __LEAD_PF_SUB__ + __LEAD_A_P_SUB__ (1-y)^{__C_P_SUB__} + __LEAD_B_P_SUB__ (1-y)^{__CPD_P_SUB__} + __LEAD_E_P_SUB__ (1-y)^{__CPDF_P_SUB__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx \left[ __LEAD_PF_SUB__ __LEAD_A_P_SUB_SIGNED__ (1-y)^{__C_P_SUB__} __LEAD_B_P_SUB_SIGNED__ (1-y)^{__CPD_P_SUB__} __LEAD_E_P_SUB_SIGNED__ (1-y)^{__CPDF_P_SUB__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection{Temperature $T(m,t)$}
@@ -277,41 +277,41 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     Using the optimal Candidate 3 (3-Parameter Power Law):
-    $$U(y_s) \approx __CU_SHOCK__ - __AU_SHOCK__ \, y_s^{__BU_SHOCK__}$$
+    $$U(y_s) \approx __CU_SHOCK__ __AU_SHOCK_NEG_SIGNED__ \, y_s^{__BU_SHOCK__}$$
     
     \item \textbf{Theoretical Scaling}:
     $$u(m,t) = U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     
     \item \textbf{Parametrized Shape}:
-    $$u(m,t) \approx \left[ __CU_SHOCK__ - __AU_SHOCK__ \, y_s^{__BU_SHOCK__} \right] \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
+    $$u(m,t) \approx U(y_s) \, v_0^{\frac{1}{2}} \, p_0^{\frac{1}{2}} \, t^{\frac{\tau}{2}}$$
     
     \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($u_{\text{scale}} \approx __U_SCALE_SHOCK__ \text{ km/s}$):
-    $$u(m,t) \approx \left[ __CU_SHOCK__ - __AU_SHOCK__ \, y_s^{__BU_SHOCK__} \right] \cdot __U_SCALE_SHOCK__ \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    $$u(m,t) \approx U(y_s) \cdot __U_SCALE_SHOCK__ \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y_s \approx __INV_MS__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$u(m,t) \approx \left[ __LEAD_CU_SHOCK__ - __LEAD_AU_SHOCK__ \left(y_s\right)^{__BU_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
+    $$u(m,t) \approx \left[ __LEAD_CU_SHOCK__ __LEAD_AU_SHOCK_NEG_SIGNED__ \left(y_s\right)^{__BU_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}} \quad \text{km/s}$$
 \end{enumerate}
 
 \subsection{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$P(y_s) \approx 1.0 - (1.0 - __PS_SHOCK__) \, y_s^{__D_P_SHOCK__}$$
+    $$P(y_s) \approx 1.0 __P_DIFF_COEFF_S_SIGNED__ \, y_s^{__D_P_SHOCK__}$$
     
     \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y_s) \, p_0 \, t^\tau$$
     
     \item \textbf{Parametrized Shape}:
-    $$p(m,t) \approx \left[ 1.0 - (1.0 - __PS_SHOCK__) \, y_s^{__D_P_SHOCK__} \right] \, p_0 \, t^\tau$$
+    $$p(m,t) \approx P(y_s) \, p_0 \, t^\tau$$
     
     \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($p_0 = __P_SCALE_SHOCK__ \text{ MBar}$):
-    $$p(m,t) \approx __P_SCALE_SHOCK__ \left[ 1.0 - (1.0 - __PS_SHOCK__) \, y_s^{__D_P_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx __P_SCALE_SHOCK__ \, P(y_s) \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y_s \approx __INV_MS__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}}$:
-    $$p(m,t) \approx \left[ __P_SCALE_SHOCK__ + __LEAD_P_DIFF_SHOCK__ \, y_s^{__D_P_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx \left[ __P_SCALE_SHOCK__ __LEAD_P_DIFF_SHOCK_SIGNED__ \, y_s^{__D_P_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection{Density $\rho(m,t)$}
@@ -344,20 +344,20 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \item \textbf{Dimensionless Fit Function}:
     $$T(y_s) \approx \begin{cases}
         \left( \frac{P(y_s) \, \rho(y_s)^{\mu-1}}{r \, f_{\text{dim}}} \right)^{\frac{1}{\beta}} & \text{for } y_s < 0.1 \\
-        T_s + c_1 (1 - y_s)^{a_T} + c_2 (1 - y_s)^{b_T} & \text{for } y_s \ge 0.1
+        T_s __C1_T_HIGH_SIGNED__ (1 - y_s)^{__A_T_HIGH__} __C2_T_HIGH_SIGNED__ (1 - y_s)^{__B_T_HIGH__} & \text{for } y_s \ge 0.1
     \end{cases}$$
     
     \item \textbf{CGS Parametrized form} (derived from CGS EOS in Kelvin):
     $$T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{\mu-1}}{r \, f_{\text{Kelvin}}} \right)^{\frac{1}{\beta}} & \text{for } y_s < 0.1 \\
-        T_{\text{scale\_Kelvin}} \left[ T_s + c_1 (1 - y_s)^{a_T} + c_2 (1 - y_s)^{b_T} \right] \, \left(\frac{t}{\text{ns}}\right)^{T_{pow}} & \text{for } y_s \ge 0.1
+        T_{\text{scale\_Kelvin}} \left[ T_s __C1_T_HIGH_SIGNED__ (1 - y_s)^{__A_T_HIGH__} __C2_T_HIGH_SIGNED__ (1 - y_s)^{__B_T_HIGH__} \right] \, \left(\frac{t}{\text{ns}}\right)^{T_{pow}} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin}$$
     
     \item \textbf{Fully Substituted CGS function}:
-    Substituting the fitted coefficients (where $T_s = __TS_SHOCK__$, $c_1 = __C1_T_HIGH__$, $c_2 = __C2_T_HIGH__$, $a_T = __A_T_HIGH__$, $b_T = __B_T_HIGH__$, and $T_{\text{scale\_Kelvin}} \approx __T_SCALE_KELVIN_SHOCK__$):
+    Substituting the fitted coefficients (where $T_s = __TS_SHOCK__$):
     $$T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{-0.86}}{0.25 \cdot 6730.91} \right)^{0.625} & \text{for } y_s < 0.1 \\
-        __T_SCALE_KELVIN_SHOCK__ \left[ __TS_SHOCK__ + __C1_T_HIGH__ (1 - y_s)^{__A_T_HIGH__} + __C2_T_HIGH__ (1 - y_s)^{__B_T_HIGH__} \right] \, \left(\frac{t}{\text{ns}}\right)^{__T_POW_SHOCK__} & \text{for } y_s \ge 0.1
+        __T_SCALE_KELVIN_SHOCK__ \left[ __TS_SHOCK__ __C1_T_HIGH_SIGNED__ (1 - y_s)^{__A_T_HIGH__} __C2_T_HIGH_SIGNED__ (1 - y_s)^{__B_T_HIGH__} \right] \, \left(\frac{t}{\text{ns}}\right)^{__T_POW_SHOCK__} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin}$$
 \end{enumerate}
 
@@ -369,12 +369,12 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \boxed{ y = __INV_MF__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} } \\
     \boxed{ u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}}\quad\text{km/s} } \\
     \text{where: } \begin{cases}
-        u_{\text{left}}(y) = __LEAD_U0_SUB__ + __LEAD_UA1_SUB__ y^{__UALPHA_SUB__} + __LEAD_UA2_SUB__ y^{2 __UALPHA_SUB__} + __LEAD_UA3_SUB__ y^{3 __UALPHA_SUB__} + __LEAD_UA4_SUB__ y^{4 __UALPHA_SUB__} \\
-        u_{\text{right}}(y) = __LEAD_UF_SUB__ + __LEAD_UB1_SUB__ (1-y) + __LEAD_UB2_SUB__ (1-y)^2 + __LEAD_UB3_SUB__ (1-y)^3 + __LEAD_UB4_SUB__ (1-y)^4 \\
+        u_{\text{left}}(y) = __LEAD_U0_SUB__ __LEAD_UA1_SUB_SIGNED__ y^{__UALPHA_SUB__} __LEAD_UA2_SUB_SIGNED__ y^{2 __UALPHA_SUB__} __LEAD_UA3_SUB_SIGNED__ y^{3 __UALPHA_SUB__} __LEAD_UA4_SUB_SIGNED__ y^{4 __UALPHA_SUB__} \\
+        u_{\text{right}}(y) = __LEAD_UF_SUB__ __LEAD_UB1_SUB_SIGNED__ (1-y) __LEAD_UB2_SUB_SIGNED__ (1-y)^2 __LEAD_UB3_SUB_SIGNED__ (1-y)^3 __LEAD_UB4_SUB_SIGNED__ (1-y)^4 \\
         W(y) = \frac{1 - y}{1 + \left( y / __UY0_SUB__ \right)^4}
     \end{cases} \nonumber \\
     \boxed{ v(m,t) \approx __LEAD_V_H__ \left(1 - __INV_MF__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{__D_V_H__} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}\quad\text{cm}^3/\text{g} } \\
-    \boxed{ p(m,t) \approx \left[ __LEAD_PF_SUB__ + __LEAD_A_P_SUB__ (1-y)^{__C_P_SUB__} + __LEAD_B_P_SUB__ (1-y)^{__CPD_P_SUB__} + __LEAD_E_P_SUB__ (1-y)^{__CPDF_P_SUB__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ p(m,t) \approx \left[ __LEAD_PF_SUB__ __LEAD_A_P_SUB_SIGNED__ (1-y)^{__C_P_SUB__} __LEAD_B_P_SUB_SIGNED__ (1-y)^{__CPD_P_SUB__} __LEAD_E_P_SUB_SIGNED__ (1-y)^{__CPDF_P_SUB__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
     \boxed{ T(m,t) \approx 1.00000 \, \left[ \left(1 - __INV_MF__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + __DENOM_T__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}}\quad\text{HeV} } \\
     \boxed{ \rho(m,t) \approx __LEAD_RHO_SCALE_H__ \cdot \left[ \frac{T(m,t)^{1.6}}{p(m,t)} \right]^{-1.16279} \quad \text{g/cm}^3 }
 \end{gather}
@@ -383,15 +383,15 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
 \begin{gather}
     \boxed{ m_s(t) \approx __M_S_SCALE__ \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} \quad \text{g/cm}^2 } \\
     \boxed{ y_s = __INV_MS__ \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{149}{192}} } \\
-    \boxed{ u(m,t) \approx \left[ __LEAD_CU_SHOCK__ - __LEAD_AU_SHOCK__ \left(y_s\right)^{__BU_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
-    \boxed{ p(m,t) \approx \left[ __P_SCALE_SHOCK__ + __LEAD_P_DIFF_SHOCK__ \, y_s^{__D_P_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ u(m,t) \approx \left[ __LEAD_CU_SHOCK__ __LEAD_AU_SHOCK_NEG_SIGNED__ \left(y_s\right)^{__BU_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{192}}\quad\text{km/s} } \\
+    \boxed{ p(m,t) \approx \left[ __P_SCALE_SHOCK__ __LEAD_P_DIFF_SHOCK_SIGNED__ \, y_s^{__D_P_SHOCK__} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
     \boxed{ \rho(m,t) \approx \begin{cases}
         __RHOS_SHOCK__ + (__RHO0_SHOCK__ - __RHOS_SHOCK__) (1 - y_s^{__D_RHO_LOW__})^{__A_RHO_LOW__} & \text{for } y_s < 0.1 \\
         \left( \frac{p(m,t)}{0.25 \cdot 6730.91 \cdot T(m,t)^{1.6}} \right)^{-1.16279} & \text{for } y_s \ge 0.1 
     \end{cases} \quad \text{g/cm}^3 } \\
     \boxed{ T(m,t) \approx \begin{cases}
         \left( \frac{p(m,t) \, \rho(m,t)^{-0.86}}{0.25 \cdot 6730.91} \right)^{0.625} & \text{for } y_s < 0.1 \\
-        __T_SCALE_KELVIN_SHOCK__ \left[ __TS_SHOCK__ + __C1_T_HIGH__ (1 - y_s)^{__A_T_HIGH__} + __C2_T_HIGH__ (1 - y_s)^{__B_T_HIGH__} \right] \, \left(\frac{t}{\text{ns}}\right)^{__T_POW_SHOCK__} & \text{for } y_s \ge 0.1
+        __T_SCALE_KELVIN_SHOCK__ \left[ __TS_SHOCK__ __C1_T_HIGH_SIGNED__ (1 - y_s)^{__A_T_HIGH__} __C2_T_HIGH_SIGNED__ (1 - y_s)^{__B_T_HIGH__} \right] \, \left(\frac{t}{\text{ns}}\right)^{__T_POW_SHOCK__} & \text{for } y_s \ge 0.1
     \end{cases} \quad \text{Kelvin} }
 \end{gather}
 
