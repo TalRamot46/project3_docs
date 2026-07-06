@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  2 JUN 2026 21:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  10 JUN 2026 11:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -797,28 +797,28 @@ n/10.95 ^^Y \OT1/cmr/m/n/10.95 29\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 60156[
  []
 
 
-Overfull \hbox (47.76743pt too wide) detected at line 203
+Overfull \hbox (53.24243pt too wide) detected at line 203
 \OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10
-.95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 247\OML/cmm/m/it/10.95 :\OT1/
-cmr/m/n/10.95 47183 + 979\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 34686\OML/cmm/
-m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.
-95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT
-1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/
-10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\
-OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[]
+.95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 268\OML/cmm/m/it/10.95 :\OT1/
+cmr/m/n/10.95 83367 + 1066\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 20065\OML/cmm
+/m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10
+.95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \O
+T1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it
+/10.95 y[] \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 1480\OML/cmm/m/it/10.95 :
+\OT1/cmr/m/n/10.95 07779\OML/cmm/m/it/10.95 y[]
  []
 
 
 Overfull \hbox (4.15361pt too wide) detected at line 204
 \OML/cmm/m/it/10.95 u[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10
 .95 ) = \OMS/cmsy/m/n/10.95 ^^@\OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95 :\OT1/cm
-r/m/n/10.95 00048 \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 104\OML/cmm/m/it/1
-0.95 :\OT1/cmr/m/n/10.95 02827(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\
-OT1/cmr/m/n/10.95 ) + 301\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 00969(1 \OMS/c
+r/m/n/10.95 00048 \OMS/cmsy/m/n/10.95 ^^@ \OT1/cmr/m/n/10.95 108\OML/cmm/m/it/1
+0.95 :\OT1/cmr/m/n/10.95 65051(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\
+OT1/cmr/m/n/10.95 ) + 301\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 86956(1 \OMS/c
 msy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.
 95 ^^@ \OT1/cmr/m/n/10.95 592\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 03112(1 \O
-MS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] + 437\OML/cmm
-/m/it/10.95 :\OT1/cmr/m/n/10.95 02875(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/1
+MS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 y\OT1/cmr/m/n/10.95 )[] + 397\OML/cmm
+/m/it/10.95 :\OT1/cmr/m/n/10.95 90522(1 \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/1
 0.95 y\OT1/cmr/m/n/10.95 )[]
  []
 
@@ -900,7 +900,7 @@ Overfull \hbox (127.09447pt too wide) detected at line 361
  []
 
 
-Overfull \hbox (99.48912pt too wide) detected at line 380
+Overfull \hbox (104.96413pt too wide) detected at line 380
 []
  []
 
@@ -945,7 +945,9 @@ Overfull \hbox (7.00716pt too wide) in paragraph at lines 513--517
 
 [15]
 
-[16] (piecewise_analytic_formulas.aux)
+[16]
+
+[17] (piecewise_analytic_formulas.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -980,9 +982,9 @@ P-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
 ti10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb><C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/type1
 /public/cm-super/sfrm1095.pfb>
-Output written on piecewise_analytic_formulas.pdf (16 pages, 307698 bytes).
+Output written on piecewise_analytic_formulas.pdf (17 pages, 314135 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
+ 187 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  157 words of extra memory for PDF output out of 10000 (max. 10000000)
 

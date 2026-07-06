@@ -601,4 +601,82 @@ The absolute Eulerian coordinate $x(m,t)$ is defined piecewise across the spatia
     \end{equation}
 \end{enumerate}
 
+\section{Integrated Energies}
+Integrated energies per unit area are computed piecewise across the subsonic ablation region and the shock compressed region.
+
+\subsection{Subsonic Ablation Region ($m < m_f(t)$)}
+\begin{enumerate}
+    \item \textbf{Kinetic Energy} $E_k(t)$:
+    \begin{equation}
+        E_k(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \int_0^{\xi_f} \frac{U^2(\xi)}{2} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_k(t) \approx __C_E_KIN_SUB__ \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Internal Energy} $E_{in}(t)$:
+    \begin{equation}
+        E_{in}(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \int_0^{\xi_f} \frac{P(\xi)V(\xi)}{r} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_{in}(t) \approx __C_E_INT_SUB__ \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Total Energy} $E(t)$:
+    \begin{equation}
+        E(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \frac{S_0}{2c_u - c}
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E(t) \approx __C_E_TOT_SUB__ \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+\end{enumerate}
+
+\subsection{Shock Compressed Region ($m_f(t) \le m < m_s(t)$)}
+Based on the equations from the similarity solution, the integrated energies in the shock region are given by:
+\begin{enumerate}
+    \item \textbf{Internal Energy} $E_{in}(t)$:
+    \begin{equation}
+        E_{in}(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \frac{P(\xi)V(\xi)}{r} d\xi
+    \end{equation}
+    Substituting numerical values (with $\omega = 0$, $\tau = -43/96$) yields:
+    \begin{equation}
+        E_{in}(t) \approx __C_E_INT_SHOCK__ \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Kinetic Energy} $E_k(t)$:
+    \begin{equation}
+        E_k(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \frac{U^2(\xi)}{2} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_k(t) \approx __C_E_KIN_SHOCK__ \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Total Energy} $E(t)$:
+    \begin{equation}
+        E(t) = E_{in}(t) + E_k(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \left(\frac{P(\xi)V(\xi)}{r} + \frac{U^2(\xi)}{2}\right) d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E(t) \approx __C_E_TOT_SHOCK__ \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+\end{enumerate}
+
+\subsection{Energy Ratio Identity}
+We verify the identity:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} = \text{const}
+\end{equation}
+For the subsonic region:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} \approx __RATIO_E_SUB__
+\end{equation}
+For the shock region:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} \approx __RATIO_E_SHOCK__
+\end{equation}
+
 \end{document}

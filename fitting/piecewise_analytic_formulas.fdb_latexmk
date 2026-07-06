@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1780399188.53738 "c:/Users/TLP-001/Documents/GitHub/project3_docs/fitting/piecewise_analytic_formulas.tex" "piecewise_analytic_formulas.pdf" "piecewise_analytic_formulas" 1780399189.68083 0
+["pdflatex"] 1780976472.38614 "c:/Users/TLP-001/Documents/GitHub/project3_docs/fitting/piecewise_analytic_formulas.tex" "piecewise_analytic_formulas.pdf" "piecewise_analytic_formulas" 1780976475.16567 0
   "C:/Users/TLP-001/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1779531576 1790191 60023c0996852a19288d666b7d9463fc ""
   "C:/Users/TLP-001/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766608234 13322591 416bd87c1347c522aaba8eb7ca07b895 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1001775420 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -186,9 +186,9 @@
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1749468414 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/TLP-001/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/TLP-001/Documents/GitHub/project3_docs/fitting/piecewise_analytic_formulas.tex" 1780399187 27675 f2e877f242fbf9c01829d234da0573a2 ""
-  "piecewise_analytic_formulas.aux" 1780399189 3311 b6184dffd9a515595e6df785947351f0 "pdflatex"
-  "piecewise_analytic_formulas.tex" 1780399187 27675 f2e877f242fbf9c01829d234da0573a2 ""
+  "c:/Users/TLP-001/Documents/GitHub/project3_docs/fitting/piecewise_analytic_formulas.tex" 1780976470 36403 6fe68120b60be5fc3e4249762192be66 ""
+  "piecewise_analytic_formulas.aux" 1780976474 4198 6ce2bd8a4313bc7841fd20b84aea0d9f "pdflatex"
+  "piecewise_analytic_formulas.tex" 1780976470 36403 6fe68120b60be5fc3e4249762192be66 ""
   (generated)
   "piecewise_analytic_formulas.aux"
   "piecewise_analytic_formulas.log"

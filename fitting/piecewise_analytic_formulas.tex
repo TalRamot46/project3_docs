@@ -182,9 +182,9 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Using the optimal Candidate 12 (Asymptotic Blend 10-Parameter 4-Power model):
     $$U(y) \approx W(y) U_{\text{left}}(y) + (1 - W(y)) U_{\text{right}}(y)$$
     where:
-    $$U_{\text{left}}(y) = -8.36010 + 33.08430 y^{0.69118} - 50.00000 y^{2 0.69118} - 50.00000 y^{3 0.69118} - 50.00000 y^{4 0.69118}$$
-    $$U_{\text{right}}(y) = -0.00002 - 3.51428 (1-y) + 10.16871 (1-y)^2 - 20.00000 (1-y)^3 + 14.76371 (1-y)^4$$
-    $$W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}$$
+    $$U_{\text{left}}(y) = -9.08174 + 36.01840 y^{0.63620} - 50.00000 y^{2 0.63620} - 50.00000 y^{3 0.63620} - 50.00000 y^{4 0.63620}$$
+    $$U_{\text{right}}(y) = -0.00002 - 3.67043 (1-y) + 10.19776 (1-y)^2 - 20.00000 (1-y)^3 + 13.44204 (1-y)^4$$
+    $$W(y) = \frac{1 - y}{1 + \left( y / 0.17525 \right)^4}$$
     
     \item \textbf{Theoretical Scaling}:
     $$u(m,t) = U(y) \, A^{a_u} \, B^{b_u} \, t^{c_u} = U(y) \, A^{\frac{275}{384}} \, B^{-\frac{7}{192}} \, t^{\frac{7}{192}}$$
@@ -200,33 +200,33 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
     $$u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s}$$
     where:
-    $$u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} - 1480.07779 y^{2 0.69118} - 1480.07779 y^{3 0.69118} - 1480.07779 y^{4 0.69118}$$
-    $$u_{\text{right}}(y) = -0.00048 - 104.02827 (1-y) + 301.00969 (1-y)^2 - 592.03112 (1-y)^3 + 437.02875 (1-y)^4$$
-    with $W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}$.
+    $$u_{\text{left}}(y) = -268.83367 + 1066.20065 y^{0.63620} - 1480.07779 y^{2 0.63620} - 1480.07779 y^{3 0.63620} - 1480.07779 y^{4 0.63620}$$
+    $$u_{\text{right}}(y) = -0.00048 - 108.65051 (1-y) + 301.86956 (1-y)^2 - 592.03112 (1-y)^3 + 397.90522 (1-y)^4$$
+    with $W(y) = \frac{1 - y}{1 + \left( y / 0.17525 \right)^4}$.
 \end{enumerate}
 
 \subsection{Specific Volume $v(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
-    $$V(y) \approx 483.36492 \, (1 - y)^{39.54884}$$
+    $$V(y) \approx 726.38441 \, (1 - y)^{58.47054}$$
     \item \textbf{Theoretical Scaling}:
     $$v(m,t) = V(y) \, A^{a_v} \, B^{b_v} \, t^{c_v} = V(y) \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
     \item \textbf{Parametrized Shape}:
-    $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
+    $$v(m,t) \approx 726.38441 (1 - y)^{58.47054} \, A^{-\frac{115}{96}} \, B^{-\frac{25}{48}} \, t^{\frac{25}{48}}$$
     \item \textbf{Substitution of scaling constants and units}:
     Using physical conversions ($v_{\text{scale}} \approx 1.24268 \text{ cm}^3/\text{g}$):
-    $$v(m,t) \approx 483.36492 (1 - y)^{39.54884} \cdot 1.24268 \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
-    $$\approx 600.66640 \, (1 - y)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    $$v(m,t) \approx 726.38441 (1 - y)^{58.47054} \cdot 1.24268 \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    $$\approx 902.66111 \, (1 - y)^{58.47054} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$v(m,t) \approx 600.66640 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
+    $$v(m,t) \approx 902.66111 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{58.47054} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g}$$
 \end{enumerate}
 
 \subsection{Pressure $p(m,t)$}
 \begin{enumerate}
     \item \textbf{Dimensionless Fit Function}:
     Using the optimal Candidate 4 (Power Law $y=1$ 3-Term 6-Parameter model):
-    $$P(y) \approx 0.38708 - 0.18660 \, (1-y)^{0.49607} - 0.18444 \, (1-y)^{1.51128} - 0.01335 \, (1-y)^{6.20384}$$
+    $$P(y) \approx 0.38708 - 0.19041 \, (1-y)^{0.50096} - 0.18302 \, (1-y)^{1.54775} - 0.01165 \, (1-y)^{7.59373}$$
     
     \item \textbf{Theoretical Scaling}:
     $$p(m,t) = P(y) \, A^{a_p} \, B^{b_p} \, t^{c_p} = P(y) \, A^{\frac{505}{192}} \, B^{\frac{43}{96}} \, t^{-\frac{43}{96}}$$
@@ -240,7 +240,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$p(m,t) \approx \left[ 2.72945 - 1.31578 (1-y)^{0.49607} - 1.30057 (1-y)^{1.51128} - 0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
+    $$p(m,t) \approx \left[ 2.72945 - 1.34262 (1-y)^{0.50096} - 1.29050 (1-y)^{1.54775} - 0.08218 (1-y)^{7.59373} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar}$$
 \end{enumerate}
 
 \subsection{Temperature $T(m,t)$}
@@ -256,7 +256,7 @@ So we can define the normalized mass coordinates $y = m/m_f(t)$ and $y_s = m/m_s
     $$T(m,t) \approx 1.00000 \, \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \quad \text{HeV}$$
     \item \textbf{Fully Substituted CGS function}:
     Substituting $y \approx 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}$:
-    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
+    $$T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.11007 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}} \quad \text{HeV}$$
 \end{enumerate}
 
 \subsection{Density $\rho(m,t)$}
@@ -369,13 +369,13 @@ Complementary to the density profile, the temperature is piecewise. Near the pis
     \boxed{ y = 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}} } \\
     \boxed{ u(m,t) \approx \left[ W(y) u_{\text{left}}(y) + (1-W(y)) u_{\text{right}}(y) \right] \, \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}}\quad\text{km/s} } \\
     \text{where: } \begin{cases}
-        u_{\text{left}}(y) = -247.47183 + 979.34686 y^{0.69118} - 1480.07779 y^{2 0.69118} - 1480.07779 y^{3 0.69118} - 1480.07779 y^{4 0.69118} \\
-        u_{\text{right}}(y) = -0.00048 - 104.02827 (1-y) + 301.00969 (1-y)^2 - 592.03112 (1-y)^3 + 437.02875 (1-y)^4 \\
-        W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}
+        u_{\text{left}}(y) = -268.83367 + 1066.20065 y^{0.63620} - 1480.07779 y^{2 0.63620} - 1480.07779 y^{3 0.63620} - 1480.07779 y^{4 0.63620} \\
+        u_{\text{right}}(y) = -0.00048 - 108.65051 (1-y) + 301.86956 (1-y)^2 - 592.03112 (1-y)^3 + 397.90522 (1-y)^4 \\
+        W(y) = \frac{1 - y}{1 + \left( y / 0.17525 \right)^4}
     \end{cases} \nonumber \\
-    \boxed{ v(m,t) \approx 600.66640 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{39.54884} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}\quad\text{cm}^3/\text{g} } \\
-    \boxed{ p(m,t) \approx \left[ 2.72945 - 1.31578 (1-y)^{0.49607} - 1.30057 (1-y)^{1.51128} - 0.09415 (1-y)^{6.20384} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
-    \boxed{ T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.10933 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}}\quad\text{HeV} } \\
+    \boxed{ v(m,t) \approx 902.66111 \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)^{58.47054} \, \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}}\quad\text{cm}^3/\text{g} } \\
+    \boxed{ p(m,t) \approx \left[ 2.72945 - 1.34262 (1-y)^{0.50096} - 1.29050 (1-y)^{1.54775} - 0.08218 (1-y)^{7.59373} \right] \, \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}}\quad\text{MBar} } \\
+    \boxed{ T(m,t) \approx 1.00000 \, \left[ \left(1 - 981.45247 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right)\left(1 + 199.11007 \left(\frac{m}{\text{g/cm}^2}\right) \left(\frac{t}{\text{ns}}\right)^{-\frac{33}{64}}\right) \right]^{\frac{10}{39}}\quad\text{HeV} } \\
     \boxed{ \rho(m,t) \approx 4.03377 \cdot \left[ \frac{T(m,t)^{1.6}}{p(m,t)} \right]^{-1.16279} \quad \text{g/cm}^3 }
 \end{gather}
 
@@ -403,14 +403,14 @@ In this section, profiles are written using fully evaluated numerical prefactors
     u(m,t) \approx 29.60156 U_h(y) \left(\frac{t}{\text{ns}}\right)^{\frac{7}{192}} \quad \text{km/s} \\
     \text{where: } \begin{cases}
         U_h(y) = W(y) U_{\text{left}}(y) + (1-W(y)) U_{\text{right}}(y) \\
-        U_{\text{left}}(y) = -8.36010 + 33.08430 y^{0.69118} - 50.00000 y^{2 0.69118} - 50.00000 y^{3 0.69118} - 50.00000 y^{4 0.69118} \\
-        U_{\text{right}}(y) = -0.00002 - 3.51428 (1-y) + 10.16871 (1-y)^2 - 20.00000 (1-y)^3 + 14.76371 (1-y)^4 \\
-        W(y) = \frac{1 - y}{1 + \left( y / 0.20621 \right)^4}
+        U_{\text{left}}(y) = -9.08174 + 36.01840 y^{0.63620} - 50.00000 y^{2 0.63620} - 50.00000 y^{3 0.63620} - 50.00000 y^{4 0.63620} \\
+        U_{\text{right}}(y) = -0.00002 - 3.67043 (1-y) + 10.19776 (1-y)^2 - 20.00000 (1-y)^3 + 13.44204 (1-y)^4 \\
+        W(y) = \frac{1 - y}{1 + \left( y / 0.17525 \right)^4}
     \end{cases} \nonumber \\
     v(m,t) \approx 1.24268 V_h(y) \left(\frac{t}{\text{ns}}\right)^{\frac{25}{48}} \quad \text{cm}^3/\text{g} \\
-    \text{where: } V_h(y) = 483.36492 \, (1 - y)^{39.54884} \nonumber \\
+    \text{where: } V_h(y) = 726.38441 \, (1 - y)^{58.47054} \nonumber \\
     p(m,t) \approx 7.05133 P_h(y) \left(\frac{t}{\text{ns}}\right)^{-\frac{43}{96}} \quad \text{MBar} \\
-    \text{where: } P_h(y) = 0.38708 - 0.18660 \, (1-y)^{0.49607} - 0.18444 \, (1-y)^{1.51128} - 0.01335 \, (1-y)^{6.20384} \nonumber \\
+    \text{where: } P_h(y) = 0.38708 - 0.19041 \, (1-y)^{0.50096} - 0.18302 \, (1-y)^{1.54775} - 0.01165 \, (1-y)^{7.59373} \nonumber \\
     T(m,t) \approx 1.16045 \times 10^{6} T_h(y) \quad \text{Kelvin} \\
     \text{where: } T_h(y) = \left[ (1 - y)(1 + 0.20287 y) \right]^{\frac{10}{39}} \nonumber \\
     \rho(m,t) \approx 4.03377 \rho_h(y) \left(\frac{t}{\text{ns}}\right)^{-\frac{25}{48}} \quad \text{g/cm}^3 \\
@@ -458,7 +458,7 @@ We can construct the full solution profiles valid over the entire spatial domain
 \end{equation}
 where:
 \begin{itemize}
-    \item $U_h(y_h) = W(y_h) U_{\text{left}}(y_h) + (1-W(y_h)) U_{\text{right}}(y_h)$ as defined in 5.1 \quad [Avg Err: 3.059\%, Max Err: 90.949\%]
+    \item $U_h(y_h) = W(y_h) U_{\text{left}}(y_h) + (1-W(y_h)) U_{\text{right}}(y_h)$ as defined in 5.1 \quad [Avg Err: 3.031\%, Max Err: 90.838\%]
     \item $U_s(y_s) = 0.96888 + 0.18376 \, y_s^{0.59966}$ as defined in 5.2 \quad [Avg Err: 0.019\%, Max Err: 0.350\%]
 \end{itemize}
 
@@ -474,7 +474,7 @@ where:
 \end{equation}
 where:
 \begin{itemize}
-    \item $P_h(y_h) = 0.38708 - 0.18660 \, (1-y_h)^{0.49607} - 0.18444 \, (1-y_h)^{1.51128} - 0.01335 \, (1-y_h)^{6.20384}$ \quad [Avg Err: 0.279\%, Max Err: 41.257\%]
+    \item $P_h(y_h) = 0.38708 - 0.19041 \, (1-y_h)^{0.50096} - 0.18302 \, (1-y_h)^{1.54775} - 0.01165 \, (1-y_h)^{7.59373}$ \quad [Avg Err: 0.212\%, Max Err: 37.595\%]
     \item $P_s(y_s) = 1.0 + 0.49535 \, y_s^{1.13315}$ \quad [Avg Err: 0.136\%, Max Err: 0.307\%]
 \end{itemize}
 
@@ -490,7 +490,7 @@ where:
 \end{equation}
 where:
 \begin{itemize}
-    \item $\rho_h(y_h) = \left[ \frac{T_h(y_h)^{1.6}}{P_h(y_h)} \right]^{-1.16279}$ \quad [Avg Err: 0.741\%, Max Err: 46.110\%]
+    \item $\rho_h(y_h) = \left[ \frac{T_h(y_h)^{1.6}}{P_h(y_h)} \right]^{-1.16279}$ \quad [Avg Err: 0.648\%, Max Err: 42.195\%]
     \item $\rho_s(y_s) = \begin{cases}
         9.00000 + (0.00012 - 9.00000) (1 - y_s^{0.45561})^{0.69201} & \text{for } y_s < 0.1 \\
         \left( \frac{P_s(y_s)}{T_s(y_s)^{1.6}} \right)^{1.16279} & \text{for } y_s \ge 0.1
@@ -540,9 +540,9 @@ The time-dependent trajectories of the boundaries and shock interfaces are expre
     \begin{equation}
         x_b(t) = x_{af}(t) + C_{\text{pos}}(t) \, U_0
     \end{equation}
-    where $C_{\text{pos}}(t) = \frac{A^{a_u} B^{b_u} t^{c_u+1}}{c_u+1}$. Substituting the physical values (with $U_0 \approx -8.36010$) yields:
+    where $C_{\text{pos}}(t) = \frac{A^{a_u} B^{b_u} t^{c_u+1}}{c_u+1}$. Substituting the physical values (with $U_0 \approx -9.08174$) yields:
     \begin{equation}
-        x_b(t) \approx 5.12397 \times 10^{-4} \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} - 3.01086 \times 10^{-2} \left(\frac{t}{\text{ns}}\right)^{\frac{199}{192}} \quad \text{cm}
+        x_b(t) \approx 5.12397 \times 10^{-4} \left(\frac{t}{\text{ns}}\right)^{\frac{149}{192}} - 3.01147 \times 10^{-2} \left(\frac{t}{\text{ns}}\right)^{\frac{199}{192}} \quad \text{cm}
     \end{equation}
 
     \item \textbf{Shock Piston position} $x_p(t)$:
@@ -600,5 +600,83 @@ The absolute Eulerian coordinate $x(m,t)$ is defined piecewise across the spatia
         x_{\text{un}}(m,t) = \frac{m}{\rho_0} \approx 0.05176 \left( \frac{m}{\text{g/cm}^2} \right) \quad \text{cm}
     \end{equation}
 \end{enumerate}
+
+\section{Integrated Energies}
+Integrated energies per unit area are computed piecewise across the subsonic ablation region and the shock compressed region.
+
+\subsection{Subsonic Ablation Region ($m < m_f(t)$)}
+\begin{enumerate}
+    \item \textbf{Kinetic Energy} $E_k(t)$:
+    \begin{equation}
+        E_k(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \int_0^{\xi_f} \frac{U^2(\xi)}{2} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_k(t) \approx 2.22491 \times 10^{10} \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Internal Energy} $E_{in}(t)$:
+    \begin{equation}
+        E_{in}(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \int_0^{\xi_f} \frac{P(\xi)V(\xi)}{r} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_{in}(t) \approx 3.61070 \times 10^{10} \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Total Energy} $E(t)$:
+    \begin{equation}
+        E(t) = A^{2a_u - a} B^{2b_u - b} t^{2c_u - c} \frac{S_0}{2c_u - c}
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E(t) \approx 5.83561 \times 10^{10} \left(\frac{t}{\text{ns}}\right)^{\frac{113}{192}} \quad \text{erg/cm}^2
+    \end{equation}
+\end{enumerate}
+
+\subsection{Shock Compressed Region ($m_f(t) \le m < m_s(t)$)}
+Based on the equations from the similarity solution, the integrated energies in the shock region are given by:
+\begin{enumerate}
+    \item \textbf{Internal Energy} $E_{in}(t)$:
+    \begin{equation}
+        E_{in}(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \frac{P(\xi)V(\xi)}{r} d\xi
+    \end{equation}
+    Substituting numerical values (with $\omega = 0$, $\tau = -43/96$) yields:
+    \begin{equation}
+        E_{in}(t) \approx 3.84521 \times 10^{10} \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Kinetic Energy} $E_k(t)$:
+    \begin{equation}
+        E_k(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \frac{U^2(\xi)}{2} d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E_k(t) \approx 9.98032 \times 10^{8} \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+
+    \item \textbf{Total Energy} $E(t)$:
+    \begin{equation}
+        E(t) = E_{in}(t) + E_k(t) = v_0^{\frac{1}{2-\omega}} p_0^{\frac{3-\omega}{2-\omega}} t^{\frac{3\tau - \tau\omega + 2}{2-\omega}} \int_0^{\xi_s} \left(\frac{P(\xi)V(\xi)}{r} + \frac{U^2(\xi)}{2}\right) d\xi
+    \end{equation}
+    Substituting numerical values yields:
+    \begin{equation}
+        E(t) \approx 3.94501 \times 10^{10} \left(\frac{t}{\text{ns}}\right)^{\frac{21}{64}} \quad \text{erg/cm}^2
+    \end{equation}
+\end{enumerate}
+
+\subsection{Energy Ratio Identity}
+We verify the identity:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} = \text{const}
+\end{equation}
+For the subsonic region:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} \approx 0.61620
+\end{equation}
+For the shock region:
+\begin{equation}
+    \frac{E_k(t)}{E_{in}(t)} \approx 0.02596
+\end{equation}
 
 \end{document}

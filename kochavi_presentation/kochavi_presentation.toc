@@ -1,0 +1,10 @@
+\beamer@sectionintoc {1}{Describing the Physical system}{2}{0}{1}
+\beamer@sectionintoc {2}{Marshak Waves Experiments}{5}{0}{2}
+\beamer@sectionintoc {3}{1.5D model}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{1D effects}{12}{0}{3}
+\beamer@subsectionintoc {3}{2}{2D effects}{15}{0}{3}
+\beamer@sectionintoc {4}{Full 2D model}{23}{0}{4}
+\beamer@subsectionintoc {4}{1}{Modeling the front curvature}{23}{0}{4}
+\beamer@subsectionintoc {4}{2}{Comparing to 2D supersonic diffusion simulation}{29}{0}{4}
+\beamer@subsectionintoc {4}{3}{A full 2D Temperature distribution}{36}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{47}{0}{5}
